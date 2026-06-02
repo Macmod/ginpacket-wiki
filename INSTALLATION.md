@@ -1,5 +1,10 @@
 # Installation
 
+{% hint style="success" %}
+**Looking for pre-built binaries?**
+You can download ready-to-use releases for Windows, Linux, and macOS directly from the [Releases page](https://github.com/Macmod/ginpacket/releases).
+{% endhint %}
+
 ## Clone the repository
 ```bash
 git clone https://github.com/Macmod/ginpacket
@@ -27,18 +32,18 @@ Alternatively, you can pass the tool names directly as arguments to skip the men
 ## Windows
 To build all commands on Windows, use the provided `build.ps1` PowerShell script:
 ```powershell
-.\build.ps1 -All
+.uild.ps1 -All
 ```
 
 ### Building Specific Tools
 Just like on Linux, you can run the script interactively to choose what to build from a TUI menu:
 ```powershell
-.\build.ps1
+.uild.ps1
 ```
 
 Or you can specify the tools you want to build via command-line arguments:
 ```powershell
-.\build.ps1 ldap dns cert
+.uild.ps1 ldap dns cert
 ```
 
 ## Static Build (Disable CGO)
@@ -52,5 +57,5 @@ CGO_ENABLED=0 ./build.sh --all
 **On Windows (PowerShell):**
 ```powershell
 $env:CGO_ENABLED="0"
-.\build.ps1 -All
+.uild.ps1 -All
 ```
