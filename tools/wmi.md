@@ -4,8 +4,11 @@
 
 ## Subcommands / Usage
 
+### Syntax
 
+```bash
 wmi [auth_flags] [-n <namespace>] query <wql> [-f <fields>] [-L <n>]
+```
 
 ### Run a WQL query against a WMI namespace
 

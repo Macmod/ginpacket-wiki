@@ -68,9 +68,12 @@ eventlog [auth_flags] watch <channel> [--event-id <ids>] [--grep <str>] [-L <n>]
 ./eventlog [auth_flags] watch Security --event-id 4624,4625 -L 20
 ```
 
+### Syntax
 
+```bash
 eventlog [auth_flags] export <channel> <out-path>
 eventlog [auth_flags] export --evtx-file <in-path> <out-path>
+```
 
 ### Export a live channel to an .evtx file
 
@@ -103,7 +106,7 @@ eventlog [auth_flags] channel [<channel>] [-T config|meta|all]
 ```
 
 
-Show channel information: config (EvtRpcGetChannelConfig), meta (EvtRpcGetLogFileInfo), or all (default)
+Show channel information: config (EvtRpcGetChannelConfig), meta (EvtRpcGetLogFileInfo), or all (default)  
 
 
 ```bash

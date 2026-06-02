@@ -4,8 +4,11 @@
 
 ## Subcommands / Usage
 
+### Syntax
 
+```bash
 authz [auth_flags] [--object-uuid <uuid>] <subcommand>
+```
 
 ### Show version
 
@@ -15,22 +18,27 @@ authz [auth_flags] [--object-uuid <uuid>] <subcommand>
 
 ### Inspect token/context info classes for a SID or account
 
-Classes: all, user, groups, restricted, device-groups, user-claims, device-claims
+Classes: all, user, groups, restricted, device-groups, user-claims, device-claims  
 
 
 ```bash
 ./authz [auth_flags] info 'joao_couves' --class all
 ```
 
+### Syntax
 
+```bash
 authz check <source> <SID|NAME> -T <target> [common flags]
-Common check flags:
---desired-access <mask>      default 0x02000000 (MAXIMUM_ALLOWED)
---principal-self <sid|name>  PrincipalSelf substitution SID/name
---device <sid|name>          optional device identity for compound AccessCheck
--O, --object-types <list>    comma-separated [level:]guid entries
--P, --privileges             request privilege computation
---print-sd <no|dacl|sacl|all>
+```
+
+
+Common check flags:  
+--desired-access <mask>      default 0x02000000 (MAXIMUM_ALLOWED)  
+--principal-self <sid|name>  PrincipalSelf substitution SID/name  
+--device <sid|name>          optional device identity for compound AccessCheck  
+-O, --object-types <list>    comma-separated [level:]guid entries  
+-P, --privileges             request privilege computation  
+--print-sd <no|dacl|sacl|all>  
 
 ### Inline SD (hex or SDDL)
 
@@ -83,7 +91,7 @@ Common check flags:
 
 ### ObjectTypeList examples:
 
-first entry defaults to level 0, subsequent entries default to level 1
+first entry defaults to level 0, subsequent entries default to level 1  
 
 
 ```bash

@@ -40,8 +40,11 @@ dfs [auth_flags] links <namespace-path>
 ./dfs [auth_flags] links '\\EXAMPLE.LOCAL\dfs'
 ```
 
+### Syntax
 
+```bash
 dfs [auth_flags] info <path> [--gen-guid] [--version]
+```
 
 ### Show full info for a namespace root or link
 
@@ -109,8 +112,11 @@ dfs [auth_flags] set-comment <path> -c <text>
 ./dfs [auth_flags] set-comment '\\EXAMPLE.LOCAL\dfs\apps' -c 'Application share'
 ```
 
+### Syntax
 
+```bash
 dfs [auth_flags] set-state <dfs-path> -e <online|offline|resynchronize> [--server <server> -s <share>] [--pdc <dc>] [--use-v1]
+```
 
 ### Set a link offline
 
@@ -136,8 +142,11 @@ dfs [auth_flags] set-state <dfs-path> -e <online|offline|resynchronize> [--serve
 ./dfs [auth_flags] set-state '\\EXAMPLE.LOCAL\dfs' -e resynchronize --pdc dc01.example.com
 ```
 
+### Syntax
 
+```bash
 dfs [auth_flags] set-timeout <dfs-path> -T <sec> [--use-v1]
+```
 
 ### Set the client referral cache timeout on a link
 
@@ -151,8 +160,11 @@ dfs [auth_flags] set-timeout <dfs-path> -T <sec> [--use-v1]
 ./dfs [auth_flags] set-timeout '\\EXAMPLE.LOCAL\dfs\apps' -T 300 --use-v1
 ```
 
+### Syntax
 
+```bash
 dfs [auth_flags] set-flags <dfs-path> -f <flags> [-m <mask>] [--use-v1]
+```
 
 ### Set DFS flags on a link
 
@@ -172,8 +184,11 @@ dfs [auth_flags] set-flags <dfs-path> -f <flags> [-m <mask>] [--use-v1]
 ./dfs [auth_flags] set-flags '\\EXAMPLE.LOCAL\dfs\apps' -f 0 -m 47
 ```
 
+### Syntax
 
+```bash
 dfs [auth_flags] set-priority <dfs-path> --server <server> -s <share> -c <class> -R <rank> [--use-v1]
+```
 
 ### Set referral priority class and rank for a link target
 
@@ -247,8 +262,11 @@ dfs [auth_flags] set-dc-address --server <server> --pdc <pdc> [--set-timeout -T 
 ./dfs [auth_flags] set-dc-address --server FILES01 --pdc dc01.example.com -i
 ```
 
+### Syntax
 
+```bash
 dfs [auth_flags] add-root <dfs-path> [--root-target <\\server\share>] [--new] [--version <0|1|2>] [--use-v1]
+```
 
 ### Create a new stand-alone DFS namespace
 
@@ -268,8 +286,11 @@ dfs [auth_flags] add-root <dfs-path> [--root-target <\\server\share>] [--new] [-
 ./dfs [auth_flags] add-root '\\EXAMPLE.LOCAL\dfs' --root-target '\\FILES02\dfsroot'
 ```
 
+### Syntax
 
+```bash
 dfs [auth_flags] del-root <dfs-path> [--root-target <\\server\share>] [--force] [--use-v1]
+```
 
 ### Delete a stand-alone DFS namespace
 

@@ -4,8 +4,11 @@
 
 ## Subcommands / Usage
 
+### Syntax
 
+```bash
 reg [auth_flags] query <key-path> [-v <value-name>] [--max-allowed]
+```
 
 ### Enumerate all values under a registry key
 
@@ -230,7 +233,7 @@ reg [auth_flags] shell
 ```
 
 
-Open an interactive registry shell with persistent connection and cd/ls/get/set/add/del/info/acl
+Open an interactive registry shell with persistent connection and cd/ls/get/set/add/del/info/acl  
 
 
 ```bash

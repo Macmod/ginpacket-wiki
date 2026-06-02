@@ -88,8 +88,11 @@ services [auth_flags] translate (-K <svc-key> | -N <display-name>)
 ./services [auth_flags] translate -K Spooler
 ```
 
+### Syntax
 
+```bash
 services [auth_flags] add-service <name> <binpath> [-N <display>] [--service-type <type>] [-T <start-type>] [--wow64] [--wow-type <arch>]
+```
 
 ### Create a new service with an on-demand start type
 
@@ -104,7 +107,7 @@ services [auth_flags] add-service <name> <binpath> [-N <display>] [--service-typ
 ```
 
 
-Register a service for a specific machine architecture (RCreateWowService, opnum 60)
+Register a service for a specific machine architecture (RCreateWowService, opnum 60)  
 
 
 ```bash

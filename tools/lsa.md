@@ -268,8 +268,11 @@ lsa [auth_flags] get-secret <name> [--use-tcp]
 ./lsa [auth_flags] get-secret _SC_MyService
 ```
 
+### Syntax
 
+```bash
 lsa [auth_flags] set-secret <name> -v <hex> [--old-value <hex>]
+```
 
 ### Set the current value of an LSA secret
 
@@ -319,8 +322,11 @@ lsa [auth_flags] trust-records -n <domain>
 ./lsa [auth_flags] trust-records -n child.example.com
 ```
 
+### Syntax
 
+```bash
 lsa [auth_flags] trust (-n <domain> | -s <sid>)
+```
 
 ### Query a trust by domain name
 

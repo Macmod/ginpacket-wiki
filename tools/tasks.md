@@ -28,8 +28,11 @@ tasks [auth_flags] query [--include-hidden]
 ./tasks [auth_flags] query --include-hidden
 ```
 
+### Syntax
 
+```bash
 tasks [auth_flags] task <path> [--format xml]
+```
 
 ### Show full task details (info + embedded XML) for a v2 task
 
@@ -71,8 +74,11 @@ tasks [auth_flags] xml <path>
 ./tasks [auth_flags] xml '\MyTask'
 ```
 
+### Syntax
 
+```bash
 tasks [auth_flags] add (-P <path> -X <xml> | --use-v1 -c <cmd> --time <HH:MM> [schedule flags])
+```
 
 ### Register a v2 task from an XML file
 
@@ -86,8 +92,11 @@ tasks [auth_flags] add (-P <path> -X <xml> | --use-v1 -c <cmd> --time <HH:MM> [s
 ./tasks [auth_flags] add --use-v1 -c 'cmd.exe /c whoami > C:\temp\t.txt' --time 09:30 --days-of-week mon,wed,fri --periodic
 ```
 
+### Syntax
 
+```bash
 tasks [auth_flags] enable|disable <path>
+```
 
 ### Enable a disabled task
 
@@ -113,8 +122,11 @@ tasks [auth_flags] run <path>
 ./tasks [auth_flags] run '\MyTask'
 ```
 
+### Syntax
 
+```bash
 tasks [auth_flags] stop ([path] | -G <instance-guid>)
+```
 
 ### Stop all running instances of a task by path
 
@@ -164,8 +176,11 @@ tasks [auth_flags] instances <path>
 ./tasks [auth_flags] instances '\MyTask'
 ```
 
+### Syntax
 
+```bash
 tasks [auth_flags] get-sddl <path> [--parse-dacl]
+```
 
 ### Read the security descriptor of a task
 
@@ -203,8 +218,11 @@ tasks [auth_flags] missed-runs <path>
 ./tasks [auth_flags] missed-runs '\MyTask'
 ```
 
+### Syntax
 
+```bash
 tasks [auth_flags] del ([path] | --use-v1 (--job-id | --min-job-id/--max-job-id))
+```
 
 ### Delete a v2 task by path
 

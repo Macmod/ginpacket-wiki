@@ -28,8 +28,11 @@ dns [auth_flags] zones
 ./dns [auth_flags] zones
 ```
 
+### Syntax
 
+```bash
 dns [auth_flags] records <zone> [-n <node>] [-T <A|AAAA|MX|TXT|CNAME|SRV|NS|PTR|SOA|ALL>]
+```
 
 ### List all DNS records in a zone
 
@@ -43,8 +46,11 @@ dns [auth_flags] records <zone> [-n <node>] [-T <A|AAAA|MX|TXT|CNAME|SRV|NS|PTR|
 ./dns [auth_flags] records EXAMPLE.LOCAL -n _tcp -T SRV
 ```
 
+### Syntax
 
+```bash
 dns [auth_flags] nodes <zone> [-n <parent-node>]
+```
 
 ### List all nodes in a DNS zone
 
@@ -58,8 +64,11 @@ dns [auth_flags] nodes <zone> [-n <parent-node>]
 ./dns [auth_flags] nodes EXAMPLE.LOCAL -n _tcp
 ```
 
+### Syntax
 
+```bash
 dns [auth_flags] dump [-z <zone>] [--skip-cache=<true|false>]
+```
 
 ### Dump all DNS records from all zones
 

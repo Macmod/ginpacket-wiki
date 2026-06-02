@@ -69,8 +69,24 @@ def parse_bash_block(bash_text):
             if current_desc:
                 # If we hit an empty line and we have accumulated comments,
                 # they might be a standalone text block.
-                # Let's flush them as markdown text.
-                out.append("\n" + "\n".join(current_desc) + "\n")
+                # But if it looks like syntax, render it as a bash block.
+                syntax_lines = []
+                desc_lines = []
+                for d in current_desc:
+                    words = d.split()
+                    if not words:
+                        continue
+                    first_word = words[0]
+                    if ('[auth_flags]' in d) or (first_word == short_name and '<' in d):
+                         syntax_lines.append(d)
+                    else:
+                         desc_lines.append(d)
+                
+                if syntax_lines:
+                    out.append(f"### Syntax\n\n```bash\n{chr(10).join(syntax_lines)}\n```\n")
+                if desc_lines:
+                    out.append("\n" + "  \n".join(desc_lines) + "  \n")
+                
                 current_desc = []
             continue
         else:
@@ -95,9 +111,9 @@ def parse_bash_block(bash_text):
                     if len(desc_lines[0]) < 80 and not desc_lines[0].startswith('-') and not desc_lines[0].startswith(' '):
                         out.append(f"### {desc_lines[0]}")
                         if len(desc_lines) > 1:
-                            out.append("\n" + "\n".join(desc_lines[1:]) + "\n")
+                            out.append("\n" + "  \n".join(desc_lines[1:]) + "  \n")
                     else:
-                        out.append("\n" + "\n".join(desc_lines) + "\n")
+                        out.append("\n" + "  \n".join(desc_lines) + "  \n")
                     out.append(f"\n```bash\n{line}\n```\n")
                 elif not desc_lines and not syntax_lines:
                     out.append(f"```bash\n{line}\n```\n")

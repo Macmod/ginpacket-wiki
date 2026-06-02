@@ -203,7 +203,7 @@ tsts [auth_flags] shutdown [-r] [-P] [-l]
 ```
 
 
-Shut down, reboot, power off, or log off all sessions via WinStationShutdownSystem
+Shut down, reboot, power off, or log off all sessions via WinStationShutdownSystem  
 
 
 ```bash

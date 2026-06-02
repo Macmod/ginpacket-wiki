@@ -40,8 +40,11 @@ perf [auth_flags] instances <guid>
 ./perf [auth_flags] instances '{6BFFD098-A112-610E-9FBF-00A0C90D67DA}'
 ```
 
+### Syntax
 
+```bash
 perf [auth_flags] query <guid> [-c <counter-id>] [--instance <id>]
+```
 
 ### Query all counters for a counter set
 

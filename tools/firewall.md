@@ -225,7 +225,7 @@ firewall [auth_flags] add-ipsec-mmrule <name> [-P <profile>] --phase1-auth <id> 
 ```
 
 
-Add an IPsec main-mode (IKE phase-1) rule; --phase1-auth and --phase1-crypto are required
+Add an IPsec main-mode (IKE phase-1) rule; --phase1-auth and --phase1-crypto are required  
 
 
 ```bash

@@ -6,7 +6,7 @@
 
 ### IMPORTANT: use UNC file paths for remote EFSRPC calls.
 
-Local paths like C:\Temp\file.txt can return ERROR_ACCESS_DENIED.
+Local paths like C:\Temp\file.txt can return ERROR_ACCESS_DENIED.  
 
 
 ```bash

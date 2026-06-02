@@ -4,8 +4,11 @@
 
 ## Subcommands / Usage
 
+### Syntax
 
+```bash
 shutdown [auth_flags] initiate [-m <msg>] [--timeout <s>] [--force] [-r] [--reason <code>] [--interface <iface>] [--use-v1]
+```
 
 ### Initiate a remote shutdown with a message, timeout, force, and reboot
 

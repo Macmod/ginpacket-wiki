@@ -70,8 +70,11 @@ server [auth_flags] set-share -s <name> [--remark <text>] [--max-uses <n>]
 ./server [auth_flags] set-share -s TempShare --remark 'renamed share' --max-uses 5
 ```
 
+### Syntax
 
+```bash
 server [auth_flags] del-share -s <name> [--scope <server>] [--use-v1] [--persistent] [--two-phase]
+```
 
 ### Delete a share using NetrShareDelEx (default, opnum 57)
 
@@ -86,7 +89,7 @@ server [auth_flags] del-share -s <name> [--scope <server>] [--use-v1] [--persist
 ```
 
 
-Clear share persistence only, keeping the runtime share (NetrShareDelSticky, opnum 19)
+Clear share persistence only, keeping the runtime share (NetrShareDelSticky, opnum 19)  
 
 
 ```bash
@@ -94,7 +97,7 @@ Clear share persistence only, keeping the runtime share (NetrShareDelSticky, opn
 ```
 
 
-Delete a share via two-phase commit (NetrShareDelStart + NetrShareDelCommit, opnums 37+38)
+Delete a share via two-phase commit (NetrShareDelStart + NetrShareDelCommit, opnums 37+38)  
 
 
 ```bash
@@ -223,8 +226,11 @@ server [auth_flags] transports
 ./server [auth_flags] transports
 ```
 
+### Syntax
 
+```bash
 server [auth_flags] add-transport <transport> [-A <addr>] [-d <domain>] [--flags <n>] [--use-v1]
+```
 
 ### Add a transport binding (level 2, opnum 41)
 
@@ -244,8 +250,11 @@ server [auth_flags] add-transport <transport> [-A <addr>] [-d <domain>] [--flags
 ./server [auth_flags] add-transport '\Device\NetBT_Tcpip_{6BFFD098-A112-610E-9FBF-00A0C90D67DA}' --use-v1              # NetrServerTransportAdd (opnum 25)
 ```
 
+### Syntax
 
+```bash
 server [auth_flags] del-transport <transport> [-A <addr>] [-d <domain>] [--use-v1]
+```
 
 ### Remove a transport binding
 

@@ -184,8 +184,11 @@ printer [auth_flags] job <printer> -j <job-id>
 ./printer [auth_flags] job '\\TARGET\HP LaserJet' -j 3
 ```
 
+### Syntax
 
+```bash
 printer [auth_flags] set-job <printer> -j <job-id> -a <pause|resume|cancel|restart|delete|retain|release>
+```
 
 ### Cancel a print job
 
@@ -199,8 +202,11 @@ printer [auth_flags] set-job <printer> -j <job-id> -a <pause|resume|cancel|resta
 ./printer [auth_flags] set-job '\\TARGET\HP LaserJet' -j 3 -a retain
 ```
 
+### Syntax
 
+```bash
 printer [auth_flags] set-attrs <printer> [-A <add-mask>] [-R <remove-mask>]
+```
 
 ### Enable KEEPPRINTEDJOBS (0x100) so completed jobs stay visible in the queue
 
@@ -232,8 +238,11 @@ printer [auth_flags] notify <listener-host>
 ./printer [auth_flags] notify 10.10.14.1
 ```
 
+### Syntax
 
+```bash
 printer [auth_flags] add-printer -n <name> -d <driver> -q <port> [-s <share>] [-C <comment>] [-D <datatype>] [-c <processor>]
+```
 
 ### Add a printer using an already-installed driver
 
@@ -265,8 +274,11 @@ printer [auth_flags] add-printer -n <name> -d <driver> -q <port> [-s <share>] [-
     -D RAW -c WinPrint
 ```
 
+### Syntax
 
+```bash
 printer [auth_flags] set-printer <printer> -a <pause|resume|purge>
+```
 
 ### Pause a printer (new jobs are held)
 
@@ -286,8 +298,11 @@ printer [auth_flags] set-printer <printer> -a <pause|resume|purge>
 ./printer [auth_flags] set-printer '\\TARGET\TestPrinter' -a purge
 ```
 
+### Syntax
 
+```bash
 printer [auth_flags] reset-printer <printer> [-D <datatype>]
+```
 
 ### Reset a printer's data type and device-mode to defaults
 
@@ -331,8 +346,11 @@ printer [auth_flags] driver-dir [-e <environment>]
 ./printer [auth_flags] driver-dir -e 'Windows x64'
 ```
 
+### Syntax
 
+```bash
 printer [auth_flags] add-driver <driver-name> --driver-path <path> --data-file <path> --config-file <path> [-e <env>]
+```
 
 ### Install a driver from UNC paths accessible to the print server
 
@@ -354,8 +372,11 @@ printer [auth_flags] add-driver <driver-name> --driver-path <path> --data-file <
     --config-file 'C:\Windows\System32\spool\DRIVERS\x64\3\mxdwdrv.dll'
 ```
 
+### Syntax
 
+```bash
 printer [auth_flags] del-driver <driver-name> [-e <environment>]
+```
 
 ### Delete an installed driver
 
@@ -369,8 +390,11 @@ printer [auth_flags] del-driver <driver-name> [-e <environment>]
 ./printer [auth_flags] del-driver 'Evil Driver' -e 'Windows x64'
 ```
 
+### Syntax
 
+```bash
 printer [auth_flags] add-processor <processor-name> --path <dll> [-e <environment>]
+```
 
 ### Register a print processor DLL (must be in the driver store on the server)
 
@@ -384,8 +408,11 @@ printer [auth_flags] add-processor <processor-name> --path <dll> [-e <environmen
 ./printer [auth_flags] add-processor 'EvilProc' --path 'evilproc.dll' -e 'Windows x64'
 ```
 
+### Syntax
 
+```bash
 printer [auth_flags] del-processor <processor-name> [-e <environment>]
+```
 
 ### Remove a print processor
 
@@ -422,7 +449,7 @@ printer [auth_flags] forms
 ```
 
 
-List all form definitions registered on the print server (built-in and user-defined)
+List all form definitions registered on the print server (built-in and user-defined)  
 
 
 ```bash
@@ -529,8 +556,11 @@ printer [auth_flags] del-monitor <name> [-e <environment>]
 ./printer [auth_flags] del-monitor 'MyMon'
 ```
 
+### Syntax
 
+```bash
 printer [auth_flags] print <printer> -f <file> [-d <doc-name>] [-D <datatype>] [-o <output-path>]
+```
 
 ### Send a raw PRN/PCL/PostScript file to a v3-driver printer
 

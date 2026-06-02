@@ -96,7 +96,7 @@ wksta [auth_flags] names [--type <primary|alternate|all>]
 
 ### List registered computer names for the workstation (default: --type all)
 
-PrimaryComputerName is printed as a single value; AlternateComputerNames are listed.
+PrimaryComputerName is printed as a single value; AlternateComputerNames are listed.  
 
 
 ```bash
@@ -151,8 +151,8 @@ wksta [auth_flags] rename-machine <new-name> [--rename-account] [--dns-only]
 
 ### Rename the machine account within the domain
 
---rename-account  also rename the computer account in AD (NETSETUP_ACCT_CREATE, 0x2)
---dns-only        limit updates to DNS-based names only (NETSETUP_DNS_NAME_CHANGES_ONLY, 0x1000)
+--rename-account  also rename the computer account in AD (NETSETUP_ACCT_CREATE, 0x2)  
+--dns-only        limit updates to DNS-based names only (NETSETUP_DNS_NAME_CHANGES_ONLY, 0x1000)  
 
 
 ```bash
@@ -208,8 +208,8 @@ wksta [auth_flags] set-primary-name <primary-name>
 ```
 
 
-Note: the new primary name must already exist as an alternate name.
-Example flow: add-alt-name -> set-primary-name -> (optional) del-alt-name oldname
+Note: the new primary name must already exist as an alternate name.  
+Example flow: add-alt-name -> set-primary-name -> (optional) del-alt-name oldname  
 
 ### Syntax
 

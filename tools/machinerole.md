@@ -4,8 +4,11 @@
 
 ## Subcommands / Usage
 
+### Syntax
 
+```bash
 machinerole [auth_flags] [--use-named-pipe]
+```
 
 ### Query the machine's domain role and DS state via TCP
 

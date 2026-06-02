@@ -63,7 +63,7 @@ cert [auth_flags] ca-unregister-dcom <ca-name>
 ```
 
 
-Unregister CA DCOM interfaces (ServerControl flag 1); stops CertSvc - restart to recover
+Unregister CA DCOM interfaces (ServerControl flag 1); stops CertSvc - restart to recover  
 
 
 ```bash
@@ -338,8 +338,8 @@ cert [auth_flags] import-key <ca-name> <request-id> <pkcs7-file> [--cert-hash <s
 
 ### Import archived key blob (key recovery)
 
-The PKCS#7 EnvelopedData payload must carry an MS-WCCE private key BLOB
-(section 2.2.2.9), encrypted to the current CA exchange certificate.
+The PKCS#7 EnvelopedData payload must carry an MS-WCCE private key BLOB  
+(section 2.2.2.9), encrypted to the current CA exchange certificate.  
 
 
 ```bash
@@ -455,7 +455,7 @@ cert [auth_flags] db <ca-name> [--table <request|extension|attribute|crl>] [--co
 ```
 
 
-Read CA database rows with simple paging and optional column projection (EnumViewColumnTable by default)
+Read CA database rows with simple paging and optional column projection (EnumViewColumnTable by default)  
 
 
 ```bash

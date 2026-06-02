@@ -28,8 +28,11 @@ bkpkey [auth_flags] encrypt (--in-file <file> | --in-b64 <base64>) [-o <out-file
 ./bkpkey [auth_flags] encrypt --in-file request.bin -o response.bin
 ```
 
+### Syntax
 
+```bash
 bkpkey [auth_flags] decrypt (--in-file <file> | --in-b64 <base64>) [-o <out-file>] [--win2k]  (alias: restore)
+```
 
 ### Unwrap a credential blob using the DC's backup private key
 

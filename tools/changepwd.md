@@ -4,8 +4,11 @@
 
 ## Subcommands / Usage
 
+### Syntax
 
+```bash
 changepwd [auth_flags] samr -a <account> -w <new-password> [-o <old-password>] [--transport <smb|tcp>]
+```
 
 ### Change a password via MS-SAMR over SMB named pipe
 
@@ -19,9 +22,14 @@ changepwd [auth_flags] samr -a <account> -w <new-password> [-o <old-password>] [
 ./changepwd [auth_flags] samr -a jdoe -w 'NewP@ssw0rd!' --transport tcp
 ```
 
+### Syntax
 
+```bash
 changepwd [auth_flags] kpasswd -a <account> -w <new-password> [-o <old-password>]
-Note: for this command, --dc is only considered to override the DC for PKINIT when authenticating with a client certificate. In that case, if --dc is not specified, the target (-t) will be used for both PKINIT and the operation itself.
+```
+
+
+Note: for this command, --dc is only considered to override the DC for PKINIT when authenticating with a client certificate. In that case, if --dc is not specified, the target (-t) will be used for both PKINIT and the operation itself.  
 
 ### Change a password using the Kerberos kpasswd protocol (self-change)
 

@@ -233,8 +233,8 @@ ldap [auth_flags] query trusts [--transitive]
 ```
 
 
-List domain trust relationships rendered as an ASCII tree with direction arrows and trust attribute flags
-← inbound (they trust us), → outbound (we trust them), ↔ bidirectional
+List domain trust relationships rendered as an ASCII tree with direction arrows and trust attribute flags  
+← inbound (they trust us), → outbound (we trust them), ↔ bidirectional  
 
 
 ```bash
@@ -272,7 +272,7 @@ ldap [auth_flags] query shadow-creds [--limit <n>]
 ```
 
 
-List objects with msDS-KeyCredentialLink set; parse DeviceID, key type, and creation time
+List objects with msDS-KeyCredentialLink set; parse DeviceID, key type, and creation time  
 
 
 ```bash
@@ -286,7 +286,7 @@ ldap [auth_flags] query rbcd [--limit <n>]
 ```
 
 
-List computers with msDS-AllowedToActOnBehalfOfOtherIdentity set; decode the SD DACL
+List computers with msDS-AllowedToActOnBehalfOfOtherIdentity set; decode the SD DACL  
 
 
 ```bash
@@ -300,7 +300,7 @@ ldap [auth_flags] query gmsa [--limit <n>]
 ```
 
 
-List Group Managed Service Accounts; show password rotation interval and who can read the password (msDS-GroupMSAMembership DACL)
+List Group Managed Service Accounts; show password rotation interval and who can read the password (msDS-GroupMSAMembership DACL)  
 
 
 ```bash
@@ -314,7 +314,7 @@ ldap [auth_flags] query laps [--limit <n>]
 ```
 
 
-List computers that have a LAPS password set (v1: ms-Mcs-AdmPwd, v2: msLAPS-Password); show expiry timestamps
+List computers that have a LAPS password set (v1: ms-Mcs-AdmPwd, v2: msLAPS-Password); show expiry timestamps  
 
 
 ```bash
@@ -328,7 +328,7 @@ ldap [auth_flags] query sccm [--limit <n>]
 ```
 
 
-Detect SCCM/MECM management points registered in AD (objectClass=mSSMSManagementPoint)
+Detect SCCM/MECM management points registered in AD (objectClass=mSSMSManagementPoint)  
 
 
 ```bash
@@ -354,7 +354,7 @@ ldap [auth_flags] get-gmsa-password <sAMAccountName>
 ```
 
 
-Read and decode the msDS-ManagedPassword blob for a GMSA (requires group membership listed in msDS-GroupMSAMembership)
+Read and decode the msDS-ManagedPassword blob for a GMSA (requires group membership listed in msDS-GroupMSAMembership)  
 
 
 ```bash
@@ -368,7 +368,7 @@ ldap [auth_flags] get-laps <computer>
 ```
 
 
-Read the LAPS administrator password for a computer (v1 plaintext or v2 JSON blob); requires LAPS read rights
+Read the LAPS administrator password for a computer (v1 plaintext or v2 JSON blob); requires LAPS read rights  
 
 
 ```bash
@@ -526,7 +526,7 @@ ldap [auth_flags] create user --name <cn> [--pass <password>] [--enabled] [--par
 ```
 
 
-Create a new user account (created disabled if --pass is omitted; set password requires LDAPS/StartTLS)
+Create a new user account (created disabled if --pass is omitted; set password requires LDAPS/StartTLS)  
 
 
 ```bash
@@ -554,7 +554,7 @@ ldap [auth_flags] create computer --name <cn> [--pass <password>] [--parent-dn <
 ```
 
 
-Create a machine account (requires ms-DS-MachineAccountQuota >= 1 or sufficient privileges)
+Create a machine account (requires ms-DS-MachineAccountQuota >= 1 or sufficient privileges)  
 
 
 ```bash
@@ -572,7 +572,7 @@ ldap [auth_flags] create group --name <cn> [--type <group-type>] [--parent-dn <d
 ```
 
 
-Create a group (types: GlobalSecurity, GlobalDistribution, DomainLocalSecurity, DomainLocalDistribution, UniversalSecurity, UniversalDistribution)
+Create a group (types: GlobalSecurity, GlobalDistribution, DomainLocalSecurity, DomainLocalDistribution, UniversalSecurity, UniversalDistribution)  
 
 
 ```bash
@@ -626,7 +626,7 @@ ldap [auth_flags] create custom --template <file.yaml>
 ```
 
 
-Create an arbitrary AD object from a YAML template (compatible with sopa create custom templates)
+Create an arbitrary AD object from a YAML template (compatible with sopa create custom templates)  
 
 
 ```bash
