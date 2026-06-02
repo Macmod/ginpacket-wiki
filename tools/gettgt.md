@@ -4,27 +4,25 @@
 
 ## Subcommands / Usage
 
-{% hint style="info" %}
-**Syntax**
+### `General Usage`
 
 ```bash
 ./gettgt [auth_flags] --dc <DC> -o <ccache> (+ -p <password> | -H <LM:NT|NT> | --aes-key <hex> | --ccache <file> | --pfx <file>)
 ```
-{% endhint %}
 
-### Request a TGT using password credentials
+**Request a TGT using password credentials:**
 
 ```bash
 ./gettgt [auth_flags] -p 'P@ssw0rd!' --dc dc01.example.com -o administrator@EXAMPLE.LOCAL.ccache
 ```
 
-### Request a TGT using an NT hash
+**Request a TGT using an NT hash:**
 
 ```bash
 ./gettgt [auth_flags] -H 31d6cfe0d16ae931b73c59d7e0c089c0 --dc dc01.example.com -o administrator@EXAMPLE.LOCAL.ccache
 ```
 
-### Request a TGT using an AES session key
+**Request a TGT using an AES session key:**
 
 ```bash
 ./gettgt [auth_flags] --aes-key a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2 --dc dc01.example.com -o administrator@EXAMPLE.LOCAL.ccache

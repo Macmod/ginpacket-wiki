@@ -4,71 +4,61 @@
 
 ## Subcommands / Usage
 
-{% hint style="info" %}
-**Syntax**
-
-```bash
-./eventlog [auth_flags] channels
-```
-{% endhint %}
-
-### List all event log channels on the host
+### `channels`
 
 ```bash
 ./eventlog [auth_flags] channels
 ```
 
-{% hint style="info" %}
-**Syntax**
+**List all event log channels on the host:**
+
+```bash
+./eventlog [auth_flags] channels
+```
+
+### `publishers`
 
 ```bash
 ./eventlog [auth_flags] publishers
 ```
-{% endhint %}
 
-### List all registered event publishers
+**List all registered event publishers:**
 
 ```bash
 ./eventlog [auth_flags] publishers
 ```
 
-{% hint style="info" %}
-**Syntax**
+### `query`
 
 ```bash
 ./eventlog [auth_flags] query <channel> [-q <xpath>] [-L <n>] [-T <ms>]
 ```
-{% endhint %}
 
-### Query events from a channel using an XPath filter
+**Query events from a channel using an XPath filter:**
 
 ```bash
 ./eventlog [auth_flags] query Security -q "*" -L 10 -T 5000
 ```
 
-{% hint style="info" %}
-**Syntax**
+### `subscribe`
 
 ```bash
 ./eventlog [auth_flags] subscribe <channel> [-q <xpath>] [-L <n>] [-T <ms>]
 ```
-{% endhint %}
 
-### Subscribe to a channel and receive events as they arrive
+**Subscribe to a channel and receive events as they arrive:**
 
 ```bash
 ./eventlog [auth_flags] subscribe Security -q "*" -L 10 -T 5000
 ```
 
-{% hint style="info" %}
-**Syntax**
+### `watch`
 
 ```bash
 ./eventlog [auth_flags] watch <channel> [--event-id <ids>] [--grep <str>] [-L <n>] [-F <text|json>]
 ```
-{% endhint %}
 
-### Live-tail a channel for future events, with optional filtering
+**Live-tail a channel for future events, with optional filtering:**
 
 ```bash
 ./eventlog [auth_flags] watch Security
@@ -78,52 +68,44 @@
 ./eventlog [auth_flags] watch Security --event-id 4624,4625 -L 20
 ```
 
-{% hint style="info" %}
-**Syntax**
+### `export`
 
 ```bash
 ./eventlog [auth_flags] export <channel> <out-path>
 ./eventlog [auth_flags] export --evtx-file <in-path> <out-path>
 ```
-{% endhint %}
 
-### Export a live channel to an .evtx file
+**Export a live channel to an .evtx file:**
 
 ```bash
 ./eventlog [auth_flags] export Security 'C:\temp\security.evtx'
 ```
 
-### Export from an existing .evtx file to another .evtx file
+**Export from an existing .evtx file to another .evtx file:**
 
 ```bash
 ./eventlog [auth_flags] export --evtx-file 'C:\temp\in.evtx' 'C:\temp\out.evtx'
 ```
 
-{% hint style="info" %}
-**Syntax**
+### `clear`
 
 ```bash
 ./eventlog [auth_flags] clear <channel> [-b <backup-path>] [--confirm]
 ```
-{% endhint %}
 
-### Clear a channel and optionally save a backup
+**Clear a channel and optionally save a backup:**
 
 ```bash
 ./eventlog [auth_flags] clear Security -b 'C:\temp\security-backup.evtx' --confirm
 ```
 
-{% hint style="info" %}
-**Syntax**
+### `channel`
 
 ```bash
 ./eventlog [auth_flags] channel [<channel>] [-T config|meta|all]
 ```
-{% endhint %}
 
-
-Show channel information: config (EvtRpcGetChannelConfig), meta (EvtRpcGetLogFileInfo), or all (default)  
-
+**Show channel information: config (EvtRpcGetChannelConfig), meta (EvtRpcGetLogFileInfo), or all (default):**
 
 ```bash
 ./eventlog [auth_flags] channel Security
@@ -137,57 +119,49 @@ Show channel information: config (EvtRpcGetChannelConfig), meta (EvtRpcGetLogFil
 ./eventlog [auth_flags] channel Security -T meta
 ```
 
-{% hint style="info" %}
-**Syntax**
+### `publisher`
 
 ```bash
 ./eventlog [auth_flags] publisher <name>
 ```
-{% endhint %}
 
-### Show metadata for a registered event publisher (GUID, schema path, etc.)
+**Show metadata for a registered event publisher (GUID, schema path, etc.):**
 
 ```bash
 ./eventlog [auth_flags] publisher 'Microsoft-Windows-Security-Auditing'
 ```
 
-{% hint style="info" %}
-**Syntax**
+### `channel-publishers`
 
 ```bash
 ./eventlog [auth_flags] channel-publishers [<channel>]
 ```
-{% endhint %}
 
-### List publishers registered to write to a specific channel
+**List publishers registered to write to a specific channel:**
 
 ```bash
 ./eventlog [auth_flags] channel-publishers Security
 ```
 
-{% hint style="info" %}
-**Syntax**
+### `classic-name`
 
 ```bash
 ./eventlog [auth_flags] classic-name <name>
 ```
-{% endhint %}
 
-### Resolve a classic event log name to its display name
+**Resolve a classic event log name to its display name:**
 
 ```bash
 ./eventlog [auth_flags] classic-name Security
 ```
 
-{% hint style="info" %}
-**Syntax**
+### `set-channel`
 
 ```bash
 ./eventlog [auth_flags] set-channel [<channel>] [--enabled <true|false>] [--max-size <bytes>]
 ```
-{% endhint %}
 
-### Enable or disable a channel and/or change its maximum log file size
+**Enable or disable a channel and/or change its maximum log file size:**
 
 ```bash
 ./eventlog [auth_flags] set-channel Security --enabled false

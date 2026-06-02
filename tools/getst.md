@@ -4,21 +4,19 @@
 
 ## Subcommands / Usage
 
-{% hint style="info" %}
-**Syntax**
+### `General Usage`
 
 ```bash
 ./getst [auth_flags] -c <ccache> -s <spn> --dc <dc> -o <out> [--self -i <user>]
 ```
-{% endhint %}
 
-### Request a service ticket for a given SPN using an existing TGT
+**Request a service ticket for a given SPN using an existing TGT:**
 
 ```bash
 ./getst [auth_flags] -c administrator@EXAMPLE.LOCAL.ccache -s cifs/dc01.example.com --dc dc01.example.com -o cifs_dc01.ccache
 ```
 
-### Request an S4U2Self impersonation evidence ticket
+**Request an S4U2Self impersonation evidence ticket:**
 
 ```bash
 ./getst [auth_flags] -c svc_iis@EXAMPLE.LOCAL.ccache -i jdoe --self --dc dc01.example.com -o jdoe_evidence.ccache

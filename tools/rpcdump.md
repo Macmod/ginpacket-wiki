@@ -4,21 +4,19 @@
 
 ## Subcommands / Usage
 
-{% hint style="info" %}
-**Syntax**
+### `[-U`
 
 ```bash
 ./rpcdump [auth_flags] [-U <interface-uuid>] [--transport <transports>]
 ```
-{% endhint %}
 
-### Enumerate all registered RPC endpoints via the endpoint mapper
+**Enumerate all registered RPC endpoints via the endpoint mapper:**
 
 ```bash
 ./rpcdump [auth_flags]
 ```
 
-### Filter results by interface UUID and transport set
+**Filter results by interface UUID and transport set:**
 
 ```bash
 ./rpcdump [auth_flags] -U 6bffd098-a112-610e-9fbf-00a0c90d67da --transport ncacn_ip_tcp,ncacn_np

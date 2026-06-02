@@ -4,428 +4,355 @@
 
 ## Subcommands / Usage
 
-{% hint style="info" %}
-**Syntax**
-
-```bash
-./ldap [auth_flags] whoami
-```
-{% endhint %}
-
-### Print the authenticated LDAP user identity
+### `whoami`
 
 ```bash
 ./ldap [auth_flags] whoami
 ```
 
-{% hint style="info" %}
-**Syntax**
+**Print the authenticated LDAP user identity:**
+
+```bash
+./ldap [auth_flags] whoami
+```
+
+### `info`
 
 ```bash
 ./ldap [auth_flags] info <dn-or-name> [--all]
 ```
-{% endhint %}
 
-### Dump attributes for an object by DN, sAMAccountName, UPN, or GUID
+**Dump attributes for an object by DN, sAMAccountName, UPN, or GUID:**
 
 ```bash
 ./ldap [auth_flags] info 'Administrator'
 ```
 
-### Show all attributes including non-default ones
+**Show all attributes including non-default ones:**
 
 ```bash
 ./ldap [auth_flags] info 'CN=Domain Users,CN=Users,DC=example,DC=com' --all
 ```
 
-{% hint style="info" %}
-**Syntax**
+### `query`
 
 ```bash
 ./ldap [auth_flags] query users [--enabled] [--disabled]
 ```
-{% endhint %}
 
-### List all user objects in the domain
+**List all user objects in the domain:**
 
 ```bash
 ./ldap [auth_flags] query users
 ```
 
-### List only enabled user accounts
+**List only enabled user accounts:**
 
 ```bash
 ./ldap [auth_flags] query users --enabled
 ```
 
-### List only disabled user accounts
+**List only disabled user accounts:**
 
 ```bash
 ./ldap [auth_flags] query users --disabled
 ```
 
-{% hint style="info" %}
-**Syntax**
-
-```bash
-./ldap [auth_flags] query groups
-```
-{% endhint %}
-
-### List all group objects in the domain
+### `query`
 
 ```bash
 ./ldap [auth_flags] query groups
 ```
 
-{% hint style="info" %}
-**Syntax**
+**List all group objects in the domain:**
+
+```bash
+./ldap [auth_flags] query groups
+```
+
+### `query`
 
 ```bash
 ./ldap [auth_flags] query computers
 ```
-{% endhint %}
 
-### List all computer accounts in the domain
+**List all computer accounts in the domain:**
 
 ```bash
 ./ldap [auth_flags] query computers
 ```
 
-{% hint style="info" %}
-**Syntax**
-
-```bash
-./ldap [auth_flags] query containers
-```
-{% endhint %}
-
-### List all container objects in the domain
+### `query`
 
 ```bash
 ./ldap [auth_flags] query containers
 ```
 
-{% hint style="info" %}
-**Syntax**
+**List all container objects in the domain:**
+
+```bash
+./ldap [auth_flags] query containers
+```
+
+### `query`
 
 ```bash
 ./ldap [auth_flags] query ous
 ```
-{% endhint %}
 
-### List all organizational units in the domain
+**List all organizational units in the domain:**
 
 ```bash
 ./ldap [auth_flags] query ous
 ```
 
-{% hint style="info" %}
-**Syntax**
-
-```bash
-./ldap [auth_flags] query service-accounts
-```
-{% endhint %}
-
-### List accounts with service principal names (service accounts)
+### `query`
 
 ```bash
 ./ldap [auth_flags] query service-accounts
 ```
 
-{% hint style="info" %}
-**Syntax**
+**List accounts with service principal names (service accounts):**
+
+```bash
+./ldap [auth_flags] query service-accounts
+```
+
+### `query`
 
 ```bash
 ./ldap [auth_flags] query gpos
 ```
-{% endhint %}
 
-### List all group policy objects in the domain
+**List all group policy objects in the domain:**
 
 ```bash
 ./ldap [auth_flags] query gpos
 ```
 
-{% hint style="info" %}
-**Syntax**
-
-```bash
-./ldap [auth_flags] query spns
-```
-{% endhint %}
-
-### List all accounts with service principal names set
+### `query`
 
 ```bash
 ./ldap [auth_flags] query spns
 ```
 
-{% hint style="info" %}
-**Syntax**
+**List all accounts with service principal names set:**
+
+```bash
+./ldap [auth_flags] query spns
+```
+
+### `query`
 
 ```bash
 ./ldap [auth_flags] query unconstrained-delegation
 ```
-{% endhint %}
 
-### List computers and users with unconstrained Kerberos delegation
+**List computers and users with unconstrained Kerberos delegation:**
 
 ```bash
 ./ldap [auth_flags] query unconstrained-delegation
 ```
 
-{% hint style="info" %}
-**Syntax**
-
-```bash
-./ldap [auth_flags] query constrained-delegation
-```
-{% endhint %}
-
-### List accounts configured with constrained Kerberos delegation
+### `query`
 
 ```bash
 ./ldap [auth_flags] query constrained-delegation
 ```
 
-{% hint style="info" %}
-**Syntax**
+**List accounts configured with constrained Kerberos delegation:**
+
+```bash
+./ldap [auth_flags] query constrained-delegation
+```
+
+### `query`
 
 ```bash
 ./ldap [auth_flags] query asreproast
 ```
-{% endhint %}
 
-### List accounts that have Kerberos pre-authentication disabled
+**List accounts that have Kerberos pre-authentication disabled:**
 
 ```bash
 ./ldap [auth_flags] query asreproast
 ```
 
-{% hint style="info" %}
-**Syntax**
-
-```bash
-./ldap [auth_flags] query never-expires
-```
-{% endhint %}
-
-### List accounts whose password is set to never expire
+### `query`
 
 ```bash
 ./ldap [auth_flags] query never-expires
 ```
 
-{% hint style="info" %}
-**Syntax**
+**List accounts whose password is set to never expire:**
+
+```bash
+./ldap [auth_flags] query never-expires
+```
+
+### `query`
 
 ```bash
 ./ldap [auth_flags] query password-not-required
 ```
-{% endhint %}
 
-### List accounts that do not require a password
+**List accounts that do not require a password:**
 
 ```bash
 ./ldap [auth_flags] query password-not-required
 ```
 
-{% hint style="info" %}
-**Syntax**
-
-```bash
-./ldap [auth_flags] query cert-templates
-```
-{% endhint %}
-
-### List certificate templates published in the domain
+### `query`
 
 ```bash
 ./ldap [auth_flags] query cert-templates
 ```
 
-{% hint style="info" %}
-**Syntax**
+**List certificate templates published in the domain:**
+
+```bash
+./ldap [auth_flags] query cert-templates
+```
+
+### `query`
 
 ```bash
 ./ldap [auth_flags] query cert-authorities
 ```
-{% endhint %}
 
-### List enterprise certification authorities in the domain
+**List enterprise certification authorities in the domain:**
 
 ```bash
 ./ldap [auth_flags] query cert-authorities
 ```
 
-{% hint style="info" %}
-**Syntax**
+### `query`
 
 ```bash
 ./ldap [auth_flags] query trusts [--transitive]
 ```
-{% endhint %}
 
-
-List domain trust relationships rendered as an ASCII tree with direction arrows and trust attribute flags  
-← inbound (they trust us), → outbound (we trust them), ↔ bidirectional  
-
+**List domain trust relationships rendered as an ASCII tree with direction arrows and trust attribute flags ← inbound (they trust us), → outbound (we trust them), ↔ bidirectional:**
 
 ```bash
 ./ldap [auth_flags] query trusts
 ```
 
-{% hint style="info" %}
-**Syntax**
-
-```bash
-./ldap [auth_flags] query passpol
-```
-{% endhint %}
-
-### Show the domain password policy and any fine-grained PSOs
+### `query`
 
 ```bash
 ./ldap [auth_flags] query passpol
 ```
 
-{% hint style="info" %}
-**Syntax**
+**Show the domain password policy and any fine-grained PSOs:**
+
+```bash
+./ldap [auth_flags] query passpol
+```
+
+### `query`
 
 ```bash
 ./ldap [auth_flags] query mquota
 ```
-{% endhint %}
 
-### Show the ms-DS-MachineAccountQuota value from the domain object
+**Show the ms-DS-MachineAccountQuota value from the domain object:**
 
 ```bash
 ./ldap [auth_flags] query mquota
 ```
 
-{% hint style="info" %}
-**Syntax**
+### `query`
 
 ```bash
 ./ldap [auth_flags] query shadow-creds [--limit <n>]
 ```
-{% endhint %}
 
-
-List objects with msDS-KeyCredentialLink set; parse DeviceID, key type, and creation time  
-
+**List objects with msDS-KeyCredentialLink set; parse DeviceID, key type, and creation time:**
 
 ```bash
 ./ldap [auth_flags] query shadow-creds
 ```
 
-{% hint style="info" %}
-**Syntax**
+### `query`
 
 ```bash
 ./ldap [auth_flags] query rbcd [--limit <n>]
 ```
-{% endhint %}
 
-
-List computers with msDS-AllowedToActOnBehalfOfOtherIdentity set; decode the SD DACL  
-
+**List computers with msDS-AllowedToActOnBehalfOfOtherIdentity set; decode the SD DACL:**
 
 ```bash
 ./ldap [auth_flags] query rbcd
 ```
 
-{% hint style="info" %}
-**Syntax**
+### `query`
 
 ```bash
 ./ldap [auth_flags] query gmsa [--limit <n>]
 ```
-{% endhint %}
 
-
-List Group Managed Service Accounts; show password rotation interval and who can read the password (msDS-GroupMSAMembership DACL)  
-
+**List Group Managed Service Accounts; show password rotation interval and who can read the password (msDS-GroupMSAMembership DACL):**
 
 ```bash
 ./ldap [auth_flags] query gmsa
 ```
 
-{% hint style="info" %}
-**Syntax**
+### `query`
 
 ```bash
 ./ldap [auth_flags] query laps [--limit <n>]
 ```
-{% endhint %}
 
-
-List computers that have a LAPS password set (v1: ms-Mcs-AdmPwd, v2: msLAPS-Password); show expiry timestamps  
-
+**List computers that have a LAPS password set (v1: ms-Mcs-AdmPwd, v2: msLAPS-Password); show expiry timestamps:**
 
 ```bash
 ./ldap [auth_flags] query laps
 ```
 
-{% hint style="info" %}
-**Syntax**
+### `query`
 
 ```bash
 ./ldap [auth_flags] query sccm [--limit <n>]
 ```
-{% endhint %}
 
-
-Detect SCCM/MECM management points registered in AD (objectClass=mSSMSManagementPoint)  
-
+**Detect SCCM/MECM management points registered in AD (objectClass=mSSMSManagementPoint):**
 
 ```bash
 ./ldap [auth_flags] query sccm
 ```
 
-{% hint style="info" %}
-**Syntax**
+### `query`
 
 ```bash
 ./ldap [auth_flags] query wds [--limit <n>]
 ```
-{% endhint %}
 
-### Detect Windows Deployment Services servers via WDSMC SPN on computer objects
+**Detect Windows Deployment Services servers via WDSMC SPN on computer objects:**
 
 ```bash
 ./ldap [auth_flags] query wds
 ```
 
-{% hint style="info" %}
-**Syntax**
+### `get-gmsa-password`
 
 ```bash
 ./ldap [auth_flags] get-gmsa-password <sAMAccountName>
 ```
-{% endhint %}
 
-
-Read and decode the msDS-ManagedPassword blob for a GMSA (requires group membership listed in msDS-GroupMSAMembership)  
-
+**Read and decode the msDS-ManagedPassword blob for a GMSA (requires group membership listed in msDS-GroupMSAMembership):**
 
 ```bash
 ./ldap [auth_flags] get-gmsa-password 'svc_backup$'
 ```
 
-{% hint style="info" %}
-**Syntax**
+### `get-laps`
 
 ```bash
 ./ldap [auth_flags] get-laps <computer>
 ```
-{% endhint %}
 
-
-Read the LAPS administrator password for a computer (v1 plaintext or v2 JSON blob); requires LAPS read rights  
-
+**Read the LAPS administrator password for a computer (v1 plaintext or v2 JSON blob); requires LAPS read rights:**
 
 ```bash
 ./ldap [auth_flags] get-laps WIN-DC01
@@ -435,43 +362,37 @@ Read the LAPS administrator password for a computer (v1 plaintext or v2 JSON blo
 ./ldap [auth_flags] get-laps WIN-DC01.corp.local
 ```
 
-{% hint style="info" %}
-**Syntax**
+### `enable`
 
 ```bash
 ./ldap [auth_flags] enable <dn>
 ```
-{% endhint %}
 
-### Enable an AD account by clearing the ACCOUNTDISABLE userAccountControl bit
+**Enable an AD account by clearing the ACCOUNTDISABLE userAccountControl bit:**
 
 ```bash
 ./ldap [auth_flags] enable 'CN=jdoe,CN=Users,DC=example,DC=com'
 ```
 
-{% hint style="info" %}
-**Syntax**
+### `disable`
 
 ```bash
 ./ldap [auth_flags] disable <dn>
 ```
-{% endhint %}
 
-### Disable an AD account by setting the ACCOUNTDISABLE userAccountControl bit
+**Disable an AD account by setting the ACCOUNTDISABLE userAccountControl bit:**
 
 ```bash
 ./ldap [auth_flags] disable 'CN=jdoe,CN=Users,DC=example,DC=com'
 ```
 
-{% hint style="info" %}
-**Syntax**
+### `uac-modify`
 
 ```bash
 ./ldap [auth_flags] uac-modify <dn> <flag> <set|clear>
 ```
-{% endhint %}
 
-### Toggle a single userAccountControl bit by name (or numeric value)
+**Toggle a single userAccountControl bit by name (or numeric value):**
 
 ```bash
 ./ldap [auth_flags] uac-modify 'CN=jdoe,CN=Users,DC=example,DC=com' DONT_REQUIRE_PREAUTH set
@@ -485,121 +406,109 @@ Read the LAPS administrator password for a computer (v1 plaintext or v2 JSON blo
 ./ldap [auth_flags] uac-modify 'CN=jdoe,CN=Users,DC=example,DC=com' TRUSTED_FOR_DELEGATION clear
 ```
 
-{% hint style="info" %}
-**Syntax**
+### `search`
 
 ```bash
 ./ldap [auth_flags] search -F <filter> [-A <attrs>] [--limit <n>] [--base-dn <dn>] [--scope <scope>]
 ```
-{% endhint %}
 
-### Run a raw LDAP search with a custom filter and attribute projection
+**Run a raw LDAP search with a custom filter and attribute projection:**
 
 ```bash
 ./ldap [auth_flags] search -F '(objectClass=user)' -A cn,mail,userAccountControl
 ```
 
-### Search with a wildcard filter
+**Search with a wildcard filter:**
 
 ```bash
 ./ldap [auth_flags] search -F '(cn=admin*)' -A cn,mail
 ```
 
-### Filter group members with a result limit
+**Filter group members with a result limit:**
 
 ```bash
 ./ldap [auth_flags] search -F '(memberof=CN=Domain Admins,CN=Groups,DC=example,DC=com)' --limit 100
 ```
 
-### Search for accounts with SPNs
+**Search for accounts with SPNs:**
 
 ```bash
 ./ldap [auth_flags] search -F '(servicePrincipalName=*)' --limit 50
 ```
 
-### Use a bitfield OID filter for password policy attributes
+**Use a bitfield OID filter for password policy attributes:**
 
 ```bash
 ./ldap [auth_flags] search -F '(userAccountControl:1.2.840.113556.1.4.803:=524288)'
 ```
 
-{% hint style="info" %}
-**Syntax**
+### `General Usage`
 
 ```bash
 ./ldap [auth_flags] <subcommand> -f <filter-chain> -a <attr-chain> -b <base-chain>
 ```
-{% endhint %}
 
-### Apply ldapx obfuscation chains to a raw search
+**Apply ldapx obfuscation chains to a raw search:**
 
 ```bash
 ./ldap [auth_flags] search -F '(objectClass=user)' -A cn,sAMAccountName -f OGDR -a Owp -b OX
 ```
 
-### Apply obfuscation chains to a predefined query
+**Apply obfuscation chains to a predefined query:**
 
 ```bash
 ./ldap [auth_flags] query users -f OGDR -a Owp -b OX
 ```
 
-### Apply obfuscation chains to an info lookup
+**Apply obfuscation chains to an info lookup:**
 
 ```bash
 ./ldap [auth_flags] info 'Administrator' -f OGDR -b OX
 ```
 
-{% hint style="info" %}
-**Syntax**
+### `modify`
 
 ```bash
 ./ldap [auth_flags] modify <dn> --attr <name> --operation <add|replace|delete> --value <value>
 ```
-{% endhint %}
 
-### Replace an attribute value on an LDAP object (requires write access)
+**Replace an attribute value on an LDAP object (requires write access):**
 
 ```bash
 ./ldap [auth_flags] modify 'CN=User,CN=Users,DC=example,DC=com' --attr description --operation replace --value 'Updated description'
 ```
 
-### Add a member to a group
+**Add a member to a group:**
 
 ```bash
 ./ldap [auth_flags] modify 'CN=Group,CN=Users,DC=example,DC=com' --attr member --operation add --value 'CN=User,CN=Users,DC=example,DC=com'
 ```
 
-{% hint style="info" %}
-**Syntax**
+### `General Usage`
 
 ```bash
 ./ldap [auth_flags] --scheme ldaps|ldap [--starttls] <subcommand>
 ```
-{% endhint %}
 
-### Connect over LDAPS (TLS)
+**Connect over LDAPS (TLS):**
 
 ```bash
 ./ldap [auth_flags] --scheme ldaps query users
 ```
 
-### Connect using StartTLS upgrade on plain LDAP
+**Connect using StartTLS upgrade on plain LDAP:**
 
 ```bash
 ./ldap [auth_flags] --scheme ldap --starttls query users
 ```
 
-{% hint style="info" %}
-**Syntax**
+### `create`
 
 ```bash
 ./ldap [auth_flags] create user --name <cn> [--pass <password>] [--enabled] [--parent-dn <dn>] [--scheme ldaps]
 ```
-{% endhint %}
 
-
-Create a new user account (created disabled if --pass is omitted; set password requires LDAPS/StartTLS)  
-
+**Create a new user account (created disabled if --pass is omitted; set password requires LDAPS/StartTLS):**
 
 ```bash
 ./ldap [auth_flags] create user --name jdoe --scheme ldaps
@@ -613,23 +522,19 @@ Create a new user account (created disabled if --pass is omitted; set password r
 ./ldap [auth_flags] create user --name jdoe --pass 'P@ssw0rd!' --enabled=false --scheme ldaps
 ```
 
-### Create user in a custom OU
+**Create user in a custom OU:**
 
 ```bash
 ./ldap [auth_flags] create user --name svc_backup --parent-dn 'OU=ServiceAccounts,DC=example,DC=com' --scheme ldaps
 ```
 
-{% hint style="info" %}
-**Syntax**
+### `create`
 
 ```bash
 ./ldap [auth_flags] create computer --name <cn> [--pass <password>] [--parent-dn <dn>] [--scheme ldaps]
 ```
-{% endhint %}
 
-
-Create a machine account (requires ms-DS-MachineAccountQuota >= 1 or sufficient privileges)  
-
+**Create a machine account (requires ms-DS-MachineAccountQuota >= 1 or sufficient privileges):**
 
 ```bash
 ./ldap [auth_flags] create computer --name PENTEST$ --scheme ldaps
@@ -639,17 +544,13 @@ Create a machine account (requires ms-DS-MachineAccountQuota >= 1 or sufficient 
 ./ldap [auth_flags] create computer --name PENTEST --pass 'P@ssw0rd!' --scheme ldaps
 ```
 
-{% hint style="info" %}
-**Syntax**
+### `create`
 
 ```bash
 ./ldap [auth_flags] create group --name <cn> [--type <group-type>] [--parent-dn <dn>]
 ```
-{% endhint %}
 
-
-Create a group (types: GlobalSecurity, GlobalDistribution, DomainLocalSecurity, DomainLocalDistribution, UniversalSecurity, UniversalDistribution)  
-
+**Create a group (types: GlobalSecurity, GlobalDistribution, DomainLocalSecurity, DomainLocalDistribution, UniversalSecurity, UniversalDistribution):**
 
 ```bash
 ./ldap [auth_flags] create group --name 'Pentesters'
@@ -663,15 +564,13 @@ Create a group (types: GlobalSecurity, GlobalDistribution, DomainLocalSecurity, 
 ./ldap [auth_flags] create group --name 'Pentesters' --parent-dn 'OU=Groups,DC=example,DC=com'
 ```
 
-{% hint style="info" %}
-**Syntax**
+### `create`
 
 ```bash
 ./ldap [auth_flags] create ou --name <name> [--parent-dn <dn>]
 ```
-{% endhint %}
 
-### Create an Organizational Unit
+**Create an Organizational Unit:**
 
 ```bash
 ./ldap [auth_flags] create ou --name 'RedTeam'
@@ -681,15 +580,13 @@ Create a group (types: GlobalSecurity, GlobalDistribution, DomainLocalSecurity, 
 ./ldap [auth_flags] create ou --name 'RedTeam' --parent-dn 'DC=example,DC=com'
 ```
 
-{% hint style="info" %}
-**Syntax**
+### `create`
 
 ```bash
 ./ldap [auth_flags] create container --name <name> [--parent-dn <dn>]
 ```
-{% endhint %}
 
-### Create a container object
+**Create a container object:**
 
 ```bash
 ./ldap [auth_flags] create container --name 'TestContainer'
@@ -699,17 +596,13 @@ Create a group (types: GlobalSecurity, GlobalDistribution, DomainLocalSecurity, 
 ./ldap [auth_flags] create container --name 'TestContainer' --parent-dn 'DC=example,DC=com'
 ```
 
-{% hint style="info" %}
-**Syntax**
+### `create`
 
 ```bash
 ./ldap [auth_flags] create custom --template <file.yaml>
 ```
-{% endhint %}
 
-
-Create an arbitrary AD object from a YAML template (compatible with sopa create custom templates)  
-
+**Create an arbitrary AD object from a YAML template (compatible with sopa create custom templates):**
 
 ```bash
 ./ldap [auth_flags] create custom --template myobject.yaml

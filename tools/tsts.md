@@ -4,15 +4,13 @@
 
 ## Subcommands / Usage
 
-{% hint style="info" %}
-**Syntax**
+### `sessions`
 
 ```bash
 ./tsts [auth_flags] sessions [-s <state>] [-f <username>]
 ```
-{% endhint %}
 
-### Enumerate Terminal Services sessions, optionally filtering by state or user
+**Enumerate Terminal Services sessions, optionally filtering by state or user:**
 
 ```bash
 ./tsts [auth_flags] sessions
@@ -26,15 +24,13 @@
 ./tsts [auth_flags] sessions -f administrator
 ```
 
-{% hint style="info" %}
-**Syntax**
+### `processes`
 
 ```bash
 ./tsts [auth_flags] processes [-s <session-id>]
 ```
-{% endhint %}
 
-### List running processes across Terminal Services sessions
+**List running processes across Terminal Services sessions:**
 
 ```bash
 ./tsts [auth_flags] processes
@@ -44,29 +40,25 @@
 ./tsts [auth_flags] processes -s 1
 ```
 
-{% hint style="info" %}
-**Syntax**
-
-```bash
-./tsts [auth_flags] policy
-```
-{% endhint %}
-
-### Retrieve the Terminal Services machine policy buffer
+### `policy`
 
 ```bash
 ./tsts [auth_flags] policy
 ```
 
-{% hint style="info" %}
-**Syntax**
+**Retrieve the Terminal Services machine policy buffer:**
+
+```bash
+./tsts [auth_flags] policy
+```
+
+### `session`
 
 ```bash
 ./tsts [auth_flags] session <id> [-c] [-g]
 ```
-{% endhint %}
 
-### Show session details with optional raw client/config blobs
+**Show session details with optional raw client/config blobs:**
 
 ```bash
 ./tsts [auth_flags] session 1
@@ -76,29 +68,25 @@
 ./tsts [auth_flags] session 1 -c -g
 ```
 
-{% hint style="info" %}
-**Syntax**
+### `connect`
 
 ```bash
 ./tsts [auth_flags] connect <src-session> <dst-session> [-P <target-password>]
 ```
-{% endhint %}
 
-### Connect a source session into a destination session
+**Connect a source session into a destination session:**
 
 ```bash
 ./tsts [auth_flags] connect 2 1
 ```
 
-{% hint style="info" %}
-**Syntax**
+### `watch`
 
 ```bash
 ./tsts [auth_flags] watch [-e <event-list>]
 ```
-{% endhint %}
 
-### Watch Terminal Services events synchronously until Ctrl+C
+**Watch Terminal Services events synchronously until Ctrl+C:**
 
 ```bash
 ./tsts [auth_flags] watch
@@ -108,71 +96,61 @@
 ./tsts [auth_flags] watch -e logon,logoff,connect,disconnect
 ```
 
-{% hint style="info" %}
-**Syntax**
+### `kill-session`
 
 ```bash
 ./tsts [auth_flags] kill-session <id> [-w]
 ```
-{% endhint %}
 
-### Reset a session forcibly
+**Reset a session forcibly:**
 
 ```bash
 ./tsts [auth_flags] kill-session 3
 ```
 
-{% hint style="info" %}
-**Syntax**
+### `logoff`
 
 ```bash
 ./tsts [auth_flags] logoff <session-id>
 ```
-{% endhint %}
 
-### Log off a session via LSM session control
+**Log off a session via LSM session control:**
 
 ```bash
 ./tsts [auth_flags] logoff 3
 ```
 
-{% hint style="info" %}
-**Syntax**
+### `disconnect`
 
 ```bash
 ./tsts [auth_flags] disconnect <session-id> [-w]
 ```
-{% endhint %}
 
-### Disconnect a session without logging it off
+**Disconnect a session without logging it off:**
 
 ```bash
 ./tsts [auth_flags] disconnect 3
 ```
 
-{% hint style="info" %}
-**Syntax**
+### `kill-process`
 
 ```bash
 ./tsts [auth_flags] kill-process <pid> [-e <exit-code>]
 ```
-{% endhint %}
 
-### Terminate a process by PID
+**Terminate a process by PID:**
 
 ```bash
 ./tsts [auth_flags] kill-process 4242 -e 1
 ```
 
-{% hint style="info" %}
-**Syntax**
+### `message`
 
 ```bash
 ./tsts [auth_flags] message <session-id> -T <title> -m <text> [-s <style>] [-o <seconds>] [-a]
 ```
-{% endhint %}
 
-### Show a message box and optionally wait for the user response
+**Show a message box and optionally wait for the user response:**
 
 ```bash
 ./tsts [auth_flags] message 1 -T 'Maintenance' -m 'Please save your work.' -s 1 -o 120
@@ -182,59 +160,49 @@
 ./tsts [auth_flags] message 1 -T 'Notice' -m 'This is async.' -a
 ```
 
-{% hint style="info" %}
-**Syntax**
-
-```bash
-./tsts [auth_flags] listeners
-```
-{% endhint %}
-
-### List available Terminal Services listeners
+### `listeners`
 
 ```bash
 ./tsts [auth_flags] listeners
 ```
 
-{% hint style="info" %}
-**Syntax**
+**List available Terminal Services listeners:**
+
+```bash
+./tsts [auth_flags] listeners
+```
+
+### `stop-listener`
 
 ```bash
 ./tsts [auth_flags] stop-listener <name>
 ```
-{% endhint %}
 
-### Stop a listener such as RDP-Tcp
+**Stop a listener such as RDP-Tcp:**
 
 ```bash
 ./tsts [auth_flags] stop-listener RDP-Tcp
 ```
 
-{% hint style="info" %}
-**Syntax**
+### `start-listener`
 
 ```bash
 ./tsts [auth_flags] start-listener <name>
 ```
-{% endhint %}
 
-### Start a listener such as RDP-Tcp
+**Start a listener such as RDP-Tcp:**
 
 ```bash
 ./tsts [auth_flags] start-listener RDP-Tcp
 ```
 
-{% hint style="info" %}
-**Syntax**
+### `shutdown`
 
 ```bash
 ./tsts [auth_flags] shutdown [-r] [-P] [-l]
 ```
-{% endhint %}
 
-
-Shut down, reboot, power off, or log off all sessions via WinStationShutdownSystem  
-
+**Shut down, reboot, power off, or log off all sessions via WinStationShutdownSystem:**
 
 ```bash
 ./tsts [auth_flags] shutdown -r

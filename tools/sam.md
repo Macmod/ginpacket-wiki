@@ -4,561 +4,481 @@
 
 ## Subcommands / Usage
 
-{% hint style="info" %}
-**Syntax**
-
-```bash
-./sam [auth_flags] domains
-```
-{% endhint %}
-
-### List all SAM domains on the target
+### `domains`
 
 ```bash
 ./sam [auth_flags] domains
 ```
 
-{% hint style="info" %}
-**Syntax**
+**List all SAM domains on the target:**
+
+```bash
+./sam [auth_flags] domains
+```
+
+### `domain`
 
 ```bash
 ./sam [auth_flags] domain [-d <name>]
 ```
-{% endhint %}
 
-### Show detailed info for a domain
+**Show detailed info for a domain:**
 
 ```bash
 ./sam [auth_flags] domain -d EXAMPLE
 ```
 
-{% hint style="info" %}
-**Syntax**
+### `set-domain`
 
 ```bash
 ./sam [auth_flags] set-domain [-d <name>] [--min-pwd-len <n>] [--lockout-threshold <n>] [--lockout-window <dur>] [--lockout-duration <dur>]
 ```
-{% endhint %}
 
-### Modify domain-level password and lockout policy
+**Modify domain-level password and lockout policy:**
 
 ```bash
 ./sam [auth_flags] set-domain -d EXAMPLE --min-pwd-len 8 --lockout-threshold 5 --lockout-window 30m --lockout-duration 30m
 ```
 
-{% hint style="info" %}
-**Syntax**
+### `password-policy`
 
 ```bash
 ./sam [auth_flags] password-policy [-d <name>]
 ```
-{% endhint %}
 
-### Query the domain password policy
+**Query the domain password policy:**
 
 ```bash
 ./sam [auth_flags] password-policy -d EXAMPLE
 ```
 
-{% hint style="info" %}
-**Syntax**
+### `get-acl`
 
 ```bash
 ./sam [auth_flags] get-acl [-d <name>]
 ```
-{% endhint %}
 
-### Read the domain object's security descriptor
+**Read the domain object's security descriptor:**
 
 ```bash
 ./sam [auth_flags] get-acl -d EXAMPLE
 ```
 
-{% hint style="info" %}
-**Syntax**
+### `set-acl`
 
 ```bash
 ./sam [auth_flags] set-acl --sd <hex> [-d <name>]
 ```
-{% endhint %}
 
-### Write a security descriptor to the domain object
+**Write a security descriptor to the domain object:**
 
 ```bash
 ./sam [auth_flags] set-acl --sd 01000480200000002c00000000000000 -d EXAMPLE
 ```
 
-{% hint style="info" %}
-**Syntax**
+### `users`
 
 ```bash
 ./sam [auth_flags] users [-d <name>]
 ```
-{% endhint %}
 
-### Enumerate all user accounts in a domain
+**Enumerate all user accounts in a domain:**
 
 ```bash
 ./sam [auth_flags] users -d EXAMPLE
 ```
 
-{% hint style="info" %}
-**Syntax**
+### `display`
 
 ```bash
 ./sam [auth_flags] display [-d <name>] [--type <users|machines|groups>] [--prefix <str>]
 ```
-{% endhint %}
 
-### Display accounts with optional prefix filtering (users, machines, or groups)
+**Display accounts with optional prefix filtering (users, machines, or groups):**
 
 ```bash
 ./sam [auth_flags] display -d EXAMPLE --type users --prefix adm
 ```
 
-{% hint style="info" %}
-**Syntax**
+### `user`
 
 ```bash
 ./sam [auth_flags] user <username|RID> [-d <name>]
 ```
-{% endhint %}
 
-### Show full attributes for a user account
+**Show full attributes for a user account:**
 
 ```bash
 ./sam [auth_flags] user Administrator -d EXAMPLE
 ```
 
-{% hint style="info" %}
-**Syntax**
+### `add-user`
 
 ```bash
 ./sam [auth_flags] add-user <name> [-d <name>] [-N <s>] [-D <s>] [-w <s>] [--disable]
 ```
-{% endhint %}
 
-### Create a new user account
+**Create a new user account:**
 
 ```bash
 ./sam [auth_flags] add-user jdoe -d EXAMPLE -N 'John Doe' -D 'Test user' -w 'P@ssw0rd!'
 ```
 
-{% hint style="info" %}
-**Syntax**
+### `del-user`
 
 ```bash
 ./sam [auth_flags] del-user <username|RID> [-d <name>]
 ```
-{% endhint %}
 
-### Delete a user account
+**Delete a user account:**
 
 ```bash
 ./sam [auth_flags] del-user jdoe -d EXAMPLE
 ```
 
-{% hint style="info" %}
-**Syntax**
+### `set-user`
 
 ```bash
 ./sam [auth_flags] set-user <username|RID> [-d <name>] [--full-name <s>] [--description <s>] [--password <s>] [--expires <RFC3339|never>] [--enable-uac <flag>] [--disable-uac <flag>]
 ```
-{% endhint %}
 
-### Modify user account attributes or password
+**Modify user account attributes or password:**
 
 ```bash
 ./sam [auth_flags] set-user jdoe -d EXAMPLE --password 'NewP@ssw0rd!' --expires never
 ```
 
-{% hint style="info" %}
-**Syntax**
+### `user-groups`
 
 ```bash
 ./sam [auth_flags] user-groups <username|RID> [-d <name>]
 ```
-{% endhint %}
 
-### List all global groups a user belongs to
+**List all global groups a user belongs to:**
 
 ```bash
 ./sam [auth_flags] user-groups Administrator -d EXAMPLE
 ```
 
-{% hint style="info" %}
-**Syntax**
+### `user-aliases`
 
 ```bash
 ./sam [auth_flags] user-aliases <username|RID> [-d <name>]
 ```
-{% endhint %}
 
-### List all aliases (local groups) a user belongs to
+**List all aliases (local groups) a user belongs to:**
 
 ```bash
 ./sam [auth_flags] user-aliases Administrator -d EXAMPLE
 ```
 
-{% hint style="info" %}
-**Syntax**
+### `validate-password`
 
 ```bash
 ./sam [auth_flags] validate-password <password> [-d <name>] [--operation <auth|change|reset>]
 ```
-{% endhint %}
 
-### Validate a password against the domain policy
+**Validate a password against the domain policy:**
 
 ```bash
 ./sam [auth_flags] validate-password 'P@ssw0rd!' -d EXAMPLE --operation auth
 ```
 
-{% hint style="info" %}
-**Syntax**
+### `groups`
 
 ```bash
 ./sam [auth_flags] groups [-d <name>]
 ```
-{% endhint %}
 
-### Enumerate all global groups in a domain
+**Enumerate all global groups in a domain:**
 
 ```bash
 ./sam [auth_flags] groups -d EXAMPLE
 ```
 
-{% hint style="info" %}
-**Syntax**
+### `group`
 
 ```bash
 ./sam [auth_flags] group <name|RID> [-d <name>]
 ```
-{% endhint %}
 
-### Show full attributes for a global group
+**Show full attributes for a global group:**
 
 ```bash
 ./sam [auth_flags] group 'Domain Admins' -d EXAMPLE
 ```
 
-{% hint style="info" %}
-**Syntax**
+### `add-group`
 
 ```bash
 ./sam [auth_flags] add-group <name> [-d <name>]
 ```
-{% endhint %}
 
-### Create a new global group
+**Create a new global group:**
 
 ```bash
 ./sam [auth_flags] add-group TestGroup -d EXAMPLE
 ```
 
-{% hint style="info" %}
-**Syntax**
+### `del-group`
 
 ```bash
 ./sam [auth_flags] del-group <name|RID> [-d <name>]
 ```
-{% endhint %}
 
-### Delete a global group
+**Delete a global group:**
 
 ```bash
 ./sam [auth_flags] del-group TestGroup -d EXAMPLE
 ```
 
-{% hint style="info" %}
-**Syntax**
+### `group-members`
 
 ```bash
 ./sam [auth_flags] group-members <name|RID> [-d <name>] [--resolve-sids]
 ```
-{% endhint %}
 
-### List members of a global group
+**List members of a global group:**
 
 ```bash
 ./sam [auth_flags] group-members 'Domain Admins' -d EXAMPLE --resolve-sids
 ```
 
-{% hint style="info" %}
-**Syntax**
+### `add-group-member`
 
 ```bash
 ./sam [auth_flags] add-group-member <group> <member-username|RID> [-d <name>]
 ```
-{% endhint %}
 
-### Add a member to a global group
+**Add a member to a global group:**
 
 ```bash
 ./sam [auth_flags] add-group-member 'Domain Admins' jdoe -d EXAMPLE
 ```
 
-{% hint style="info" %}
-**Syntax**
+### `del-group-member`
 
 ```bash
 ./sam [auth_flags] del-group-member <group> <member-username|RID> [-d <name>]
 ```
-{% endhint %}
 
-### Remove a member from a global group
+**Remove a member from a global group:**
 
 ```bash
 ./sam [auth_flags] del-group-member 'Domain Admins' jdoe -d EXAMPLE
 ```
 
-{% hint style="info" %}
-**Syntax**
+### `set-group`
 
 ```bash
 ./sam [auth_flags] set-group <name|RID> [-d <name>] [--name <s>] [--description <s>]
 ```
-{% endhint %}
 
-### Rename or update the description of a global group
+**Rename or update the description of a global group:**
 
 ```bash
 ./sam [auth_flags] set-group TestGroup -d EXAMPLE --name RenamedGroup --description 'Updated desc'
 ```
 
-{% hint style="info" %}
-**Syntax**
+### `set-member-attrs`
 
 ```bash
 ./sam [auth_flags] set-member-attrs <group> <member-username|RID> [-d <name>] [--attributes <hex>]
 ```
-{% endhint %}
 
-### Set per-member attributes on a group membership
+**Set per-member attributes on a group membership:**
 
 ```bash
 ./sam [auth_flags] set-member-attrs 'Domain Admins' jdoe -d EXAMPLE --attributes 0x7
 ```
 
-{% hint style="info" %}
-**Syntax**
+### `aliases`
 
 ```bash
 ./sam [auth_flags] aliases [-d <name>] [--builtin]
 ```
-{% endhint %}
 
-### Enumerate all aliases (local groups) in a domain
+**Enumerate all aliases (local groups) in a domain:**
 
 ```bash
 ./sam [auth_flags] aliases -d EXAMPLE
 ```
 
-{% hint style="info" %}
-**Syntax**
+### `alias`
 
 ```bash
 ./sam [auth_flags] alias <name|RID> [-d <name>] [--builtin]
 ```
-{% endhint %}
 
-### Show full attributes for an alias
+**Show full attributes for an alias:**
 
 ```bash
 ./sam [auth_flags] alias Administrators --builtin
 ```
 
-{% hint style="info" %}
-**Syntax**
+### `add-alias`
 
 ```bash
 ./sam [auth_flags] add-alias <name> [-d <name>]
 ```
-{% endhint %}
 
-### Create a new alias (local group)
+**Create a new alias (local group):**
 
 ```bash
 ./sam [auth_flags] add-alias TestAlias -d EXAMPLE
 ```
 
-{% hint style="info" %}
-**Syntax**
+### `del-alias`
 
 ```bash
 ./sam [auth_flags] del-alias <name|RID> [-d <name>] [--builtin]
 ```
-{% endhint %}
 
-### Delete an alias
+**Delete an alias:**
 
 ```bash
 ./sam [auth_flags] del-alias TestAlias -d EXAMPLE
 ```
 
-{% hint style="info" %}
-**Syntax**
+### `alias-members`
 
 ```bash
 ./sam [auth_flags] alias-members <name|RID> [-d <name>] [--builtin] [--resolve-sids]
 ```
-{% endhint %}
 
-### List members of an alias
+**List members of an alias:**
 
 ```bash
 ./sam [auth_flags] alias-members Administrators --builtin --resolve-sids
 ```
 
-{% hint style="info" %}
-**Syntax**
+### `alias-membership`
 
 ```bash
 ./sam [auth_flags] alias-membership <sid> [-d <name>] [--builtin]
 ```
-{% endhint %}
 
-### List all alias memberships for a given SID
+**List all alias memberships for a given SID:**
 
 ```bash
 ./sam [auth_flags] alias-membership S-1-5-21-111-222-333-1105 -d EXAMPLE
 ```
 
-{% hint style="info" %}
-**Syntax**
+### `add-alias-member`
 
 ```bash
 ./sam [auth_flags] add-alias-member <alias> <sid|username> [-d <name>] [--builtin]
 ```
-{% endhint %}
 
-### Add a member (by SID or username) to an alias
+**Add a member (by SID or username) to an alias:**
 
 ```bash
 ./sam [auth_flags] add-alias-member Administrators S-1-5-21-111-222-333-1105 --builtin
 ```
 
-{% hint style="info" %}
-**Syntax**
+### `del-alias-member`
 
 ```bash
 ./sam [auth_flags] del-alias-member <alias> <sid|username> [-d <name>] [--builtin]
 ```
-{% endhint %}
 
-### Remove a member from an alias
+**Remove a member from an alias:**
 
 ```bash
 ./sam [auth_flags] del-alias-member Administrators S-1-5-21-111-222-333-1105 --builtin
 ```
 
-{% hint style="info" %}
-**Syntax**
+### `add-alias-members`
 
 ```bash
 ./sam [auth_flags] add-alias-members <alias> <sid|username>... [-d <name>] [--builtin]
 ```
-{% endhint %}
 
-### Add multiple members to an alias in one call
+**Add multiple members to an alias in one call:**
 
 ```bash
 ./sam [auth_flags] add-alias-members Administrators S-1-5-21-111-222-333-1105 S-1-5-21-111-222-333-1106 --builtin
 ```
 
-{% hint style="info" %}
-**Syntax**
+### `del-alias-members`
 
 ```bash
 ./sam [auth_flags] del-alias-members <alias> <sid|username>... [-d <name>] [--builtin]
 ```
-{% endhint %}
 
-### Remove multiple members from an alias in one call
+**Remove multiple members from an alias in one call:**
 
 ```bash
 ./sam [auth_flags] del-alias-members Administrators S-1-5-21-111-222-333-1105 S-1-5-21-111-222-333-1106 --builtin
 ```
 
-{% hint style="info" %}
-**Syntax**
+### `set-alias`
 
 ```bash
 ./sam [auth_flags] set-alias <name|RID> [-d <name>] [--builtin] [--name <s>] [--description <s>]
 ```
-{% endhint %}
 
-### Rename or update the description of an alias
+**Rename or update the description of an alias:**
 
 ```bash
 ./sam [auth_flags] set-alias TestAlias -d EXAMPLE --name RenamedAlias --description 'Updated desc'
 ```
 
-{% hint style="info" %}
-**Syntax**
+### `purge-sid`
 
 ```bash
 ./sam [auth_flags] purge-sid <sid> [-d <name>] [--builtin]
 ```
-{% endhint %}
 
-### Remove all alias/group memberships for a stale SID (cross-domain cleanup)
+**Remove all alias/group memberships for a stale SID (cross-domain cleanup):**
 
 ```bash
 ./sam [auth_flags] purge-sid S-1-5-21-111-222-333-1105 -d EXAMPLE
 ```
 
-{% hint style="info" %}
-**Syntax**
+### `lookup-names`
 
 ```bash
 ./sam [auth_flags] lookup-names <name>... [-d <name>]
 ```
-{% endhint %}
 
-### Resolve one or more account names to RIDs and types
+**Resolve one or more account names to RIDs and types:**
 
 ```bash
 ./sam [auth_flags] lookup-names Administrator jdoe -d EXAMPLE
 ```
 
-{% hint style="info" %}
-**Syntax**
+### `lookup-rids`
 
 ```bash
 ./sam [auth_flags] lookup-rids <rid>... [-d <name>]
 ```
-{% endhint %}
 
-### Resolve one or more RIDs to account names and types
+**Resolve one or more RIDs to account names and types:**
 
 ```bash
 ./sam [auth_flags] lookup-rids 500 512 -d EXAMPLE
 ```
 
-{% hint style="info" %}
-**Syntax**
+### `rid-to-sid`
 
 ```bash
 ./sam [auth_flags] rid-to-sid <rid>
 ```
-{% endhint %}
 
-### Convert a RID to its full SID within the bound domain
+**Convert a RID to its full SID within the bound domain:**
 
 ```bash
 ./sam [auth_flags] rid-to-sid 500
 ```
 
-{% hint style="info" %}
-**Syntax**
+### `set-dsrm-password`
 
 ```bash
 ./sam [auth_flags] set-dsrm-password <new-password>
 ```
-{% endhint %}
 
-### Set the Directory Services Restore Mode password on a DC
+**Set the Directory Services Restore Mode password on a DC:**
 
 ```bash
 ./sam [auth_flags] set-dsrm-password 'NewDSRM@Passw0rd!'

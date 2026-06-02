@@ -4,41 +4,37 @@
 
 ## Subcommands / Usage
 
-{% hint style="info" %}
-**Syntax**
+### `initiate`
 
 ```bash
 ./shutdown [auth_flags] initiate [-m <msg>] [--timeout <s>] [--force] [-r] [--reason <code>] [--interface <iface>] [--use-v1]
 ```
-{% endhint %}
 
-### Initiate a remote shutdown with a message, timeout, force, and reboot
+**Initiate a remote shutdown with a message, timeout, force, and reboot:**
 
 ```bash
 ./shutdown [auth_flags] initiate -m 'maintenance' --timeout 120 --force -r --reason 'planned os maintenance'
 ```
 
-### Initiate a shutdown using a numeric reason code
+**Initiate a shutdown using a numeric reason code:**
 
 ```bash
 ./shutdown [auth_flags] initiate --reason 0x80020001
 ```
 
-### Initiate a shutdown using the legacy API (no reason codes)
+**Initiate a shutdown using the legacy API (no reason codes):**
 
 ```bash
 ./shutdown [auth_flags] initiate --use-v1
 ```
 
-{% hint style="info" %}
-**Syntax**
+### `abort`
 
 ```bash
 ./shutdown [auth_flags] abort
 ```
-{% endhint %}
 
-### Abort a pending remote shutdown
+**Abort a pending remote shutdown:**
 
 ```bash
 ./shutdown [auth_flags] abort

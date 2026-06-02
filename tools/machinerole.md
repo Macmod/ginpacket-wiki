@@ -4,21 +4,19 @@
 
 ## Subcommands / Usage
 
-{% hint style="info" %}
-**Syntax**
+### `[--use-named-pipe]`
 
 ```bash
 ./machinerole [auth_flags] [--use-named-pipe]
 ```
-{% endhint %}
 
-### Query the machine's domain role and DS state via TCP
+**Query the machine's domain role and DS state via TCP:**
 
 ```bash
 ./machinerole [auth_flags]
 ```
 
-### Query using the named pipe transport instead of TCP
+**Query using the named pipe transport instead of TCP:**
 
 ```bash
 ./machinerole [auth_flags] --use-named-pipe

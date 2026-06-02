@@ -4,49 +4,43 @@
 
 ## Subcommands / Usage
 
-{% hint style="info" %}
-**Syntax**
+### `retrieve`
 
 ```bash
 ./bkpkey [auth_flags] retrieve [-o <out-file>]
 ```
-{% endhint %}
 
-### Retrieve the domain backup key and write it to a file
+**Retrieve the domain backup key and write it to a file:**
 
 ```bash
 ./bkpkey [auth_flags] retrieve -o backupkey.bin
 ```
 
-{% hint style="info" %}
-**Syntax**
+### `encrypt`
 
 ```bash
 ./bkpkey [auth_flags] encrypt (--in-file <file> | --in-b64 <base64>) [-o <out-file>]  (alias: backup)
 ```
-{% endhint %}
 
-### Wrap a DPAPI blob using the domain backup key (BACKUPKEY_BACKUP_GUID)
+**Wrap a DPAPI blob using the domain backup key (BACKUPKEY_BACKUP_GUID):**
 
 ```bash
 ./bkpkey [auth_flags] encrypt --in-file request.bin -o response.bin
 ```
 
-{% hint style="info" %}
-**Syntax**
+### `decrypt`
 
 ```bash
 ./bkpkey [auth_flags] decrypt (--in-file <file> | --in-b64 <base64>) [-o <out-file>] [--win2k]  (alias: restore)
 ```
-{% endhint %}
 
-### Unwrap a credential blob using the DC's backup private key
+**Unwrap a credential blob using the DC's backup private key:**
 
 ```bash
 ./bkpkey [auth_flags] decrypt --in-file blob.bin
 ```
 
-### Unwrap using the legacy Win2000-era action (BACKUPKEY_RESTORE_GUID_WIN2K)
+**Unwrap using the legacy Win2000-era action (BACKUPKEY_RESTORE_GUID_WIN2K):**
 
 ```bash
 ./bkpkey [auth_flags] decrypt --in-b64 'MIIB...' --win2k

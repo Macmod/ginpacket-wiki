@@ -4,72 +4,64 @@
 
 ## Subcommands / Usage
 
-{% hint style="info" %}
-**Syntax**
+### `samr`
 
 ```bash
 ./changepwd [auth_flags] samr -a <account> -w <new-password> [-o <old-password>] [--transport <smb|tcp>]
 ```
-{% endhint %}
 
-### Change a password via MS-SAMR over SMB named pipe
+**Change a password via MS-SAMR over SMB named pipe:**
 
 ```bash
 ./changepwd [auth_flags] samr -a jdoe -w 'NewP@ssw0rd!' --transport smb
 ```
 
-### Change a password via MS-SAMR over TCP
+**Change a password via MS-SAMR over TCP:**
 
 ```bash
 ./changepwd [auth_flags] samr -a jdoe -w 'NewP@ssw0rd!' --transport tcp
 ```
 
-{% hint style="info" %}
-**Syntax**
+### `kpasswd`
 
 ```bash
 ./changepwd [auth_flags] kpasswd -a <account> -w <new-password> [-o <old-password>]
 ```
-{% endhint %}
 
 
 Note: for this command, --dc is only considered to override the DC for PKINIT when authenticating with a client certificate. In that case, if --dc is not specified, the target (-t) will be used for both PKINIT and the operation itself.  
 
-### Change a password using the Kerberos kpasswd protocol (self-change)
+**Change a password using the Kerberos kpasswd protocol (self-change):**
 
 ```bash
 ./changepwd [auth_flags] kpasswd -a jdoe -w 'NewP@ssw0rd!' -o 'OldP@ssw0rd!'
 ```
 
-### Perform an admin password reset via kpasswd
+**Perform an admin password reset via kpasswd:**
 
 ```bash
 ./changepwd [auth_flags] kpasswd -a jdoe -w 'NewP@ssw0rd!'
 ```
 
-{% hint style="info" %}
-**Syntax**
+### `ldap`
 
 ```bash
 ./changepwd [auth_flags] ldap -a <account> -w <new-password> [--scheme <ldap|ldaps>] [--starttls]
 ```
-{% endhint %}
 
-### Change a password via LDAPS
+**Change a password via LDAPS:**
 
 ```bash
 ./changepwd [auth_flags] ldap -a jdoe -w 'NewP@ssw0rd!' --scheme ldaps
 ```
 
-{% hint style="info" %}
-**Syntax**
+### `adws`
 
 ```bash
 ./changepwd [auth_flags] adws -a <account> -w <new-password>
 ```
-{% endhint %}
 
-### Change a password via ADWS (Active Directory Web Services)
+**Change a password via ADWS (Active Directory Web Services):**
 
 ```bash
 ./changepwd [auth_flags] adws -a jdoe -w 'NewP@ssw0rd!'
