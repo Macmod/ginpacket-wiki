@@ -10,13 +10,35 @@ cd ginpacket
 To build all commands into `./bin` on Linux or MacOS, use the `build.sh` script:
 ```bash
 chmod +x build.sh
+./build.sh --all
+```
+
+### Building Specific Tools
+If you only want to build specific tools, you can run the script interactively. This will open a terminal UI (TUI) menu allowing you to select the desired tools with the spacebar:
+```bash
 ./build.sh
+```
+
+Alternatively, you can pass the tool names directly as arguments to skip the menu:
+```bash
+./build.sh ldap dns cert
 ```
 
 ## Windows
 To build all commands on Windows, use the provided `build.ps1` PowerShell script:
 ```powershell
+.\build.ps1 -All
+```
+
+### Building Specific Tools
+Just like on Linux, you can run the script interactively to choose what to build from a TUI menu:
+```powershell
 .\build.ps1
+```
+
+Or you can specify the tools you want to build via command-line arguments:
+```powershell
+.\build.ps1 ldap dns cert
 ```
 
 ## Static Build (Disable CGO)
@@ -24,11 +46,11 @@ If you want to build the binaries statically without relying on CGO (which is us
 
 **On Linux / MacOS:**
 ```bash
-CGO_ENABLED=0 ./build.sh
+CGO_ENABLED=0 ./build.sh --all
 ```
 
 **On Windows (PowerShell):**
 ```powershell
 $env:CGO_ENABLED="0"
-.\build.ps1
+.\build.ps1 -All
 ```
