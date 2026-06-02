@@ -4,11 +4,13 @@
 
 ## Subcommands / Usage
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./bkpkey [auth_flags] retrieve [-o <out-file>]
 ```
+{% endhint %}
 
 ### Retrieve the domain backup key and write it to a file
 
@@ -16,11 +18,13 @@
 ./bkpkey [auth_flags] retrieve -o backupkey.bin
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./bkpkey [auth_flags] encrypt (--in-file <file> | --in-b64 <base64>) [-o <out-file>]  (alias: backup)
 ```
+{% endhint %}
 
 ### Wrap a DPAPI blob using the domain backup key (BACKUPKEY_BACKUP_GUID)
 
@@ -28,11 +32,13 @@
 ./bkpkey [auth_flags] encrypt --in-file request.bin -o response.bin
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./bkpkey [auth_flags] decrypt (--in-file <file> | --in-b64 <base64>) [-o <out-file>] [--win2k]  (alias: restore)
 ```
+{% endhint %}
 
 ### Unwrap a credential blob using the DC's backup private key
 

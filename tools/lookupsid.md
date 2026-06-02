@@ -4,11 +4,13 @@
 
 ## Subcommands / Usage
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./lookupsid [auth_flags] (-s <sid> | -n <name> | -D <domain-sid> -F <start-rid> -T <end-rid>) [--use-v1]
 ```
+{% endhint %}
 
 ### Resolve a well-known or arbitrary SID to its account name
 

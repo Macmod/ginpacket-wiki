@@ -17,11 +17,44 @@ if usage_idx == -1:
     print("Could not find '## Usage' in README.md")
     exit(1)
 
+def convert_github_alerts(text):
+    lines = text.split('\n')
+    out = []
+    in_alert = False
+    for line in lines:
+        if line.startswith('> [!NOTE]'):
+            out.append('{% hint style="info" %}')
+            in_alert = True
+        elif line.startswith('> [!IMPORTANT]'):
+            out.append('{% hint style="warning" %}')
+            in_alert = True
+        elif line.startswith('> [!WARNING]'):
+            out.append('{% hint style="danger" %}')
+            in_alert = True
+        elif line.startswith('> [!TIP]'):
+            out.append('{% hint style="success" %}')
+            in_alert = True
+        elif in_alert and line.startswith('>'):
+            content = line[1:]
+            if content.startswith(' '):
+                content = content[1:]
+            out.append(content)
+        elif in_alert and not line.startswith('>'):
+            out.append('{% endhint %}')
+            out.append(line)
+            in_alert = False
+        else:
+            out.append(line)
+    if in_alert:
+        out.append('{% endhint %}')
+    return '\n'.join(out)
+
 main_readme = content[:usage_idx].strip()
 # Remove the HTML badges section at the top of main readme to make it cleaner for GitBook
 main_readme = re.sub(r'<p align="center">.*?</p>\s*</p>\s*', '', main_readme, flags=re.DOTALL)
 # Alternatively just leave it. GitBook can render basic HTML. But let's replace with a simple markdown header.
 main_readme = "# Ginpacket\n\n" + main_readme
+main_readme = convert_github_alerts(main_readme)
 
 # Also append the Authentication section which is before Usage
 auth_start = main_readme.find("## Authentication")
@@ -89,7 +122,8 @@ def parse_bash_block(bash_text):
                             fixed_syntax.append(s.replace(short_name, f'./{short_name}', 1))
                         else:
                             fixed_syntax.append(s)
-                    out.append(f"### Syntax\n\n```bash\n{chr(10).join(fixed_syntax)}\n```\n")
+                    syntax_block = chr(10).join(fixed_syntax)
+                    out.append(f"{{% hint style=\"info\" %}}\n**Syntax**\n\n```bash\n{syntax_block}\n```\n{{% endhint %}}\n")
                 if desc_lines:
                     out.append("\n" + "  \n".join(desc_lines) + "  \n")
                 
@@ -117,7 +151,8 @@ def parse_bash_block(bash_text):
                             fixed_syntax.append(s.replace(short_name, f'./{short_name}', 1))
                         else:
                             fixed_syntax.append(s)
-                    out.append(f"### Syntax\n\n```bash\n{chr(10).join(fixed_syntax)}\n```\n")
+                    syntax_block = chr(10).join(fixed_syntax)
+                    out.append(f"{{% hint style=\"info\" %}}\n**Syntax**\n\n```bash\n{syntax_block}\n```\n{{% endhint %}}\n")
                 if desc_lines:
                     # Treat the first line as heading if short, rest as text
                     if len(desc_lines[0]) < 80 and not desc_lines[0].startswith('-') and not desc_lines[0].startswith(' '):
@@ -165,6 +200,7 @@ for title, body in blocks:
     for b in bash_blocks:
         notes = notes.replace(f'```bash\n{b}\n```', '')
     notes = notes.strip()
+    notes = convert_github_alerts(notes)
     
     # Build tool markdown
     tool_md = [

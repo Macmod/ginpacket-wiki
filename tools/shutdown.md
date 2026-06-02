@@ -4,11 +4,13 @@
 
 ## Subcommands / Usage
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./shutdown [auth_flags] initiate [-m <msg>] [--timeout <s>] [--force] [-r] [--reason <code>] [--interface <iface>] [--use-v1]
 ```
+{% endhint %}
 
 ### Initiate a remote shutdown with a message, timeout, force, and reboot
 
@@ -28,11 +30,13 @@
 ./shutdown [auth_flags] initiate --use-v1
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./shutdown [auth_flags] abort
 ```
+{% endhint %}
 
 ### Abort a pending remote shutdown
 

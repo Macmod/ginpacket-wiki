@@ -4,11 +4,13 @@
 
 ## Subcommands / Usage
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./wmi [auth_flags] [-n <namespace>] query <wql> [-f <fields>] [-L <n>]
 ```
+{% endhint %}
 
 ### Run a WQL query against a WMI namespace
 
@@ -22,11 +24,13 @@
 ./wmi [auth_flags] query 'SELECT * FROM Win32_Process' -f Name,ProcessId,CommandLine -L 20
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./wmi [auth_flags] namespaces
 ```
+{% endhint %}
 
 ### List all WMI namespaces on the host
 
@@ -34,11 +38,13 @@
 ./wmi [auth_flags] namespaces
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./wmi [auth_flags] classes
 ```
+{% endhint %}
 
 ### List all classes in the current namespace
 
@@ -46,11 +52,13 @@
 ./wmi [auth_flags] classes
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./wmi [auth_flags] class <class>
 ```
+{% endhint %}
 
 ### List all properties of a WMI class
 
@@ -58,11 +66,13 @@
 ./wmi [auth_flags] class Win32_Process
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./wmi [auth_flags] methods <class>
 ```
+{% endhint %}
 
 ### List all methods of a WMI class
 
@@ -70,11 +80,13 @@
 ./wmi [auth_flags] methods Win32_Process
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./wmi [auth_flags] instance <object-path>
 ```
+{% endhint %}
 
 ### Retrieve a WMI object instance by path
 
@@ -82,11 +94,13 @@
 ./wmi [auth_flags] instance "Win32_Service.Name='W32Time'"
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./wmi [auth_flags] invoke <object::method> [--arg <key=value>]
 ```
+{% endhint %}
 
 ### Invoke a method on a WMI object
 
@@ -94,11 +108,13 @@
 ./wmi [auth_flags] invoke Win32_Process::Create --arg 'CommandLine=cmd.exe /c whoami'
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./wmi [auth_flags] exec <command>
 ```
+{% endhint %}
 
 ### Execute a command via WMI (Win32_Process.Create shorthand)
 
@@ -106,11 +122,13 @@
 ./wmi [auth_flags] exec 'cmd.exe /c hostname'
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./wmi [auth_flags] del-instance <object-path>
 ```
+{% endhint %}
 
 ### Delete a WMI object instance by path
 

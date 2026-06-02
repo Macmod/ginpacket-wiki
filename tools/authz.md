@@ -4,11 +4,13 @@
 
 ## Subcommands / Usage
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./authz [auth_flags] [--object-uuid <uuid>] <subcommand>
 ```
+{% endhint %}
 
 ### Show version
 
@@ -25,11 +27,13 @@ Classes: all, user, groups, restricted, device-groups, user-claims, device-claim
 ./authz [auth_flags] info 'joao_couves' --class all
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./authz check <source> <SID|NAME> -T <target> [common flags]
 ```
+{% endhint %}
 
 
 Common check flags:  

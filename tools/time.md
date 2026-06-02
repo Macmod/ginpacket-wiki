@@ -4,11 +4,13 @@
 
 ## Subcommands / Usage
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./time [auth_flags] sync [--wait <sec>] [--sync-flags <n>]
 ```
+{% endhint %}
 
 ### Trigger a manual time synchronization
 
@@ -16,11 +18,13 @@
 ./time [auth_flags] sync --wait 1 --sync-flags 3
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./time [auth_flags] bits
 ```
+{% endhint %}
 
 ### Query the W32TM capability bits advertised by the service
 
@@ -28,11 +32,13 @@
 ./time [auth_flags] bits
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./time [auth_flags] source
 ```
+{% endhint %}
 
 ### Query the current time source (NTP server) in use
 
@@ -40,11 +46,13 @@
 ./time [auth_flags] source
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./time [auth_flags] config
 ```
+{% endhint %}
 
 ### Query the global W32TM service configuration
 
@@ -52,11 +60,13 @@
 ./time [auth_flags] config
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./time [auth_flags] status
 ```
+{% endhint %}
 
 ### Query the current time synchronization status
 
@@ -64,11 +74,13 @@
 ./time [auth_flags] status
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./time [auth_flags] log
 ```
+{% endhint %}
 
 ### Query the W32TM event log entries
 
@@ -76,11 +88,13 @@
 ./time [auth_flags] log
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./time [auth_flags] provider-status <provider-name> [--provider-flags <n>]
 ```
+{% endhint %}
 
 ### Query the status of a named time provider
 
@@ -88,11 +102,13 @@
 ./time [auth_flags] provider-status NtpClient
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./time [auth_flags] provider-config <provider-name> [--provider-flags <n>]
 ```
+{% endhint %}
 
 ### Query the configuration of a named time provider
 

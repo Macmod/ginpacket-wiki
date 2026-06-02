@@ -4,11 +4,13 @@
 
 ## Subcommands / Usage
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./services [auth_flags] dump [--type <mask>] [--state <mask>] [--group <name>]
 ```
+{% endhint %}
 
 ### Enumerate all services with their type, state, and group
 
@@ -16,11 +18,13 @@
 ./services [auth_flags] dump
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./services [auth_flags] query [--type <mask>] [--state <mask>] [--group <name>]
 ```
+{% endhint %}
 
 ### Query running services with optional type/state/group filters
 
@@ -28,11 +32,13 @@
 ./services [auth_flags] query
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./services [auth_flags] service <name> [--use-v1]
 ```
+{% endhint %}
 
 ### Show full configuration info for a service
 
@@ -40,11 +46,13 @@
 ./services [auth_flags] service Spooler
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./services [auth_flags] get-sd <name> [--parse-dacl]
 ```
+{% endhint %}
 
 ### Read the security descriptor of a service
 
@@ -52,11 +60,13 @@
 ./services [auth_flags] get-sd Spooler
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./services [auth_flags] group <group-name>
 ```
+{% endhint %}
 
 ### Query the load-order group for a service group
 
@@ -64,11 +74,13 @@
 ./services [auth_flags] group 'NetworkProvider'
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./services [auth_flags] enum-deps <name>
 ```
+{% endhint %}
 
 ### List all services that depend on a given service
 
@@ -76,11 +88,13 @@
 ./services [auth_flags] enum-deps Spooler
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./services [auth_flags] translate (-K <svc-key> | -N <display-name>)
 ```
+{% endhint %}
 
 ### Translate between a service's registry key name and its display name
 
@@ -88,11 +102,13 @@
 ./services [auth_flags] translate -K Spooler
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./services [auth_flags] add-service <name> <binpath> [-N <display>] [--service-type <type>] [-T <start-type>] [--wow64] [--wow-type <arch>]
 ```
+{% endhint %}
 
 ### Create a new service with an on-demand start type
 
@@ -118,11 +134,13 @@ Register a service for a specific machine architecture (RCreateWowService, opnum
 ./services [auth_flags] add-service MySvcArch 'C:\tools\agent.exe' --wow-type 0x014c
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./services [auth_flags] set-service <name> [-b <binpath>] [-T <start-type>] [-a <account>] ...
 ```
+{% endhint %}
 
 ### Modify configuration of an existing service
 
@@ -130,11 +148,13 @@ Register a service for a specific machine architecture (RCreateWowService, opnum
 ./services [auth_flags] set-service MyService -b 'C:\new\path.exe' -T auto
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./services [auth_flags] set-failure <name> [-F <command>] [--reset-period <sec>]
 ```
+{% endhint %}
 
 ### Configure failure recovery actions for a service
 
@@ -142,11 +162,13 @@ Register a service for a specific machine architecture (RCreateWowService, opnum
 ./services [auth_flags] set-failure MyService -F 'net start MyService' --reset-period 3600
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./services [auth_flags] set-sd <name> --sd <hex-sd>
 ```
+{% endhint %}
 
 ### Write a custom security descriptor to a service (use hex output from get-sd)
 
@@ -154,11 +176,13 @@ Register a service for a specific machine architecture (RCreateWowService, opnum
 ./services [auth_flags] set-sd MyService --sd '01000480200000002c00000000000000'
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./services [auth_flags] start <name> [--arg <value> ...]
 ```
+{% endhint %}
 
 ### Start a service, optionally passing arguments
 
@@ -166,11 +190,13 @@ Register a service for a specific machine architecture (RCreateWowService, opnum
 ./services [auth_flags] start Spooler --arg '-example'
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./services [auth_flags] stop <name> [--reason <hex>] [--planned] [--comment <text>]
 ```
+{% endhint %}
 
 ### Stop a service with an optional reason code
 
@@ -178,11 +204,13 @@ Register a service for a specific machine architecture (RCreateWowService, opnum
 ./services [auth_flags] stop Spooler
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./services [auth_flags] del-service <name>
 ```
+{% endhint %}
 
 ### Delete a service
 

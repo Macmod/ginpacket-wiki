@@ -4,11 +4,13 @@
 
 ## Subcommands / Usage
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./wksta [auth_flags] info [--detail <basic|lan|full|config>]
 ```
+{% endhint %}
 
 ### Query workstation configuration and identity info (default: full)
 
@@ -16,11 +18,13 @@
 ./wksta [auth_flags] info --detail full
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./wksta [auth_flags] loggedon
 ```
+{% endhint %}
 
 ### List users currently logged on to the workstation interactively
 
@@ -28,11 +32,13 @@
 ./wksta [auth_flags] loggedon
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./wksta [auth_flags] transports
 ```
+{% endhint %}
 
 ### Enumerate network transports bound to the workstation
 
@@ -40,11 +46,13 @@
 ./wksta [auth_flags] transports
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./wksta [auth_flags] join-info
 ```
+{% endhint %}
 
 ### Query the current domain or workgroup join status
 
@@ -52,11 +60,13 @@
 ./wksta [auth_flags] join-info
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./wksta [auth_flags] stats
 ```
+{% endhint %}
 
 ### Show SMB redirector statistics (bytes transferred, sessions, operations)
 
@@ -64,11 +74,13 @@
 ./wksta [auth_flags] stats
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./wksta [auth_flags] set-info (--keep-conn | --sess-timeout | --dormant-file-limit) <n>
 ```
+{% endhint %}
 
 ### Set the keep-alive connection interval in seconds
 
@@ -88,11 +100,13 @@
 ./wksta [auth_flags] set-info --dormant-file-limit 15
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./wksta [auth_flags] names [--type <primary|alternate|all>]
 ```
+{% endhint %}
 
 ### List registered computer names for the workstation (default: --type all)
 
@@ -107,11 +121,13 @@ PrimaryComputerName is printed as a single value; AlternateComputerNames are lis
 ./wksta [auth_flags] names --type alternate
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./wksta [auth_flags] joinable-ous <domain>
 ```
+{% endhint %}
 
 ### Enumerate OUs in a domain that this machine can join
 
@@ -119,11 +135,13 @@ PrimaryComputerName is printed as a single value; AlternateComputerNames are lis
 ./wksta [auth_flags] joinable-ous EXAMPLE.LOCAL
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./wksta [auth_flags] join-domain <domain> [--options <n>]
 ```
+{% endhint %}
 
 ### Join the workstation to a domain
 
@@ -131,11 +149,13 @@ PrimaryComputerName is printed as a single value; AlternateComputerNames are lis
 ./wksta [auth_flags] join-domain EXAMPLE.LOCAL --options 0
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./wksta [auth_flags] unjoin-domain [--options <n>]
 ```
+{% endhint %}
 
 ### Remove the workstation from its domain
 
@@ -143,11 +163,13 @@ PrimaryComputerName is printed as a single value; AlternateComputerNames are lis
 ./wksta [auth_flags] unjoin-domain --options 0
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./wksta [auth_flags] rename-machine <new-name> [--rename-account] [--dns-only]
 ```
+{% endhint %}
 
 ### Rename the machine account within the domain
 
@@ -159,11 +181,13 @@ PrimaryComputerName is printed as a single value; AlternateComputerNames are lis
 ./wksta [auth_flags] rename-machine WS02 --rename-account
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./wksta [auth_flags] validate-name <name> [--name-type <type>]
 ```
+{% endhint %}
 
 ### Validate a potential machine or domain name against naming rules
 
@@ -171,11 +195,13 @@ PrimaryComputerName is printed as a single value; AlternateComputerNames are lis
 ./wksta [auth_flags] validate-name WS02 --name-type 1
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./wksta [auth_flags] add-alt-name <alt-name>
 ```
+{% endhint %}
 
 ### Add a DNS alternate computer name to the workstation
 
@@ -183,11 +209,13 @@ PrimaryComputerName is printed as a single value; AlternateComputerNames are lis
 ./wksta [auth_flags] add-alt-name alias.example.local
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./wksta [auth_flags] del-alt-name <alt-name>
 ```
+{% endhint %}
 
 ### Remove a DNS alternate computer name from the workstation
 
@@ -195,11 +223,13 @@ PrimaryComputerName is printed as a single value; AlternateComputerNames are lis
 ./wksta [auth_flags] del-alt-name alias.example.local
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./wksta [auth_flags] set-primary-name <primary-name>
 ```
+{% endhint %}
 
 ### Promote an existing alternate DNS computer name to primary
 
@@ -211,11 +241,13 @@ PrimaryComputerName is printed as a single value; AlternateComputerNames are lis
 Note: the new primary name must already exist as an alternate name.  
 Example flow: add-alt-name -> set-primary-name -> (optional) del-alt-name oldname  
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./wksta [auth_flags] add-transport <transport-name> [--quality <n>]
 ```
+{% endhint %}
 
 ### Add a transport protocol binding to the workstation
 
@@ -223,11 +255,13 @@ Example flow: add-alt-name -> set-primary-name -> (optional) del-alt-name oldnam
 ./wksta [auth_flags] add-transport '\Device\NetBT_Tcpip_{D1B719B7-6A4A-4E77-8EAC-E53584969BB0}'
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./wksta [auth_flags] del-transport <transport-name> [--force-level <n>]
 ```
+{% endhint %}
 
 ### Remove a transport protocol binding from the workstation
 

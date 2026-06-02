@@ -4,11 +4,13 @@
 
 ## Subcommands / Usage
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./smb [auth_flags] shares
 ```
+{% endhint %}
 
 ### List available SMB shares on the target
 
@@ -16,11 +18,13 @@
 ./smb [auth_flags] shares
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./smb [auth_flags] ls <share[\path]> [-l]
 ```
+{% endhint %}
 
 ### List directory contents of a share
 
@@ -34,11 +38,13 @@
 ./smb [auth_flags] ls 'C$\Windows' -l
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./smb [auth_flags] tree <share[\path]> [--max-depth <n>]
 ```
+{% endhint %}
 
 ### Recursively print the directory tree of a share
 
@@ -46,11 +52,13 @@
 ./smb [auth_flags] tree C$ --max-depth 3
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./smb [auth_flags] stat <share[\path]>
 ```
+{% endhint %}
 
 ### Show metadata for a remote file or directory
 
@@ -58,11 +66,13 @@
 ./smb [auth_flags] stat 'C$\Windows\System32'
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./smb [auth_flags] cat <share[\file]> [--max-bytes <n>]
 ```
+{% endhint %}
 
 ### Print the contents of a remote file to stdout
 
@@ -70,11 +80,13 @@
 ./smb [auth_flags] cat 'C$\Windows\win.ini' --max-bytes 1024
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./smb [auth_flags] get <share[\remote]> [<local>] [-R]
 ```
+{% endhint %}
 
 ### Download a remote file
 
@@ -88,11 +100,13 @@
 ./smb [auth_flags] get 'C$\Temp\Data' local_data -R
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./smb [auth_flags] put <local> <share[\remote]> [-R]
 ```
+{% endhint %}
 
 ### Upload a local file to the share
 
@@ -106,11 +120,13 @@
 ./smb [auth_flags] put local_data 'C$\Temp\remote_data' -R
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./smb [auth_flags] mkdir <share[\dir]> [--parents]
 ```
+{% endhint %}
 
 ### Create a remote directory
 
@@ -124,11 +140,13 @@
 ./smb [auth_flags] mkdir 'C$\Temp\deep\nested\path' --parents
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./smb [auth_flags] rm <share[\path]> [-R]
 ```
+{% endhint %}
 
 ### Remove a remote file
 
@@ -142,11 +160,13 @@
 ./smb [auth_flags] rm 'C$\Temp\Data' -R
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./smb [auth_flags] mv <share[\src]> <dst>
 ```
+{% endhint %}
 
 ### Rename or move a remote file or directory within the share
 
@@ -154,11 +174,13 @@
 ./smb [auth_flags] mv 'C$\Temp\old.txt' 'Temp\new.txt'
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./smb [auth_flags] cp <share[\src]> <dst>
 ```
+{% endhint %}
 
 ### Copy a remote file within the same share
 
@@ -166,11 +188,13 @@
 ./smb [auth_flags] cp 'C$\Temp\file.txt' 'Temp\backup.txt'
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./smb [auth_flags] -s <share> shell
 ```
+{% endhint %}
 
 ### Start an interactive SMB shell for the share
 
@@ -178,11 +202,13 @@
 ./smb [auth_flags] -s C$ shell
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./smb [auth_flags] [--require-signing] [--encrypt] [--dialect <ver>] <subcommand>
 ```
+{% endhint %}
 
 ### List share contents with required SMB signing
 
@@ -203,5 +229,6 @@
 ```
 
 ## Notes
-> [!NOTE]
-> Recursive operations are supported for `get`, `put`, and `rm` commands. The interactive `shell` command reuses a single connection and supports both remote and local workflow commands.
+{% hint style="info" %}
+Recursive operations are supported for `get`, `put`, and `rm` commands. The interactive `shell` command reuses a single connection and supports both remote and local workflow commands.
+{% endhint %}

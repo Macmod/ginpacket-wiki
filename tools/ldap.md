@@ -4,11 +4,13 @@
 
 ## Subcommands / Usage
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./ldap [auth_flags] whoami
 ```
+{% endhint %}
 
 ### Print the authenticated LDAP user identity
 
@@ -16,11 +18,13 @@
 ./ldap [auth_flags] whoami
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./ldap [auth_flags] info <dn-or-name> [--all]
 ```
+{% endhint %}
 
 ### Dump attributes for an object by DN, sAMAccountName, UPN, or GUID
 
@@ -34,11 +38,13 @@
 ./ldap [auth_flags] info 'CN=Domain Users,CN=Users,DC=example,DC=com' --all
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./ldap [auth_flags] query users [--enabled] [--disabled]
 ```
+{% endhint %}
 
 ### List all user objects in the domain
 
@@ -58,11 +64,13 @@
 ./ldap [auth_flags] query users --disabled
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./ldap [auth_flags] query groups
 ```
+{% endhint %}
 
 ### List all group objects in the domain
 
@@ -70,11 +78,13 @@
 ./ldap [auth_flags] query groups
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./ldap [auth_flags] query computers
 ```
+{% endhint %}
 
 ### List all computer accounts in the domain
 
@@ -82,11 +92,13 @@
 ./ldap [auth_flags] query computers
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./ldap [auth_flags] query containers
 ```
+{% endhint %}
 
 ### List all container objects in the domain
 
@@ -94,11 +106,13 @@
 ./ldap [auth_flags] query containers
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./ldap [auth_flags] query ous
 ```
+{% endhint %}
 
 ### List all organizational units in the domain
 
@@ -106,11 +120,13 @@
 ./ldap [auth_flags] query ous
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./ldap [auth_flags] query service-accounts
 ```
+{% endhint %}
 
 ### List accounts with service principal names (service accounts)
 
@@ -118,11 +134,13 @@
 ./ldap [auth_flags] query service-accounts
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./ldap [auth_flags] query gpos
 ```
+{% endhint %}
 
 ### List all group policy objects in the domain
 
@@ -130,11 +148,13 @@
 ./ldap [auth_flags] query gpos
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./ldap [auth_flags] query spns
 ```
+{% endhint %}
 
 ### List all accounts with service principal names set
 
@@ -142,11 +162,13 @@
 ./ldap [auth_flags] query spns
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./ldap [auth_flags] query unconstrained-delegation
 ```
+{% endhint %}
 
 ### List computers and users with unconstrained Kerberos delegation
 
@@ -154,11 +176,13 @@
 ./ldap [auth_flags] query unconstrained-delegation
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./ldap [auth_flags] query constrained-delegation
 ```
+{% endhint %}
 
 ### List accounts configured with constrained Kerberos delegation
 
@@ -166,11 +190,13 @@
 ./ldap [auth_flags] query constrained-delegation
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./ldap [auth_flags] query asreproast
 ```
+{% endhint %}
 
 ### List accounts that have Kerberos pre-authentication disabled
 
@@ -178,11 +204,13 @@
 ./ldap [auth_flags] query asreproast
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./ldap [auth_flags] query never-expires
 ```
+{% endhint %}
 
 ### List accounts whose password is set to never expire
 
@@ -190,11 +218,13 @@
 ./ldap [auth_flags] query never-expires
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./ldap [auth_flags] query password-not-required
 ```
+{% endhint %}
 
 ### List accounts that do not require a password
 
@@ -202,11 +232,13 @@
 ./ldap [auth_flags] query password-not-required
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./ldap [auth_flags] query cert-templates
 ```
+{% endhint %}
 
 ### List certificate templates published in the domain
 
@@ -214,11 +246,13 @@
 ./ldap [auth_flags] query cert-templates
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./ldap [auth_flags] query cert-authorities
 ```
+{% endhint %}
 
 ### List enterprise certification authorities in the domain
 
@@ -226,11 +260,13 @@
 ./ldap [auth_flags] query cert-authorities
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./ldap [auth_flags] query trusts [--transitive]
 ```
+{% endhint %}
 
 
 List domain trust relationships rendered as an ASCII tree with direction arrows and trust attribute flags  
@@ -241,11 +277,13 @@ List domain trust relationships rendered as an ASCII tree with direction arrows 
 ./ldap [auth_flags] query trusts
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./ldap [auth_flags] query passpol
 ```
+{% endhint %}
 
 ### Show the domain password policy and any fine-grained PSOs
 
@@ -253,11 +291,13 @@ List domain trust relationships rendered as an ASCII tree with direction arrows 
 ./ldap [auth_flags] query passpol
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./ldap [auth_flags] query mquota
 ```
+{% endhint %}
 
 ### Show the ms-DS-MachineAccountQuota value from the domain object
 
@@ -265,11 +305,13 @@ List domain trust relationships rendered as an ASCII tree with direction arrows 
 ./ldap [auth_flags] query mquota
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./ldap [auth_flags] query shadow-creds [--limit <n>]
 ```
+{% endhint %}
 
 
 List objects with msDS-KeyCredentialLink set; parse DeviceID, key type, and creation time  
@@ -279,11 +321,13 @@ List objects with msDS-KeyCredentialLink set; parse DeviceID, key type, and crea
 ./ldap [auth_flags] query shadow-creds
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./ldap [auth_flags] query rbcd [--limit <n>]
 ```
+{% endhint %}
 
 
 List computers with msDS-AllowedToActOnBehalfOfOtherIdentity set; decode the SD DACL  
@@ -293,11 +337,13 @@ List computers with msDS-AllowedToActOnBehalfOfOtherIdentity set; decode the SD 
 ./ldap [auth_flags] query rbcd
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./ldap [auth_flags] query gmsa [--limit <n>]
 ```
+{% endhint %}
 
 
 List Group Managed Service Accounts; show password rotation interval and who can read the password (msDS-GroupMSAMembership DACL)  
@@ -307,11 +353,13 @@ List Group Managed Service Accounts; show password rotation interval and who can
 ./ldap [auth_flags] query gmsa
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./ldap [auth_flags] query laps [--limit <n>]
 ```
+{% endhint %}
 
 
 List computers that have a LAPS password set (v1: ms-Mcs-AdmPwd, v2: msLAPS-Password); show expiry timestamps  
@@ -321,11 +369,13 @@ List computers that have a LAPS password set (v1: ms-Mcs-AdmPwd, v2: msLAPS-Pass
 ./ldap [auth_flags] query laps
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./ldap [auth_flags] query sccm [--limit <n>]
 ```
+{% endhint %}
 
 
 Detect SCCM/MECM management points registered in AD (objectClass=mSSMSManagementPoint)  
@@ -335,11 +385,13 @@ Detect SCCM/MECM management points registered in AD (objectClass=mSSMSManagement
 ./ldap [auth_flags] query sccm
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./ldap [auth_flags] query wds [--limit <n>]
 ```
+{% endhint %}
 
 ### Detect Windows Deployment Services servers via WDSMC SPN on computer objects
 
@@ -347,11 +399,13 @@ Detect SCCM/MECM management points registered in AD (objectClass=mSSMSManagement
 ./ldap [auth_flags] query wds
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./ldap [auth_flags] get-gmsa-password <sAMAccountName>
 ```
+{% endhint %}
 
 
 Read and decode the msDS-ManagedPassword blob for a GMSA (requires group membership listed in msDS-GroupMSAMembership)  
@@ -361,11 +415,13 @@ Read and decode the msDS-ManagedPassword blob for a GMSA (requires group members
 ./ldap [auth_flags] get-gmsa-password 'svc_backup$'
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./ldap [auth_flags] get-laps <computer>
 ```
+{% endhint %}
 
 
 Read the LAPS administrator password for a computer (v1 plaintext or v2 JSON blob); requires LAPS read rights  
@@ -379,11 +435,13 @@ Read the LAPS administrator password for a computer (v1 plaintext or v2 JSON blo
 ./ldap [auth_flags] get-laps WIN-DC01.corp.local
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./ldap [auth_flags] enable <dn>
 ```
+{% endhint %}
 
 ### Enable an AD account by clearing the ACCOUNTDISABLE userAccountControl bit
 
@@ -391,11 +449,13 @@ Read the LAPS administrator password for a computer (v1 plaintext or v2 JSON blo
 ./ldap [auth_flags] enable 'CN=jdoe,CN=Users,DC=example,DC=com'
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./ldap [auth_flags] disable <dn>
 ```
+{% endhint %}
 
 ### Disable an AD account by setting the ACCOUNTDISABLE userAccountControl bit
 
@@ -403,11 +463,13 @@ Read the LAPS administrator password for a computer (v1 plaintext or v2 JSON blo
 ./ldap [auth_flags] disable 'CN=jdoe,CN=Users,DC=example,DC=com'
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./ldap [auth_flags] uac-modify <dn> <flag> <set|clear>
 ```
+{% endhint %}
 
 ### Toggle a single userAccountControl bit by name (or numeric value)
 
@@ -423,11 +485,13 @@ Read the LAPS administrator password for a computer (v1 plaintext or v2 JSON blo
 ./ldap [auth_flags] uac-modify 'CN=jdoe,CN=Users,DC=example,DC=com' TRUSTED_FOR_DELEGATION clear
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./ldap [auth_flags] search -F <filter> [-A <attrs>] [--limit <n>] [--base-dn <dn>] [--scope <scope>]
 ```
+{% endhint %}
 
 ### Run a raw LDAP search with a custom filter and attribute projection
 
@@ -459,11 +523,13 @@ Read the LAPS administrator password for a computer (v1 plaintext or v2 JSON blo
 ./ldap [auth_flags] search -F '(userAccountControl:1.2.840.113556.1.4.803:=524288)'
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./ldap [auth_flags] <subcommand> -f <filter-chain> -a <attr-chain> -b <base-chain>
 ```
+{% endhint %}
 
 ### Apply ldapx obfuscation chains to a raw search
 
@@ -483,11 +549,13 @@ Read the LAPS administrator password for a computer (v1 plaintext or v2 JSON blo
 ./ldap [auth_flags] info 'Administrator' -f OGDR -b OX
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./ldap [auth_flags] modify <dn> --attr <name> --operation <add|replace|delete> --value <value>
 ```
+{% endhint %}
 
 ### Replace an attribute value on an LDAP object (requires write access)
 
@@ -501,11 +569,13 @@ Read the LAPS administrator password for a computer (v1 plaintext or v2 JSON blo
 ./ldap [auth_flags] modify 'CN=Group,CN=Users,DC=example,DC=com' --attr member --operation add --value 'CN=User,CN=Users,DC=example,DC=com'
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./ldap [auth_flags] --scheme ldaps|ldap [--starttls] <subcommand>
 ```
+{% endhint %}
 
 ### Connect over LDAPS (TLS)
 
@@ -519,11 +589,13 @@ Read the LAPS administrator password for a computer (v1 plaintext or v2 JSON blo
 ./ldap [auth_flags] --scheme ldap --starttls query users
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./ldap [auth_flags] create user --name <cn> [--pass <password>] [--enabled] [--parent-dn <dn>] [--scheme ldaps]
 ```
+{% endhint %}
 
 
 Create a new user account (created disabled if --pass is omitted; set password requires LDAPS/StartTLS)  
@@ -547,11 +619,13 @@ Create a new user account (created disabled if --pass is omitted; set password r
 ./ldap [auth_flags] create user --name svc_backup --parent-dn 'OU=ServiceAccounts,DC=example,DC=com' --scheme ldaps
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./ldap [auth_flags] create computer --name <cn> [--pass <password>] [--parent-dn <dn>] [--scheme ldaps]
 ```
+{% endhint %}
 
 
 Create a machine account (requires ms-DS-MachineAccountQuota >= 1 or sufficient privileges)  
@@ -565,11 +639,13 @@ Create a machine account (requires ms-DS-MachineAccountQuota >= 1 or sufficient 
 ./ldap [auth_flags] create computer --name PENTEST --pass 'P@ssw0rd!' --scheme ldaps
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./ldap [auth_flags] create group --name <cn> [--type <group-type>] [--parent-dn <dn>]
 ```
+{% endhint %}
 
 
 Create a group (types: GlobalSecurity, GlobalDistribution, DomainLocalSecurity, DomainLocalDistribution, UniversalSecurity, UniversalDistribution)  
@@ -587,11 +663,13 @@ Create a group (types: GlobalSecurity, GlobalDistribution, DomainLocalSecurity, 
 ./ldap [auth_flags] create group --name 'Pentesters' --parent-dn 'OU=Groups,DC=example,DC=com'
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./ldap [auth_flags] create ou --name <name> [--parent-dn <dn>]
 ```
+{% endhint %}
 
 ### Create an Organizational Unit
 
@@ -603,11 +681,13 @@ Create a group (types: GlobalSecurity, GlobalDistribution, DomainLocalSecurity, 
 ./ldap [auth_flags] create ou --name 'RedTeam' --parent-dn 'DC=example,DC=com'
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./ldap [auth_flags] create container --name <name> [--parent-dn <dn>]
 ```
+{% endhint %}
 
 ### Create a container object
 
@@ -619,11 +699,13 @@ Create a group (types: GlobalSecurity, GlobalDistribution, DomainLocalSecurity, 
 ./ldap [auth_flags] create container --name 'TestContainer' --parent-dn 'DC=example,DC=com'
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./ldap [auth_flags] create custom --template <file.yaml>
 ```
+{% endhint %}
 
 
 Create an arbitrary AD object from a YAML template (compatible with sopa create custom templates)  

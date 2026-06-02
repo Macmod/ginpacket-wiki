@@ -13,11 +13,13 @@ Local paths like C:\Temp\file.txt can return ERROR_ACCESS_DENIED.
 $f='\\WIN-6BKCP1FPPCI\C$\Temp\secret.txt'
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./efs [auth_flags] encrypt <file> [--use-v1]
 ```
+{% endhint %}
 
 ### Default is EfsRpcEncryptFileExSrv (opnum 21).
 
@@ -31,29 +33,37 @@ $f='\\WIN-6BKCP1FPPCI\C$\Temp\secret.txt'
 ./efs [auth_flags] encrypt $f --use-v1
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./efs [auth_flags] decrypt <file>
 ```
+{% endhint %}
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./efs [auth_flags] users <file>
 ```
+{% endhint %}
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./efs [auth_flags] recovery <file>
 ```
+{% endhint %}
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./efs [auth_flags] file-key <file> [--info-class <n>] [--use-v1]
 ```
+{% endhint %}
 
 ### Default path uses EfsRpcFileKeyInfoEx (opnum 16) and requires --info-class.
 
@@ -67,41 +77,53 @@ $f='\\WIN-6BKCP1FPPCI\C$\Temp\secret.txt'
 ./efs [auth_flags] file-key $f --use-v1
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./efs [auth_flags] protectors <file>
 ```
+{% endhint %}
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./efs [auth_flags] encrypted-metadata <file>
 ```
+{% endhint %}
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./efs [auth_flags] set-encrypted-metadata <file> [--blob-b64 <base64>|--blob-hex <hex>]
 ```
+{% endhint %}
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./efs [auth_flags] open-raw <file> [--import]
 ```
+{% endhint %}
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./efs [auth_flags] del-users <file> --hash <sha1-cert-hash>
 ```
+{% endhint %}
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./efs [auth_flags] add-users <file> --users-json <file>
 ```
+{% endhint %}
 
 ### users JSON file must be UTF-8 without BOM.
 
@@ -109,17 +131,21 @@ $f='\\WIN-6BKCP1FPPCI\C$\Temp\secret.txt'
 ./efs [auth_flags] add-users $f --users-json users.json
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./efs [auth_flags] clone-meta <src> <dst>
 ```
+{% endhint %}
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./efs [auth_flags] flush-cache
 ```
+{% endhint %}
 
 ## Notes
 > **Compatibility note:** Per MS-EFSR, `file-key` default (`EfsRpcFileKeyInfoEx`, opnum 16), `encrypted-metadata` (opnum 18), and `set-encrypted-metadata` (opnum 19) can legitimately return nonzero and are implementation-specific on many servers. On Server 2022 they commonly return `ERROR_NOT_SUPPORTED`. Use `file-key --use-v1` (opnum 12) when you need stable key-info output. `encrypt` default (`EfsRpcEncryptFileExSrv`, opnum 21) is available on modern Windows and works on Server 2022 with UNC paths. `protectors` (opnum 22) is unavailable on older systems (up to 2012 R2) and may still return `ERROR_NOT_SUPPORTED` depending on implementation/protector support.

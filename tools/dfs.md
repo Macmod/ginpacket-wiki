@@ -4,11 +4,13 @@
 
 ## Subcommands / Usage
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./dfs [auth_flags] namespaces
 ```
+{% endhint %}
 
 ### List all DFS namespaces served by the target
 
@@ -16,11 +18,13 @@
 ./dfs [auth_flags] namespaces
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./dfs [auth_flags] dump
 ```
+{% endhint %}
 
 ### Dump full details for all namespaces and their links
 
@@ -28,11 +32,13 @@
 ./dfs [auth_flags] dump
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./dfs [auth_flags] links <namespace-path>
 ```
+{% endhint %}
 
 ### Enumerate all links within a namespace
 
@@ -40,11 +46,13 @@
 ./dfs [auth_flags] links '\\EXAMPLE.LOCAL\dfs'
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./dfs [auth_flags] info <path> [--gen-guid] [--version]
 ```
+{% endhint %}
 
 ### Show full info for a namespace root or link
 
@@ -64,11 +72,13 @@
 ./dfs [auth_flags] info '\\EXAMPLE.LOCAL\dfs' --version
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./dfs [auth_flags] add-link <link-path> --server <server> -s <share>
 ```
+{% endhint %}
 
 ### Add a new DFS link pointing to a target share
 
@@ -76,11 +86,13 @@
 ./dfs [auth_flags] add-link '\\EXAMPLE.LOCAL\dfs\apps' --server FILES01 -s Data
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./dfs [auth_flags] del-link <link-path>
 ```
+{% endhint %}
 
 ### Remove a DFS link
 
@@ -88,11 +100,13 @@
 ./dfs [auth_flags] del-link '\\EXAMPLE.LOCAL\dfs\apps'
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./dfs [auth_flags] move <old-path> <new-path>
 ```
+{% endhint %}
 
 ### Rename/move a DFS link to a new path
 
@@ -100,11 +114,13 @@
 ./dfs [auth_flags] move '\\EXAMPLE.LOCAL\dfs\old' '\\EXAMPLE.LOCAL\dfs\new'
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./dfs [auth_flags] set-comment <path> -c <text>
 ```
+{% endhint %}
 
 ### Set a descriptive comment on a namespace root or link
 
@@ -112,11 +128,13 @@
 ./dfs [auth_flags] set-comment '\\EXAMPLE.LOCAL\dfs\apps' -c 'Application share'
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./dfs [auth_flags] set-state <dfs-path> -e <online|offline|resynchronize> [--server <server> -s <share>] [--pdc <dc>] [--use-v1]
 ```
+{% endhint %}
 
 ### Set a link offline
 
@@ -142,11 +160,13 @@
 ./dfs [auth_flags] set-state '\\EXAMPLE.LOCAL\dfs' -e resynchronize --pdc dc01.example.com
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./dfs [auth_flags] set-timeout <dfs-path> -T <sec> [--use-v1]
 ```
+{% endhint %}
 
 ### Set the client referral cache timeout on a link
 
@@ -160,11 +180,13 @@
 ./dfs [auth_flags] set-timeout '\\EXAMPLE.LOCAL\dfs\apps' -T 300 --use-v1
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./dfs [auth_flags] set-flags <dfs-path> -f <flags> [-m <mask>] [--use-v1]
 ```
+{% endhint %}
 
 ### Set DFS flags on a link
 
@@ -184,11 +206,13 @@
 ./dfs [auth_flags] set-flags '\\EXAMPLE.LOCAL\dfs\apps' -f 0 -m 47
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./dfs [auth_flags] set-priority <dfs-path> --server <server> -s <share> -c <class> -R <rank> [--use-v1]
 ```
+{% endhint %}
 
 ### Set referral priority class and rank for a link target
 
@@ -202,11 +226,13 @@
 ./dfs [auth_flags] set-priority '\\EXAMPLE.LOCAL\dfs\apps' --server FILES01 -s Data -c 2 -R 5 --use-v1
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./dfs [auth_flags] get-sd <dfs-path>
 ```
+{% endhint %}
 
 ### Read the security descriptor of a namespace root or link
 
@@ -214,11 +240,13 @@
 ./dfs [auth_flags] get-sd '\\EXAMPLE.LOCAL\dfs\apps'
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./dfs [auth_flags] set-sd <dfs-path> --sd <hex>
 ```
+{% endhint %}
 
 ### Write a security descriptor to a namespace root or link
 
@@ -226,11 +254,13 @@
 ./dfs [auth_flags] set-sd '\\EXAMPLE.LOCAL\dfs\apps' --sd '01000480...'
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./dfs [auth_flags] dc-address --server <server> [--pdc <dc>]
 ```
+{% endhint %}
 
 ### Query the DFS metadata DC currently used by a DFS server
 
@@ -238,11 +268,13 @@
 ./dfs [auth_flags] dc-address --server FILES01
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./dfs [auth_flags] set-dc-address --server <server> --pdc <pdc> [--set-timeout -T <seconds>] [-i]
 ```
+{% endhint %}
 
 ### Set the DFS metadata DC for a DFS server (server is required)
 
@@ -262,11 +294,13 @@
 ./dfs [auth_flags] set-dc-address --server FILES01 --pdc dc01.example.com -i
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./dfs [auth_flags] add-root <dfs-path> [--root-target <\\server\share>] [--new] [--version <0|1|2>] [--use-v1]
 ```
+{% endhint %}
 
 ### Create a new stand-alone DFS namespace
 
@@ -286,11 +320,13 @@
 ./dfs [auth_flags] add-root '\\EXAMPLE.LOCAL\dfs' --root-target '\\FILES02\dfsroot'
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./dfs [auth_flags] del-root <dfs-path> [--root-target <\\server\share>] [--force] [--use-v1]
 ```
+{% endhint %}
 
 ### Delete a stand-alone DFS namespace
 
@@ -304,11 +340,13 @@
 ./dfs [auth_flags] del-root '\\EXAMPLE.LOCAL\dfs' --root-target '\\FILES02\dfsroot'
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./dfs [auth_flags] initialize
 ```
+{% endhint %}
 
 ### Instruct the DFS server to reload its stored configuration
 
@@ -316,11 +354,13 @@
 ./dfs [auth_flags] initialize
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./dfs [auth_flags] ns-version [--origin <1|2>]
 ```
+{% endhint %}
 
 ### Query the DFS server's supported namespace versions
 
@@ -332,11 +372,13 @@
 ./dfs [auth_flags] ns-version --origin 2
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./dfs [auth_flags] server-version
 ```
+{% endhint %}
 
 ### Query the DFS server version (NetrDfsManagerGetVersion)
 
@@ -344,11 +386,13 @@
 ./dfs [auth_flags] server-version
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./dfs [auth_flags] flush-ft-table --pdc <dc> --namespace <name>
 ```
+{% endhint %}
 
 ### Purge the domainv1 DFS referral cache entry on a domain controller
 
@@ -357,12 +401,13 @@
 ```
 
 ## Notes
-> [!IMPORTANT]
-> `dfs set-state` uses different valid values depending on what you target:
-> - link path only: `ok`, `online`, `offline`
-> - namespace root only: `resynchronize`, `standby`, `force-sync`
-> - specific target (`--server` + `-s`): `online`, `offline` with target-state semantics
->
-> Root paths intentionally reject `online`, `offline`, and `ok` because they commonly fail with `ERROR_INVALID_PARAMETER` on Windows.
+{% hint style="warning" %}
+`dfs set-state` uses different valid values depending on what you target:
+- link path only: `ok`, `online`, `offline`
+- namespace root only: `resynchronize`, `standby`, `force-sync`
+- specific target (`--server` + `-s`): `online`, `offline` with target-state semantics
+
+Root paths intentionally reject `online`, `offline`, and `ok` because they commonly fail with `ERROR_INVALID_PARAMETER` on Windows.
+{% endhint %}
 
 Note: Levels 105, 106 and 107 are intentionally not exposed yet due to CLI complexity.

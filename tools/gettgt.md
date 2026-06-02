@@ -4,11 +4,13 @@
 
 ## Subcommands / Usage
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./gettgt [auth_flags] --dc <DC> -o <ccache> (+ -p <password> | -H <LM:NT|NT> | --aes-key <hex> | --ccache <file> | --pfx <file>)
 ```
+{% endhint %}
 
 ### Request a TGT using password credentials
 

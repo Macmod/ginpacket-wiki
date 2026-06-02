@@ -4,11 +4,13 @@
 
 ## Subcommands / Usage
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./rpcdump [auth_flags] [-U <interface-uuid>] [--transport <transports>]
 ```
+{% endhint %}
 
 ### Enumerate all registered RPC endpoints via the endpoint mapper
 

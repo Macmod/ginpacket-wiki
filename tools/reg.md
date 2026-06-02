@@ -4,11 +4,13 @@
 
 ## Subcommands / Usage
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./reg [auth_flags] query <key-path> [-v <value-name>] [--max-allowed]
 ```
+{% endhint %}
 
 ### Enumerate all values under a registry key
 
@@ -28,11 +30,13 @@
 ./reg [auth_flags] --max-allowed query '\\dc01\HKLM\SOFTWARE\MyKey'
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./reg [auth_flags] add <key-path> -v <value-name> -T <type> -d <data>
 ```
+{% endhint %}
 
 ### Add or overwrite a registry value
 
@@ -40,11 +44,13 @@
 ./reg [auth_flags] add '\\dc01\HKLM\SOFTWARE\MyKey' -v MyValue -T REG_SZ -d 'hello'
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./reg [auth_flags] delete <key-path> -v <value-name>
 ```
+{% endhint %}
 
 ### Delete a registry value
 
@@ -52,11 +58,13 @@
 ./reg [auth_flags] delete '\\dc01\HKLM\SOFTWARE\MyKey' -v MyValue
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./reg [auth_flags] get-sd <key-path> [--parse-dacl]
 ```
+{% endhint %}
 
 ### Read the security descriptor of a key
 
@@ -70,11 +78,13 @@
 ./reg [auth_flags] get-sd '\\dc01\HKLM\SOFTWARE\MyKey' --parse-dacl
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./reg [auth_flags] set-sd <key-path> --sd <hex-sd>
 ```
+{% endhint %}
 
 ### Write a security descriptor to a key
 
@@ -82,11 +92,13 @@
 ./reg [auth_flags] set-sd '\\dc01\HKLM\SOFTWARE\MyKey' --sd 01000480200000002c00000000000000
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./reg [auth_flags] save <key-path> <remote-path>
 ```
+{% endhint %}
 
 ### Save a hive subtree to a file on the remote host
 
@@ -94,11 +106,13 @@
 ./reg [auth_flags] save '\\dc01\HKLM\SAM' 'C:\Windows\Temp\sam.hiv'
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./reg [auth_flags] load <key-path> <file>
 ```
+{% endhint %}
 
 ### Load a hive file into a registry key
 
@@ -106,11 +120,13 @@
 ./reg [auth_flags] load '\\dc01\HKLM\TempHive' 'C:\Windows\Temp\sam.hiv'
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./reg [auth_flags] unload <key-path>
 ```
+{% endhint %}
 
 ### Unload a previously loaded hive
 
@@ -118,11 +134,13 @@
 ./reg [auth_flags] unload '\\dc01\HKLM\TempHive'
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./reg [auth_flags] info <key-path>
 ```
+{% endhint %}
 
 ### Query key metadata including subkey / value counts and last-write timestamp
 
@@ -130,11 +148,13 @@
 ./reg [auth_flags] info '\\dc01\HKLM\SOFTWARE\Microsoft'
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./reg [auth_flags] restore <key-path> <file>
 ```
+{% endhint %}
 
 ### Overwrite a live key with the contents of a hive file already on the target
 
@@ -142,11 +162,13 @@
 ./reg [auth_flags] restore '\\dc01\HKLM\SOFTWARE\MyKey' 'C:\Windows\Temp\mykey.hiv'
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./reg [auth_flags] replace <key-path> -n <new-file> [-b <backup-file>]
 ```
+{% endhint %}
 
 ### Schedule a hive replacement at next boot
 
@@ -154,11 +176,13 @@
 ./reg [auth_flags] replace '\\dc01\HKLM\SOFTWARE\MyKey' -n 'C:\Windows\Temp\new.hiv' -b 'C:\Windows\Temp\old.hiv'
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./reg [auth_flags] flush <key-path>
 ```
+{% endhint %}
 
 ### Force pending writes for a key to be flushed to the backing store
 
@@ -166,11 +190,13 @@
 ./reg [auth_flags] flush '\\dc01\HKLM\SOFTWARE\MyKey'
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./reg [auth_flags] export <key-path> -o <file> [-R]
 ```
+{% endhint %}
 
 ### Export a key subtree to a .reg file
 
@@ -178,11 +204,13 @@
 ./reg [auth_flags] export '\\dc01\HKLM\SOFTWARE\Microsoft' -o software.reg -R
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./reg [auth_flags] import <file>
 ```
+{% endhint %}
 
 ### Import a .reg file into the registry
 
@@ -190,11 +218,13 @@
 ./reg [auth_flags] import software.reg
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./reg [auth_flags] compare <key-a> <key-b> [-R] [-O <output-mode>]
 ```
+{% endhint %}
 
 ### Compare two registry key subtrees
 
@@ -202,11 +232,13 @@
 ./reg [auth_flags] compare '\\dc01\HKLM\SOFTWARE\A' '\\dc01\HKLM\SOFTWARE\B' -R -O od
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./reg [auth_flags] copy <src-key> <dst-key> [-R]
 ```
+{% endhint %}
 
 ### Copy a key subtree to another location
 
@@ -214,11 +246,13 @@
 ./reg [auth_flags] copy '\\dc01\HKLM\SOFTWARE\A' '\\dc01\HKLM\SOFTWARE\B' -R
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./reg [auth_flags] secrets [--sam] [--lsa] [--cache]
 ```
+{% endhint %}
 
 ### Dump SAM, LSA secrets, and cached credentials
 
@@ -226,11 +260,13 @@
 ./reg [auth_flags] secrets --sam --lsa --cache
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./reg [auth_flags] shell
 ```
+{% endhint %}
 
 
 Open an interactive registry shell with persistent connection and cd/ls/get/set/add/del/info/acl  
@@ -240,11 +276,13 @@ Open an interactive registry shell with persistent connection and cd/ls/get/set/
 ./reg [auth_flags] shell
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./reg [auth_flags] server-version [--hive <root>]
 ```
+{% endhint %}
 
 ### Query the registry server version (defaults to HKCU)
 

@@ -4,11 +4,13 @@
 
 ## Subcommands / Usage
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./perf [auth_flags] csets
 ```
+{% endhint %}
 
 ### List all performance counter sets (GUIDs and names)
 
@@ -16,11 +18,13 @@
 ./perf [auth_flags] csets
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./perf [auth_flags] cset <guid>
 ```
+{% endhint %}
 
 ### Show metadata for a specific counter set by GUID
 
@@ -28,11 +32,13 @@
 ./perf [auth_flags] cset '{6BFFD098-A112-610E-9FBF-00A0C90D67DA}'
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./perf [auth_flags] instances <guid>
 ```
+{% endhint %}
 
 ### List all instances of a counter set
 
@@ -40,11 +46,13 @@
 ./perf [auth_flags] instances '{6BFFD098-A112-610E-9FBF-00A0C90D67DA}'
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./perf [auth_flags] query <guid> [-c <counter-id>] [--instance <id>]
 ```
+{% endhint %}
 
 ### Query all counters for a counter set
 
@@ -64,11 +72,13 @@
 ./perf [auth_flags] query '{6BFFD098-A112-610E-9FBF-00A0C90D67DA}' --counter 1 --instance 0
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./perf [auth_flags] dump
 ```
+{% endhint %}
 
 ### Dump all available counter data from all counter sets
 

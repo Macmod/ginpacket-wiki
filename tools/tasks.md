@@ -4,11 +4,13 @@
 
 ## Subcommands / Usage
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./tasks [auth_flags] dump
 ```
+{% endhint %}
 
 ### Dump the full task scheduler folder tree (v2 only)
 
@@ -16,11 +18,13 @@
 ./tasks [auth_flags] dump
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./tasks [auth_flags] query [--include-hidden]
 ```
+{% endhint %}
 
 ### List all task paths, optionally including hidden tasks
 
@@ -28,11 +32,13 @@
 ./tasks [auth_flags] query --include-hidden
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./tasks [auth_flags] task <path> [--format xml]
 ```
+{% endhint %}
 
 ### Show full task details (info + embedded XML) for a v2 task
 
@@ -46,11 +52,13 @@
 ./tasks [auth_flags] task '\MyTask' --format xml
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./tasks [auth_flags] folders [path]
 ```
+{% endhint %}
 
 ### List immediate subfolders of a task scheduler folder path (v2 only)
 
@@ -62,11 +70,13 @@
 ./tasks [auth_flags] folders '\Microsoft\Windows'
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./tasks [auth_flags] xml <path>
 ```
+{% endhint %}
 
 ### Export a task's raw XML definition
 
@@ -74,11 +84,13 @@
 ./tasks [auth_flags] xml '\MyTask'
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./tasks [auth_flags] add (-P <path> -X <xml> | --use-v1 -c <cmd> --time <HH:MM> [schedule flags])
 ```
+{% endhint %}
 
 ### Register a v2 task from an XML file
 
@@ -92,11 +104,13 @@
 ./tasks [auth_flags] add --use-v1 -c 'cmd.exe /c whoami > C:\temp\t.txt' --time 09:30 --days-of-week mon,wed,fri --periodic
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./tasks [auth_flags] enable|disable <path>
 ```
+{% endhint %}
 
 ### Enable a disabled task
 
@@ -110,11 +124,13 @@
 ./tasks [auth_flags] disable '\MyTask'
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./tasks [auth_flags] run <path>
 ```
+{% endhint %}
 
 ### Run a task immediately
 
@@ -122,11 +138,13 @@
 ./tasks [auth_flags] run '\MyTask'
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./tasks [auth_flags] stop ([path] | -G <instance-guid>)
 ```
+{% endhint %}
 
 ### Stop all running instances of a task by path
 
@@ -140,11 +158,13 @@
 ./tasks [auth_flags] stop -G '{guid}'
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./tasks [auth_flags] rename <current-path> <new-path>
 ```
+{% endhint %}
 
 ### Rename a task to a new path
 
@@ -152,11 +172,13 @@
 ./tasks [auth_flags] rename '\MyTask' '\MyRenamedTask'
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./tasks [auth_flags] add-folder <path> [-D <sddl>]
 ```
+{% endhint %}
 
 ### Create a task scheduler folder
 
@@ -164,11 +186,13 @@
 ./tasks [auth_flags] add-folder '\MyFolder'
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./tasks [auth_flags] instances <path>
 ```
+{% endhint %}
 
 ### List currently running instances of a task
 
@@ -176,11 +200,13 @@
 ./tasks [auth_flags] instances '\MyTask'
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./tasks [auth_flags] get-sddl <path> [--parse-dacl]
 ```
+{% endhint %}
 
 ### Read the security descriptor of a task
 
@@ -194,11 +220,13 @@
 ./tasks [auth_flags] get-sddl '\MyTask' --parse-dacl
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./tasks [auth_flags] set-sddl <path> -D <sddl>
 ```
+{% endhint %}
 
 ### Write a security descriptor to a task
 
@@ -206,11 +234,13 @@
 ./tasks [auth_flags] set-sddl '\MyTask' -D 'D:(A;;CCDCLCSWRPWPDTLOCRSDRCWDWO;;;SY)'
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./tasks [auth_flags] missed-runs <path>
 ```
+{% endhint %}
 
 ### List missed runs for a task
 
@@ -218,11 +248,13 @@
 ./tasks [auth_flags] missed-runs '\MyTask'
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./tasks [auth_flags] del ([path] | --use-v1 (--job-id | --min-job-id/--max-job-id))
 ```
+{% endhint %}
 
 ### Delete a v2 task by path
 
@@ -242,11 +274,13 @@
 ./tasks [auth_flags] del --use-v1 --min-job-id 2 --max-job-id 5
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./tasks [auth_flags] del-folder <path>
 ```
+{% endhint %}
 
 ### Delete a task scheduler folder
 

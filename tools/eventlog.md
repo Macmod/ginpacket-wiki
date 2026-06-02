@@ -4,11 +4,13 @@
 
 ## Subcommands / Usage
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./eventlog [auth_flags] channels
 ```
+{% endhint %}
 
 ### List all event log channels on the host
 
@@ -16,11 +18,13 @@
 ./eventlog [auth_flags] channels
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./eventlog [auth_flags] publishers
 ```
+{% endhint %}
 
 ### List all registered event publishers
 
@@ -28,11 +32,13 @@
 ./eventlog [auth_flags] publishers
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./eventlog [auth_flags] query <channel> [-q <xpath>] [-L <n>] [-T <ms>]
 ```
+{% endhint %}
 
 ### Query events from a channel using an XPath filter
 
@@ -40,11 +46,13 @@
 ./eventlog [auth_flags] query Security -q "*" -L 10 -T 5000
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./eventlog [auth_flags] subscribe <channel> [-q <xpath>] [-L <n>] [-T <ms>]
 ```
+{% endhint %}
 
 ### Subscribe to a channel and receive events as they arrive
 
@@ -52,11 +60,13 @@
 ./eventlog [auth_flags] subscribe Security -q "*" -L 10 -T 5000
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./eventlog [auth_flags] watch <channel> [--event-id <ids>] [--grep <str>] [-L <n>] [-F <text|json>]
 ```
+{% endhint %}
 
 ### Live-tail a channel for future events, with optional filtering
 
@@ -68,12 +78,14 @@
 ./eventlog [auth_flags] watch Security --event-id 4624,4625 -L 20
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./eventlog [auth_flags] export <channel> <out-path>
 ./eventlog [auth_flags] export --evtx-file <in-path> <out-path>
 ```
+{% endhint %}
 
 ### Export a live channel to an .evtx file
 
@@ -87,11 +99,13 @@
 ./eventlog [auth_flags] export --evtx-file 'C:\temp\in.evtx' 'C:\temp\out.evtx'
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./eventlog [auth_flags] clear <channel> [-b <backup-path>] [--confirm]
 ```
+{% endhint %}
 
 ### Clear a channel and optionally save a backup
 
@@ -99,11 +113,13 @@
 ./eventlog [auth_flags] clear Security -b 'C:\temp\security-backup.evtx' --confirm
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./eventlog [auth_flags] channel [<channel>] [-T config|meta|all]
 ```
+{% endhint %}
 
 
 Show channel information: config (EvtRpcGetChannelConfig), meta (EvtRpcGetLogFileInfo), or all (default)  
@@ -121,11 +137,13 @@ Show channel information: config (EvtRpcGetChannelConfig), meta (EvtRpcGetLogFil
 ./eventlog [auth_flags] channel Security -T meta
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./eventlog [auth_flags] publisher <name>
 ```
+{% endhint %}
 
 ### Show metadata for a registered event publisher (GUID, schema path, etc.)
 
@@ -133,11 +151,13 @@ Show channel information: config (EvtRpcGetChannelConfig), meta (EvtRpcGetLogFil
 ./eventlog [auth_flags] publisher 'Microsoft-Windows-Security-Auditing'
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./eventlog [auth_flags] channel-publishers [<channel>]
 ```
+{% endhint %}
 
 ### List publishers registered to write to a specific channel
 
@@ -145,11 +165,13 @@ Show channel information: config (EvtRpcGetChannelConfig), meta (EvtRpcGetLogFil
 ./eventlog [auth_flags] channel-publishers Security
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./eventlog [auth_flags] classic-name <name>
 ```
+{% endhint %}
 
 ### Resolve a classic event log name to its display name
 
@@ -157,11 +179,13 @@ Show channel information: config (EvtRpcGetChannelConfig), meta (EvtRpcGetLogFil
 ./eventlog [auth_flags] classic-name Security
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./eventlog [auth_flags] set-channel [<channel>] [--enabled <true|false>] [--max-size <bytes>]
 ```
+{% endhint %}
 
 ### Enable or disable a channel and/or change its maximum log file size
 

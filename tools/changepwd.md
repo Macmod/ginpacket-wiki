@@ -4,11 +4,13 @@
 
 ## Subcommands / Usage
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./changepwd [auth_flags] samr -a <account> -w <new-password> [-o <old-password>] [--transport <smb|tcp>]
 ```
+{% endhint %}
 
 ### Change a password via MS-SAMR over SMB named pipe
 
@@ -22,11 +24,13 @@
 ./changepwd [auth_flags] samr -a jdoe -w 'NewP@ssw0rd!' --transport tcp
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./changepwd [auth_flags] kpasswd -a <account> -w <new-password> [-o <old-password>]
 ```
+{% endhint %}
 
 
 Note: for this command, --dc is only considered to override the DC for PKINIT when authenticating with a client certificate. In that case, if --dc is not specified, the target (-t) will be used for both PKINIT and the operation itself.  
@@ -43,11 +47,13 @@ Note: for this command, --dc is only considered to override the DC for PKINIT wh
 ./changepwd [auth_flags] kpasswd -a jdoe -w 'NewP@ssw0rd!'
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./changepwd [auth_flags] ldap -a <account> -w <new-password> [--scheme <ldap|ldaps>] [--starttls]
 ```
+{% endhint %}
 
 ### Change a password via LDAPS
 
@@ -55,11 +61,13 @@ Note: for this command, --dc is only considered to override the DC for PKINIT wh
 ./changepwd [auth_flags] ldap -a jdoe -w 'NewP@ssw0rd!' --scheme ldaps
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./changepwd [auth_flags] adws -a <account> -w <new-password>
 ```
+{% endhint %}
 
 ### Change a password via ADWS (Active Directory Web Services)
 

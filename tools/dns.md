@@ -4,11 +4,13 @@
 
 ## Subcommands / Usage
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./dns [auth_flags]
 ```
+{% endhint %}
 
 ### List all DNS zones on the server; equivalent to the 'zones' subcommand
 
@@ -16,11 +18,13 @@
 ./dns [auth_flags]
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./dns [auth_flags] zones
 ```
+{% endhint %}
 
 ### List all DNS zones on the server
 
@@ -28,11 +32,13 @@
 ./dns [auth_flags] zones
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./dns [auth_flags] records <zone> [-n <node>] [-T <A|AAAA|MX|TXT|CNAME|SRV|NS|PTR|SOA|ALL>]
 ```
+{% endhint %}
 
 ### List all DNS records in a zone
 
@@ -46,11 +52,13 @@
 ./dns [auth_flags] records EXAMPLE.LOCAL -n _tcp -T SRV
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./dns [auth_flags] nodes <zone> [-n <parent-node>]
 ```
+{% endhint %}
 
 ### List all nodes in a DNS zone
 
@@ -64,11 +72,13 @@
 ./dns [auth_flags] nodes EXAMPLE.LOCAL -n _tcp
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./dns [auth_flags] dump [-z <zone>] [--skip-cache=<true|false>]
 ```
+{% endhint %}
 
 ### Dump all DNS records from all zones
 
@@ -82,11 +92,13 @@
 ./dns [auth_flags] dump -z EXAMPLE.LOCAL --skip-cache=false
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./dns [auth_flags] add-record <zone> -n <node> -T <type> -v <value> [--ttl <sec>]
 ```
+{% endhint %}
 
 ### Add a DNS resource record to a zone
 
@@ -94,11 +106,13 @@
 ./dns [auth_flags] add-record EXAMPLE.LOCAL -n myhost -T A -v 10.0.0.99 --ttl 600
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./dns [auth_flags] del-record <zone> -n, --node <node> -T, --type <type> -v, --value <data> [--ttl <sec>]
 ```
+{% endhint %}
 
 ### Delete a DNS resource record from a zone
 
@@ -106,11 +120,13 @@
 ./dns [auth_flags] del-record EXAMPLE.LOCAL -n myhost -T A -v 10.0.0.99
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./dns [auth_flags] server-props [-O, --operation <name>] [--property <name>]
 ```
+{% endhint %}
 
 ### Query a named server operation
 
@@ -124,11 +140,13 @@
 ./dns [auth_flags] server-props --property Forwarders
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./dns [auth_flags] server-stats [--clear]
 ```
+{% endhint %}
 
 ### Query server statistics
 
@@ -142,11 +160,13 @@
 ./dns [auth_flags] server-stats --clear
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./dns [auth_flags] server-scopes
 ```
+{% endhint %}
 
 ### List DNS server scopes
 
@@ -154,11 +174,13 @@
 ./dns [auth_flags] server-scopes
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./dns [auth_flags] zone <zone> [--property <name>]
 ```
+{% endhint %}
 
 ### Query full zone configuration
 
@@ -172,11 +194,13 @@
 ./dns [auth_flags] zone EXAMPLE.LOCAL --property AllowUpdate
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./dns [auth_flags] zone-stats <zone> [--clear]
 ```
+{% endhint %}
 
 ### Query zone statistics
 
@@ -190,11 +214,13 @@
 ./dns [auth_flags] zone-stats EXAMPLE.LOCAL --clear
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./dns [auth_flags] zone-scopes <zone|..cache>
 ```
+{% endhint %}
 
 ### List scopes for a DNS zone
 
@@ -208,11 +234,13 @@
 ./dns [auth_flags] zone-scopes ..cache
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./dns [auth_flags] policies [-z <zone>]
 ```
+{% endhint %}
 
 ### List server-level DNS policies
 
@@ -226,11 +254,13 @@
 ./dns [auth_flags] policies -z EXAMPLE.LOCAL
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./dns [auth_flags] policy <policy-name> [-z <zone>]
 ```
+{% endhint %}
 
 ### Show a server-level policy by name
 
@@ -244,11 +274,13 @@
 ./dns [auth_flags] policy ZonePolicy1 -z EXAMPLE.LOCAL
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./dns [auth_flags] client-subnets
 ```
+{% endhint %}
 
 ### List DNS client subnet records
 
@@ -256,11 +288,13 @@
 ./dns [auth_flags] client-subnets
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./dns [auth_flags] client-subnet <subnet-record-name>
 ```
+{% endhint %}
 
 ### Show details for a named client subnet record
 
@@ -268,11 +302,13 @@
 ./dns [auth_flags] client-subnet BranchOffice-IPv4
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./dns [auth_flags] add-zone <zone> [--type <primary|secondary|stub|forwarder>] [--master <ip> ...] [--ds]
 ```
+{% endhint %}
 
 ### Create a standard primary zone
 
@@ -298,11 +334,13 @@
 ./dns [auth_flags] add-zone EXT.CORP --type forwarder --master 8.8.8.8
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./dns [auth_flags] del-zone <zone>
 ```
+{% endhint %}
 
 ### Delete a DNS zone
 
@@ -310,11 +348,13 @@
 ./dns [auth_flags] del-zone OLD.LOCAL
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./dns [auth_flags] pause-zone <zone>
 ```
+{% endhint %}
 
 ### Pause a DNS zone (stops it from answering queries)
 
@@ -322,11 +362,13 @@
 ./dns [auth_flags] pause-zone EXAMPLE.LOCAL
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./dns [auth_flags] resume-zone <zone>
 ```
+{% endhint %}
 
 ### Resume a paused DNS zone
 
@@ -334,11 +376,13 @@
 ./dns [auth_flags] resume-zone EXAMPLE.LOCAL
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./dns [auth_flags] reload-zone <zone>
 ```
+{% endhint %}
 
 ### Reload a DNS zone from its storage backend
 
@@ -346,11 +390,13 @@
 ./dns [auth_flags] reload-zone EXAMPLE.LOCAL
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./dns [auth_flags] set-forwarders [--forwarder <ipv4> ...] [--timeout <sec>] [--no-recurse]
 ```
+{% endhint %}
 
 ### Set DNS forwarders with a query timeout
 
@@ -364,11 +410,13 @@
 ./dns [auth_flags] set-forwarders
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./dns [auth_flags] version
 ```
+{% endhint %}
 
 ### Query the DNS server version
 

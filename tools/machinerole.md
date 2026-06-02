@@ -4,11 +4,13 @@
 
 ## Subcommands / Usage
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./machinerole [auth_flags] [--use-named-pipe]
 ```
+{% endhint %}
 
 ### Query the machine's domain role and DS state via TCP
 

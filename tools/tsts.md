@@ -4,11 +4,13 @@
 
 ## Subcommands / Usage
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./tsts [auth_flags] sessions [-s <state>] [-f <username>]
 ```
+{% endhint %}
 
 ### Enumerate Terminal Services sessions, optionally filtering by state or user
 
@@ -24,11 +26,13 @@
 ./tsts [auth_flags] sessions -f administrator
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./tsts [auth_flags] processes [-s <session-id>]
 ```
+{% endhint %}
 
 ### List running processes across Terminal Services sessions
 
@@ -40,11 +44,13 @@
 ./tsts [auth_flags] processes -s 1
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./tsts [auth_flags] policy
 ```
+{% endhint %}
 
 ### Retrieve the Terminal Services machine policy buffer
 
@@ -52,11 +58,13 @@
 ./tsts [auth_flags] policy
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./tsts [auth_flags] session <id> [-c] [-g]
 ```
+{% endhint %}
 
 ### Show session details with optional raw client/config blobs
 
@@ -68,11 +76,13 @@
 ./tsts [auth_flags] session 1 -c -g
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./tsts [auth_flags] connect <src-session> <dst-session> [-P <target-password>]
 ```
+{% endhint %}
 
 ### Connect a source session into a destination session
 
@@ -80,11 +90,13 @@
 ./tsts [auth_flags] connect 2 1
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./tsts [auth_flags] watch [-e <event-list>]
 ```
+{% endhint %}
 
 ### Watch Terminal Services events synchronously until Ctrl+C
 
@@ -96,11 +108,13 @@
 ./tsts [auth_flags] watch -e logon,logoff,connect,disconnect
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./tsts [auth_flags] kill-session <id> [-w]
 ```
+{% endhint %}
 
 ### Reset a session forcibly
 
@@ -108,11 +122,13 @@
 ./tsts [auth_flags] kill-session 3
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./tsts [auth_flags] logoff <session-id>
 ```
+{% endhint %}
 
 ### Log off a session via LSM session control
 
@@ -120,11 +136,13 @@
 ./tsts [auth_flags] logoff 3
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./tsts [auth_flags] disconnect <session-id> [-w]
 ```
+{% endhint %}
 
 ### Disconnect a session without logging it off
 
@@ -132,11 +150,13 @@
 ./tsts [auth_flags] disconnect 3
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./tsts [auth_flags] kill-process <pid> [-e <exit-code>]
 ```
+{% endhint %}
 
 ### Terminate a process by PID
 
@@ -144,11 +164,13 @@
 ./tsts [auth_flags] kill-process 4242 -e 1
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./tsts [auth_flags] message <session-id> -T <title> -m <text> [-s <style>] [-o <seconds>] [-a]
 ```
+{% endhint %}
 
 ### Show a message box and optionally wait for the user response
 
@@ -160,11 +182,13 @@
 ./tsts [auth_flags] message 1 -T 'Notice' -m 'This is async.' -a
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./tsts [auth_flags] listeners
 ```
+{% endhint %}
 
 ### List available Terminal Services listeners
 
@@ -172,11 +196,13 @@
 ./tsts [auth_flags] listeners
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./tsts [auth_flags] stop-listener <name>
 ```
+{% endhint %}
 
 ### Stop a listener such as RDP-Tcp
 
@@ -184,11 +210,13 @@
 ./tsts [auth_flags] stop-listener RDP-Tcp
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./tsts [auth_flags] start-listener <name>
 ```
+{% endhint %}
 
 ### Start a listener such as RDP-Tcp
 
@@ -196,11 +224,13 @@
 ./tsts [auth_flags] start-listener RDP-Tcp
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./tsts [auth_flags] shutdown [-r] [-P] [-l]
 ```
+{% endhint %}
 
 
 Shut down, reboot, power off, or log off all sessions via WinStationShutdownSystem  
@@ -215,8 +245,10 @@ Shut down, reboot, power off, or log off all sessions via WinStationShutdownSyst
 ```
 
 ## Notes
-> [!NOTE]
-> `tsts watch` polls Terminal Services session state every 2 seconds and reports matching create/delete/rename/connect/disconnect/logon/logoff/state changes until you interrupt it. `tsts message` (without `-a` / `--async`) intentionally uses a no-deadline caller context so it can block synchronously until a user responds or you interrupt it.
+{% hint style="info" %}
+`tsts watch` polls Terminal Services session state every 2 seconds and reports matching create/delete/rename/connect/disconnect/logon/logoff/state changes until you interrupt it. `tsts message` (without `-a` / `--async`) intentionally uses a no-deadline caller context so it can block synchronously until a user responds or you interrupt it.
+{% endhint %}
 
-> [!NOTE]
-> `tsts policy` calls `RpcWinStationGetMachinePolicy`, which the MS-TSTS spec marks as legacy and tied to `POLICY_TS_MACHINE`. On newer Windows versions this commonly returns failure without a detailed status code.
+{% hint style="info" %}
+`tsts policy` calls `RpcWinStationGetMachinePolicy`, which the MS-TSTS spec marks as legacy and tied to `POLICY_TS_MACHINE`. On newer Windows versions this commonly returns failure without a detailed status code.
+{% endhint %}

@@ -4,11 +4,13 @@
 
 ## Subcommands / Usage
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./getst [auth_flags] -c <ccache> -s <spn> --dc <dc> -o <out> [--self -i <user>]
 ```
+{% endhint %}
 
 ### Request a service ticket for a given SPN using an existing TGT
 

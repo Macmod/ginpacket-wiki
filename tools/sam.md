@@ -4,11 +4,13 @@
 
 ## Subcommands / Usage
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./sam [auth_flags] domains
 ```
+{% endhint %}
 
 ### List all SAM domains on the target
 
@@ -16,11 +18,13 @@
 ./sam [auth_flags] domains
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./sam [auth_flags] domain [-d <name>]
 ```
+{% endhint %}
 
 ### Show detailed info for a domain
 
@@ -28,11 +32,13 @@
 ./sam [auth_flags] domain -d EXAMPLE
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./sam [auth_flags] set-domain [-d <name>] [--min-pwd-len <n>] [--lockout-threshold <n>] [--lockout-window <dur>] [--lockout-duration <dur>]
 ```
+{% endhint %}
 
 ### Modify domain-level password and lockout policy
 
@@ -40,11 +46,13 @@
 ./sam [auth_flags] set-domain -d EXAMPLE --min-pwd-len 8 --lockout-threshold 5 --lockout-window 30m --lockout-duration 30m
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./sam [auth_flags] password-policy [-d <name>]
 ```
+{% endhint %}
 
 ### Query the domain password policy
 
@@ -52,11 +60,13 @@
 ./sam [auth_flags] password-policy -d EXAMPLE
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./sam [auth_flags] get-acl [-d <name>]
 ```
+{% endhint %}
 
 ### Read the domain object's security descriptor
 
@@ -64,11 +74,13 @@
 ./sam [auth_flags] get-acl -d EXAMPLE
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./sam [auth_flags] set-acl --sd <hex> [-d <name>]
 ```
+{% endhint %}
 
 ### Write a security descriptor to the domain object
 
@@ -76,11 +88,13 @@
 ./sam [auth_flags] set-acl --sd 01000480200000002c00000000000000 -d EXAMPLE
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./sam [auth_flags] users [-d <name>]
 ```
+{% endhint %}
 
 ### Enumerate all user accounts in a domain
 
@@ -88,11 +102,13 @@
 ./sam [auth_flags] users -d EXAMPLE
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./sam [auth_flags] display [-d <name>] [--type <users|machines|groups>] [--prefix <str>]
 ```
+{% endhint %}
 
 ### Display accounts with optional prefix filtering (users, machines, or groups)
 
@@ -100,11 +116,13 @@
 ./sam [auth_flags] display -d EXAMPLE --type users --prefix adm
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./sam [auth_flags] user <username|RID> [-d <name>]
 ```
+{% endhint %}
 
 ### Show full attributes for a user account
 
@@ -112,11 +130,13 @@
 ./sam [auth_flags] user Administrator -d EXAMPLE
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./sam [auth_flags] add-user <name> [-d <name>] [-N <s>] [-D <s>] [-w <s>] [--disable]
 ```
+{% endhint %}
 
 ### Create a new user account
 
@@ -124,11 +144,13 @@
 ./sam [auth_flags] add-user jdoe -d EXAMPLE -N 'John Doe' -D 'Test user' -w 'P@ssw0rd!'
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./sam [auth_flags] del-user <username|RID> [-d <name>]
 ```
+{% endhint %}
 
 ### Delete a user account
 
@@ -136,11 +158,13 @@
 ./sam [auth_flags] del-user jdoe -d EXAMPLE
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./sam [auth_flags] set-user <username|RID> [-d <name>] [--full-name <s>] [--description <s>] [--password <s>] [--expires <RFC3339|never>] [--enable-uac <flag>] [--disable-uac <flag>]
 ```
+{% endhint %}
 
 ### Modify user account attributes or password
 
@@ -148,11 +172,13 @@
 ./sam [auth_flags] set-user jdoe -d EXAMPLE --password 'NewP@ssw0rd!' --expires never
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./sam [auth_flags] user-groups <username|RID> [-d <name>]
 ```
+{% endhint %}
 
 ### List all global groups a user belongs to
 
@@ -160,11 +186,13 @@
 ./sam [auth_flags] user-groups Administrator -d EXAMPLE
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./sam [auth_flags] user-aliases <username|RID> [-d <name>]
 ```
+{% endhint %}
 
 ### List all aliases (local groups) a user belongs to
 
@@ -172,11 +200,13 @@
 ./sam [auth_flags] user-aliases Administrator -d EXAMPLE
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./sam [auth_flags] validate-password <password> [-d <name>] [--operation <auth|change|reset>]
 ```
+{% endhint %}
 
 ### Validate a password against the domain policy
 
@@ -184,11 +214,13 @@
 ./sam [auth_flags] validate-password 'P@ssw0rd!' -d EXAMPLE --operation auth
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./sam [auth_flags] groups [-d <name>]
 ```
+{% endhint %}
 
 ### Enumerate all global groups in a domain
 
@@ -196,11 +228,13 @@
 ./sam [auth_flags] groups -d EXAMPLE
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./sam [auth_flags] group <name|RID> [-d <name>]
 ```
+{% endhint %}
 
 ### Show full attributes for a global group
 
@@ -208,11 +242,13 @@
 ./sam [auth_flags] group 'Domain Admins' -d EXAMPLE
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./sam [auth_flags] add-group <name> [-d <name>]
 ```
+{% endhint %}
 
 ### Create a new global group
 
@@ -220,11 +256,13 @@
 ./sam [auth_flags] add-group TestGroup -d EXAMPLE
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./sam [auth_flags] del-group <name|RID> [-d <name>]
 ```
+{% endhint %}
 
 ### Delete a global group
 
@@ -232,11 +270,13 @@
 ./sam [auth_flags] del-group TestGroup -d EXAMPLE
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./sam [auth_flags] group-members <name|RID> [-d <name>] [--resolve-sids]
 ```
+{% endhint %}
 
 ### List members of a global group
 
@@ -244,11 +284,13 @@
 ./sam [auth_flags] group-members 'Domain Admins' -d EXAMPLE --resolve-sids
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./sam [auth_flags] add-group-member <group> <member-username|RID> [-d <name>]
 ```
+{% endhint %}
 
 ### Add a member to a global group
 
@@ -256,11 +298,13 @@
 ./sam [auth_flags] add-group-member 'Domain Admins' jdoe -d EXAMPLE
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./sam [auth_flags] del-group-member <group> <member-username|RID> [-d <name>]
 ```
+{% endhint %}
 
 ### Remove a member from a global group
 
@@ -268,11 +312,13 @@
 ./sam [auth_flags] del-group-member 'Domain Admins' jdoe -d EXAMPLE
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./sam [auth_flags] set-group <name|RID> [-d <name>] [--name <s>] [--description <s>]
 ```
+{% endhint %}
 
 ### Rename or update the description of a global group
 
@@ -280,11 +326,13 @@
 ./sam [auth_flags] set-group TestGroup -d EXAMPLE --name RenamedGroup --description 'Updated desc'
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./sam [auth_flags] set-member-attrs <group> <member-username|RID> [-d <name>] [--attributes <hex>]
 ```
+{% endhint %}
 
 ### Set per-member attributes on a group membership
 
@@ -292,11 +340,13 @@
 ./sam [auth_flags] set-member-attrs 'Domain Admins' jdoe -d EXAMPLE --attributes 0x7
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./sam [auth_flags] aliases [-d <name>] [--builtin]
 ```
+{% endhint %}
 
 ### Enumerate all aliases (local groups) in a domain
 
@@ -304,11 +354,13 @@
 ./sam [auth_flags] aliases -d EXAMPLE
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./sam [auth_flags] alias <name|RID> [-d <name>] [--builtin]
 ```
+{% endhint %}
 
 ### Show full attributes for an alias
 
@@ -316,11 +368,13 @@
 ./sam [auth_flags] alias Administrators --builtin
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./sam [auth_flags] add-alias <name> [-d <name>]
 ```
+{% endhint %}
 
 ### Create a new alias (local group)
 
@@ -328,11 +382,13 @@
 ./sam [auth_flags] add-alias TestAlias -d EXAMPLE
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./sam [auth_flags] del-alias <name|RID> [-d <name>] [--builtin]
 ```
+{% endhint %}
 
 ### Delete an alias
 
@@ -340,11 +396,13 @@
 ./sam [auth_flags] del-alias TestAlias -d EXAMPLE
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./sam [auth_flags] alias-members <name|RID> [-d <name>] [--builtin] [--resolve-sids]
 ```
+{% endhint %}
 
 ### List members of an alias
 
@@ -352,11 +410,13 @@
 ./sam [auth_flags] alias-members Administrators --builtin --resolve-sids
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./sam [auth_flags] alias-membership <sid> [-d <name>] [--builtin]
 ```
+{% endhint %}
 
 ### List all alias memberships for a given SID
 
@@ -364,11 +424,13 @@
 ./sam [auth_flags] alias-membership S-1-5-21-111-222-333-1105 -d EXAMPLE
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./sam [auth_flags] add-alias-member <alias> <sid|username> [-d <name>] [--builtin]
 ```
+{% endhint %}
 
 ### Add a member (by SID or username) to an alias
 
@@ -376,11 +438,13 @@
 ./sam [auth_flags] add-alias-member Administrators S-1-5-21-111-222-333-1105 --builtin
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./sam [auth_flags] del-alias-member <alias> <sid|username> [-d <name>] [--builtin]
 ```
+{% endhint %}
 
 ### Remove a member from an alias
 
@@ -388,11 +452,13 @@
 ./sam [auth_flags] del-alias-member Administrators S-1-5-21-111-222-333-1105 --builtin
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./sam [auth_flags] add-alias-members <alias> <sid|username>... [-d <name>] [--builtin]
 ```
+{% endhint %}
 
 ### Add multiple members to an alias in one call
 
@@ -400,11 +466,13 @@
 ./sam [auth_flags] add-alias-members Administrators S-1-5-21-111-222-333-1105 S-1-5-21-111-222-333-1106 --builtin
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./sam [auth_flags] del-alias-members <alias> <sid|username>... [-d <name>] [--builtin]
 ```
+{% endhint %}
 
 ### Remove multiple members from an alias in one call
 
@@ -412,11 +480,13 @@
 ./sam [auth_flags] del-alias-members Administrators S-1-5-21-111-222-333-1105 S-1-5-21-111-222-333-1106 --builtin
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./sam [auth_flags] set-alias <name|RID> [-d <name>] [--builtin] [--name <s>] [--description <s>]
 ```
+{% endhint %}
 
 ### Rename or update the description of an alias
 
@@ -424,11 +494,13 @@
 ./sam [auth_flags] set-alias TestAlias -d EXAMPLE --name RenamedAlias --description 'Updated desc'
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./sam [auth_flags] purge-sid <sid> [-d <name>] [--builtin]
 ```
+{% endhint %}
 
 ### Remove all alias/group memberships for a stale SID (cross-domain cleanup)
 
@@ -436,11 +508,13 @@
 ./sam [auth_flags] purge-sid S-1-5-21-111-222-333-1105 -d EXAMPLE
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./sam [auth_flags] lookup-names <name>... [-d <name>]
 ```
+{% endhint %}
 
 ### Resolve one or more account names to RIDs and types
 
@@ -448,11 +522,13 @@
 ./sam [auth_flags] lookup-names Administrator jdoe -d EXAMPLE
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./sam [auth_flags] lookup-rids <rid>... [-d <name>]
 ```
+{% endhint %}
 
 ### Resolve one or more RIDs to account names and types
 
@@ -460,11 +536,13 @@
 ./sam [auth_flags] lookup-rids 500 512 -d EXAMPLE
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./sam [auth_flags] rid-to-sid <rid>
 ```
+{% endhint %}
 
 ### Convert a RID to its full SID within the bound domain
 
@@ -472,11 +550,13 @@
 ./sam [auth_flags] rid-to-sid 500
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./sam [auth_flags] set-dsrm-password <new-password>
 ```
+{% endhint %}
 
 ### Set the Directory Services Restore Mode password on a DC
 

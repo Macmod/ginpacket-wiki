@@ -4,11 +4,13 @@
 
 ## Subcommands / Usage
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./server [auth_flags] shares [--persistent]
 ```
+{% endhint %}
 
 ### List all shares (optionally only persistent ones)
 
@@ -22,11 +24,13 @@
 ./server [auth_flags] shares --persistent
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./server [auth_flags] share -s <name>
 ```
+{% endhint %}
 
 ### Show full SHARE_INFO for a named share
 
@@ -34,11 +38,13 @@
 ./server [auth_flags] share -s C$
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./server [auth_flags] share-check <path>
 ```
+{% endhint %}
 
 ### Check whether a local path is already shared
 
@@ -46,11 +52,13 @@
 ./server [auth_flags] share-check 'C:\Temp'
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./server [auth_flags] add-share <name> --path <local> [--remark <text>] [--share-type <n>] [--max-uses <n>] [--persistent=<true|false>]
 ```
+{% endhint %}
 
 ### Create a new share
 
@@ -58,11 +66,13 @@
 ./server [auth_flags] add-share TempShare --path 'C:\Temp' --remark 'temporary' --share-type 0 --max-uses 10 --persistent=$false
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./server [auth_flags] set-share -s <name> [--remark <text>] [--max-uses <n>]
 ```
+{% endhint %}
 
 ### Modify the remark or max-uses on an existing share
 
@@ -70,11 +80,13 @@
 ./server [auth_flags] set-share -s TempShare --remark 'renamed share' --max-uses 5
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./server [auth_flags] del-share -s <name> [--scope <server>] [--use-v1] [--persistent] [--two-phase]
 ```
+{% endhint %}
 
 ### Delete a share using NetrShareDelEx (default, opnum 57)
 
@@ -110,11 +122,13 @@ Delete a share via two-phase commit (NetrShareDelStart + NetrShareDelCommit, opn
 ./server [auth_flags] del-share -s TempShare --scope CLUS1
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./server [auth_flags] get-file-acl <share[\path]> [--security-info <mask>]
 ```
+{% endhint %}
 
 ### Read the ACL on a file within a share
 
@@ -126,11 +140,13 @@ Delete a share via two-phase commit (NetrShareDelStart + NetrShareDelCommit, opn
 ./server [auth_flags] get-file-acl 'SYSVOL\Policies'
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./server [auth_flags] set-file-acl <share[\path]> --sd <hex> [--security-info <mask>]
 ```
+{% endhint %}
 
 ### Write an ACL to a file within a share
 
@@ -142,11 +158,13 @@ Delete a share via two-phase commit (NetrShareDelStart + NetrShareDelCommit, opn
 ./server [auth_flags] set-file-acl 'SYSVOL\Policies' --sd '01000480200000002c00000000000000'
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./server [auth_flags] sessions [--client <name>] [--session-user <user>]
 ```
+{% endhint %}
 
 ### List active SMB sessions
 
@@ -154,11 +172,13 @@ Delete a share via two-phase commit (NetrShareDelStart + NetrShareDelCommit, opn
 ./server [auth_flags] sessions -c '\\CLIENT' -U 'DOMAIN\user'
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./server [auth_flags] del-session [--client <name>] [--session-user <user>]
 ```
+{% endhint %}
 
 ### Forcibly disconnect an SMB session
 
@@ -166,11 +186,13 @@ Delete a share via two-phase commit (NetrShareDelStart + NetrShareDelCommit, opn
 ./server [auth_flags] del-session -c '\\CLIENT'
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./server [auth_flags] connections [--qualifier <share|client>]
 ```
+{% endhint %}
 
 ### List active share connections
 
@@ -178,11 +200,13 @@ Delete a share via two-phase commit (NetrShareDelStart + NetrShareDelCommit, opn
 ./server [auth_flags] connections --qualifier '\\CLIENT'
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./server [auth_flags] files [--base-path <path>] [--session-user <user>]
 ```
+{% endhint %}
 
 ### List open files on the server
 
@@ -190,11 +214,13 @@ Delete a share via two-phase commit (NetrShareDelStart + NetrShareDelCommit, opn
 ./server [auth_flags] files --base-path 'C:\' -U 'DOMAIN\user'
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./server [auth_flags] file <id>
 ```
+{% endhint %}
 
 ### Show details for a specific open file by ID
 
@@ -202,11 +228,13 @@ Delete a share via two-phase commit (NetrShareDelStart + NetrShareDelCommit, opn
 ./server [auth_flags] file 123
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./server [auth_flags] file-close <id>
 ```
+{% endhint %}
 
 ### Force-close an open file by ID
 
@@ -214,11 +242,13 @@ Delete a share via two-phase commit (NetrShareDelStart + NetrShareDelCommit, opn
 ./server [auth_flags] file-close 123
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./server [auth_flags] transports
 ```
+{% endhint %}
 
 ### List all transport bindings registered on the server
 
@@ -226,11 +256,13 @@ Delete a share via two-phase commit (NetrShareDelStart + NetrShareDelCommit, opn
 ./server [auth_flags] transports
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./server [auth_flags] add-transport <transport> [-A <addr>] [-d <domain>] [--flags <n>] [--use-v1]
 ```
+{% endhint %}
 
 ### Add a transport binding (level 2, opnum 41)
 
@@ -250,11 +282,13 @@ Delete a share via two-phase commit (NetrShareDelStart + NetrShareDelCommit, opn
 ./server [auth_flags] add-transport '\Device\NetBT_Tcpip_{6BFFD098-A112-610E-9FBF-00A0C90D67DA}' --use-v1              # NetrServerTransportAdd (opnum 25)
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./server [auth_flags] del-transport <transport> [-A <addr>] [-d <domain>] [--use-v1]
 ```
+{% endhint %}
 
 ### Remove a transport binding
 
@@ -268,11 +302,13 @@ Delete a share via two-phase commit (NetrShareDelStart + NetrShareDelCommit, opn
 ./server [auth_flags] del-transport '\Device\NetBT_Tcpip_{6BFFD098-A112-610E-9FBF-00A0C90D67DA}' --use-v1              # NetrServerTransportDel (opnum 27)
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./server [auth_flags] aliases
 ```
+{% endhint %}
 
 ### List server name aliases
 
@@ -280,11 +316,13 @@ Delete a share via two-phase commit (NetrShareDelStart + NetrShareDelCommit, opn
 ./server [auth_flags] aliases
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./server [auth_flags] add-alias <name> --alias-target <server>
 ```
+{% endhint %}
 
 ### Register a new server name alias
 
@@ -292,11 +330,13 @@ Delete a share via two-phase commit (NetrShareDelStart + NetrShareDelCommit, opn
 ./server [auth_flags] add-alias TESTDC --alias-target WIN-6BKCP1FPPCI
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./server [auth_flags] del-alias -a <name> [--alias-target <server>]
 ```
+{% endhint %}
 
 ### Remove a server name alias
 
@@ -304,11 +344,13 @@ Delete a share via two-phase commit (NetrShareDelStart + NetrShareDelCommit, opn
 ./server [auth_flags] del-alias -a TESTDC --alias-target WIN-6BKCP1FPPCI
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./server [auth_flags] validate-name <name> <type>
 ```
+{% endhint %}
 
 ### Validate a name against a specific type (share, workgroup, etc.)
 
@@ -316,11 +358,13 @@ Delete a share via two-phase commit (NetrShareDelStart + NetrShareDelCommit, opn
 ./server [auth_flags] validate-name SYSVOL share
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./server [auth_flags] info [--detail <basic|standard|full|extended|config|config-full>]
 ```
+{% endhint %}
 
 ### Query server configuration at a given info detail (default: full)
 
@@ -328,11 +372,13 @@ Delete a share via two-phase commit (NetrShareDelStart + NetrShareDelCommit, opn
 ./server [auth_flags] info --detail full
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./server [auth_flags] set-server <remark>
 ```
+{% endhint %}
 
 ### Update the server's description/remark string
 
@@ -340,11 +386,13 @@ Delete a share via two-phase commit (NetrShareDelStart + NetrShareDelCommit, opn
 ./server [auth_flags] set-server 'My DC'
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./server [auth_flags] stats
 ```
+{% endhint %}
 
 ### Query server service statistics
 
@@ -352,11 +400,13 @@ Delete a share via two-phase commit (NetrShareDelStart + NetrShareDelCommit, opn
 ./server [auth_flags] stats
 ```
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./server [auth_flags] disks
 ```
+{% endhint %}
 
 ### List available disk drives on the server
 

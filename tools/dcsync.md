@@ -4,11 +4,13 @@
 
 ## Subcommands / Usage
 
-### Syntax
+{% hint style="info" %}
+**Syntax**
 
 ```bash
 ./dcsync [auth_flags] --dc <DC> (-n <name1,name2> | -N <file> | -g <guid> | -s <sid> | -S <sid-file> | -q <ldap-filter> | -a) [--history] [--all eytypes] [--resume-file <file>]
 ```
+{% endhint %}
 
 ### Replicate specific accounts by name (comma-separated)
 
@@ -99,5 +101,6 @@ Since replication is necessarily an operation for a domain controller, `-t` and 
 
 Also note that our implementation does NOT perform the same actions as impacket's `secretsdump.py` (which performs more actions beyond DCSync) - ginpacket's `dcsync` implements the raw replication operation with some basic improvements.
 
-> [!IMPORTANT]
-> If you want to replicate hashes for all objects you MUST set `-a` - otherwise it'll default to target just the standard Administrator user. This is intentional to avoid mistakes. The tool also always saves the replicated credential material to files under `output` (unless the user enables `-O` / `--stdout-only`).
+{% hint style="warning" %}
+If you want to replicate hashes for all objects you MUST set `-a` - otherwise it'll default to target just the standard Administrator user. This is intentional to avoid mistakes. The tool also always saves the replicated credential material to files under `output` (unless the user enables `-O` / `--stdout-only`).
+{% endhint %}
