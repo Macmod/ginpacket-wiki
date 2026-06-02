@@ -4,7 +4,7 @@
 
 ## Subcommands / Usage
 
-### [-n
+### query
 
 **Syntax:**
 ```bash

@@ -1,6 +1,8 @@
 # Table of contents
 
 * [Introduction](README.md)
+* [Installation](INSTALLATION.md)
+* [Authentication](AUTHENTICATION.md)
 * [Tools](tools/README.md)
   * [🎫 Kerberos TGT (gettgt)](tools/gettgt.md)
   * [🎟️ Kerberos ST (getst)](tools/getst.md)

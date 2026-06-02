@@ -177,7 +177,7 @@
 ./smb [auth_flags] cp 'C$\Temp\file.txt' 'Temp\backup.txt'
 ```
 
-### General Usage
+### shell
 
 **Syntax:**
 ```bash
@@ -190,7 +190,7 @@
 ./smb [auth_flags] -s C$ shell
 ```
 
-### [--require-signing]
+### General Usage
 
 **Syntax:**
 ```bash

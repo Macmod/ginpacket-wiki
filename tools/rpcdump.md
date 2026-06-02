@@ -4,7 +4,7 @@
 
 ## Subcommands / Usage
 
-### [-U
+### General Usage
 
 **Syntax:**
 ```bash

@@ -4,7 +4,7 @@
 
 ## Subcommands / Usage
 
-### [--object-uuid
+### General Usage
 
 **Syntax:**
 ```bash
@@ -23,7 +23,7 @@
 ./authz [auth_flags] info 'joao_couves' --class all
 ```
 
-### General Usage
+### check
 
 **Syntax:**
 ```bash

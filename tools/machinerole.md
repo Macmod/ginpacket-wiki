@@ -4,7 +4,7 @@
 
 ## Subcommands / Usage
 
-### [--use-named-pipe]
+### General Usage
 
 **Syntax:**
 ```bash
