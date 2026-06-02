@@ -4,8 +4,9 @@
 
 ## Subcommands / Usage
 
-### `General Usage`
+### General Usage
 
+**Syntax:**
 ```bash
 ./getst [auth_flags] -c <ccache> -s <spn> --dc <dc> -o <out> [--self -i <user>]
 ```

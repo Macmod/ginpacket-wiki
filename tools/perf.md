@@ -4,8 +4,9 @@
 
 ## Subcommands / Usage
 
-### `csets`
+### csets
 
+**Syntax:**
 ```bash
 ./perf [auth_flags] csets
 ```
@@ -16,8 +17,9 @@
 ./perf [auth_flags] csets
 ```
 
-### `cset`
+### cset
 
+**Syntax:**
 ```bash
 ./perf [auth_flags] cset <guid>
 ```
@@ -28,8 +30,9 @@
 ./perf [auth_flags] cset '{6BFFD098-A112-610E-9FBF-00A0C90D67DA}'
 ```
 
-### `instances`
+### instances
 
+**Syntax:**
 ```bash
 ./perf [auth_flags] instances <guid>
 ```
@@ -40,8 +43,9 @@
 ./perf [auth_flags] instances '{6BFFD098-A112-610E-9FBF-00A0C90D67DA}'
 ```
 
-### `query`
+### query
 
+**Syntax:**
 ```bash
 ./perf [auth_flags] query <guid> [-c <counter-id>] [--instance <id>]
 ```
@@ -64,8 +68,9 @@
 ./perf [auth_flags] query '{6BFFD098-A112-610E-9FBF-00A0C90D67DA}' --counter 1 --instance 0
 ```
 
-### `dump`
+### dump
 
+**Syntax:**
 ```bash
 ./perf [auth_flags] dump
 ```

@@ -4,8 +4,9 @@
 
 ## Subcommands / Usage
 
-### `channels`
+### channels
 
+**Syntax:**
 ```bash
 ./eventlog [auth_flags] channels
 ```
@@ -16,8 +17,9 @@
 ./eventlog [auth_flags] channels
 ```
 
-### `publishers`
+### publishers
 
+**Syntax:**
 ```bash
 ./eventlog [auth_flags] publishers
 ```
@@ -28,8 +30,9 @@
 ./eventlog [auth_flags] publishers
 ```
 
-### `query`
+### query
 
+**Syntax:**
 ```bash
 ./eventlog [auth_flags] query <channel> [-q <xpath>] [-L <n>] [-T <ms>]
 ```
@@ -40,8 +43,9 @@
 ./eventlog [auth_flags] query Security -q "*" -L 10 -T 5000
 ```
 
-### `subscribe`
+### subscribe
 
+**Syntax:**
 ```bash
 ./eventlog [auth_flags] subscribe <channel> [-q <xpath>] [-L <n>] [-T <ms>]
 ```
@@ -52,8 +56,9 @@
 ./eventlog [auth_flags] subscribe Security -q "*" -L 10 -T 5000
 ```
 
-### `watch`
+### watch
 
+**Syntax:**
 ```bash
 ./eventlog [auth_flags] watch <channel> [--event-id <ids>] [--grep <str>] [-L <n>] [-F <text|json>]
 ```
@@ -68,8 +73,9 @@
 ./eventlog [auth_flags] watch Security --event-id 4624,4625 -L 20
 ```
 
-### `export`
+### export
 
+**Syntax:**
 ```bash
 ./eventlog [auth_flags] export <channel> <out-path>
 ./eventlog [auth_flags] export --evtx-file <in-path> <out-path>
@@ -87,8 +93,9 @@
 ./eventlog [auth_flags] export --evtx-file 'C:\temp\in.evtx' 'C:\temp\out.evtx'
 ```
 
-### `clear`
+### clear
 
+**Syntax:**
 ```bash
 ./eventlog [auth_flags] clear <channel> [-b <backup-path>] [--confirm]
 ```
@@ -99,8 +106,9 @@
 ./eventlog [auth_flags] clear Security -b 'C:\temp\security-backup.evtx' --confirm
 ```
 
-### `channel`
+### channel
 
+**Syntax:**
 ```bash
 ./eventlog [auth_flags] channel [<channel>] [-T config|meta|all]
 ```
@@ -119,8 +127,9 @@
 ./eventlog [auth_flags] channel Security -T meta
 ```
 
-### `publisher`
+### publisher
 
+**Syntax:**
 ```bash
 ./eventlog [auth_flags] publisher <name>
 ```
@@ -131,8 +140,9 @@
 ./eventlog [auth_flags] publisher 'Microsoft-Windows-Security-Auditing'
 ```
 
-### `channel-publishers`
+### channel-publishers
 
+**Syntax:**
 ```bash
 ./eventlog [auth_flags] channel-publishers [<channel>]
 ```
@@ -143,8 +153,9 @@
 ./eventlog [auth_flags] channel-publishers Security
 ```
 
-### `classic-name`
+### classic-name
 
+**Syntax:**
 ```bash
 ./eventlog [auth_flags] classic-name <name>
 ```
@@ -155,8 +166,9 @@
 ./eventlog [auth_flags] classic-name Security
 ```
 
-### `set-channel`
+### set-channel
 
+**Syntax:**
 ```bash
 ./eventlog [auth_flags] set-channel [<channel>] [--enabled <true|false>] [--max-size <bytes>]
 ```

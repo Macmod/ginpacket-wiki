@@ -4,8 +4,9 @@
 
 ## Subcommands / Usage
 
-### `[--use-named-pipe]`
+### [--use-named-pipe]
 
+**Syntax:**
 ```bash
 ./machinerole [auth_flags] [--use-named-pipe]
 ```

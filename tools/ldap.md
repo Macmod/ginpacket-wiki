@@ -4,8 +4,9 @@
 
 ## Subcommands / Usage
 
-### `whoami`
+### whoami
 
+**Syntax:**
 ```bash
 ./ldap [auth_flags] whoami
 ```
@@ -16,8 +17,9 @@
 ./ldap [auth_flags] whoami
 ```
 
-### `info`
+### info
 
+**Syntax:**
 ```bash
 ./ldap [auth_flags] info <dn-or-name> [--all]
 ```
@@ -34,8 +36,9 @@
 ./ldap [auth_flags] info 'CN=Domain Users,CN=Users,DC=example,DC=com' --all
 ```
 
-### `query`
+### query
 
+**Syntax:**
 ```bash
 ./ldap [auth_flags] query users [--enabled] [--disabled]
 ```
@@ -58,8 +61,9 @@
 ./ldap [auth_flags] query users --disabled
 ```
 
-### `query`
+### query
 
+**Syntax:**
 ```bash
 ./ldap [auth_flags] query groups
 ```
@@ -70,8 +74,9 @@
 ./ldap [auth_flags] query groups
 ```
 
-### `query`
+### query
 
+**Syntax:**
 ```bash
 ./ldap [auth_flags] query computers
 ```
@@ -82,8 +87,9 @@
 ./ldap [auth_flags] query computers
 ```
 
-### `query`
+### query
 
+**Syntax:**
 ```bash
 ./ldap [auth_flags] query containers
 ```
@@ -94,8 +100,9 @@
 ./ldap [auth_flags] query containers
 ```
 
-### `query`
+### query
 
+**Syntax:**
 ```bash
 ./ldap [auth_flags] query ous
 ```
@@ -106,8 +113,9 @@
 ./ldap [auth_flags] query ous
 ```
 
-### `query`
+### query
 
+**Syntax:**
 ```bash
 ./ldap [auth_flags] query service-accounts
 ```
@@ -118,8 +126,9 @@
 ./ldap [auth_flags] query service-accounts
 ```
 
-### `query`
+### query
 
+**Syntax:**
 ```bash
 ./ldap [auth_flags] query gpos
 ```
@@ -130,8 +139,9 @@
 ./ldap [auth_flags] query gpos
 ```
 
-### `query`
+### query
 
+**Syntax:**
 ```bash
 ./ldap [auth_flags] query spns
 ```
@@ -142,8 +152,9 @@
 ./ldap [auth_flags] query spns
 ```
 
-### `query`
+### query
 
+**Syntax:**
 ```bash
 ./ldap [auth_flags] query unconstrained-delegation
 ```
@@ -154,8 +165,9 @@
 ./ldap [auth_flags] query unconstrained-delegation
 ```
 
-### `query`
+### query
 
+**Syntax:**
 ```bash
 ./ldap [auth_flags] query constrained-delegation
 ```
@@ -166,8 +178,9 @@
 ./ldap [auth_flags] query constrained-delegation
 ```
 
-### `query`
+### query
 
+**Syntax:**
 ```bash
 ./ldap [auth_flags] query asreproast
 ```
@@ -178,8 +191,9 @@
 ./ldap [auth_flags] query asreproast
 ```
 
-### `query`
+### query
 
+**Syntax:**
 ```bash
 ./ldap [auth_flags] query never-expires
 ```
@@ -190,8 +204,9 @@
 ./ldap [auth_flags] query never-expires
 ```
 
-### `query`
+### query
 
+**Syntax:**
 ```bash
 ./ldap [auth_flags] query password-not-required
 ```
@@ -202,8 +217,9 @@
 ./ldap [auth_flags] query password-not-required
 ```
 
-### `query`
+### query
 
+**Syntax:**
 ```bash
 ./ldap [auth_flags] query cert-templates
 ```
@@ -214,8 +230,9 @@
 ./ldap [auth_flags] query cert-templates
 ```
 
-### `query`
+### query
 
+**Syntax:**
 ```bash
 ./ldap [auth_flags] query cert-authorities
 ```
@@ -226,8 +243,9 @@
 ./ldap [auth_flags] query cert-authorities
 ```
 
-### `query`
+### query
 
+**Syntax:**
 ```bash
 ./ldap [auth_flags] query trusts [--transitive]
 ```
@@ -238,8 +256,9 @@
 ./ldap [auth_flags] query trusts
 ```
 
-### `query`
+### query
 
+**Syntax:**
 ```bash
 ./ldap [auth_flags] query passpol
 ```
@@ -250,8 +269,9 @@
 ./ldap [auth_flags] query passpol
 ```
 
-### `query`
+### query
 
+**Syntax:**
 ```bash
 ./ldap [auth_flags] query mquota
 ```
@@ -262,8 +282,9 @@
 ./ldap [auth_flags] query mquota
 ```
 
-### `query`
+### query
 
+**Syntax:**
 ```bash
 ./ldap [auth_flags] query shadow-creds [--limit <n>]
 ```
@@ -274,8 +295,9 @@
 ./ldap [auth_flags] query shadow-creds
 ```
 
-### `query`
+### query
 
+**Syntax:**
 ```bash
 ./ldap [auth_flags] query rbcd [--limit <n>]
 ```
@@ -286,8 +308,9 @@
 ./ldap [auth_flags] query rbcd
 ```
 
-### `query`
+### query
 
+**Syntax:**
 ```bash
 ./ldap [auth_flags] query gmsa [--limit <n>]
 ```
@@ -298,8 +321,9 @@
 ./ldap [auth_flags] query gmsa
 ```
 
-### `query`
+### query
 
+**Syntax:**
 ```bash
 ./ldap [auth_flags] query laps [--limit <n>]
 ```
@@ -310,8 +334,9 @@
 ./ldap [auth_flags] query laps
 ```
 
-### `query`
+### query
 
+**Syntax:**
 ```bash
 ./ldap [auth_flags] query sccm [--limit <n>]
 ```
@@ -322,8 +347,9 @@
 ./ldap [auth_flags] query sccm
 ```
 
-### `query`
+### query
 
+**Syntax:**
 ```bash
 ./ldap [auth_flags] query wds [--limit <n>]
 ```
@@ -334,8 +360,9 @@
 ./ldap [auth_flags] query wds
 ```
 
-### `get-gmsa-password`
+### get-gmsa-password
 
+**Syntax:**
 ```bash
 ./ldap [auth_flags] get-gmsa-password <sAMAccountName>
 ```
@@ -346,8 +373,9 @@
 ./ldap [auth_flags] get-gmsa-password 'svc_backup$'
 ```
 
-### `get-laps`
+### get-laps
 
+**Syntax:**
 ```bash
 ./ldap [auth_flags] get-laps <computer>
 ```
@@ -362,8 +390,9 @@
 ./ldap [auth_flags] get-laps WIN-DC01.corp.local
 ```
 
-### `enable`
+### enable
 
+**Syntax:**
 ```bash
 ./ldap [auth_flags] enable <dn>
 ```
@@ -374,8 +403,9 @@
 ./ldap [auth_flags] enable 'CN=jdoe,CN=Users,DC=example,DC=com'
 ```
 
-### `disable`
+### disable
 
+**Syntax:**
 ```bash
 ./ldap [auth_flags] disable <dn>
 ```
@@ -386,8 +416,9 @@
 ./ldap [auth_flags] disable 'CN=jdoe,CN=Users,DC=example,DC=com'
 ```
 
-### `uac-modify`
+### uac-modify
 
+**Syntax:**
 ```bash
 ./ldap [auth_flags] uac-modify <dn> <flag> <set|clear>
 ```
@@ -406,8 +437,9 @@
 ./ldap [auth_flags] uac-modify 'CN=jdoe,CN=Users,DC=example,DC=com' TRUSTED_FOR_DELEGATION clear
 ```
 
-### `search`
+### search
 
+**Syntax:**
 ```bash
 ./ldap [auth_flags] search -F <filter> [-A <attrs>] [--limit <n>] [--base-dn <dn>] [--scope <scope>]
 ```
@@ -442,8 +474,9 @@
 ./ldap [auth_flags] search -F '(userAccountControl:1.2.840.113556.1.4.803:=524288)'
 ```
 
-### `General Usage`
+### General Usage
 
+**Syntax:**
 ```bash
 ./ldap [auth_flags] <subcommand> -f <filter-chain> -a <attr-chain> -b <base-chain>
 ```
@@ -466,8 +499,9 @@
 ./ldap [auth_flags] info 'Administrator' -f OGDR -b OX
 ```
 
-### `modify`
+### modify
 
+**Syntax:**
 ```bash
 ./ldap [auth_flags] modify <dn> --attr <name> --operation <add|replace|delete> --value <value>
 ```
@@ -484,8 +518,9 @@
 ./ldap [auth_flags] modify 'CN=Group,CN=Users,DC=example,DC=com' --attr member --operation add --value 'CN=User,CN=Users,DC=example,DC=com'
 ```
 
-### `General Usage`
+### General Usage
 
+**Syntax:**
 ```bash
 ./ldap [auth_flags] --scheme ldaps|ldap [--starttls] <subcommand>
 ```
@@ -502,8 +537,9 @@
 ./ldap [auth_flags] --scheme ldap --starttls query users
 ```
 
-### `create`
+### create
 
+**Syntax:**
 ```bash
 ./ldap [auth_flags] create user --name <cn> [--pass <password>] [--enabled] [--parent-dn <dn>] [--scheme ldaps]
 ```
@@ -528,8 +564,9 @@
 ./ldap [auth_flags] create user --name svc_backup --parent-dn 'OU=ServiceAccounts,DC=example,DC=com' --scheme ldaps
 ```
 
-### `create`
+### create
 
+**Syntax:**
 ```bash
 ./ldap [auth_flags] create computer --name <cn> [--pass <password>] [--parent-dn <dn>] [--scheme ldaps]
 ```
@@ -544,8 +581,9 @@
 ./ldap [auth_flags] create computer --name PENTEST --pass 'P@ssw0rd!' --scheme ldaps
 ```
 
-### `create`
+### create
 
+**Syntax:**
 ```bash
 ./ldap [auth_flags] create group --name <cn> [--type <group-type>] [--parent-dn <dn>]
 ```
@@ -564,8 +602,9 @@
 ./ldap [auth_flags] create group --name 'Pentesters' --parent-dn 'OU=Groups,DC=example,DC=com'
 ```
 
-### `create`
+### create
 
+**Syntax:**
 ```bash
 ./ldap [auth_flags] create ou --name <name> [--parent-dn <dn>]
 ```
@@ -580,8 +619,9 @@
 ./ldap [auth_flags] create ou --name 'RedTeam' --parent-dn 'DC=example,DC=com'
 ```
 
-### `create`
+### create
 
+**Syntax:**
 ```bash
 ./ldap [auth_flags] create container --name <name> [--parent-dn <dn>]
 ```
@@ -596,8 +636,9 @@
 ./ldap [auth_flags] create container --name 'TestContainer' --parent-dn 'DC=example,DC=com'
 ```
 
-### `create`
+### create
 
+**Syntax:**
 ```bash
 ./ldap [auth_flags] create custom --template <file.yaml>
 ```

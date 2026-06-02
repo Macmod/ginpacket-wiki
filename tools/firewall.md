@@ -4,8 +4,9 @@
 
 ## Subcommands / Usage
 
-### `profile`
+### profile
 
+**Syntax:**
 ```bash
 ./firewall [auth_flags] profile [-s <store>] [-P <profile>]
 ```
@@ -22,8 +23,9 @@
 ./firewall [auth_flags] profile -P public
 ```
 
-### `rules`
+### rules
 
+**Syntax:**
 ```bash
 ./firewall [auth_flags] rules [-s <store>] [-P <profile>] [-D <direction>] [-a <allow|block>] [--enabled-only] [-n <name>]
 ```
@@ -46,8 +48,9 @@
 ./firewall [auth_flags] rules -n 'Remote Desktop'
 ```
 
-### `products|networks|adapters|config`
+### products|networks|adapters|config
 
+**Syntax:**
 ```bash
 ./firewall [auth_flags] products|networks|adapters|config
 ```
@@ -76,8 +79,9 @@
 ./firewall [auth_flags] config
 ```
 
-### `set-config`
+### set-config
 
+**Syntax:**
 ```bash
 ./firewall [auth_flags] set-config <key> <value> [-s local]
 ```
@@ -92,8 +96,9 @@
 ./firewall [auth_flags] set-config CRLCheck 0
 ```
 
-### `ipsec-csrules|ipsec-mmrules|ipsec-authsets|ipsec-cryptosets|ipsec-sas`
+### ipsec-csrules|ipsec-mmrules|ipsec-authsets|ipsec-cryptosets|ipsec-sas
 
+**Syntax:**
 ```bash
 ./firewall [auth_flags] ipsec-csrules|ipsec-mmrules|ipsec-authsets|ipsec-cryptosets|ipsec-sas
 ```
@@ -128,8 +133,9 @@
 ./firewall [auth_flags] ipsec-sas
 ```
 
-### `enable|disable`
+### enable|disable
 
+**Syntax:**
 ```bash
 ./firewall [auth_flags] enable|disable [-s <store>] [-P <profile>]
 ```
@@ -152,8 +158,9 @@
 ./firewall [auth_flags] enable -P domain
 ```
 
-### `add-rule`
+### add-rule
 
+**Syntax:**
 ```bash
 ./firewall [auth_flags] add-rule <name> -D <in|out> [-a <allow|block>] [--protocol <any|tcp|udp>] [-l <ports>] [-r <ports>] [-A <app>] [-P <profile>]
 ```
@@ -176,8 +183,9 @@
 ./firewall [auth_flags] add-rule 'MyApp In' -D in -a allow --protocol any -A 'C:\Tools\app.exe' -P private --enabled=false
 ```
 
-### `set-rule`
+### set-rule
 
+**Syntax:**
 ```bash
 ./firewall [auth_flags] set-rule <rule-id> [--enabled=<bool>]
 ```
@@ -188,8 +196,9 @@
 ./firewall [auth_flags] set-rule '{6BFFD098-A112-610E-9FBF-00A0C90D67DA}' --enabled=false
 ```
 
-### `add-ipsec-csrule`
+### add-ipsec-csrule
 
+**Syntax:**
 ```bash
 ./firewall [auth_flags] add-ipsec-csrule <name> [-a <mode>] [--phase1-auth <id>] [--phase2-crypto <id>] [--phase2-auth <id>]
 ```
@@ -206,8 +215,9 @@
 ./firewall [auth_flags] add-ipsec-csrule 'Require Auth' -a secure --phase1-auth '{my-authset-id}'
 ```
 
-### `set-ipsec-csrule`
+### set-ipsec-csrule
 
+**Syntax:**
 ```bash
 ./firewall [auth_flags] set-ipsec-csrule <rule-id> [--enabled=<bool>]
 ```
@@ -218,8 +228,9 @@
 ./firewall [auth_flags] set-ipsec-csrule '{6BFFD098-A112-610E-9FBF-00A0C90D67DA}' --enabled=false
 ```
 
-### `add-ipsec-mmrule`
+### add-ipsec-mmrule
 
+**Syntax:**
 ```bash
 ./firewall [auth_flags] add-ipsec-mmrule <name> [-P <profile>] --phase1-auth <id> --phase1-crypto <id>
 ```
@@ -230,8 +241,9 @@
 ./firewall [auth_flags] add-ipsec-mmrule 'Custom MM Rule' --phase1-auth '{my-authset-id}' --phase1-crypto '{my-cryptoset-id}'
 ```
 
-### `set-ipsec-mmrule`
+### set-ipsec-mmrule
 
+**Syntax:**
 ```bash
 ./firewall [auth_flags] set-ipsec-mmrule <rule-id> [--enabled=<bool>]
 ```
@@ -242,8 +254,9 @@
 ./firewall [auth_flags] set-ipsec-mmrule '{6BFFD098-A112-610E-9FBF-00A0C90D67DA}' --enabled=false
 ```
 
-### `add-ipsec-authset`
+### add-ipsec-authset
 
+**Syntax:**
 ```bash
 ./firewall [auth_flags] add-ipsec-authset <set-id> [-n <name>] [--phase <1|2>] [-m <method>]
 ```
@@ -260,8 +273,9 @@
 ./firewall [auth_flags] add-ipsec-authset '{my-authset-id}' -n 'P2 Cert Auth' --phase 2 -m cert
 ```
 
-### `set-ipsec-authset`
+### set-ipsec-authset
 
+**Syntax:**
 ```bash
 ./firewall [auth_flags] set-ipsec-authset <set-id> [-n <name>] [--phase <1|2>] [-m <method>]
 ```
@@ -272,8 +286,9 @@
 ./firewall [auth_flags] set-ipsec-authset '{my-authset-id}' -n 'Updated Auth Set' --phase 1 -m ntlm
 ```
 
-### `add-ipsec-cryptoset`
+### add-ipsec-cryptoset
 
+**Syntax:**
 ```bash
 ./firewall [auth_flags] add-ipsec-cryptoset <set-id> [-n <name>] [--phase <1|2>] [--key-exchange <alg>] [--encryption <alg>] [--hash <alg>]
 ```
@@ -290,8 +305,9 @@
 ./firewall [auth_flags] add-ipsec-cryptoset '{my-cryptoset-id}' -n 'P2 Crypto' --phase 2 --encryption aes128 --hash sha1
 ```
 
-### `set-ipsec-cryptoset`
+### set-ipsec-cryptoset
 
+**Syntax:**
 ```bash
 ./firewall [auth_flags] set-ipsec-cryptoset <set-id> [-n <name>] [--phase <1|2>] [--key-exchange <alg>] [--encryption <alg>] [--hash <alg>]
 ```
@@ -302,8 +318,9 @@
 ./firewall [auth_flags] set-ipsec-cryptoset '{my-cryptoset-id}' -n 'Updated Crypto' --phase 1 --key-exchange ecdh256 --encryption aes256 --hash sha384
 ```
 
-### `del-rule`
+### del-rule
 
+**Syntax:**
 ```bash
 ./firewall [auth_flags] del-rule <rule-id> | del-all-rules
 ```
@@ -320,8 +337,9 @@
 ./firewall [auth_flags] del-all-rules
 ```
 
-### `del-ipsec-csrule`
+### del-ipsec-csrule
 
+**Syntax:**
 ```bash
 ./firewall [auth_flags] del-ipsec-csrule <rule-id> | del-ipsec-mmrule <rule-id>
 ```
@@ -338,8 +356,9 @@
 ./firewall [auth_flags] del-ipsec-mmrule '{6BFFD098-A112-610E-9FBF-00A0C90D67DA}'
 ```
 
-### `del-ipsec-authset`
+### del-ipsec-authset
 
+**Syntax:**
 ```bash
 ./firewall [auth_flags] del-ipsec-authset <set-id> [--phase <1|2>] | del-ipsec-cryptoset <set-id> [--phase <1|2>]
 ```
@@ -356,8 +375,9 @@
 ./firewall [auth_flags] del-ipsec-cryptoset '{6BFFD098-A112-610E-9FBF-00A0C90D67DA}' --phase 2
 ```
 
-### `del-all-ipsec-csrules`
+### del-all-ipsec-csrules
 
+**Syntax:**
 ```bash
 ./firewall [auth_flags] del-all-ipsec-csrules | del-all-ipsec-mmrules
 ```
@@ -374,8 +394,9 @@
 ./firewall [auth_flags] del-all-ipsec-mmrules
 ```
 
-### `del-all-ipsec-authsets`
+### del-all-ipsec-authsets
 
+**Syntax:**
 ```bash
 ./firewall [auth_flags] del-all-ipsec-authsets [--phase <1|2>] | del-all-ipsec-cryptosets [--phase <1|2>]
 ```
@@ -392,8 +413,9 @@
 ./firewall [auth_flags] del-all-ipsec-cryptosets --phase 2
 ```
 
-### `del-phase1-sas`
+### del-phase1-sas
 
+**Syntax:**
 ```bash
 ./firewall [auth_flags] del-phase1-sas | del-phase2-sas
 ```
@@ -410,8 +432,9 @@
 ./firewall [auth_flags] del-phase2-sas
 ```
 
-### `dump`
+### dump
 
+**Syntax:**
 ```bash
 ./firewall [auth_flags] dump | restore-defaults
 ```

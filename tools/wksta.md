@@ -4,8 +4,9 @@
 
 ## Subcommands / Usage
 
-### `info`
+### info
 
+**Syntax:**
 ```bash
 ./wksta [auth_flags] info [--detail <basic|lan|full|config>]
 ```
@@ -16,8 +17,9 @@
 ./wksta [auth_flags] info --detail full
 ```
 
-### `loggedon`
+### loggedon
 
+**Syntax:**
 ```bash
 ./wksta [auth_flags] loggedon
 ```
@@ -28,8 +30,9 @@
 ./wksta [auth_flags] loggedon
 ```
 
-### `transports`
+### transports
 
+**Syntax:**
 ```bash
 ./wksta [auth_flags] transports
 ```
@@ -40,8 +43,9 @@
 ./wksta [auth_flags] transports
 ```
 
-### `join-info`
+### join-info
 
+**Syntax:**
 ```bash
 ./wksta [auth_flags] join-info
 ```
@@ -52,8 +56,9 @@
 ./wksta [auth_flags] join-info
 ```
 
-### `stats`
+### stats
 
+**Syntax:**
 ```bash
 ./wksta [auth_flags] stats
 ```
@@ -64,8 +69,9 @@
 ./wksta [auth_flags] stats
 ```
 
-### `set-info`
+### set-info
 
+**Syntax:**
 ```bash
 ./wksta [auth_flags] set-info (--keep-conn | --sess-timeout | --dormant-file-limit) <n>
 ```
@@ -88,8 +94,9 @@
 ./wksta [auth_flags] set-info --dormant-file-limit 15
 ```
 
-### `names`
+### names
 
+**Syntax:**
 ```bash
 ./wksta [auth_flags] names [--type <primary|alternate|all>]
 ```
@@ -104,8 +111,9 @@
 ./wksta [auth_flags] names --type alternate
 ```
 
-### `joinable-ous`
+### joinable-ous
 
+**Syntax:**
 ```bash
 ./wksta [auth_flags] joinable-ous <domain>
 ```
@@ -116,8 +124,9 @@
 ./wksta [auth_flags] joinable-ous EXAMPLE.LOCAL
 ```
 
-### `join-domain`
+### join-domain
 
+**Syntax:**
 ```bash
 ./wksta [auth_flags] join-domain <domain> [--options <n>]
 ```
@@ -128,8 +137,9 @@
 ./wksta [auth_flags] join-domain EXAMPLE.LOCAL --options 0
 ```
 
-### `unjoin-domain`
+### unjoin-domain
 
+**Syntax:**
 ```bash
 ./wksta [auth_flags] unjoin-domain [--options <n>]
 ```
@@ -140,8 +150,9 @@
 ./wksta [auth_flags] unjoin-domain --options 0
 ```
 
-### `rename-machine`
+### rename-machine
 
+**Syntax:**
 ```bash
 ./wksta [auth_flags] rename-machine <new-name> [--rename-account] [--dns-only]
 ```
@@ -152,8 +163,9 @@
 ./wksta [auth_flags] rename-machine WS02 --rename-account
 ```
 
-### `validate-name`
+### validate-name
 
+**Syntax:**
 ```bash
 ./wksta [auth_flags] validate-name <name> [--name-type <type>]
 ```
@@ -164,8 +176,9 @@
 ./wksta [auth_flags] validate-name WS02 --name-type 1
 ```
 
-### `add-alt-name`
+### add-alt-name
 
+**Syntax:**
 ```bash
 ./wksta [auth_flags] add-alt-name <alt-name>
 ```
@@ -176,8 +189,9 @@
 ./wksta [auth_flags] add-alt-name alias.example.local
 ```
 
-### `del-alt-name`
+### del-alt-name
 
+**Syntax:**
 ```bash
 ./wksta [auth_flags] del-alt-name <alt-name>
 ```
@@ -188,8 +202,9 @@
 ./wksta [auth_flags] del-alt-name alias.example.local
 ```
 
-### `set-primary-name`
+### set-primary-name
 
+**Syntax:**
 ```bash
 ./wksta [auth_flags] set-primary-name <primary-name>
 ```
@@ -204,8 +219,9 @@
 Note: the new primary name must already exist as an alternate name.  
 Example flow: add-alt-name -> set-primary-name -> (optional) del-alt-name oldname  
 
-### `add-transport`
+### add-transport
 
+**Syntax:**
 ```bash
 ./wksta [auth_flags] add-transport <transport-name> [--quality <n>]
 ```
@@ -216,8 +232,9 @@ Example flow: add-alt-name -> set-primary-name -> (optional) del-alt-name oldnam
 ./wksta [auth_flags] add-transport '\Device\NetBT_Tcpip_{D1B719B7-6A4A-4E77-8EAC-E53584969BB0}'
 ```
 
-### `del-transport`
+### del-transport
 
+**Syntax:**
 ```bash
 ./wksta [auth_flags] del-transport <transport-name> [--force-level <n>]
 ```

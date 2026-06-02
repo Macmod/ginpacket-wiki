@@ -4,8 +4,9 @@
 
 ## Subcommands / Usage
 
-### `shares`
+### shares
 
+**Syntax:**
 ```bash
 ./server [auth_flags] shares [--persistent]
 ```
@@ -22,8 +23,9 @@
 ./server [auth_flags] shares --persistent
 ```
 
-### `share`
+### share
 
+**Syntax:**
 ```bash
 ./server [auth_flags] share -s <name>
 ```
@@ -34,8 +36,9 @@
 ./server [auth_flags] share -s C$
 ```
 
-### `share-check`
+### share-check
 
+**Syntax:**
 ```bash
 ./server [auth_flags] share-check <path>
 ```
@@ -46,8 +49,9 @@
 ./server [auth_flags] share-check 'C:\Temp'
 ```
 
-### `add-share`
+### add-share
 
+**Syntax:**
 ```bash
 ./server [auth_flags] add-share <name> --path <local> [--remark <text>] [--share-type <n>] [--max-uses <n>] [--persistent=<true|false>]
 ```
@@ -58,8 +62,9 @@
 ./server [auth_flags] add-share TempShare --path 'C:\Temp' --remark 'temporary' --share-type 0 --max-uses 10 --persistent=$false
 ```
 
-### `set-share`
+### set-share
 
+**Syntax:**
 ```bash
 ./server [auth_flags] set-share -s <name> [--remark <text>] [--max-uses <n>]
 ```
@@ -70,8 +75,9 @@
 ./server [auth_flags] set-share -s TempShare --remark 'renamed share' --max-uses 5
 ```
 
-### `del-share`
+### del-share
 
+**Syntax:**
 ```bash
 ./server [auth_flags] del-share -s <name> [--scope <server>] [--use-v1] [--persistent] [--two-phase]
 ```
@@ -106,8 +112,9 @@
 ./server [auth_flags] del-share -s TempShare --scope CLUS1
 ```
 
-### `get-file-acl`
+### get-file-acl
 
+**Syntax:**
 ```bash
 ./server [auth_flags] get-file-acl <share[\path]> [--security-info <mask>]
 ```
@@ -122,8 +129,9 @@
 ./server [auth_flags] get-file-acl 'SYSVOL\Policies'
 ```
 
-### `set-file-acl`
+### set-file-acl
 
+**Syntax:**
 ```bash
 ./server [auth_flags] set-file-acl <share[\path]> --sd <hex> [--security-info <mask>]
 ```
@@ -138,8 +146,9 @@
 ./server [auth_flags] set-file-acl 'SYSVOL\Policies' --sd '01000480200000002c00000000000000'
 ```
 
-### `sessions`
+### sessions
 
+**Syntax:**
 ```bash
 ./server [auth_flags] sessions [--client <name>] [--session-user <user>]
 ```
@@ -150,8 +159,9 @@
 ./server [auth_flags] sessions -c '\\CLIENT' -U 'DOMAIN\user'
 ```
 
-### `del-session`
+### del-session
 
+**Syntax:**
 ```bash
 ./server [auth_flags] del-session [--client <name>] [--session-user <user>]
 ```
@@ -162,8 +172,9 @@
 ./server [auth_flags] del-session -c '\\CLIENT'
 ```
 
-### `connections`
+### connections
 
+**Syntax:**
 ```bash
 ./server [auth_flags] connections [--qualifier <share|client>]
 ```
@@ -174,8 +185,9 @@
 ./server [auth_flags] connections --qualifier '\\CLIENT'
 ```
 
-### `files`
+### files
 
+**Syntax:**
 ```bash
 ./server [auth_flags] files [--base-path <path>] [--session-user <user>]
 ```
@@ -186,8 +198,9 @@
 ./server [auth_flags] files --base-path 'C:\' -U 'DOMAIN\user'
 ```
 
-### `file`
+### file
 
+**Syntax:**
 ```bash
 ./server [auth_flags] file <id>
 ```
@@ -198,8 +211,9 @@
 ./server [auth_flags] file 123
 ```
 
-### `file-close`
+### file-close
 
+**Syntax:**
 ```bash
 ./server [auth_flags] file-close <id>
 ```
@@ -210,8 +224,9 @@
 ./server [auth_flags] file-close 123
 ```
 
-### `transports`
+### transports
 
+**Syntax:**
 ```bash
 ./server [auth_flags] transports
 ```
@@ -222,8 +237,9 @@
 ./server [auth_flags] transports
 ```
 
-### `add-transport`
+### add-transport
 
+**Syntax:**
 ```bash
 ./server [auth_flags] add-transport <transport> [-A <addr>] [-d <domain>] [--flags <n>] [--use-v1]
 ```
@@ -246,8 +262,9 @@
 ./server [auth_flags] add-transport '\Device\NetBT_Tcpip_{6BFFD098-A112-610E-9FBF-00A0C90D67DA}' --use-v1              # NetrServerTransportAdd (opnum 25)
 ```
 
-### `del-transport`
+### del-transport
 
+**Syntax:**
 ```bash
 ./server [auth_flags] del-transport <transport> [-A <addr>] [-d <domain>] [--use-v1]
 ```
@@ -264,8 +281,9 @@
 ./server [auth_flags] del-transport '\Device\NetBT_Tcpip_{6BFFD098-A112-610E-9FBF-00A0C90D67DA}' --use-v1              # NetrServerTransportDel (opnum 27)
 ```
 
-### `aliases`
+### aliases
 
+**Syntax:**
 ```bash
 ./server [auth_flags] aliases
 ```
@@ -276,8 +294,9 @@
 ./server [auth_flags] aliases
 ```
 
-### `add-alias`
+### add-alias
 
+**Syntax:**
 ```bash
 ./server [auth_flags] add-alias <name> --alias-target <server>
 ```
@@ -288,8 +307,9 @@
 ./server [auth_flags] add-alias TESTDC --alias-target WIN-6BKCP1FPPCI
 ```
 
-### `del-alias`
+### del-alias
 
+**Syntax:**
 ```bash
 ./server [auth_flags] del-alias -a <name> [--alias-target <server>]
 ```
@@ -300,8 +320,9 @@
 ./server [auth_flags] del-alias -a TESTDC --alias-target WIN-6BKCP1FPPCI
 ```
 
-### `validate-name`
+### validate-name
 
+**Syntax:**
 ```bash
 ./server [auth_flags] validate-name <name> <type>
 ```
@@ -312,8 +333,9 @@
 ./server [auth_flags] validate-name SYSVOL share
 ```
 
-### `info`
+### info
 
+**Syntax:**
 ```bash
 ./server [auth_flags] info [--detail <basic|standard|full|extended|config|config-full>]
 ```
@@ -324,8 +346,9 @@
 ./server [auth_flags] info --detail full
 ```
 
-### `set-server`
+### set-server
 
+**Syntax:**
 ```bash
 ./server [auth_flags] set-server <remark>
 ```
@@ -336,8 +359,9 @@
 ./server [auth_flags] set-server 'My DC'
 ```
 
-### `stats`
+### stats
 
+**Syntax:**
 ```bash
 ./server [auth_flags] stats
 ```
@@ -348,8 +372,9 @@
 ./server [auth_flags] stats
 ```
 
-### `disks`
+### disks
 
+**Syntax:**
 ```bash
 ./server [auth_flags] disks
 ```

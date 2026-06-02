@@ -4,8 +4,9 @@
 
 ## Subcommands / Usage
 
-### `query`
+### query
 
+**Syntax:**
 ```bash
 ./reg [auth_flags] query <key-path> [-v <value-name>] [--max-allowed]
 ```
@@ -28,8 +29,9 @@
 ./reg [auth_flags] --max-allowed query '\\dc01\HKLM\SOFTWARE\MyKey'
 ```
 
-### `add`
+### add
 
+**Syntax:**
 ```bash
 ./reg [auth_flags] add <key-path> -v <value-name> -T <type> -d <data>
 ```
@@ -40,8 +42,9 @@
 ./reg [auth_flags] add '\\dc01\HKLM\SOFTWARE\MyKey' -v MyValue -T REG_SZ -d 'hello'
 ```
 
-### `delete`
+### delete
 
+**Syntax:**
 ```bash
 ./reg [auth_flags] delete <key-path> -v <value-name>
 ```
@@ -52,8 +55,9 @@
 ./reg [auth_flags] delete '\\dc01\HKLM\SOFTWARE\MyKey' -v MyValue
 ```
 
-### `get-sd`
+### get-sd
 
+**Syntax:**
 ```bash
 ./reg [auth_flags] get-sd <key-path> [--parse-dacl]
 ```
@@ -70,8 +74,9 @@
 ./reg [auth_flags] get-sd '\\dc01\HKLM\SOFTWARE\MyKey' --parse-dacl
 ```
 
-### `set-sd`
+### set-sd
 
+**Syntax:**
 ```bash
 ./reg [auth_flags] set-sd <key-path> --sd <hex-sd>
 ```
@@ -82,8 +87,9 @@
 ./reg [auth_flags] set-sd '\\dc01\HKLM\SOFTWARE\MyKey' --sd 01000480200000002c00000000000000
 ```
 
-### `save`
+### save
 
+**Syntax:**
 ```bash
 ./reg [auth_flags] save <key-path> <remote-path>
 ```
@@ -94,8 +100,9 @@
 ./reg [auth_flags] save '\\dc01\HKLM\SAM' 'C:\Windows\Temp\sam.hiv'
 ```
 
-### `load`
+### load
 
+**Syntax:**
 ```bash
 ./reg [auth_flags] load <key-path> <file>
 ```
@@ -106,8 +113,9 @@
 ./reg [auth_flags] load '\\dc01\HKLM\TempHive' 'C:\Windows\Temp\sam.hiv'
 ```
 
-### `unload`
+### unload
 
+**Syntax:**
 ```bash
 ./reg [auth_flags] unload <key-path>
 ```
@@ -118,8 +126,9 @@
 ./reg [auth_flags] unload '\\dc01\HKLM\TempHive'
 ```
 
-### `info`
+### info
 
+**Syntax:**
 ```bash
 ./reg [auth_flags] info <key-path>
 ```
@@ -130,8 +139,9 @@
 ./reg [auth_flags] info '\\dc01\HKLM\SOFTWARE\Microsoft'
 ```
 
-### `restore`
+### restore
 
+**Syntax:**
 ```bash
 ./reg [auth_flags] restore <key-path> <file>
 ```
@@ -142,8 +152,9 @@
 ./reg [auth_flags] restore '\\dc01\HKLM\SOFTWARE\MyKey' 'C:\Windows\Temp\mykey.hiv'
 ```
 
-### `replace`
+### replace
 
+**Syntax:**
 ```bash
 ./reg [auth_flags] replace <key-path> -n <new-file> [-b <backup-file>]
 ```
@@ -154,8 +165,9 @@
 ./reg [auth_flags] replace '\\dc01\HKLM\SOFTWARE\MyKey' -n 'C:\Windows\Temp\new.hiv' -b 'C:\Windows\Temp\old.hiv'
 ```
 
-### `flush`
+### flush
 
+**Syntax:**
 ```bash
 ./reg [auth_flags] flush <key-path>
 ```
@@ -166,8 +178,9 @@
 ./reg [auth_flags] flush '\\dc01\HKLM\SOFTWARE\MyKey'
 ```
 
-### `export`
+### export
 
+**Syntax:**
 ```bash
 ./reg [auth_flags] export <key-path> -o <file> [-R]
 ```
@@ -178,8 +191,9 @@
 ./reg [auth_flags] export '\\dc01\HKLM\SOFTWARE\Microsoft' -o software.reg -R
 ```
 
-### `import`
+### import
 
+**Syntax:**
 ```bash
 ./reg [auth_flags] import <file>
 ```
@@ -190,8 +204,9 @@
 ./reg [auth_flags] import software.reg
 ```
 
-### `compare`
+### compare
 
+**Syntax:**
 ```bash
 ./reg [auth_flags] compare <key-a> <key-b> [-R] [-O <output-mode>]
 ```
@@ -202,8 +217,9 @@
 ./reg [auth_flags] compare '\\dc01\HKLM\SOFTWARE\A' '\\dc01\HKLM\SOFTWARE\B' -R -O od
 ```
 
-### `copy`
+### copy
 
+**Syntax:**
 ```bash
 ./reg [auth_flags] copy <src-key> <dst-key> [-R]
 ```
@@ -214,8 +230,9 @@
 ./reg [auth_flags] copy '\\dc01\HKLM\SOFTWARE\A' '\\dc01\HKLM\SOFTWARE\B' -R
 ```
 
-### `secrets`
+### secrets
 
+**Syntax:**
 ```bash
 ./reg [auth_flags] secrets [--sam] [--lsa] [--cache]
 ```
@@ -226,8 +243,9 @@
 ./reg [auth_flags] secrets --sam --lsa --cache
 ```
 
-### `shell`
+### shell
 
+**Syntax:**
 ```bash
 ./reg [auth_flags] shell
 ```
@@ -238,8 +256,9 @@
 ./reg [auth_flags] shell
 ```
 
-### `server-version`
+### server-version
 
+**Syntax:**
 ```bash
 ./reg [auth_flags] server-version [--hive <root>]
 ```

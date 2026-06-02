@@ -4,8 +4,9 @@
 
 ## Subcommands / Usage
 
-### `policy`
+### policy
 
+**Syntax:**
 ```bash
 ./lsa [auth_flags] policy
 ```
@@ -16,8 +17,9 @@
 ./lsa [auth_flags] policy
 ```
 
-### `set-audit`
+### set-audit
 
+**Syntax:**
 ```bash
 ./lsa [auth_flags] set-audit [--enable] [--disable] [--event <category>=<none|success|failure|both>]
 ```
@@ -28,8 +30,9 @@
 ./lsa [auth_flags] set-audit --enable --event system=both --event logon=success
 ```
 
-### `domain-policy`
+### domain-policy
 
+**Syntax:**
 ```bash
 ./lsa [auth_flags] domain-policy
 ```
@@ -40,8 +43,9 @@
 ./lsa [auth_flags] domain-policy
 ```
 
-### `set-domain-policy`
+### set-domain-policy
 
+**Syntax:**
 ```bash
 ./lsa [auth_flags] set-domain-policy [--max-service-ticket <dur>] [--max-tgt <dur>] [--max-renew <dur>] [--max-skew <dur>] [--validate-client] [--no-validate-client]
 ```
@@ -52,8 +56,9 @@
 ./lsa [auth_flags] set-domain-policy --max-service-ticket 10h --max-tgt 10h --max-renew 168h --max-skew 5m
 ```
 
-### `get-sd`
+### get-sd
 
+**Syntax:**
 ```bash
 ./lsa [auth_flags] get-sd [--security-info <mask>]
 ```
@@ -64,8 +69,9 @@
 ./lsa [auth_flags] get-sd --security-info 4
 ```
 
-### `set-sd`
+### set-sd
 
+**Syntax:**
 ```bash
 ./lsa [auth_flags] set-sd --sd <hex> [--security-info <mask>]
 ```
@@ -76,8 +82,9 @@
 ./lsa [auth_flags] set-sd --sd 01000480200000002c00000000000000 --security-info 4
 ```
 
-### `privileges`
+### privileges
 
+**Syntax:**
 ```bash
 ./lsa [auth_flags] privileges
 ```
@@ -88,8 +95,9 @@
 ./lsa [auth_flags] privileges
 ```
 
-### `lookup-priv`
+### lookup-priv
 
+**Syntax:**
 ```bash
 ./lsa [auth_flags] lookup-priv -n <privilege-name>
 ```
@@ -100,8 +108,9 @@
 ./lsa [auth_flags] lookup-priv -n SeDebugPrivilege
 ```
 
-### `priv-name`
+### priv-name
 
+**Syntax:**
 ```bash
 ./lsa [auth_flags] priv-name --high <n> --low <n>
 ```
@@ -112,8 +121,9 @@
 ./lsa [auth_flags] priv-name --high 0 --low 20
 ```
 
-### `accounts`
+### accounts
 
+**Syntax:**
 ```bash
 ./lsa [auth_flags] accounts
 ```
@@ -124,8 +134,9 @@
 ./lsa [auth_flags] accounts
 ```
 
-### `rights`
+### rights
 
+**Syntax:**
 ```bash
 ./lsa [auth_flags] rights [-r <right1,right2>]
 ```
@@ -136,8 +147,9 @@
 ./lsa [auth_flags] rights -r SeServiceLogonRight,SeInteractiveLogonRight
 ```
 
-### `account-rights`
+### account-rights
 
+**Syntax:**
 ```bash
 ./lsa [auth_flags] account-rights <sid>
 ```
@@ -148,8 +160,9 @@
 ./lsa [auth_flags] account-rights S-1-5-21-111-222-333-500
 ```
 
-### `account-privs`
+### account-privs
 
+**Syntax:**
 ```bash
 ./lsa [auth_flags] account-privs <sid>
 ```
@@ -160,8 +173,9 @@
 ./lsa [auth_flags] account-privs S-1-5-21-111-222-333-500
 ```
 
-### `account-access`
+### account-access
 
+**Syntax:**
 ```bash
 ./lsa [auth_flags] account-access <sid>
 ```
@@ -172,8 +186,9 @@
 ./lsa [auth_flags] account-access S-1-5-21-111-222-333-500
 ```
 
-### `set-account-access`
+### set-account-access
 
+**Syntax:**
 ```bash
 ./lsa [auth_flags] set-account-access <sid> <access>
 ```
@@ -184,8 +199,9 @@
 ./lsa [auth_flags] set-account-access S-1-5-21-111-222-333-500 4
 ```
 
-### `add-rights`
+### add-rights
 
+**Syntax:**
 ```bash
 ./lsa [auth_flags] add-rights <sid> -r <right>
 ```
@@ -196,8 +212,9 @@
 ./lsa [auth_flags] add-rights S-1-5-21-111-222-333-500 -r SeServiceLogonRight
 ```
 
-### `del-rights`
+### del-rights
 
+**Syntax:**
 ```bash
 ./lsa [auth_flags] del-rights <sid> -r <right>
 ```
@@ -208,8 +225,9 @@
 ./lsa [auth_flags] del-rights S-1-5-21-111-222-333-500 -r SeServiceLogonRight
 ```
 
-### `add-account`
+### add-account
 
+**Syntax:**
 ```bash
 ./lsa [auth_flags] add-account <sid>
 ```
@@ -220,8 +238,9 @@
 ./lsa [auth_flags] add-account S-1-5-21-111-222-333-500
 ```
 
-### `del-account`
+### del-account
 
+**Syntax:**
 ```bash
 ./lsa [auth_flags] del-account <sid>
 ```
@@ -232,8 +251,9 @@
 ./lsa [auth_flags] del-account S-1-5-21-111-222-333-500
 ```
 
-### `add-secret`
+### add-secret
 
+**Syntax:**
 ```bash
 ./lsa [auth_flags] add-secret <name>
 ```
@@ -244,8 +264,9 @@
 ./lsa [auth_flags] add-secret _SC_MyService
 ```
 
-### `secret`
+### secret
 
+**Syntax:**
 ```bash
 ./lsa [auth_flags] secret <name> [--use-tcp]
 ```
@@ -256,8 +277,9 @@
 ./lsa [auth_flags] secret _SC_MyService
 ```
 
-### `get-secret`
+### get-secret
 
+**Syntax:**
 ```bash
 ./lsa [auth_flags] get-secret <name> [--use-tcp]
 ```
@@ -268,8 +290,9 @@
 ./lsa [auth_flags] get-secret _SC_MyService
 ```
 
-### `set-secret`
+### set-secret
 
+**Syntax:**
 ```bash
 ./lsa [auth_flags] set-secret <name> -v <hex> [--old-value <hex>]
 ```
@@ -286,8 +309,9 @@
 ./lsa [auth_flags] set-secret _SC_MyService -v 4f6c644e547a744d6758 --old-value 4e65774e547a744d6758
 ```
 
-### `del-secret`
+### del-secret
 
+**Syntax:**
 ```bash
 ./lsa [auth_flags] del-secret <name>
 ```
@@ -298,8 +322,9 @@
 ./lsa [auth_flags] del-secret _SC_MyService
 ```
 
-### `trusts`
+### trusts
 
+**Syntax:**
 ```bash
 ./lsa [auth_flags] trusts
 ```
@@ -310,8 +335,9 @@
 ./lsa [auth_flags] trusts
 ```
 
-### `trust-records`
+### trust-records
 
+**Syntax:**
 ```bash
 ./lsa [auth_flags] trust-records -n <domain>
 ```
@@ -322,8 +348,9 @@
 ./lsa [auth_flags] trust-records -n child.example.com
 ```
 
-### `trust`
+### trust
 
+**Syntax:**
 ```bash
 ./lsa [auth_flags] trust (-n <domain> | -s <sid>)
 ```
@@ -340,8 +367,9 @@
 ./lsa [auth_flags] trust -s S-1-5-21-111-222-333
 ```
 
-### `set-trust`
+### set-trust
 
+**Syntax:**
 ```bash
 ./lsa [auth_flags] set-trust -n <domain> [-D <n>] [-T <n>] [--attributes <hex>]
 ```
@@ -352,8 +380,9 @@
 ./lsa [auth_flags] set-trust -n child.example.com -D 3 -T 2 --attributes 0x20
 ```
 
-### `add-trust`
+### add-trust
 
+**Syntax:**
 ```bash
 ./lsa [auth_flags] add-trust -n <domain> --flat-name <name> -s <sid> [-w <secret>] [-D <n>] [-T <n>]
 ```
@@ -364,8 +393,9 @@
 ./lsa [auth_flags] add-trust -n child.example.com --flat-name CHILD -s S-1-5-21-111-222-333 -D 2 -T 2
 ```
 
-### `del-trust`
+### del-trust
 
+**Syntax:**
 ```bash
 ./lsa [auth_flags] del-trust <sid>
 ```
@@ -376,8 +406,9 @@
 ./lsa [auth_flags] del-trust S-1-5-21-111-222-333
 ```
 
-### `set-trust-records`
+### set-trust-records
 
+**Syntax:**
 ```bash
 ./lsa [auth_flags] set-trust-records -n <domain> [--check]
 ```

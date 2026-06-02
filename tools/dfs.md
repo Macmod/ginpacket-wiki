@@ -4,8 +4,9 @@
 
 ## Subcommands / Usage
 
-### `namespaces`
+### namespaces
 
+**Syntax:**
 ```bash
 ./dfs [auth_flags] namespaces
 ```
@@ -16,8 +17,9 @@
 ./dfs [auth_flags] namespaces
 ```
 
-### `dump`
+### dump
 
+**Syntax:**
 ```bash
 ./dfs [auth_flags] dump
 ```
@@ -28,8 +30,9 @@
 ./dfs [auth_flags] dump
 ```
 
-### `links`
+### links
 
+**Syntax:**
 ```bash
 ./dfs [auth_flags] links <namespace-path>
 ```
@@ -40,8 +43,9 @@
 ./dfs [auth_flags] links '\\EXAMPLE.LOCAL\dfs'
 ```
 
-### `info`
+### info
 
+**Syntax:**
 ```bash
 ./dfs [auth_flags] info <path> [--gen-guid] [--version]
 ```
@@ -64,8 +68,9 @@
 ./dfs [auth_flags] info '\\EXAMPLE.LOCAL\dfs' --version
 ```
 
-### `add-link`
+### add-link
 
+**Syntax:**
 ```bash
 ./dfs [auth_flags] add-link <link-path> --server <server> -s <share>
 ```
@@ -76,8 +81,9 @@
 ./dfs [auth_flags] add-link '\\EXAMPLE.LOCAL\dfs\apps' --server FILES01 -s Data
 ```
 
-### `del-link`
+### del-link
 
+**Syntax:**
 ```bash
 ./dfs [auth_flags] del-link <link-path>
 ```
@@ -88,8 +94,9 @@
 ./dfs [auth_flags] del-link '\\EXAMPLE.LOCAL\dfs\apps'
 ```
 
-### `move`
+### move
 
+**Syntax:**
 ```bash
 ./dfs [auth_flags] move <old-path> <new-path>
 ```
@@ -100,8 +107,9 @@
 ./dfs [auth_flags] move '\\EXAMPLE.LOCAL\dfs\old' '\\EXAMPLE.LOCAL\dfs\new'
 ```
 
-### `set-comment`
+### set-comment
 
+**Syntax:**
 ```bash
 ./dfs [auth_flags] set-comment <path> -c <text>
 ```
@@ -112,8 +120,9 @@
 ./dfs [auth_flags] set-comment '\\EXAMPLE.LOCAL\dfs\apps' -c 'Application share'
 ```
 
-### `set-state`
+### set-state
 
+**Syntax:**
 ```bash
 ./dfs [auth_flags] set-state <dfs-path> -e <online|offline|resynchronize> [--server <server> -s <share>] [--pdc <dc>] [--use-v1]
 ```
@@ -142,8 +151,9 @@
 ./dfs [auth_flags] set-state '\\EXAMPLE.LOCAL\dfs' -e resynchronize --pdc dc01.example.com
 ```
 
-### `set-timeout`
+### set-timeout
 
+**Syntax:**
 ```bash
 ./dfs [auth_flags] set-timeout <dfs-path> -T <sec> [--use-v1]
 ```
@@ -160,8 +170,9 @@
 ./dfs [auth_flags] set-timeout '\\EXAMPLE.LOCAL\dfs\apps' -T 300 --use-v1
 ```
 
-### `set-flags`
+### set-flags
 
+**Syntax:**
 ```bash
 ./dfs [auth_flags] set-flags <dfs-path> -f <flags> [-m <mask>] [--use-v1]
 ```
@@ -184,8 +195,9 @@
 ./dfs [auth_flags] set-flags '\\EXAMPLE.LOCAL\dfs\apps' -f 0 -m 47
 ```
 
-### `set-priority`
+### set-priority
 
+**Syntax:**
 ```bash
 ./dfs [auth_flags] set-priority <dfs-path> --server <server> -s <share> -c <class> -R <rank> [--use-v1]
 ```
@@ -202,8 +214,9 @@
 ./dfs [auth_flags] set-priority '\\EXAMPLE.LOCAL\dfs\apps' --server FILES01 -s Data -c 2 -R 5 --use-v1
 ```
 
-### `get-sd`
+### get-sd
 
+**Syntax:**
 ```bash
 ./dfs [auth_flags] get-sd <dfs-path>
 ```
@@ -214,8 +227,9 @@
 ./dfs [auth_flags] get-sd '\\EXAMPLE.LOCAL\dfs\apps'
 ```
 
-### `set-sd`
+### set-sd
 
+**Syntax:**
 ```bash
 ./dfs [auth_flags] set-sd <dfs-path> --sd <hex>
 ```
@@ -226,8 +240,9 @@
 ./dfs [auth_flags] set-sd '\\EXAMPLE.LOCAL\dfs\apps' --sd '01000480...'
 ```
 
-### `dc-address`
+### dc-address
 
+**Syntax:**
 ```bash
 ./dfs [auth_flags] dc-address --server <server> [--pdc <dc>]
 ```
@@ -238,8 +253,9 @@
 ./dfs [auth_flags] dc-address --server FILES01
 ```
 
-### `set-dc-address`
+### set-dc-address
 
+**Syntax:**
 ```bash
 ./dfs [auth_flags] set-dc-address --server <server> --pdc <pdc> [--set-timeout -T <seconds>] [-i]
 ```
@@ -262,8 +278,9 @@
 ./dfs [auth_flags] set-dc-address --server FILES01 --pdc dc01.example.com -i
 ```
 
-### `add-root`
+### add-root
 
+**Syntax:**
 ```bash
 ./dfs [auth_flags] add-root <dfs-path> [--root-target <\\server\share>] [--new] [--version <0|1|2>] [--use-v1]
 ```
@@ -286,8 +303,9 @@
 ./dfs [auth_flags] add-root '\\EXAMPLE.LOCAL\dfs' --root-target '\\FILES02\dfsroot'
 ```
 
-### `del-root`
+### del-root
 
+**Syntax:**
 ```bash
 ./dfs [auth_flags] del-root <dfs-path> [--root-target <\\server\share>] [--force] [--use-v1]
 ```
@@ -304,8 +322,9 @@
 ./dfs [auth_flags] del-root '\\EXAMPLE.LOCAL\dfs' --root-target '\\FILES02\dfsroot'
 ```
 
-### `initialize`
+### initialize
 
+**Syntax:**
 ```bash
 ./dfs [auth_flags] initialize
 ```
@@ -316,8 +335,9 @@
 ./dfs [auth_flags] initialize
 ```
 
-### `ns-version`
+### ns-version
 
+**Syntax:**
 ```bash
 ./dfs [auth_flags] ns-version [--origin <1|2>]
 ```
@@ -332,8 +352,9 @@
 ./dfs [auth_flags] ns-version --origin 2
 ```
 
-### `server-version`
+### server-version
 
+**Syntax:**
 ```bash
 ./dfs [auth_flags] server-version
 ```
@@ -344,8 +365,9 @@
 ./dfs [auth_flags] server-version
 ```
 
-### `flush-ft-table`
+### flush-ft-table
 
+**Syntax:**
 ```bash
 ./dfs [auth_flags] flush-ft-table --pdc <dc> --namespace <name>
 ```

@@ -4,8 +4,9 @@
 
 ## Subcommands / Usage
 
-### `General Usage`
+### General Usage
 
+**Syntax:**
 ```bash
 ./dcsync [auth_flags] --dc <DC> (-n <name1,name2> | -N <file> | -g <guid> | -s <sid> | -S <sid-file> | -q <ldap-filter> | -a) [--history] [--all eytypes] [--resume-file <file>]
 ```

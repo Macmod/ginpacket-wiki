@@ -4,8 +4,9 @@
 
 ## Subcommands / Usage
 
-### `dump`
+### dump
 
+**Syntax:**
 ```bash
 ./services [auth_flags] dump [--type <mask>] [--state <mask>] [--group <name>]
 ```
@@ -16,8 +17,9 @@
 ./services [auth_flags] dump
 ```
 
-### `query`
+### query
 
+**Syntax:**
 ```bash
 ./services [auth_flags] query [--type <mask>] [--state <mask>] [--group <name>]
 ```
@@ -28,8 +30,9 @@
 ./services [auth_flags] query
 ```
 
-### `service`
+### service
 
+**Syntax:**
 ```bash
 ./services [auth_flags] service <name> [--use-v1]
 ```
@@ -40,8 +43,9 @@
 ./services [auth_flags] service Spooler
 ```
 
-### `get-sd`
+### get-sd
 
+**Syntax:**
 ```bash
 ./services [auth_flags] get-sd <name> [--parse-dacl]
 ```
@@ -52,8 +56,9 @@
 ./services [auth_flags] get-sd Spooler
 ```
 
-### `group`
+### group
 
+**Syntax:**
 ```bash
 ./services [auth_flags] group <group-name>
 ```
@@ -64,8 +69,9 @@
 ./services [auth_flags] group 'NetworkProvider'
 ```
 
-### `enum-deps`
+### enum-deps
 
+**Syntax:**
 ```bash
 ./services [auth_flags] enum-deps <name>
 ```
@@ -76,8 +82,9 @@
 ./services [auth_flags] enum-deps Spooler
 ```
 
-### `translate`
+### translate
 
+**Syntax:**
 ```bash
 ./services [auth_flags] translate (-K <svc-key> | -N <display-name>)
 ```
@@ -88,8 +95,9 @@
 ./services [auth_flags] translate -K Spooler
 ```
 
-### `add-service`
+### add-service
 
+**Syntax:**
 ```bash
 ./services [auth_flags] add-service <name> <binpath> [-N <display>] [--service-type <type>] [-T <start-type>] [--wow64] [--wow-type <arch>]
 ```
@@ -116,8 +124,9 @@
 ./services [auth_flags] add-service MySvcArch 'C:\tools\agent.exe' --wow-type 0x014c
 ```
 
-### `set-service`
+### set-service
 
+**Syntax:**
 ```bash
 ./services [auth_flags] set-service <name> [-b <binpath>] [-T <start-type>] [-a <account>] ...
 ```
@@ -128,8 +137,9 @@
 ./services [auth_flags] set-service MyService -b 'C:\new\path.exe' -T auto
 ```
 
-### `set-failure`
+### set-failure
 
+**Syntax:**
 ```bash
 ./services [auth_flags] set-failure <name> [-F <command>] [--reset-period <sec>]
 ```
@@ -140,8 +150,9 @@
 ./services [auth_flags] set-failure MyService -F 'net start MyService' --reset-period 3600
 ```
 
-### `set-sd`
+### set-sd
 
+**Syntax:**
 ```bash
 ./services [auth_flags] set-sd <name> --sd <hex-sd>
 ```
@@ -152,8 +163,9 @@
 ./services [auth_flags] set-sd MyService --sd '01000480200000002c00000000000000'
 ```
 
-### `start`
+### start
 
+**Syntax:**
 ```bash
 ./services [auth_flags] start <name> [--arg <value> ...]
 ```
@@ -164,8 +176,9 @@
 ./services [auth_flags] start Spooler --arg '-example'
 ```
 
-### `stop`
+### stop
 
+**Syntax:**
 ```bash
 ./services [auth_flags] stop <name> [--reason <hex>] [--planned] [--comment <text>]
 ```
@@ -176,8 +189,9 @@
 ./services [auth_flags] stop Spooler
 ```
 
-### `del-service`
+### del-service
 
+**Syntax:**
 ```bash
 ./services [auth_flags] del-service <name>
 ```

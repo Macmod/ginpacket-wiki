@@ -4,8 +4,9 @@
 
 ## Subcommands / Usage
 
-### `printers`
+### printers
 
+**Syntax:**
 ```bash
 ./printer [auth_flags] printers
 ```
@@ -16,8 +17,9 @@
 ./printer [auth_flags] printers
 ```
 
-### `dump`
+### dump
 
+**Syntax:**
 ```bash
 ./printer [auth_flags] dump [--ports] [--monitors] [--forms] [--strict]
 ```
@@ -40,8 +42,9 @@
 ./printer [auth_flags] dump --strict
 ```
 
-### `drivers`
+### drivers
 
+**Syntax:**
 ```bash
 ./printer [auth_flags] drivers [-e <environment>]
 ```
@@ -58,8 +61,9 @@
 ./printer [auth_flags] drivers -e 'Windows x86'
 ```
 
-### `ports`
+### ports
 
+**Syntax:**
 ```bash
 ./printer [auth_flags] ports
 ```
@@ -70,8 +74,9 @@
 ./printer [auth_flags] ports
 ```
 
-### `monitors`
+### monitors
 
+**Syntax:**
 ```bash
 ./printer [auth_flags] monitors
 ```
@@ -82,8 +87,9 @@
 ./printer [auth_flags] monitors
 ```
 
-### `server`
+### server
 
+**Syntax:**
 ```bash
 ./printer [auth_flags] server
 ```
@@ -94,8 +100,9 @@
 ./printer [auth_flags] server
 ```
 
-### `processors`
+### processors
 
+**Syntax:**
 ```bash
 ./printer [auth_flags] processors [-e <environment>]
 ```
@@ -112,8 +119,9 @@
 ./printer [auth_flags] processors -e 'Windows x64'
 ```
 
-### `datatypes`
+### datatypes
 
+**Syntax:**
 ```bash
 ./printer [auth_flags] datatypes [-c <print-processor>] [-e <environment>]
 ```
@@ -130,8 +138,9 @@
 ./printer [auth_flags] datatypes -c WinPrint -e 'Windows x64'
 ```
 
-### `info`
+### info
 
+**Syntax:**
 ```bash
 ./printer [auth_flags] info <printer>
 ```
@@ -142,8 +151,9 @@
 ./printer [auth_flags] info '\\TARGET\HP LaserJet'
 ```
 
-### `driver`
+### driver
 
+**Syntax:**
 ```bash
 ./printer [auth_flags] driver <printer> [-e <environment>]
 ```
@@ -160,8 +170,9 @@
 ./printer [auth_flags] driver '\\TARGET\HP LaserJet' -e 'Windows x64'
 ```
 
-### `jobs`
+### jobs
 
+**Syntax:**
 ```bash
 ./printer [auth_flags] jobs <printer>
 ```
@@ -172,8 +183,9 @@
 ./printer [auth_flags] jobs '\\TARGET\HP LaserJet'
 ```
 
-### `job`
+### job
 
+**Syntax:**
 ```bash
 ./printer [auth_flags] job <printer> -j <job-id>
 ```
@@ -184,8 +196,9 @@
 ./printer [auth_flags] job '\\TARGET\HP LaserJet' -j 3
 ```
 
-### `set-job`
+### set-job
 
+**Syntax:**
 ```bash
 ./printer [auth_flags] set-job <printer> -j <job-id> -a <pause|resume|cancel|restart|delete|retain|release>
 ```
@@ -202,8 +215,9 @@
 ./printer [auth_flags] set-job '\\TARGET\HP LaserJet' -j 3 -a retain
 ```
 
-### `set-attrs`
+### set-attrs
 
+**Syntax:**
 ```bash
 ./printer [auth_flags] set-attrs <printer> [-A <add-mask>] [-R <remove-mask>]
 ```
@@ -226,8 +240,9 @@
 ./printer [auth_flags] set-attrs '\\TARGET\TestRAW1' -A 0x108
 ```
 
-### `notify`
+### notify
 
+**Syntax:**
 ```bash
 ./printer [auth_flags] notify <listener-host>
 ```
@@ -238,8 +253,9 @@
 ./printer [auth_flags] notify 10.10.14.1
 ```
 
-### `add-printer`
+### add-printer
 
+**Syntax:**
 ```bash
 ./printer [auth_flags] add-printer -n <name> -d <driver> -q <port> [-s <share>] [-C <comment>] [-D <datatype>] [-c <processor>]
 ```
@@ -274,8 +290,9 @@
     -D RAW -c WinPrint
 ```
 
-### `set-printer`
+### set-printer
 
+**Syntax:**
 ```bash
 ./printer [auth_flags] set-printer <printer> -a <pause|resume|purge>
 ```
@@ -298,8 +315,9 @@
 ./printer [auth_flags] set-printer '\\TARGET\TestPrinter' -a purge
 ```
 
-### `reset-printer`
+### reset-printer
 
+**Syntax:**
 ```bash
 ./printer [auth_flags] reset-printer <printer> [-D <datatype>]
 ```
@@ -316,8 +334,9 @@
 ./printer [auth_flags] reset-printer '\\TARGET\TestPrinter' -D RAW
 ```
 
-### `del-printer`
+### del-printer
 
+**Syntax:**
 ```bash
 ./printer [auth_flags] del-printer <printer>
 ```
@@ -328,8 +347,9 @@
 ./printer [auth_flags] del-printer '\\TARGET\TestPrinter'
 ```
 
-### `driver-dir`
+### driver-dir
 
+**Syntax:**
 ```bash
 ./printer [auth_flags] driver-dir [-e <environment>]
 ```
@@ -346,8 +366,9 @@
 ./printer [auth_flags] driver-dir -e 'Windows x64'
 ```
 
-### `add-driver`
+### add-driver
 
+**Syntax:**
 ```bash
 ./printer [auth_flags] add-driver <driver-name> --driver-path <path> --data-file <path> --config-file <path> [-e <env>]
 ```
@@ -372,8 +393,9 @@
     --config-file 'C:\Windows\System32\spool\DRIVERS\x64\3\mxdwdrv.dll'
 ```
 
-### `del-driver`
+### del-driver
 
+**Syntax:**
 ```bash
 ./printer [auth_flags] del-driver <driver-name> [-e <environment>]
 ```
@@ -390,8 +412,9 @@
 ./printer [auth_flags] del-driver 'Evil Driver' -e 'Windows x64'
 ```
 
-### `add-processor`
+### add-processor
 
+**Syntax:**
 ```bash
 ./printer [auth_flags] add-processor <processor-name> --path <dll> [-e <environment>]
 ```
@@ -408,8 +431,9 @@
 ./printer [auth_flags] add-processor 'EvilProc' --path 'evilproc.dll' -e 'Windows x64'
 ```
 
-### `del-processor`
+### del-processor
 
+**Syntax:**
 ```bash
 ./printer [auth_flags] del-processor <processor-name> [-e <environment>]
 ```
@@ -426,8 +450,9 @@
 ./printer [auth_flags] del-processor 'EvilProc' -e 'Windows x64'
 ```
 
-### `processor-dir`
+### processor-dir
 
+**Syntax:**
 ```bash
 ./printer [auth_flags] processor-dir [-e <environment>]
 ```
@@ -442,8 +467,9 @@
 ./printer [auth_flags] processor-dir -e 'Windows x64'
 ```
 
-### `forms`
+### forms
 
+**Syntax:**
 ```bash
 ./printer [auth_flags] forms
 ```
@@ -454,8 +480,9 @@
 ./printer [auth_flags] forms
 ```
 
-### `form`
+### form
 
+**Syntax:**
 ```bash
 ./printer [auth_flags] form <form>
 ```
@@ -466,8 +493,9 @@
 ./printer [auth_flags] form 'Letter'
 ```
 
-### `add-form`
+### add-form
 
+**Syntax:**
 ```bash
 ./printer [auth_flags] add-form <form> --width <mm> --height <mm> [--x-off <n>] [--y-off <n>]
 ```
@@ -478,8 +506,9 @@
 ./printer [auth_flags] add-form 'MyForm' --width 210 --height 297
 ```
 
-### `set-form`
+### set-form
 
+**Syntax:**
 ```bash
 ./printer [auth_flags] set-form <form> --width <mm> --height <mm>
 ```
@@ -490,8 +519,9 @@
 ./printer [auth_flags] set-form 'MyForm' --width 215 --height 279
 ```
 
-### `del-form`
+### del-form
 
+**Syntax:**
 ```bash
 ./printer [auth_flags] del-form <form>
 ```
@@ -502,8 +532,9 @@
 ./printer [auth_flags] del-form 'MyForm'
 ```
 
-### `add-port`
+### add-port
 
+**Syntax:**
 ```bash
 ./printer [auth_flags] add-port <port> [--monitor <name>]
 ```
@@ -518,8 +549,9 @@
 ./printer [auth_flags] add-port '192.168.88.20_Port' --monitor 'Standard TCP/IP Port'
 ```
 
-### `del-port`
+### del-port
 
+**Syntax:**
 ```bash
 ./printer [auth_flags] del-port <port>
 ```
@@ -530,8 +562,9 @@
 ./printer [auth_flags] del-port 'LPT2:'
 ```
 
-### `add-monitor`
+### add-monitor
 
+**Syntax:**
 ```bash
 ./printer [auth_flags] add-monitor <name> --path <dll> [-e <environment>]
 ```
@@ -542,8 +575,9 @@
 ./printer [auth_flags] add-monitor 'MyMon' --path 'mymon.dll'
 ```
 
-### `del-monitor`
+### del-monitor
 
+**Syntax:**
 ```bash
 ./printer [auth_flags] del-monitor <name> [-e <environment>]
 ```
@@ -554,8 +588,9 @@
 ./printer [auth_flags] del-monitor 'MyMon'
 ```
 
-### `print`
+### print
 
+**Syntax:**
 ```bash
 ./printer [auth_flags] print <printer> -f <file> [-d <doc-name>] [-D <datatype>] [-o <output-path>]
 ```

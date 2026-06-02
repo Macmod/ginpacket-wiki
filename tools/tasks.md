@@ -4,8 +4,9 @@
 
 ## Subcommands / Usage
 
-### `dump`
+### dump
 
+**Syntax:**
 ```bash
 ./tasks [auth_flags] dump
 ```
@@ -16,8 +17,9 @@
 ./tasks [auth_flags] dump
 ```
 
-### `query`
+### query
 
+**Syntax:**
 ```bash
 ./tasks [auth_flags] query [--include-hidden]
 ```
@@ -28,8 +30,9 @@
 ./tasks [auth_flags] query --include-hidden
 ```
 
-### `task`
+### task
 
+**Syntax:**
 ```bash
 ./tasks [auth_flags] task <path> [--format xml]
 ```
@@ -46,8 +49,9 @@
 ./tasks [auth_flags] task '\MyTask' --format xml
 ```
 
-### `folders`
+### folders
 
+**Syntax:**
 ```bash
 ./tasks [auth_flags] folders [path]
 ```
@@ -62,8 +66,9 @@
 ./tasks [auth_flags] folders '\Microsoft\Windows'
 ```
 
-### `xml`
+### xml
 
+**Syntax:**
 ```bash
 ./tasks [auth_flags] xml <path>
 ```
@@ -74,8 +79,9 @@
 ./tasks [auth_flags] xml '\MyTask'
 ```
 
-### `add`
+### add
 
+**Syntax:**
 ```bash
 ./tasks [auth_flags] add (-P <path> -X <xml> | --use-v1 -c <cmd> --time <HH:MM> [schedule flags])
 ```
@@ -92,8 +98,9 @@
 ./tasks [auth_flags] add --use-v1 -c 'cmd.exe /c whoami > C:\temp\t.txt' --time 09:30 --days-of-week mon,wed,fri --periodic
 ```
 
-### `enable|disable`
+### enable|disable
 
+**Syntax:**
 ```bash
 ./tasks [auth_flags] enable|disable <path>
 ```
@@ -110,8 +117,9 @@
 ./tasks [auth_flags] disable '\MyTask'
 ```
 
-### `run`
+### run
 
+**Syntax:**
 ```bash
 ./tasks [auth_flags] run <path>
 ```
@@ -122,8 +130,9 @@
 ./tasks [auth_flags] run '\MyTask'
 ```
 
-### `stop`
+### stop
 
+**Syntax:**
 ```bash
 ./tasks [auth_flags] stop ([path] | -G <instance-guid>)
 ```
@@ -140,8 +149,9 @@
 ./tasks [auth_flags] stop -G '{guid}'
 ```
 
-### `rename`
+### rename
 
+**Syntax:**
 ```bash
 ./tasks [auth_flags] rename <current-path> <new-path>
 ```
@@ -152,8 +162,9 @@
 ./tasks [auth_flags] rename '\MyTask' '\MyRenamedTask'
 ```
 
-### `add-folder`
+### add-folder
 
+**Syntax:**
 ```bash
 ./tasks [auth_flags] add-folder <path> [-D <sddl>]
 ```
@@ -164,8 +175,9 @@
 ./tasks [auth_flags] add-folder '\MyFolder'
 ```
 
-### `instances`
+### instances
 
+**Syntax:**
 ```bash
 ./tasks [auth_flags] instances <path>
 ```
@@ -176,8 +188,9 @@
 ./tasks [auth_flags] instances '\MyTask'
 ```
 
-### `get-sddl`
+### get-sddl
 
+**Syntax:**
 ```bash
 ./tasks [auth_flags] get-sddl <path> [--parse-dacl]
 ```
@@ -194,8 +207,9 @@
 ./tasks [auth_flags] get-sddl '\MyTask' --parse-dacl
 ```
 
-### `set-sddl`
+### set-sddl
 
+**Syntax:**
 ```bash
 ./tasks [auth_flags] set-sddl <path> -D <sddl>
 ```
@@ -206,8 +220,9 @@
 ./tasks [auth_flags] set-sddl '\MyTask' -D 'D:(A;;CCDCLCSWRPWPDTLOCRSDRCWDWO;;;SY)'
 ```
 
-### `missed-runs`
+### missed-runs
 
+**Syntax:**
 ```bash
 ./tasks [auth_flags] missed-runs <path>
 ```
@@ -218,8 +233,9 @@
 ./tasks [auth_flags] missed-runs '\MyTask'
 ```
 
-### `del`
+### del
 
+**Syntax:**
 ```bash
 ./tasks [auth_flags] del ([path] | --use-v1 (--job-id | --min-job-id/--max-job-id))
 ```
@@ -242,8 +258,9 @@
 ./tasks [auth_flags] del --use-v1 --min-job-id 2 --max-job-id 5
 ```
 
-### `del-folder`
+### del-folder
 
+**Syntax:**
 ```bash
 ./tasks [auth_flags] del-folder <path>
 ```

@@ -4,8 +4,9 @@
 
 ## Subcommands / Usage
 
-### `[-n`
+### [-n
 
+**Syntax:**
 ```bash
 ./wmi [auth_flags] [-n <namespace>] query <wql> [-f <fields>] [-L <n>]
 ```
@@ -22,8 +23,9 @@
 ./wmi [auth_flags] query 'SELECT * FROM Win32_Process' -f Name,ProcessId,CommandLine -L 20
 ```
 
-### `namespaces`
+### namespaces
 
+**Syntax:**
 ```bash
 ./wmi [auth_flags] namespaces
 ```
@@ -34,8 +36,9 @@
 ./wmi [auth_flags] namespaces
 ```
 
-### `classes`
+### classes
 
+**Syntax:**
 ```bash
 ./wmi [auth_flags] classes
 ```
@@ -46,8 +49,9 @@
 ./wmi [auth_flags] classes
 ```
 
-### `class`
+### class
 
+**Syntax:**
 ```bash
 ./wmi [auth_flags] class <class>
 ```
@@ -58,8 +62,9 @@
 ./wmi [auth_flags] class Win32_Process
 ```
 
-### `methods`
+### methods
 
+**Syntax:**
 ```bash
 ./wmi [auth_flags] methods <class>
 ```
@@ -70,8 +75,9 @@
 ./wmi [auth_flags] methods Win32_Process
 ```
 
-### `instance`
+### instance
 
+**Syntax:**
 ```bash
 ./wmi [auth_flags] instance <object-path>
 ```
@@ -82,8 +88,9 @@
 ./wmi [auth_flags] instance "Win32_Service.Name='W32Time'"
 ```
 
-### `invoke`
+### invoke
 
+**Syntax:**
 ```bash
 ./wmi [auth_flags] invoke <object::method> [--arg <key=value>]
 ```
@@ -94,8 +101,9 @@
 ./wmi [auth_flags] invoke Win32_Process::Create --arg 'CommandLine=cmd.exe /c whoami'
 ```
 
-### `exec`
+### exec
 
+**Syntax:**
 ```bash
 ./wmi [auth_flags] exec <command>
 ```
@@ -106,8 +114,9 @@
 ./wmi [auth_flags] exec 'cmd.exe /c hostname'
 ```
 
-### `del-instance`
+### del-instance
 
+**Syntax:**
 ```bash
 ./wmi [auth_flags] del-instance <object-path>
 ```

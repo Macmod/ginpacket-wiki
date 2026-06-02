@@ -4,8 +4,9 @@
 
 ## Subcommands / Usage
 
-### `sessions`
+### sessions
 
+**Syntax:**
 ```bash
 ./tsts [auth_flags] sessions [-s <state>] [-f <username>]
 ```
@@ -24,8 +25,9 @@
 ./tsts [auth_flags] sessions -f administrator
 ```
 
-### `processes`
+### processes
 
+**Syntax:**
 ```bash
 ./tsts [auth_flags] processes [-s <session-id>]
 ```
@@ -40,8 +42,9 @@
 ./tsts [auth_flags] processes -s 1
 ```
 
-### `policy`
+### policy
 
+**Syntax:**
 ```bash
 ./tsts [auth_flags] policy
 ```
@@ -52,8 +55,9 @@
 ./tsts [auth_flags] policy
 ```
 
-### `session`
+### session
 
+**Syntax:**
 ```bash
 ./tsts [auth_flags] session <id> [-c] [-g]
 ```
@@ -68,8 +72,9 @@
 ./tsts [auth_flags] session 1 -c -g
 ```
 
-### `connect`
+### connect
 
+**Syntax:**
 ```bash
 ./tsts [auth_flags] connect <src-session> <dst-session> [-P <target-password>]
 ```
@@ -80,8 +85,9 @@
 ./tsts [auth_flags] connect 2 1
 ```
 
-### `watch`
+### watch
 
+**Syntax:**
 ```bash
 ./tsts [auth_flags] watch [-e <event-list>]
 ```
@@ -96,8 +102,9 @@
 ./tsts [auth_flags] watch -e logon,logoff,connect,disconnect
 ```
 
-### `kill-session`
+### kill-session
 
+**Syntax:**
 ```bash
 ./tsts [auth_flags] kill-session <id> [-w]
 ```
@@ -108,8 +115,9 @@
 ./tsts [auth_flags] kill-session 3
 ```
 
-### `logoff`
+### logoff
 
+**Syntax:**
 ```bash
 ./tsts [auth_flags] logoff <session-id>
 ```
@@ -120,8 +128,9 @@
 ./tsts [auth_flags] logoff 3
 ```
 
-### `disconnect`
+### disconnect
 
+**Syntax:**
 ```bash
 ./tsts [auth_flags] disconnect <session-id> [-w]
 ```
@@ -132,8 +141,9 @@
 ./tsts [auth_flags] disconnect 3
 ```
 
-### `kill-process`
+### kill-process
 
+**Syntax:**
 ```bash
 ./tsts [auth_flags] kill-process <pid> [-e <exit-code>]
 ```
@@ -144,8 +154,9 @@
 ./tsts [auth_flags] kill-process 4242 -e 1
 ```
 
-### `message`
+### message
 
+**Syntax:**
 ```bash
 ./tsts [auth_flags] message <session-id> -T <title> -m <text> [-s <style>] [-o <seconds>] [-a]
 ```
@@ -160,8 +171,9 @@
 ./tsts [auth_flags] message 1 -T 'Notice' -m 'This is async.' -a
 ```
 
-### `listeners`
+### listeners
 
+**Syntax:**
 ```bash
 ./tsts [auth_flags] listeners
 ```
@@ -172,8 +184,9 @@
 ./tsts [auth_flags] listeners
 ```
 
-### `stop-listener`
+### stop-listener
 
+**Syntax:**
 ```bash
 ./tsts [auth_flags] stop-listener <name>
 ```
@@ -184,8 +197,9 @@
 ./tsts [auth_flags] stop-listener RDP-Tcp
 ```
 
-### `start-listener`
+### start-listener
 
+**Syntax:**
 ```bash
 ./tsts [auth_flags] start-listener <name>
 ```
@@ -196,8 +210,9 @@
 ./tsts [auth_flags] start-listener RDP-Tcp
 ```
 
-### `shutdown`
+### shutdown
 
+**Syntax:**
 ```bash
 ./tsts [auth_flags] shutdown [-r] [-P] [-l]
 ```

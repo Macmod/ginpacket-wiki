@@ -4,8 +4,9 @@
 
 ## Subcommands / Usage
 
-### `initiate`
+### initiate
 
+**Syntax:**
 ```bash
 ./shutdown [auth_flags] initiate [-m <msg>] [--timeout <s>] [--force] [-r] [--reason <code>] [--interface <iface>] [--use-v1]
 ```
@@ -28,8 +29,9 @@
 ./shutdown [auth_flags] initiate --use-v1
 ```
 
-### `abort`
+### abort
 
+**Syntax:**
 ```bash
 ./shutdown [auth_flags] abort
 ```

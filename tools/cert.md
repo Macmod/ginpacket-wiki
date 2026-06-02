@@ -4,8 +4,9 @@
 
 ## Subcommands / Usage
 
-### `ping`
+### ping
 
+**Syntax:**
 ```bash
 ./cert [auth_flags] ping <ca-name> [--use-v1]
 ```
@@ -20,8 +21,9 @@
 ./cert [auth_flags] ping 'CRETA-CA' --use-v1
 ```
 
-### `my-roles`
+### my-roles
 
+**Syntax:**
 ```bash
 ./cert [auth_flags] my-roles <ca-name>
 ```
@@ -32,8 +34,9 @@
 ./cert [auth_flags] my-roles 'CRETA-CA'
 ```
 
-### `ca-info`
+### ca-info
 
+**Syntax:**
 ```bash
 ./cert [auth_flags] ca-info <ca-name>
 ```
@@ -44,8 +47,9 @@
 ./cert [auth_flags] ca-info 'CRETA-CA'
 ```
 
-### `ca-state`
+### ca-state
 
+**Syntax:**
 ```bash
 ./cert [auth_flags] ca-state <ca-name>
 ```
@@ -56,8 +60,9 @@
 ./cert [auth_flags] ca-state 'CRETA-CA'
 ```
 
-### `ca-unregister-dcom`
+### ca-unregister-dcom
 
+**Syntax:**
 ```bash
 ./cert [auth_flags] ca-unregister-dcom <ca-name>
 ```
@@ -68,8 +73,9 @@
 ./cert [auth_flags] ca-unregister-dcom 'CRETA-CA'
 ```
 
-### `get-sd|get-ca-sd`
+### get-sd|get-ca-sd
 
+**Syntax:**
 ```bash
 ./cert [auth_flags] get-sd|get-ca-sd <ca-name> [--out <file>]
 ```
@@ -80,8 +86,9 @@
 ./cert [auth_flags] get-sd 'CRETA-CA' --out ca.sd
 ```
 
-### `set-sd|set-ca-sd`
+### set-sd|set-ca-sd
 
+**Syntax:**
 ```bash
 ./cert [auth_flags] set-sd|set-ca-sd <ca-name> <value> [--hex|--base64]
 ```
@@ -98,8 +105,9 @@
 ./cert [auth_flags] set-sd 'CRETA-CA' AQAEgCAAAAAsAAAAAAA= --base64
 ```
 
-### `get-audit`
+### get-audit
 
+**Syntax:**
 ```bash
 ./cert [auth_flags] get-audit <ca-name>
 ```
@@ -110,8 +118,9 @@
 ./cert [auth_flags] get-audit 'CRETA-CA'
 ```
 
-### `set-audit`
+### set-audit
 
+**Syntax:**
 ```bash
 ./cert [auth_flags] set-audit <ca-name> <mask>
 ```
@@ -122,8 +131,9 @@
 ./cert [auth_flags] set-audit 'CRETA-CA' 0x1F
 ```
 
-### `ca-config`
+### ca-config
 
+**Syntax:**
 ```bash
 ./cert [auth_flags] ca-config <ca-name> <node-path> <entry>
 ```
@@ -134,8 +144,9 @@
 ./cert [auth_flags] ca-config 'CRETA-CA' PolicyModules\CertificateAuthority_MicrosoftDefault.Policy EnableRequestExtensionList
 ```
 
-### `set-ca-config`
+### set-ca-config
 
+**Syntax:**
 ```bash
 ./cert [auth_flags] set-ca-config <ca-name> <node-path> <entry> <value> [--type <string|dword>]
 ```
@@ -146,8 +157,9 @@
 ./cert [auth_flags] set-ca-config 'CRETA-CA' PolicyModules\CertificateAuthority_MicrosoftDefault.Policy EditFlags 0x11014e --type dword
 ```
 
-### `ca-props`
+### ca-props
 
+**Syntax:**
 ```bash
 ./cert [auth_flags] ca-props <ca-name>
 ```
@@ -158,8 +170,9 @@
 ./cert [auth_flags] ca-props 'CRETA-CA'
 ```
 
-### `set-ca-prop`
+### set-ca-prop
 
+**Syntax:**
 ```bash
 ./cert [auth_flags] set-ca-prop <ca-name> <prop-id> <value> [--type <auto|long|string|binary>] [--index <n>] [--file|--base64]
 ```
@@ -174,8 +187,9 @@
 ./cert [auth_flags] set-ca-prop 'CRETA-CA' 0x1d 'User:1.3.6.1.4.1.311.21.8.1234' --type string
 ```
 
-### `view-default-columns`
+### view-default-columns
 
+**Syntax:**
 ```bash
 ./cert [auth_flags] view-default-columns <ca-name> <pending|issued|failed|extension|attribute|crl|revoked>
 ```
@@ -186,8 +200,9 @@
 ./cert [auth_flags] view-default-columns 'CRETA-CA' issued
 ```
 
-### `del-row`
+### del-row
 
+**Syntax:**
 ```bash
 ./cert [auth_flags] del-row <ca-name> [row-id] [--table <request|extension|attribute|crl>] [--expired|--pending-failed --before <yyyy-mm-dd>]
 ```
@@ -204,8 +219,9 @@
 ./cert [auth_flags] del-row 'CRETA-CA' --pending-failed --before 2025-01-01
 ```
 
-### `request`
+### request
 
+**Syntax:**
 ```bash
 ./cert [auth_flags] request <ca-name> [--csr <file>] [--template <name>] [--attrs <k:v;...>] [--out <file>] [--cms] [--include-crls]
 ```
@@ -222,8 +238,9 @@
 ./cert [auth_flags] request 'CRETA-CA' --csr renewal.p7b --cms --template User --out cert.der
 ```
 
-### `retrieve`
+### retrieve
 
+**Syntax:**
 ```bash
 ./cert [auth_flags] retrieve <ca-name> [<request-id>] [--serial <hex>] [--out <file>]
 ```
@@ -240,8 +257,9 @@
 ./cert [auth_flags] retrieve 'CRETA-CA' --serial 4a72ef9c2a01
 ```
 
-### `approve|deny`
+### approve|deny
 
+**Syntax:**
 ```bash
 ./cert [auth_flags] approve|deny <ca-name> <request-id>
 ```
@@ -256,8 +274,9 @@
 ./cert [auth_flags] deny 'CRETA-CA' 43
 ```
 
-### `revoke`
+### revoke
 
+**Syntax:**
 ```bash
 ./cert [auth_flags] revoke <ca-name> <serial> [--reason <code|name>] [--date <yyyy-mm-dd>]
 ```
@@ -268,8 +287,9 @@
 ./cert [auth_flags] revoke 'CRETA-CA' 4a72ef9c2a01 --reason keyCompromise --date 2026-04-01
 ```
 
-### `check`
+### check
 
+**Syntax:**
 ```bash
 ./cert [auth_flags] check <ca-name> <serial>
 ```
@@ -280,8 +300,9 @@
 ./cert [auth_flags] check 'CRETA-CA' 4a72ef9c2a01
 ```
 
-### `publish-crl`
+### publish-crl
 
+**Syntax:**
 ```bash
 ./cert [auth_flags] publish-crl <ca-name> [--next <yyyy-mm-dd>] [--delta] [--force] [--legacy]
 ```
@@ -304,8 +325,9 @@
 ./cert [auth_flags] publish-crl 'CRETA-CA' --legacy --next 2026-05-01
 ```
 
-### `get-crl`
+### get-crl
 
+**Syntax:**
 ```bash
 ./cert [auth_flags] get-crl <ca-name> [--out <file>]
 ```
@@ -316,8 +338,9 @@
 ./cert [auth_flags] get-crl 'CRETA-CA' --out ca.crl
 ```
 
-### `import-cert`
+### import-cert
 
+**Syntax:**
 ```bash
 ./cert [auth_flags] import-cert <ca-name> <file> [--allow-foreign] [--existing-row]
 ```
@@ -328,8 +351,9 @@
 ./cert [auth_flags] import-cert 'CRETA-CA' issued.der --allow-foreign
 ```
 
-### `import-key`
+### import-key
 
+**Syntax:**
 ```bash
 ./cert [auth_flags] import-key <ca-name> <request-id> <pkcs7-file> [--cert-hash <sha1>] [--overwrite]
 ```
@@ -340,8 +364,9 @@
 ./cert [auth_flags] import-key 'CRETA-CA' 42 keyblob.p7b --overwrite
 ```
 
-### `set-extension`
+### set-extension
 
+**Syntax:**
 ```bash
 ./cert [auth_flags] set-extension <ca-name> <request-id> <oid> <hex-der> [--type <1|2|3|4>] [--critical] [--disabled]
 ```
@@ -352,8 +377,9 @@
 ./cert [auth_flags] set-extension 'CRETA-CA' 42 2.5.29.17 3011820f7777772e6578616d706c652e636f6d --type 3 --critical
 ```
 
-### `set-attrs`
+### set-attrs
 
+**Syntax:**
 ```bash
 ./cert [auth_flags] set-attrs <ca-name> <request-id> <attributes> [--file <path>]
 ```
@@ -370,8 +396,9 @@
 ./cert [auth_flags] set-attrs 'CRETA-CA' 42 dummy --file attrs.txt
 ```
 
-### `request-attrs|request-exts|request-meta`
+### request-attrs|request-exts|request-meta
 
+**Syntax:**
 ```bash
 ./cert [auth_flags] request-attrs|request-exts|request-meta <ca-name> <request-id>
 ```
@@ -394,8 +421,9 @@
 ./cert [auth_flags] request-meta 'CRETA-CA' 42
 ```
 
-### `restore-paths`
+### restore-paths
 
+**Syntax:**
 ```bash
 ./cert [auth_flags] restore-paths <ca-name>
 ```
@@ -406,8 +434,9 @@
 ./cert [auth_flags] restore-paths 'CRETA-CA'
 ```
 
-### `officer-rights`
+### officer-rights
 
+**Syntax:**
 ```bash
 ./cert [auth_flags] officer-rights <ca-name>
 ```
@@ -418,8 +447,9 @@
 ./cert [auth_flags] officer-rights 'CRETA-CA'
 ```
 
-### `set-officer-rights`
+### set-officer-rights
 
+**Syntax:**
 ```bash
 ./cert [auth_flags] set-officer-rights <ca-name> (--enable|--disable) [--sd-file <path>]
 ```
@@ -430,8 +460,9 @@
 ./cert [auth_flags] set-officer-rights 'CRETA-CA' --enable --sd-file officer.sd
 ```
 
-### `archived-key`
+### archived-key
 
+**Syntax:**
 ```bash
 ./cert [auth_flags] archived-key <ca-name> <request-id> [--out <file>]
 ```
@@ -442,8 +473,9 @@
 ./cert [auth_flags] archived-key 'CRETA-CA' 42 --out archived-key.bin
 ```
 
-### `db`
+### db
 
+**Syntax:**
 ```bash
 ./cert [auth_flags] db <ca-name> [--table <request|extension|attribute|crl>] [--columns c1,c2] [--offset <n>] [--limit <n>] [--format <text|csv|json>] [--use-v1]
 ```
@@ -472,8 +504,9 @@
 ./cert [auth_flags] db 'CRETA-CA' --use-v1 --limit 25
 ```
 
-### `requests|pending|issued|failed|revoked`
+### requests|pending|issued|failed|revoked
 
+**Syntax:**
 ```bash
 ./cert [auth_flags] requests|pending|issued|failed|revoked <ca-name> [--columns c1,c2] [--offset <n>] [--limit <n>] [--format <text|csv|json>]
 ```

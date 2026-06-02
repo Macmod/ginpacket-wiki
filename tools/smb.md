@@ -4,8 +4,9 @@
 
 ## Subcommands / Usage
 
-### `shares`
+### shares
 
+**Syntax:**
 ```bash
 ./smb [auth_flags] shares
 ```
@@ -16,8 +17,9 @@
 ./smb [auth_flags] shares
 ```
 
-### `ls`
+### ls
 
+**Syntax:**
 ```bash
 ./smb [auth_flags] ls <share[\path]> [-l]
 ```
@@ -34,8 +36,9 @@
 ./smb [auth_flags] ls 'C$\Windows' -l
 ```
 
-### `tree`
+### tree
 
+**Syntax:**
 ```bash
 ./smb [auth_flags] tree <share[\path]> [--max-depth <n>]
 ```
@@ -46,8 +49,9 @@
 ./smb [auth_flags] tree C$ --max-depth 3
 ```
 
-### `stat`
+### stat
 
+**Syntax:**
 ```bash
 ./smb [auth_flags] stat <share[\path]>
 ```
@@ -58,8 +62,9 @@
 ./smb [auth_flags] stat 'C$\Windows\System32'
 ```
 
-### `cat`
+### cat
 
+**Syntax:**
 ```bash
 ./smb [auth_flags] cat <share[\file]> [--max-bytes <n>]
 ```
@@ -70,8 +75,9 @@
 ./smb [auth_flags] cat 'C$\Windows\win.ini' --max-bytes 1024
 ```
 
-### `get`
+### get
 
+**Syntax:**
 ```bash
 ./smb [auth_flags] get <share[\remote]> [<local>] [-R]
 ```
@@ -88,8 +94,9 @@
 ./smb [auth_flags] get 'C$\Temp\Data' local_data -R
 ```
 
-### `put`
+### put
 
+**Syntax:**
 ```bash
 ./smb [auth_flags] put <local> <share[\remote]> [-R]
 ```
@@ -106,8 +113,9 @@
 ./smb [auth_flags] put local_data 'C$\Temp\remote_data' -R
 ```
 
-### `mkdir`
+### mkdir
 
+**Syntax:**
 ```bash
 ./smb [auth_flags] mkdir <share[\dir]> [--parents]
 ```
@@ -124,8 +132,9 @@
 ./smb [auth_flags] mkdir 'C$\Temp\deep\nested\path' --parents
 ```
 
-### `rm`
+### rm
 
+**Syntax:**
 ```bash
 ./smb [auth_flags] rm <share[\path]> [-R]
 ```
@@ -142,8 +151,9 @@
 ./smb [auth_flags] rm 'C$\Temp\Data' -R
 ```
 
-### `mv`
+### mv
 
+**Syntax:**
 ```bash
 ./smb [auth_flags] mv <share[\src]> <dst>
 ```
@@ -154,8 +164,9 @@
 ./smb [auth_flags] mv 'C$\Temp\old.txt' 'Temp\new.txt'
 ```
 
-### `cp`
+### cp
 
+**Syntax:**
 ```bash
 ./smb [auth_flags] cp <share[\src]> <dst>
 ```
@@ -166,8 +177,9 @@
 ./smb [auth_flags] cp 'C$\Temp\file.txt' 'Temp\backup.txt'
 ```
 
-### `General Usage`
+### General Usage
 
+**Syntax:**
 ```bash
 ./smb [auth_flags] -s <share> shell
 ```
@@ -178,8 +190,9 @@
 ./smb [auth_flags] -s C$ shell
 ```
 
-### `[--require-signing]`
+### [--require-signing]
 
+**Syntax:**
 ```bash
 ./smb [auth_flags] [--require-signing] [--encrypt] [--dialect <ver>] <subcommand>
 ```

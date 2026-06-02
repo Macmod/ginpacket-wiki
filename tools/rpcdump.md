@@ -4,8 +4,9 @@
 
 ## Subcommands / Usage
 
-### `[-U`
+### [-U
 
+**Syntax:**
 ```bash
 ./rpcdump [auth_flags] [-U <interface-uuid>] [--transport <transports>]
 ```

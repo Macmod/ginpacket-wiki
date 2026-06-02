@@ -4,8 +4,9 @@
 
 ## Subcommands / Usage
 
-### `General Usage`
+### General Usage
 
+**Syntax:**
 ```bash
 ./dns [auth_flags]
 ```
@@ -16,8 +17,9 @@
 ./dns [auth_flags]
 ```
 
-### `zones`
+### zones
 
+**Syntax:**
 ```bash
 ./dns [auth_flags] zones
 ```
@@ -28,8 +30,9 @@
 ./dns [auth_flags] zones
 ```
 
-### `records`
+### records
 
+**Syntax:**
 ```bash
 ./dns [auth_flags] records <zone> [-n <node>] [-T <A|AAAA|MX|TXT|CNAME|SRV|NS|PTR|SOA|ALL>]
 ```
@@ -46,8 +49,9 @@
 ./dns [auth_flags] records EXAMPLE.LOCAL -n _tcp -T SRV
 ```
 
-### `nodes`
+### nodes
 
+**Syntax:**
 ```bash
 ./dns [auth_flags] nodes <zone> [-n <parent-node>]
 ```
@@ -64,8 +68,9 @@
 ./dns [auth_flags] nodes EXAMPLE.LOCAL -n _tcp
 ```
 
-### `dump`
+### dump
 
+**Syntax:**
 ```bash
 ./dns [auth_flags] dump [-z <zone>] [--skip-cache=<true|false>]
 ```
@@ -82,8 +87,9 @@
 ./dns [auth_flags] dump -z EXAMPLE.LOCAL --skip-cache=false
 ```
 
-### `add-record`
+### add-record
 
+**Syntax:**
 ```bash
 ./dns [auth_flags] add-record <zone> -n <node> -T <type> -v <value> [--ttl <sec>]
 ```
@@ -94,8 +100,9 @@
 ./dns [auth_flags] add-record EXAMPLE.LOCAL -n myhost -T A -v 10.0.0.99 --ttl 600
 ```
 
-### `del-record`
+### del-record
 
+**Syntax:**
 ```bash
 ./dns [auth_flags] del-record <zone> -n, --node <node> -T, --type <type> -v, --value <data> [--ttl <sec>]
 ```
@@ -106,8 +113,9 @@
 ./dns [auth_flags] del-record EXAMPLE.LOCAL -n myhost -T A -v 10.0.0.99
 ```
 
-### `server-props`
+### server-props
 
+**Syntax:**
 ```bash
 ./dns [auth_flags] server-props [-O, --operation <name>] [--property <name>]
 ```
@@ -124,8 +132,9 @@
 ./dns [auth_flags] server-props --property Forwarders
 ```
 
-### `server-stats`
+### server-stats
 
+**Syntax:**
 ```bash
 ./dns [auth_flags] server-stats [--clear]
 ```
@@ -142,8 +151,9 @@
 ./dns [auth_flags] server-stats --clear
 ```
 
-### `server-scopes`
+### server-scopes
 
+**Syntax:**
 ```bash
 ./dns [auth_flags] server-scopes
 ```
@@ -154,8 +164,9 @@
 ./dns [auth_flags] server-scopes
 ```
 
-### `zone`
+### zone
 
+**Syntax:**
 ```bash
 ./dns [auth_flags] zone <zone> [--property <name>]
 ```
@@ -172,8 +183,9 @@
 ./dns [auth_flags] zone EXAMPLE.LOCAL --property AllowUpdate
 ```
 
-### `zone-stats`
+### zone-stats
 
+**Syntax:**
 ```bash
 ./dns [auth_flags] zone-stats <zone> [--clear]
 ```
@@ -190,8 +202,9 @@
 ./dns [auth_flags] zone-stats EXAMPLE.LOCAL --clear
 ```
 
-### `zone-scopes`
+### zone-scopes
 
+**Syntax:**
 ```bash
 ./dns [auth_flags] zone-scopes <zone|..cache>
 ```
@@ -208,8 +221,9 @@
 ./dns [auth_flags] zone-scopes ..cache
 ```
 
-### `policies`
+### policies
 
+**Syntax:**
 ```bash
 ./dns [auth_flags] policies [-z <zone>]
 ```
@@ -226,8 +240,9 @@
 ./dns [auth_flags] policies -z EXAMPLE.LOCAL
 ```
 
-### `policy`
+### policy
 
+**Syntax:**
 ```bash
 ./dns [auth_flags] policy <policy-name> [-z <zone>]
 ```
@@ -244,8 +259,9 @@
 ./dns [auth_flags] policy ZonePolicy1 -z EXAMPLE.LOCAL
 ```
 
-### `client-subnets`
+### client-subnets
 
+**Syntax:**
 ```bash
 ./dns [auth_flags] client-subnets
 ```
@@ -256,8 +272,9 @@
 ./dns [auth_flags] client-subnets
 ```
 
-### `client-subnet`
+### client-subnet
 
+**Syntax:**
 ```bash
 ./dns [auth_flags] client-subnet <subnet-record-name>
 ```
@@ -268,8 +285,9 @@
 ./dns [auth_flags] client-subnet BranchOffice-IPv4
 ```
 
-### `add-zone`
+### add-zone
 
+**Syntax:**
 ```bash
 ./dns [auth_flags] add-zone <zone> [--type <primary|secondary|stub|forwarder>] [--master <ip> ...] [--ds]
 ```
@@ -298,8 +316,9 @@
 ./dns [auth_flags] add-zone EXT.CORP --type forwarder --master 8.8.8.8
 ```
 
-### `del-zone`
+### del-zone
 
+**Syntax:**
 ```bash
 ./dns [auth_flags] del-zone <zone>
 ```
@@ -310,8 +329,9 @@
 ./dns [auth_flags] del-zone OLD.LOCAL
 ```
 
-### `pause-zone`
+### pause-zone
 
+**Syntax:**
 ```bash
 ./dns [auth_flags] pause-zone <zone>
 ```
@@ -322,8 +342,9 @@
 ./dns [auth_flags] pause-zone EXAMPLE.LOCAL
 ```
 
-### `resume-zone`
+### resume-zone
 
+**Syntax:**
 ```bash
 ./dns [auth_flags] resume-zone <zone>
 ```
@@ -334,8 +355,9 @@
 ./dns [auth_flags] resume-zone EXAMPLE.LOCAL
 ```
 
-### `reload-zone`
+### reload-zone
 
+**Syntax:**
 ```bash
 ./dns [auth_flags] reload-zone <zone>
 ```
@@ -346,8 +368,9 @@
 ./dns [auth_flags] reload-zone EXAMPLE.LOCAL
 ```
 
-### `set-forwarders`
+### set-forwarders
 
+**Syntax:**
 ```bash
 ./dns [auth_flags] set-forwarders [--forwarder <ipv4> ...] [--timeout <sec>] [--no-recurse]
 ```
@@ -364,8 +387,9 @@
 ./dns [auth_flags] set-forwarders
 ```
 
-### `version`
+### version
 
+**Syntax:**
 ```bash
 ./dns [auth_flags] version
 ```

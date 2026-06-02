@@ -4,8 +4,9 @@
 
 ## Subcommands / Usage
 
-### `sync`
+### sync
 
+**Syntax:**
 ```bash
 ./time [auth_flags] sync [--wait <sec>] [--sync-flags <n>]
 ```
@@ -16,8 +17,9 @@
 ./time [auth_flags] sync --wait 1 --sync-flags 3
 ```
 
-### `bits`
+### bits
 
+**Syntax:**
 ```bash
 ./time [auth_flags] bits
 ```
@@ -28,8 +30,9 @@
 ./time [auth_flags] bits
 ```
 
-### `source`
+### source
 
+**Syntax:**
 ```bash
 ./time [auth_flags] source
 ```
@@ -40,8 +43,9 @@
 ./time [auth_flags] source
 ```
 
-### `config`
+### config
 
+**Syntax:**
 ```bash
 ./time [auth_flags] config
 ```
@@ -52,8 +56,9 @@
 ./time [auth_flags] config
 ```
 
-### `status`
+### status
 
+**Syntax:**
 ```bash
 ./time [auth_flags] status
 ```
@@ -64,8 +69,9 @@
 ./time [auth_flags] status
 ```
 
-### `log`
+### log
 
+**Syntax:**
 ```bash
 ./time [auth_flags] log
 ```
@@ -76,8 +82,9 @@
 ./time [auth_flags] log
 ```
 
-### `provider-status`
+### provider-status
 
+**Syntax:**
 ```bash
 ./time [auth_flags] provider-status <provider-name> [--provider-flags <n>]
 ```
@@ -88,8 +95,9 @@
 ./time [auth_flags] provider-status NtpClient
 ```
 
-### `provider-config`
+### provider-config
 
+**Syntax:**
 ```bash
 ./time [auth_flags] provider-config <provider-name> [--provider-flags <n>]
 ```

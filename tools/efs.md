@@ -10,8 +10,9 @@
 $f='\\WIN-6BKCP1FPPCI\C$\Temp\secret.txt'
 ```
 
-### `encrypt`
+### encrypt
 
+**Syntax:**
 ```bash
 ./efs [auth_flags] encrypt <file> [--use-v1]
 ```
@@ -28,26 +29,30 @@ $f='\\WIN-6BKCP1FPPCI\C$\Temp\secret.txt'
 ./efs [auth_flags] encrypt $f --use-v1
 ```
 
-### `decrypt`
+### decrypt
 
+**Syntax:**
 ```bash
 ./efs [auth_flags] decrypt <file>
 ```
 
-### `users`
+### users
 
+**Syntax:**
 ```bash
 ./efs [auth_flags] users <file>
 ```
 
-### `recovery`
+### recovery
 
+**Syntax:**
 ```bash
 ./efs [auth_flags] recovery <file>
 ```
 
-### `file-key`
+### file-key
 
+**Syntax:**
 ```bash
 ./efs [auth_flags] file-key <file> [--info-class <n>] [--use-v1]
 ```
@@ -64,38 +69,44 @@ $f='\\WIN-6BKCP1FPPCI\C$\Temp\secret.txt'
 ./efs [auth_flags] file-key $f --use-v1
 ```
 
-### `protectors`
+### protectors
 
+**Syntax:**
 ```bash
 ./efs [auth_flags] protectors <file>
 ```
 
-### `encrypted-metadata`
+### encrypted-metadata
 
+**Syntax:**
 ```bash
 ./efs [auth_flags] encrypted-metadata <file>
 ```
 
-### `set-encrypted-metadata`
+### set-encrypted-metadata
 
+**Syntax:**
 ```bash
 ./efs [auth_flags] set-encrypted-metadata <file> [--blob-b64 <base64>|--blob-hex <hex>]
 ```
 
-### `open-raw`
+### open-raw
 
+**Syntax:**
 ```bash
 ./efs [auth_flags] open-raw <file> [--import]
 ```
 
-### `del-users`
+### del-users
 
+**Syntax:**
 ```bash
 ./efs [auth_flags] del-users <file> --hash <sha1-cert-hash>
 ```
 
-### `add-users`
+### add-users
 
+**Syntax:**
 ```bash
 ./efs [auth_flags] add-users <file> --users-json <file>
 ```
@@ -106,14 +117,16 @@ $f='\\WIN-6BKCP1FPPCI\C$\Temp\secret.txt'
 ./efs [auth_flags] add-users $f --users-json users.json
 ```
 
-### `clone-meta`
+### clone-meta
 
+**Syntax:**
 ```bash
 ./efs [auth_flags] clone-meta <src> <dst>
 ```
 
-### `flush-cache`
+### flush-cache
 
+**Syntax:**
 ```bash
 ./efs [auth_flags] flush-cache
 ```

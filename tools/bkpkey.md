@@ -4,8 +4,9 @@
 
 ## Subcommands / Usage
 
-### `retrieve`
+### retrieve
 
+**Syntax:**
 ```bash
 ./bkpkey [auth_flags] retrieve [-o <out-file>]
 ```
@@ -16,8 +17,9 @@
 ./bkpkey [auth_flags] retrieve -o backupkey.bin
 ```
 
-### `encrypt`
+### encrypt
 
+**Syntax:**
 ```bash
 ./bkpkey [auth_flags] encrypt (--in-file <file> | --in-b64 <base64>) [-o <out-file>]  (alias: backup)
 ```
@@ -28,8 +30,9 @@
 ./bkpkey [auth_flags] encrypt --in-file request.bin -o response.bin
 ```
 
-### `decrypt`
+### decrypt
 
+**Syntax:**
 ```bash
 ./bkpkey [auth_flags] decrypt (--in-file <file> | --in-b64 <base64>) [-o <out-file>] [--win2k]  (alias: restore)
 ```

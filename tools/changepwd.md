@@ -4,8 +4,9 @@
 
 ## Subcommands / Usage
 
-### `samr`
+### samr
 
+**Syntax:**
 ```bash
 ./changepwd [auth_flags] samr -a <account> -w <new-password> [-o <old-password>] [--transport <smb|tcp>]
 ```
@@ -22,8 +23,9 @@
 ./changepwd [auth_flags] samr -a jdoe -w 'NewP@ssw0rd!' --transport tcp
 ```
 
-### `kpasswd`
+### kpasswd
 
+**Syntax:**
 ```bash
 ./changepwd [auth_flags] kpasswd -a <account> -w <new-password> [-o <old-password>]
 ```
@@ -43,8 +45,9 @@ Note: for this command, --dc is only considered to override the DC for PKINIT wh
 ./changepwd [auth_flags] kpasswd -a jdoe -w 'NewP@ssw0rd!'
 ```
 
-### `ldap`
+### ldap
 
+**Syntax:**
 ```bash
 ./changepwd [auth_flags] ldap -a <account> -w <new-password> [--scheme <ldap|ldaps>] [--starttls]
 ```
@@ -55,8 +58,9 @@ Note: for this command, --dc is only considered to override the DC for PKINIT wh
 ./changepwd [auth_flags] ldap -a jdoe -w 'NewP@ssw0rd!' --scheme ldaps
 ```
 
-### `adws`
+### adws
 
+**Syntax:**
 ```bash
 ./changepwd [auth_flags] adws -a <account> -w <new-password>
 ```

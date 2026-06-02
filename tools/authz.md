@@ -4,8 +4,9 @@
 
 ## Subcommands / Usage
 
-### `[--object-uuid`
+### [--object-uuid
 
+**Syntax:**
 ```bash
 ./authz [auth_flags] [--object-uuid <uuid>] <subcommand>
 ```
@@ -22,8 +23,9 @@
 ./authz [auth_flags] info 'joao_couves' --class all
 ```
 
-### `General Usage`
+### General Usage
 
+**Syntax:**
 ```bash
 ./authz check <source> <SID|NAME> -T <target> [common flags]
 ```

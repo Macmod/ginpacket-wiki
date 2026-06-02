@@ -4,8 +4,9 @@
 
 ## Subcommands / Usage
 
-### `(-s`
+### (-s
 
+**Syntax:**
 ```bash
 ./lookupsid [auth_flags] (-s <sid> | -n <name> | -D <domain-sid> -F <start-rid> -T <end-rid>) [--use-v1]
 ```

@@ -4,8 +4,9 @@
 
 ## Subcommands / Usage
 
-### `domains`
+### domains
 
+**Syntax:**
 ```bash
 ./sam [auth_flags] domains
 ```
@@ -16,8 +17,9 @@
 ./sam [auth_flags] domains
 ```
 
-### `domain`
+### domain
 
+**Syntax:**
 ```bash
 ./sam [auth_flags] domain [-d <name>]
 ```
@@ -28,8 +30,9 @@
 ./sam [auth_flags] domain -d EXAMPLE
 ```
 
-### `set-domain`
+### set-domain
 
+**Syntax:**
 ```bash
 ./sam [auth_flags] set-domain [-d <name>] [--min-pwd-len <n>] [--lockout-threshold <n>] [--lockout-window <dur>] [--lockout-duration <dur>]
 ```
@@ -40,8 +43,9 @@
 ./sam [auth_flags] set-domain -d EXAMPLE --min-pwd-len 8 --lockout-threshold 5 --lockout-window 30m --lockout-duration 30m
 ```
 
-### `password-policy`
+### password-policy
 
+**Syntax:**
 ```bash
 ./sam [auth_flags] password-policy [-d <name>]
 ```
@@ -52,8 +56,9 @@
 ./sam [auth_flags] password-policy -d EXAMPLE
 ```
 
-### `get-acl`
+### get-acl
 
+**Syntax:**
 ```bash
 ./sam [auth_flags] get-acl [-d <name>]
 ```
@@ -64,8 +69,9 @@
 ./sam [auth_flags] get-acl -d EXAMPLE
 ```
 
-### `set-acl`
+### set-acl
 
+**Syntax:**
 ```bash
 ./sam [auth_flags] set-acl --sd <hex> [-d <name>]
 ```
@@ -76,8 +82,9 @@
 ./sam [auth_flags] set-acl --sd 01000480200000002c00000000000000 -d EXAMPLE
 ```
 
-### `users`
+### users
 
+**Syntax:**
 ```bash
 ./sam [auth_flags] users [-d <name>]
 ```
@@ -88,8 +95,9 @@
 ./sam [auth_flags] users -d EXAMPLE
 ```
 
-### `display`
+### display
 
+**Syntax:**
 ```bash
 ./sam [auth_flags] display [-d <name>] [--type <users|machines|groups>] [--prefix <str>]
 ```
@@ -100,8 +108,9 @@
 ./sam [auth_flags] display -d EXAMPLE --type users --prefix adm
 ```
 
-### `user`
+### user
 
+**Syntax:**
 ```bash
 ./sam [auth_flags] user <username|RID> [-d <name>]
 ```
@@ -112,8 +121,9 @@
 ./sam [auth_flags] user Administrator -d EXAMPLE
 ```
 
-### `add-user`
+### add-user
 
+**Syntax:**
 ```bash
 ./sam [auth_flags] add-user <name> [-d <name>] [-N <s>] [-D <s>] [-w <s>] [--disable]
 ```
@@ -124,8 +134,9 @@
 ./sam [auth_flags] add-user jdoe -d EXAMPLE -N 'John Doe' -D 'Test user' -w 'P@ssw0rd!'
 ```
 
-### `del-user`
+### del-user
 
+**Syntax:**
 ```bash
 ./sam [auth_flags] del-user <username|RID> [-d <name>]
 ```
@@ -136,8 +147,9 @@
 ./sam [auth_flags] del-user jdoe -d EXAMPLE
 ```
 
-### `set-user`
+### set-user
 
+**Syntax:**
 ```bash
 ./sam [auth_flags] set-user <username|RID> [-d <name>] [--full-name <s>] [--description <s>] [--password <s>] [--expires <RFC3339|never>] [--enable-uac <flag>] [--disable-uac <flag>]
 ```
@@ -148,8 +160,9 @@
 ./sam [auth_flags] set-user jdoe -d EXAMPLE --password 'NewP@ssw0rd!' --expires never
 ```
 
-### `user-groups`
+### user-groups
 
+**Syntax:**
 ```bash
 ./sam [auth_flags] user-groups <username|RID> [-d <name>]
 ```
@@ -160,8 +173,9 @@
 ./sam [auth_flags] user-groups Administrator -d EXAMPLE
 ```
 
-### `user-aliases`
+### user-aliases
 
+**Syntax:**
 ```bash
 ./sam [auth_flags] user-aliases <username|RID> [-d <name>]
 ```
@@ -172,8 +186,9 @@
 ./sam [auth_flags] user-aliases Administrator -d EXAMPLE
 ```
 
-### `validate-password`
+### validate-password
 
+**Syntax:**
 ```bash
 ./sam [auth_flags] validate-password <password> [-d <name>] [--operation <auth|change|reset>]
 ```
@@ -184,8 +199,9 @@
 ./sam [auth_flags] validate-password 'P@ssw0rd!' -d EXAMPLE --operation auth
 ```
 
-### `groups`
+### groups
 
+**Syntax:**
 ```bash
 ./sam [auth_flags] groups [-d <name>]
 ```
@@ -196,8 +212,9 @@
 ./sam [auth_flags] groups -d EXAMPLE
 ```
 
-### `group`
+### group
 
+**Syntax:**
 ```bash
 ./sam [auth_flags] group <name|RID> [-d <name>]
 ```
@@ -208,8 +225,9 @@
 ./sam [auth_flags] group 'Domain Admins' -d EXAMPLE
 ```
 
-### `add-group`
+### add-group
 
+**Syntax:**
 ```bash
 ./sam [auth_flags] add-group <name> [-d <name>]
 ```
@@ -220,8 +238,9 @@
 ./sam [auth_flags] add-group TestGroup -d EXAMPLE
 ```
 
-### `del-group`
+### del-group
 
+**Syntax:**
 ```bash
 ./sam [auth_flags] del-group <name|RID> [-d <name>]
 ```
@@ -232,8 +251,9 @@
 ./sam [auth_flags] del-group TestGroup -d EXAMPLE
 ```
 
-### `group-members`
+### group-members
 
+**Syntax:**
 ```bash
 ./sam [auth_flags] group-members <name|RID> [-d <name>] [--resolve-sids]
 ```
@@ -244,8 +264,9 @@
 ./sam [auth_flags] group-members 'Domain Admins' -d EXAMPLE --resolve-sids
 ```
 
-### `add-group-member`
+### add-group-member
 
+**Syntax:**
 ```bash
 ./sam [auth_flags] add-group-member <group> <member-username|RID> [-d <name>]
 ```
@@ -256,8 +277,9 @@
 ./sam [auth_flags] add-group-member 'Domain Admins' jdoe -d EXAMPLE
 ```
 
-### `del-group-member`
+### del-group-member
 
+**Syntax:**
 ```bash
 ./sam [auth_flags] del-group-member <group> <member-username|RID> [-d <name>]
 ```
@@ -268,8 +290,9 @@
 ./sam [auth_flags] del-group-member 'Domain Admins' jdoe -d EXAMPLE
 ```
 
-### `set-group`
+### set-group
 
+**Syntax:**
 ```bash
 ./sam [auth_flags] set-group <name|RID> [-d <name>] [--name <s>] [--description <s>]
 ```
@@ -280,8 +303,9 @@
 ./sam [auth_flags] set-group TestGroup -d EXAMPLE --name RenamedGroup --description 'Updated desc'
 ```
 
-### `set-member-attrs`
+### set-member-attrs
 
+**Syntax:**
 ```bash
 ./sam [auth_flags] set-member-attrs <group> <member-username|RID> [-d <name>] [--attributes <hex>]
 ```
@@ -292,8 +316,9 @@
 ./sam [auth_flags] set-member-attrs 'Domain Admins' jdoe -d EXAMPLE --attributes 0x7
 ```
 
-### `aliases`
+### aliases
 
+**Syntax:**
 ```bash
 ./sam [auth_flags] aliases [-d <name>] [--builtin]
 ```
@@ -304,8 +329,9 @@
 ./sam [auth_flags] aliases -d EXAMPLE
 ```
 
-### `alias`
+### alias
 
+**Syntax:**
 ```bash
 ./sam [auth_flags] alias <name|RID> [-d <name>] [--builtin]
 ```
@@ -316,8 +342,9 @@
 ./sam [auth_flags] alias Administrators --builtin
 ```
 
-### `add-alias`
+### add-alias
 
+**Syntax:**
 ```bash
 ./sam [auth_flags] add-alias <name> [-d <name>]
 ```
@@ -328,8 +355,9 @@
 ./sam [auth_flags] add-alias TestAlias -d EXAMPLE
 ```
 
-### `del-alias`
+### del-alias
 
+**Syntax:**
 ```bash
 ./sam [auth_flags] del-alias <name|RID> [-d <name>] [--builtin]
 ```
@@ -340,8 +368,9 @@
 ./sam [auth_flags] del-alias TestAlias -d EXAMPLE
 ```
 
-### `alias-members`
+### alias-members
 
+**Syntax:**
 ```bash
 ./sam [auth_flags] alias-members <name|RID> [-d <name>] [--builtin] [--resolve-sids]
 ```
@@ -352,8 +381,9 @@
 ./sam [auth_flags] alias-members Administrators --builtin --resolve-sids
 ```
 
-### `alias-membership`
+### alias-membership
 
+**Syntax:**
 ```bash
 ./sam [auth_flags] alias-membership <sid> [-d <name>] [--builtin]
 ```
@@ -364,8 +394,9 @@
 ./sam [auth_flags] alias-membership S-1-5-21-111-222-333-1105 -d EXAMPLE
 ```
 
-### `add-alias-member`
+### add-alias-member
 
+**Syntax:**
 ```bash
 ./sam [auth_flags] add-alias-member <alias> <sid|username> [-d <name>] [--builtin]
 ```
@@ -376,8 +407,9 @@
 ./sam [auth_flags] add-alias-member Administrators S-1-5-21-111-222-333-1105 --builtin
 ```
 
-### `del-alias-member`
+### del-alias-member
 
+**Syntax:**
 ```bash
 ./sam [auth_flags] del-alias-member <alias> <sid|username> [-d <name>] [--builtin]
 ```
@@ -388,8 +420,9 @@
 ./sam [auth_flags] del-alias-member Administrators S-1-5-21-111-222-333-1105 --builtin
 ```
 
-### `add-alias-members`
+### add-alias-members
 
+**Syntax:**
 ```bash
 ./sam [auth_flags] add-alias-members <alias> <sid|username>... [-d <name>] [--builtin]
 ```
@@ -400,8 +433,9 @@
 ./sam [auth_flags] add-alias-members Administrators S-1-5-21-111-222-333-1105 S-1-5-21-111-222-333-1106 --builtin
 ```
 
-### `del-alias-members`
+### del-alias-members
 
+**Syntax:**
 ```bash
 ./sam [auth_flags] del-alias-members <alias> <sid|username>... [-d <name>] [--builtin]
 ```
@@ -412,8 +446,9 @@
 ./sam [auth_flags] del-alias-members Administrators S-1-5-21-111-222-333-1105 S-1-5-21-111-222-333-1106 --builtin
 ```
 
-### `set-alias`
+### set-alias
 
+**Syntax:**
 ```bash
 ./sam [auth_flags] set-alias <name|RID> [-d <name>] [--builtin] [--name <s>] [--description <s>]
 ```
@@ -424,8 +459,9 @@
 ./sam [auth_flags] set-alias TestAlias -d EXAMPLE --name RenamedAlias --description 'Updated desc'
 ```
 
-### `purge-sid`
+### purge-sid
 
+**Syntax:**
 ```bash
 ./sam [auth_flags] purge-sid <sid> [-d <name>] [--builtin]
 ```
@@ -436,8 +472,9 @@
 ./sam [auth_flags] purge-sid S-1-5-21-111-222-333-1105 -d EXAMPLE
 ```
 
-### `lookup-names`
+### lookup-names
 
+**Syntax:**
 ```bash
 ./sam [auth_flags] lookup-names <name>... [-d <name>]
 ```
@@ -448,8 +485,9 @@
 ./sam [auth_flags] lookup-names Administrator jdoe -d EXAMPLE
 ```
 
-### `lookup-rids`
+### lookup-rids
 
+**Syntax:**
 ```bash
 ./sam [auth_flags] lookup-rids <rid>... [-d <name>]
 ```
@@ -460,8 +498,9 @@
 ./sam [auth_flags] lookup-rids 500 512 -d EXAMPLE
 ```
 
-### `rid-to-sid`
+### rid-to-sid
 
+**Syntax:**
 ```bash
 ./sam [auth_flags] rid-to-sid <rid>
 ```
@@ -472,8 +511,9 @@
 ./sam [auth_flags] rid-to-sid 500
 ```
 
-### `set-dsrm-password`
+### set-dsrm-password
 
+**Syntax:**
 ```bash
 ./sam [auth_flags] set-dsrm-password <new-password>
 ```

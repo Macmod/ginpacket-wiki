@@ -4,8 +4,9 @@
 
 ## Subcommands / Usage
 
-### `server-version`
+### server-version
 
+**Syntax:**
 ```bash
 ./dhcp [auth_flags] server-version
 ```
@@ -16,8 +17,9 @@
 ./dhcp [auth_flags] server-version
 ```
 
-### `scopes`
+### scopes
 
+**Syntax:**
 ```bash
 ./dhcp [auth_flags] scopes
 ```
@@ -28,8 +30,9 @@
 ./dhcp [auth_flags] scopes
 ```
 
-### `scope`
+### scope
 
+**Syntax:**
 ```bash
 ./dhcp [auth_flags] scope <scope-ip>
 ```
@@ -40,8 +43,9 @@
 ./dhcp [auth_flags] scope 10.0.20.0
 ```
 
-### `leases`
+### leases
 
+**Syntax:**
 ```bash
 ./dhcp [auth_flags] leases [-s <scope-ip>]
 ```
@@ -58,8 +62,9 @@
 ./dhcp [auth_flags] leases -s 10.0.20.0
 ```
 
-### `dump`
+### dump
 
+**Syntax:**
 ```bash
 ./dhcp [auth_flags] dump [-s <scope-ip>] [--no-clients] [--no-options] [--no-stats]
 ```
@@ -76,8 +81,9 @@
 ./dhcp [auth_flags] dump -s 10.0.20.0 --no-clients --no-options
 ```
 
-### `stats`
+### stats
 
+**Syntax:**
 ```bash
 ./dhcp [auth_flags] stats
 ```
@@ -88,8 +94,9 @@
 ./dhcp [auth_flags] stats
 ```
 
-### `add-scope`
+### add-scope
 
+**Syntax:**
 ```bash
 ./dhcp [auth_flags] add-scope <scope-ip> -m <mask> --name <name> [--comment <text>]
 ```
@@ -100,8 +107,9 @@
 ./dhcp [auth_flags] add-scope 10.0.20.0 -m 255.255.255.0 --name 'Lab' --comment 'Lab subnet'
 ```
 
-### `set-scope`
+### set-scope
 
+**Syntax:**
 ```bash
 ./dhcp [auth_flags] set-scope <scope-ip> [--name <name>] [--comment <text>] [--state <enabled|disabled>]
 ```
@@ -112,8 +120,9 @@
 ./dhcp [auth_flags] set-scope 10.0.20.0 --name 'Lab-Renamed' --state enabled
 ```
 
-### `del-scope`
+### del-scope
 
+**Syntax:**
 ```bash
 ./dhcp [auth_flags] del-scope <scope-ip> [-f]
 ```
@@ -124,8 +133,9 @@
 ./dhcp [auth_flags] del-scope 10.0.20.0 -f
 ```
 
-### `ranges`
+### ranges
 
+**Syntax:**
 ```bash
 ./dhcp [auth_flags] ranges <scope-ip>
 ```
@@ -136,8 +146,9 @@
 ./dhcp [auth_flags] ranges 10.0.20.0
 ```
 
-### `add-range`
+### add-range
 
+**Syntax:**
 ```bash
 ./dhcp [auth_flags] add-range <scope-ip> -F <start-ip> -T <end-ip>
 ```
@@ -148,8 +159,9 @@
 ./dhcp [auth_flags] add-range 10.0.20.0 -F 10.0.20.10 -T 10.0.20.200
 ```
 
-### `del-range`
+### del-range
 
+**Syntax:**
 ```bash
 ./dhcp [auth_flags] del-range <scope-ip> -F <start-ip> -T <end-ip> [--force]
 ```
@@ -160,8 +172,9 @@
 ./dhcp [auth_flags] del-range 10.0.20.0 -F 10.0.20.10 -T 10.0.20.200 --force
 ```
 
-### `exclusions`
+### exclusions
 
+**Syntax:**
 ```bash
 ./dhcp [auth_flags] exclusions <scope-ip>
 ```
@@ -172,8 +185,9 @@
 ./dhcp [auth_flags] exclusions 10.0.20.0
 ```
 
-### `add-exclusion`
+### add-exclusion
 
+**Syntax:**
 ```bash
 ./dhcp [auth_flags] add-exclusion <scope-ip> -F <start-ip> -T <end-ip>
 ```
@@ -184,8 +198,9 @@
 ./dhcp [auth_flags] add-exclusion 10.0.20.0 -F 10.0.20.100 -T 10.0.20.110
 ```
 
-### `del-exclusion`
+### del-exclusion
 
+**Syntax:**
 ```bash
 ./dhcp [auth_flags] del-exclusion <scope-ip> -F <start-ip> -T <end-ip>
 ```
@@ -196,8 +211,9 @@
 ./dhcp [auth_flags] del-exclusion 10.0.20.0 -F 10.0.20.100 -T 10.0.20.110
 ```
 
-### `reservations`
+### reservations
 
+**Syntax:**
 ```bash
 ./dhcp [auth_flags] reservations <scope-ip>
 ```
@@ -208,8 +224,9 @@
 ./dhcp [auth_flags] reservations 10.0.20.0
 ```
 
-### `add-reservation`
+### add-reservation
 
+**Syntax:**
 ```bash
 ./dhcp [auth_flags] add-reservation <scope-ip> --ip <ip> --mac <mac>
 ```
@@ -220,8 +237,9 @@
 ./dhcp [auth_flags] add-reservation 10.0.20.0 --ip 10.0.20.50 --mac 00:11:22:33:44:55
 ```
 
-### `del-reservation`
+### del-reservation
 
+**Syntax:**
 ```bash
 ./dhcp [auth_flags] del-reservation <scope-ip> --ip <ip>
 ```
@@ -232,8 +250,9 @@
 ./dhcp [auth_flags] del-reservation 10.0.20.0 --ip 10.0.20.50
 ```
 
-### `reservation`
+### reservation
 
+**Syntax:**
 ```bash
 ./dhcp [auth_flags] reservation <scope-ip> <ip>
 ```
@@ -244,8 +263,9 @@
 ./dhcp [auth_flags] reservation 10.0.20.0 10.0.20.50
 ```
 
-### `set-reservation`
+### set-reservation
 
+**Syntax:**
 ```bash
 ./dhcp [auth_flags] set-reservation <scope-ip> <ip> <new-mac>
 ```
@@ -256,8 +276,9 @@
 ./dhcp [auth_flags] set-reservation 10.0.20.0 10.0.20.50 00:11:22:33:44:AA
 ```
 
-### `options`
+### options
 
+**Syntax:**
 ```bash
 ./dhcp [auth_flags] options [-s <scope-ip>]
 ```
@@ -274,8 +295,9 @@
 ./dhcp [auth_flags] options -s 10.0.20.0
 ```
 
-### `set-option`
+### set-option
 
+**Syntax:**
 ```bash
 ./dhcp [auth_flags] set-option <option-id> [-s <scope-ip>] --type <type> --value <value>
 ```
@@ -286,8 +308,9 @@
 ./dhcp [auth_flags] set-option 6 -s 10.0.20.0 --type ip --value 10.0.20.2
 ```
 
-### `option`
+### option
 
+**Syntax:**
 ```bash
 ./dhcp [auth_flags] option <option-id> [-s <scope-ip>]
 ```
@@ -304,8 +327,9 @@
 ./dhcp [auth_flags] option 6 -s 10.0.20.0
 ```
 
-### `del-option`
+### del-option
 
+**Syntax:**
 ```bash
 ./dhcp [auth_flags] del-option <option-id> [-s <scope-ip>]
 ```
@@ -316,8 +340,9 @@
 ./dhcp [auth_flags] del-option 6 -s 10.0.20.0
 ```
 
-### `add-option-type`
+### add-option-type
 
+**Syntax:**
 ```bash
 ./dhcp [auth_flags] add-option-type <option-id> --name <name> --type <type> [--array]
 ```
@@ -328,8 +353,9 @@
 ./dhcp [auth_flags] add-option-type 222 --name 'MyOption' --type string
 ```
 
-### `set-option-type`
+### set-option-type
 
+**Syntax:**
 ```bash
 ./dhcp [auth_flags] set-option-type <option-id> --name <name> [--type <type>]
 ```
@@ -340,8 +366,9 @@
 ./dhcp [auth_flags] set-option-type 222 --name 'MyOption-Renamed'
 ```
 
-### `option-type`
+### option-type
 
+**Syntax:**
 ```bash
 ./dhcp [auth_flags] option-type <option-id>
 ```
@@ -352,8 +379,9 @@
 ./dhcp [auth_flags] option-type 222
 ```
 
-### `option-types`
+### option-types
 
+**Syntax:**
 ```bash
 ./dhcp [auth_flags] option-types
 ```
@@ -364,8 +392,9 @@
 ./dhcp [auth_flags] option-types
 ```
 
-### `del-option-type`
+### del-option-type
 
+**Syntax:**
 ```bash
 ./dhcp [auth_flags] del-option-type <option-id>
 ```
@@ -376,8 +405,9 @@
 ./dhcp [auth_flags] del-option-type 222
 ```
 
-### `add-lease`
+### add-lease
 
+**Syntax:**
 ```bash
 ./dhcp [auth_flags] add-lease --ip <ip> --mac <mac> [--name <name>] [--comment <text>]
 ```
@@ -388,8 +418,9 @@
 ./dhcp [auth_flags] add-lease --ip 10.0.20.80 --mac 00:11:22:33:44:66 --name ws01 --comment 'lab workstation'
 ```
 
-### `lease`
+### lease
 
+**Syntax:**
 ```bash
 ./dhcp [auth_flags] lease <ip>
 ```
@@ -400,8 +431,9 @@
 ./dhcp [auth_flags] lease 10.0.20.80
 ```
 
-### `set-lease`
+### set-lease
 
+**Syntax:**
 ```bash
 ./dhcp [auth_flags] set-lease --ip <ip> --mac <mac> [--name <name>] [--comment <text>]
 ```
@@ -412,8 +444,9 @@
 ./dhcp [auth_flags] set-lease --ip 10.0.20.80 --mac 00:11:22:33:44:66 --name ws01-renamed
 ```
 
-### `config`
+### config
 
+**Syntax:**
 ```bash
 ./dhcp [auth_flags] config
 ```
@@ -424,8 +457,9 @@
 ./dhcp [auth_flags] config
 ```
 
-### `set-config`
+### set-config
 
+**Syntax:**
 ```bash
 ./dhcp [auth_flags] set-config [--backup-path <path>] [--db-path <path>] [--backup-interval <n>] ...
 ```
@@ -436,8 +470,9 @@
 ./dhcp [auth_flags] set-config --backup-path 'C:\DHCP\Backup'
 ```
 
-### `scan-db`
+### scan-db
 
+**Syntax:**
 ```bash
 ./dhcp [auth_flags] scan-db [-s <scope-ip>] [--repair]
 ```
@@ -454,8 +489,9 @@
 ./dhcp [auth_flags] scan-db -s 10.0.20.0 --repair
 ```
 
-### `del-lease`
+### del-lease
 
+**Syntax:**
 ```bash
 ./dhcp [auth_flags] del-lease <client-ip>
 ```
