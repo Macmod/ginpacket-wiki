@@ -7,7 +7,7 @@
 ### Syntax
 
 ```bash
-wmi [auth_flags] [-n <namespace>] query <wql> [-f <fields>] [-L <n>]
+./wmi [auth_flags] [-n <namespace>] query <wql> [-f <fields>] [-L <n>]
 ```
 
 ### Run a WQL query against a WMI namespace
@@ -25,7 +25,7 @@ wmi [auth_flags] [-n <namespace>] query <wql> [-f <fields>] [-L <n>]
 ### Syntax
 
 ```bash
-wmi [auth_flags] namespaces
+./wmi [auth_flags] namespaces
 ```
 
 ### List all WMI namespaces on the host
@@ -37,7 +37,7 @@ wmi [auth_flags] namespaces
 ### Syntax
 
 ```bash
-wmi [auth_flags] classes
+./wmi [auth_flags] classes
 ```
 
 ### List all classes in the current namespace
@@ -49,7 +49,7 @@ wmi [auth_flags] classes
 ### Syntax
 
 ```bash
-wmi [auth_flags] class <class>
+./wmi [auth_flags] class <class>
 ```
 
 ### List all properties of a WMI class
@@ -61,7 +61,7 @@ wmi [auth_flags] class <class>
 ### Syntax
 
 ```bash
-wmi [auth_flags] methods <class>
+./wmi [auth_flags] methods <class>
 ```
 
 ### List all methods of a WMI class
@@ -73,7 +73,7 @@ wmi [auth_flags] methods <class>
 ### Syntax
 
 ```bash
-wmi [auth_flags] instance <object-path>
+./wmi [auth_flags] instance <object-path>
 ```
 
 ### Retrieve a WMI object instance by path
@@ -85,7 +85,7 @@ wmi [auth_flags] instance <object-path>
 ### Syntax
 
 ```bash
-wmi [auth_flags] invoke <object::method> [--arg <key=value>]
+./wmi [auth_flags] invoke <object::method> [--arg <key=value>]
 ```
 
 ### Invoke a method on a WMI object
@@ -97,7 +97,7 @@ wmi [auth_flags] invoke <object::method> [--arg <key=value>]
 ### Syntax
 
 ```bash
-wmi [auth_flags] exec <command>
+./wmi [auth_flags] exec <command>
 ```
 
 ### Execute a command via WMI (Win32_Process.Create shorthand)
@@ -109,7 +109,7 @@ wmi [auth_flags] exec <command>
 ### Syntax
 
 ```bash
-wmi [auth_flags] del-instance <object-path>
+./wmi [auth_flags] del-instance <object-path>
 ```
 
 ### Delete a WMI object instance by path

@@ -7,7 +7,7 @@
 ### Syntax
 
 ```bash
-dfs [auth_flags] namespaces
+./dfs [auth_flags] namespaces
 ```
 
 ### List all DFS namespaces served by the target
@@ -19,7 +19,7 @@ dfs [auth_flags] namespaces
 ### Syntax
 
 ```bash
-dfs [auth_flags] dump
+./dfs [auth_flags] dump
 ```
 
 ### Dump full details for all namespaces and their links
@@ -31,7 +31,7 @@ dfs [auth_flags] dump
 ### Syntax
 
 ```bash
-dfs [auth_flags] links <namespace-path>
+./dfs [auth_flags] links <namespace-path>
 ```
 
 ### Enumerate all links within a namespace
@@ -43,7 +43,7 @@ dfs [auth_flags] links <namespace-path>
 ### Syntax
 
 ```bash
-dfs [auth_flags] info <path> [--gen-guid] [--version]
+./dfs [auth_flags] info <path> [--gen-guid] [--version]
 ```
 
 ### Show full info for a namespace root or link
@@ -67,7 +67,7 @@ dfs [auth_flags] info <path> [--gen-guid] [--version]
 ### Syntax
 
 ```bash
-dfs [auth_flags] add-link <link-path> --server <server> -s <share>
+./dfs [auth_flags] add-link <link-path> --server <server> -s <share>
 ```
 
 ### Add a new DFS link pointing to a target share
@@ -79,7 +79,7 @@ dfs [auth_flags] add-link <link-path> --server <server> -s <share>
 ### Syntax
 
 ```bash
-dfs [auth_flags] del-link <link-path>
+./dfs [auth_flags] del-link <link-path>
 ```
 
 ### Remove a DFS link
@@ -91,7 +91,7 @@ dfs [auth_flags] del-link <link-path>
 ### Syntax
 
 ```bash
-dfs [auth_flags] move <old-path> <new-path>
+./dfs [auth_flags] move <old-path> <new-path>
 ```
 
 ### Rename/move a DFS link to a new path
@@ -103,7 +103,7 @@ dfs [auth_flags] move <old-path> <new-path>
 ### Syntax
 
 ```bash
-dfs [auth_flags] set-comment <path> -c <text>
+./dfs [auth_flags] set-comment <path> -c <text>
 ```
 
 ### Set a descriptive comment on a namespace root or link
@@ -115,7 +115,7 @@ dfs [auth_flags] set-comment <path> -c <text>
 ### Syntax
 
 ```bash
-dfs [auth_flags] set-state <dfs-path> -e <online|offline|resynchronize> [--server <server> -s <share>] [--pdc <dc>] [--use-v1]
+./dfs [auth_flags] set-state <dfs-path> -e <online|offline|resynchronize> [--server <server> -s <share>] [--pdc <dc>] [--use-v1]
 ```
 
 ### Set a link offline
@@ -145,7 +145,7 @@ dfs [auth_flags] set-state <dfs-path> -e <online|offline|resynchronize> [--serve
 ### Syntax
 
 ```bash
-dfs [auth_flags] set-timeout <dfs-path> -T <sec> [--use-v1]
+./dfs [auth_flags] set-timeout <dfs-path> -T <sec> [--use-v1]
 ```
 
 ### Set the client referral cache timeout on a link
@@ -163,7 +163,7 @@ dfs [auth_flags] set-timeout <dfs-path> -T <sec> [--use-v1]
 ### Syntax
 
 ```bash
-dfs [auth_flags] set-flags <dfs-path> -f <flags> [-m <mask>] [--use-v1]
+./dfs [auth_flags] set-flags <dfs-path> -f <flags> [-m <mask>] [--use-v1]
 ```
 
 ### Set DFS flags on a link
@@ -187,7 +187,7 @@ dfs [auth_flags] set-flags <dfs-path> -f <flags> [-m <mask>] [--use-v1]
 ### Syntax
 
 ```bash
-dfs [auth_flags] set-priority <dfs-path> --server <server> -s <share> -c <class> -R <rank> [--use-v1]
+./dfs [auth_flags] set-priority <dfs-path> --server <server> -s <share> -c <class> -R <rank> [--use-v1]
 ```
 
 ### Set referral priority class and rank for a link target
@@ -205,7 +205,7 @@ dfs [auth_flags] set-priority <dfs-path> --server <server> -s <share> -c <class>
 ### Syntax
 
 ```bash
-dfs [auth_flags] get-sd <dfs-path>
+./dfs [auth_flags] get-sd <dfs-path>
 ```
 
 ### Read the security descriptor of a namespace root or link
@@ -217,7 +217,7 @@ dfs [auth_flags] get-sd <dfs-path>
 ### Syntax
 
 ```bash
-dfs [auth_flags] set-sd <dfs-path> --sd <hex>
+./dfs [auth_flags] set-sd <dfs-path> --sd <hex>
 ```
 
 ### Write a security descriptor to a namespace root or link
@@ -229,7 +229,7 @@ dfs [auth_flags] set-sd <dfs-path> --sd <hex>
 ### Syntax
 
 ```bash
-dfs [auth_flags] dc-address --server <server> [--pdc <dc>]
+./dfs [auth_flags] dc-address --server <server> [--pdc <dc>]
 ```
 
 ### Query the DFS metadata DC currently used by a DFS server
@@ -241,7 +241,7 @@ dfs [auth_flags] dc-address --server <server> [--pdc <dc>]
 ### Syntax
 
 ```bash
-dfs [auth_flags] set-dc-address --server <server> --pdc <pdc> [--set-timeout -T <seconds>] [-i]
+./dfs [auth_flags] set-dc-address --server <server> --pdc <pdc> [--set-timeout -T <seconds>] [-i]
 ```
 
 ### Set the DFS metadata DC for a DFS server (server is required)
@@ -265,7 +265,7 @@ dfs [auth_flags] set-dc-address --server <server> --pdc <pdc> [--set-timeout -T 
 ### Syntax
 
 ```bash
-dfs [auth_flags] add-root <dfs-path> [--root-target <\\server\share>] [--new] [--version <0|1|2>] [--use-v1]
+./dfs [auth_flags] add-root <dfs-path> [--root-target <\\server\share>] [--new] [--version <0|1|2>] [--use-v1]
 ```
 
 ### Create a new stand-alone DFS namespace
@@ -289,7 +289,7 @@ dfs [auth_flags] add-root <dfs-path> [--root-target <\\server\share>] [--new] [-
 ### Syntax
 
 ```bash
-dfs [auth_flags] del-root <dfs-path> [--root-target <\\server\share>] [--force] [--use-v1]
+./dfs [auth_flags] del-root <dfs-path> [--root-target <\\server\share>] [--force] [--use-v1]
 ```
 
 ### Delete a stand-alone DFS namespace
@@ -307,7 +307,7 @@ dfs [auth_flags] del-root <dfs-path> [--root-target <\\server\share>] [--force] 
 ### Syntax
 
 ```bash
-dfs [auth_flags] initialize
+./dfs [auth_flags] initialize
 ```
 
 ### Instruct the DFS server to reload its stored configuration
@@ -319,7 +319,7 @@ dfs [auth_flags] initialize
 ### Syntax
 
 ```bash
-dfs [auth_flags] ns-version [--origin <1|2>]
+./dfs [auth_flags] ns-version [--origin <1|2>]
 ```
 
 ### Query the DFS server's supported namespace versions
@@ -335,7 +335,7 @@ dfs [auth_flags] ns-version [--origin <1|2>]
 ### Syntax
 
 ```bash
-dfs [auth_flags] server-version
+./dfs [auth_flags] server-version
 ```
 
 ### Query the DFS server version (NetrDfsManagerGetVersion)
@@ -347,7 +347,7 @@ dfs [auth_flags] server-version
 ### Syntax
 
 ```bash
-dfs [auth_flags] flush-ft-table --pdc <dc> --namespace <name>
+./dfs [auth_flags] flush-ft-table --pdc <dc> --namespace <name>
 ```
 
 ### Purge the domainv1 DFS referral cache entry on a domain controller

@@ -7,7 +7,7 @@
 ### Syntax
 
 ```bash
-reg [auth_flags] query <key-path> [-v <value-name>] [--max-allowed]
+./reg [auth_flags] query <key-path> [-v <value-name>] [--max-allowed]
 ```
 
 ### Enumerate all values under a registry key
@@ -31,7 +31,7 @@ reg [auth_flags] query <key-path> [-v <value-name>] [--max-allowed]
 ### Syntax
 
 ```bash
-reg [auth_flags] add <key-path> -v <value-name> -T <type> -d <data>
+./reg [auth_flags] add <key-path> -v <value-name> -T <type> -d <data>
 ```
 
 ### Add or overwrite a registry value
@@ -43,7 +43,7 @@ reg [auth_flags] add <key-path> -v <value-name> -T <type> -d <data>
 ### Syntax
 
 ```bash
-reg [auth_flags] delete <key-path> -v <value-name>
+./reg [auth_flags] delete <key-path> -v <value-name>
 ```
 
 ### Delete a registry value
@@ -55,7 +55,7 @@ reg [auth_flags] delete <key-path> -v <value-name>
 ### Syntax
 
 ```bash
-reg [auth_flags] get-sd <key-path> [--parse-dacl]
+./reg [auth_flags] get-sd <key-path> [--parse-dacl]
 ```
 
 ### Read the security descriptor of a key
@@ -73,7 +73,7 @@ reg [auth_flags] get-sd <key-path> [--parse-dacl]
 ### Syntax
 
 ```bash
-reg [auth_flags] set-sd <key-path> --sd <hex-sd>
+./reg [auth_flags] set-sd <key-path> --sd <hex-sd>
 ```
 
 ### Write a security descriptor to a key
@@ -85,7 +85,7 @@ reg [auth_flags] set-sd <key-path> --sd <hex-sd>
 ### Syntax
 
 ```bash
-reg [auth_flags] save <key-path> <remote-path>
+./reg [auth_flags] save <key-path> <remote-path>
 ```
 
 ### Save a hive subtree to a file on the remote host
@@ -97,7 +97,7 @@ reg [auth_flags] save <key-path> <remote-path>
 ### Syntax
 
 ```bash
-reg [auth_flags] load <key-path> <file>
+./reg [auth_flags] load <key-path> <file>
 ```
 
 ### Load a hive file into a registry key
@@ -109,7 +109,7 @@ reg [auth_flags] load <key-path> <file>
 ### Syntax
 
 ```bash
-reg [auth_flags] unload <key-path>
+./reg [auth_flags] unload <key-path>
 ```
 
 ### Unload a previously loaded hive
@@ -121,7 +121,7 @@ reg [auth_flags] unload <key-path>
 ### Syntax
 
 ```bash
-reg [auth_flags] info <key-path>
+./reg [auth_flags] info <key-path>
 ```
 
 ### Query key metadata including subkey / value counts and last-write timestamp
@@ -133,7 +133,7 @@ reg [auth_flags] info <key-path>
 ### Syntax
 
 ```bash
-reg [auth_flags] restore <key-path> <file>
+./reg [auth_flags] restore <key-path> <file>
 ```
 
 ### Overwrite a live key with the contents of a hive file already on the target
@@ -145,7 +145,7 @@ reg [auth_flags] restore <key-path> <file>
 ### Syntax
 
 ```bash
-reg [auth_flags] replace <key-path> -n <new-file> [-b <backup-file>]
+./reg [auth_flags] replace <key-path> -n <new-file> [-b <backup-file>]
 ```
 
 ### Schedule a hive replacement at next boot
@@ -157,7 +157,7 @@ reg [auth_flags] replace <key-path> -n <new-file> [-b <backup-file>]
 ### Syntax
 
 ```bash
-reg [auth_flags] flush <key-path>
+./reg [auth_flags] flush <key-path>
 ```
 
 ### Force pending writes for a key to be flushed to the backing store
@@ -169,7 +169,7 @@ reg [auth_flags] flush <key-path>
 ### Syntax
 
 ```bash
-reg [auth_flags] export <key-path> -o <file> [-R]
+./reg [auth_flags] export <key-path> -o <file> [-R]
 ```
 
 ### Export a key subtree to a .reg file
@@ -181,7 +181,7 @@ reg [auth_flags] export <key-path> -o <file> [-R]
 ### Syntax
 
 ```bash
-reg [auth_flags] import <file>
+./reg [auth_flags] import <file>
 ```
 
 ### Import a .reg file into the registry
@@ -193,7 +193,7 @@ reg [auth_flags] import <file>
 ### Syntax
 
 ```bash
-reg [auth_flags] compare <key-a> <key-b> [-R] [-O <output-mode>]
+./reg [auth_flags] compare <key-a> <key-b> [-R] [-O <output-mode>]
 ```
 
 ### Compare two registry key subtrees
@@ -205,7 +205,7 @@ reg [auth_flags] compare <key-a> <key-b> [-R] [-O <output-mode>]
 ### Syntax
 
 ```bash
-reg [auth_flags] copy <src-key> <dst-key> [-R]
+./reg [auth_flags] copy <src-key> <dst-key> [-R]
 ```
 
 ### Copy a key subtree to another location
@@ -217,7 +217,7 @@ reg [auth_flags] copy <src-key> <dst-key> [-R]
 ### Syntax
 
 ```bash
-reg [auth_flags] secrets [--sam] [--lsa] [--cache]
+./reg [auth_flags] secrets [--sam] [--lsa] [--cache]
 ```
 
 ### Dump SAM, LSA secrets, and cached credentials
@@ -229,7 +229,7 @@ reg [auth_flags] secrets [--sam] [--lsa] [--cache]
 ### Syntax
 
 ```bash
-reg [auth_flags] shell
+./reg [auth_flags] shell
 ```
 
 
@@ -243,7 +243,7 @@ Open an interactive registry shell with persistent connection and cd/ls/get/set/
 ### Syntax
 
 ```bash
-reg [auth_flags] server-version [--hive <root>]
+./reg [auth_flags] server-version [--hive <root>]
 ```
 
 ### Query the registry server version (defaults to HKCU)

@@ -83,7 +83,13 @@ def parse_bash_block(bash_text):
                          desc_lines.append(d)
                 
                 if syntax_lines:
-                    out.append(f"### Syntax\n\n```bash\n{chr(10).join(syntax_lines)}\n```\n")
+                    fixed_syntax = []
+                    for s in syntax_lines:
+                        if not s.startswith('./') and short_name in s:
+                            fixed_syntax.append(s.replace(short_name, f'./{short_name}', 1))
+                        else:
+                            fixed_syntax.append(s)
+                    out.append(f"### Syntax\n\n```bash\n{chr(10).join(fixed_syntax)}\n```\n")
                 if desc_lines:
                     out.append("\n" + "  \n".join(desc_lines) + "  \n")
                 
@@ -105,7 +111,13 @@ def parse_bash_block(bash_text):
                              desc_lines.append(d)
                 
                 if syntax_lines:
-                    out.append(f"### Syntax\n\n```bash\n{chr(10).join(syntax_lines)}\n```\n")
+                    fixed_syntax = []
+                    for s in syntax_lines:
+                        if not s.startswith('./') and short_name in s:
+                            fixed_syntax.append(s.replace(short_name, f'./{short_name}', 1))
+                        else:
+                            fixed_syntax.append(s)
+                    out.append(f"### Syntax\n\n```bash\n{chr(10).join(fixed_syntax)}\n```\n")
                 if desc_lines:
                     # Treat the first line as heading if short, rest as text
                     if len(desc_lines[0]) < 80 and not desc_lines[0].startswith('-') and not desc_lines[0].startswith(' '):

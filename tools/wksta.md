@@ -7,7 +7,7 @@
 ### Syntax
 
 ```bash
-wksta [auth_flags] info [--detail <basic|lan|full|config>]
+./wksta [auth_flags] info [--detail <basic|lan|full|config>]
 ```
 
 ### Query workstation configuration and identity info (default: full)
@@ -19,7 +19,7 @@ wksta [auth_flags] info [--detail <basic|lan|full|config>]
 ### Syntax
 
 ```bash
-wksta [auth_flags] loggedon
+./wksta [auth_flags] loggedon
 ```
 
 ### List users currently logged on to the workstation interactively
@@ -31,7 +31,7 @@ wksta [auth_flags] loggedon
 ### Syntax
 
 ```bash
-wksta [auth_flags] transports
+./wksta [auth_flags] transports
 ```
 
 ### Enumerate network transports bound to the workstation
@@ -43,7 +43,7 @@ wksta [auth_flags] transports
 ### Syntax
 
 ```bash
-wksta [auth_flags] join-info
+./wksta [auth_flags] join-info
 ```
 
 ### Query the current domain or workgroup join status
@@ -55,7 +55,7 @@ wksta [auth_flags] join-info
 ### Syntax
 
 ```bash
-wksta [auth_flags] stats
+./wksta [auth_flags] stats
 ```
 
 ### Show SMB redirector statistics (bytes transferred, sessions, operations)
@@ -67,7 +67,7 @@ wksta [auth_flags] stats
 ### Syntax
 
 ```bash
-wksta [auth_flags] set-info (--keep-conn | --sess-timeout | --dormant-file-limit) <n>
+./wksta [auth_flags] set-info (--keep-conn | --sess-timeout | --dormant-file-limit) <n>
 ```
 
 ### Set the keep-alive connection interval in seconds
@@ -91,7 +91,7 @@ wksta [auth_flags] set-info (--keep-conn | --sess-timeout | --dormant-file-limit
 ### Syntax
 
 ```bash
-wksta [auth_flags] names [--type <primary|alternate|all>]
+./wksta [auth_flags] names [--type <primary|alternate|all>]
 ```
 
 ### List registered computer names for the workstation (default: --type all)
@@ -110,7 +110,7 @@ PrimaryComputerName is printed as a single value; AlternateComputerNames are lis
 ### Syntax
 
 ```bash
-wksta [auth_flags] joinable-ous <domain>
+./wksta [auth_flags] joinable-ous <domain>
 ```
 
 ### Enumerate OUs in a domain that this machine can join
@@ -122,7 +122,7 @@ wksta [auth_flags] joinable-ous <domain>
 ### Syntax
 
 ```bash
-wksta [auth_flags] join-domain <domain> [--options <n>]
+./wksta [auth_flags] join-domain <domain> [--options <n>]
 ```
 
 ### Join the workstation to a domain
@@ -134,7 +134,7 @@ wksta [auth_flags] join-domain <domain> [--options <n>]
 ### Syntax
 
 ```bash
-wksta [auth_flags] unjoin-domain [--options <n>]
+./wksta [auth_flags] unjoin-domain [--options <n>]
 ```
 
 ### Remove the workstation from its domain
@@ -146,7 +146,7 @@ wksta [auth_flags] unjoin-domain [--options <n>]
 ### Syntax
 
 ```bash
-wksta [auth_flags] rename-machine <new-name> [--rename-account] [--dns-only]
+./wksta [auth_flags] rename-machine <new-name> [--rename-account] [--dns-only]
 ```
 
 ### Rename the machine account within the domain
@@ -162,7 +162,7 @@ wksta [auth_flags] rename-machine <new-name> [--rename-account] [--dns-only]
 ### Syntax
 
 ```bash
-wksta [auth_flags] validate-name <name> [--name-type <type>]
+./wksta [auth_flags] validate-name <name> [--name-type <type>]
 ```
 
 ### Validate a potential machine or domain name against naming rules
@@ -174,7 +174,7 @@ wksta [auth_flags] validate-name <name> [--name-type <type>]
 ### Syntax
 
 ```bash
-wksta [auth_flags] add-alt-name <alt-name>
+./wksta [auth_flags] add-alt-name <alt-name>
 ```
 
 ### Add a DNS alternate computer name to the workstation
@@ -186,7 +186,7 @@ wksta [auth_flags] add-alt-name <alt-name>
 ### Syntax
 
 ```bash
-wksta [auth_flags] del-alt-name <alt-name>
+./wksta [auth_flags] del-alt-name <alt-name>
 ```
 
 ### Remove a DNS alternate computer name from the workstation
@@ -198,7 +198,7 @@ wksta [auth_flags] del-alt-name <alt-name>
 ### Syntax
 
 ```bash
-wksta [auth_flags] set-primary-name <primary-name>
+./wksta [auth_flags] set-primary-name <primary-name>
 ```
 
 ### Promote an existing alternate DNS computer name to primary
@@ -214,7 +214,7 @@ Example flow: add-alt-name -> set-primary-name -> (optional) del-alt-name oldnam
 ### Syntax
 
 ```bash
-wksta [auth_flags] add-transport <transport-name> [--quality <n>]
+./wksta [auth_flags] add-transport <transport-name> [--quality <n>]
 ```
 
 ### Add a transport protocol binding to the workstation
@@ -226,7 +226,7 @@ wksta [auth_flags] add-transport <transport-name> [--quality <n>]
 ### Syntax
 
 ```bash
-wksta [auth_flags] del-transport <transport-name> [--force-level <n>]
+./wksta [auth_flags] del-transport <transport-name> [--force-level <n>]
 ```
 
 ### Remove a transport protocol binding from the workstation

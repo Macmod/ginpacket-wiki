@@ -7,7 +7,7 @@
 ### Syntax
 
 ```bash
-dns [auth_flags]
+./dns [auth_flags]
 ```
 
 ### List all DNS zones on the server; equivalent to the 'zones' subcommand
@@ -19,7 +19,7 @@ dns [auth_flags]
 ### Syntax
 
 ```bash
-dns [auth_flags] zones
+./dns [auth_flags] zones
 ```
 
 ### List all DNS zones on the server
@@ -31,7 +31,7 @@ dns [auth_flags] zones
 ### Syntax
 
 ```bash
-dns [auth_flags] records <zone> [-n <node>] [-T <A|AAAA|MX|TXT|CNAME|SRV|NS|PTR|SOA|ALL>]
+./dns [auth_flags] records <zone> [-n <node>] [-T <A|AAAA|MX|TXT|CNAME|SRV|NS|PTR|SOA|ALL>]
 ```
 
 ### List all DNS records in a zone
@@ -49,7 +49,7 @@ dns [auth_flags] records <zone> [-n <node>] [-T <A|AAAA|MX|TXT|CNAME|SRV|NS|PTR|
 ### Syntax
 
 ```bash
-dns [auth_flags] nodes <zone> [-n <parent-node>]
+./dns [auth_flags] nodes <zone> [-n <parent-node>]
 ```
 
 ### List all nodes in a DNS zone
@@ -67,7 +67,7 @@ dns [auth_flags] nodes <zone> [-n <parent-node>]
 ### Syntax
 
 ```bash
-dns [auth_flags] dump [-z <zone>] [--skip-cache=<true|false>]
+./dns [auth_flags] dump [-z <zone>] [--skip-cache=<true|false>]
 ```
 
 ### Dump all DNS records from all zones
@@ -85,7 +85,7 @@ dns [auth_flags] dump [-z <zone>] [--skip-cache=<true|false>]
 ### Syntax
 
 ```bash
-dns [auth_flags] add-record <zone> -n <node> -T <type> -v <value> [--ttl <sec>]
+./dns [auth_flags] add-record <zone> -n <node> -T <type> -v <value> [--ttl <sec>]
 ```
 
 ### Add a DNS resource record to a zone
@@ -97,7 +97,7 @@ dns [auth_flags] add-record <zone> -n <node> -T <type> -v <value> [--ttl <sec>]
 ### Syntax
 
 ```bash
-dns [auth_flags] del-record <zone> -n, --node <node> -T, --type <type> -v, --value <data> [--ttl <sec>]
+./dns [auth_flags] del-record <zone> -n, --node <node> -T, --type <type> -v, --value <data> [--ttl <sec>]
 ```
 
 ### Delete a DNS resource record from a zone
@@ -109,7 +109,7 @@ dns [auth_flags] del-record <zone> -n, --node <node> -T, --type <type> -v, --val
 ### Syntax
 
 ```bash
-dns [auth_flags] server-props [-O, --operation <name>] [--property <name>]
+./dns [auth_flags] server-props [-O, --operation <name>] [--property <name>]
 ```
 
 ### Query a named server operation
@@ -127,7 +127,7 @@ dns [auth_flags] server-props [-O, --operation <name>] [--property <name>]
 ### Syntax
 
 ```bash
-dns [auth_flags] server-stats [--clear]
+./dns [auth_flags] server-stats [--clear]
 ```
 
 ### Query server statistics
@@ -145,7 +145,7 @@ dns [auth_flags] server-stats [--clear]
 ### Syntax
 
 ```bash
-dns [auth_flags] server-scopes
+./dns [auth_flags] server-scopes
 ```
 
 ### List DNS server scopes
@@ -157,7 +157,7 @@ dns [auth_flags] server-scopes
 ### Syntax
 
 ```bash
-dns [auth_flags] zone <zone> [--property <name>]
+./dns [auth_flags] zone <zone> [--property <name>]
 ```
 
 ### Query full zone configuration
@@ -175,7 +175,7 @@ dns [auth_flags] zone <zone> [--property <name>]
 ### Syntax
 
 ```bash
-dns [auth_flags] zone-stats <zone> [--clear]
+./dns [auth_flags] zone-stats <zone> [--clear]
 ```
 
 ### Query zone statistics
@@ -193,7 +193,7 @@ dns [auth_flags] zone-stats <zone> [--clear]
 ### Syntax
 
 ```bash
-dns [auth_flags] zone-scopes <zone|..cache>
+./dns [auth_flags] zone-scopes <zone|..cache>
 ```
 
 ### List scopes for a DNS zone
@@ -211,7 +211,7 @@ dns [auth_flags] zone-scopes <zone|..cache>
 ### Syntax
 
 ```bash
-dns [auth_flags] policies [-z <zone>]
+./dns [auth_flags] policies [-z <zone>]
 ```
 
 ### List server-level DNS policies
@@ -229,7 +229,7 @@ dns [auth_flags] policies [-z <zone>]
 ### Syntax
 
 ```bash
-dns [auth_flags] policy <policy-name> [-z <zone>]
+./dns [auth_flags] policy <policy-name> [-z <zone>]
 ```
 
 ### Show a server-level policy by name
@@ -247,7 +247,7 @@ dns [auth_flags] policy <policy-name> [-z <zone>]
 ### Syntax
 
 ```bash
-dns [auth_flags] client-subnets
+./dns [auth_flags] client-subnets
 ```
 
 ### List DNS client subnet records
@@ -259,7 +259,7 @@ dns [auth_flags] client-subnets
 ### Syntax
 
 ```bash
-dns [auth_flags] client-subnet <subnet-record-name>
+./dns [auth_flags] client-subnet <subnet-record-name>
 ```
 
 ### Show details for a named client subnet record
@@ -271,7 +271,7 @@ dns [auth_flags] client-subnet <subnet-record-name>
 ### Syntax
 
 ```bash
-dns [auth_flags] add-zone <zone> [--type <primary|secondary|stub|forwarder>] [--master <ip> ...] [--ds]
+./dns [auth_flags] add-zone <zone> [--type <primary|secondary|stub|forwarder>] [--master <ip> ...] [--ds]
 ```
 
 ### Create a standard primary zone
@@ -301,7 +301,7 @@ dns [auth_flags] add-zone <zone> [--type <primary|secondary|stub|forwarder>] [--
 ### Syntax
 
 ```bash
-dns [auth_flags] del-zone <zone>
+./dns [auth_flags] del-zone <zone>
 ```
 
 ### Delete a DNS zone
@@ -313,7 +313,7 @@ dns [auth_flags] del-zone <zone>
 ### Syntax
 
 ```bash
-dns [auth_flags] pause-zone <zone>
+./dns [auth_flags] pause-zone <zone>
 ```
 
 ### Pause a DNS zone (stops it from answering queries)
@@ -325,7 +325,7 @@ dns [auth_flags] pause-zone <zone>
 ### Syntax
 
 ```bash
-dns [auth_flags] resume-zone <zone>
+./dns [auth_flags] resume-zone <zone>
 ```
 
 ### Resume a paused DNS zone
@@ -337,7 +337,7 @@ dns [auth_flags] resume-zone <zone>
 ### Syntax
 
 ```bash
-dns [auth_flags] reload-zone <zone>
+./dns [auth_flags] reload-zone <zone>
 ```
 
 ### Reload a DNS zone from its storage backend
@@ -349,7 +349,7 @@ dns [auth_flags] reload-zone <zone>
 ### Syntax
 
 ```bash
-dns [auth_flags] set-forwarders [--forwarder <ipv4> ...] [--timeout <sec>] [--no-recurse]
+./dns [auth_flags] set-forwarders [--forwarder <ipv4> ...] [--timeout <sec>] [--no-recurse]
 ```
 
 ### Set DNS forwarders with a query timeout
@@ -367,7 +367,7 @@ dns [auth_flags] set-forwarders [--forwarder <ipv4> ...] [--timeout <sec>] [--no
 ### Syntax
 
 ```bash
-dns [auth_flags] version
+./dns [auth_flags] version
 ```
 
 ### Query the DNS server version

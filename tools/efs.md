@@ -16,7 +16,7 @@ $f='\\WIN-6BKCP1FPPCI\C$\Temp\secret.txt'
 ### Syntax
 
 ```bash
-efs [auth_flags] encrypt <file> [--use-v1]
+./efs [auth_flags] encrypt <file> [--use-v1]
 ```
 
 ### Default is EfsRpcEncryptFileExSrv (opnum 21).
@@ -34,25 +34,25 @@ efs [auth_flags] encrypt <file> [--use-v1]
 ### Syntax
 
 ```bash
-efs [auth_flags] decrypt <file>
+./efs [auth_flags] decrypt <file>
 ```
 
 ### Syntax
 
 ```bash
-efs [auth_flags] users <file>
+./efs [auth_flags] users <file>
 ```
 
 ### Syntax
 
 ```bash
-efs [auth_flags] recovery <file>
+./efs [auth_flags] recovery <file>
 ```
 
 ### Syntax
 
 ```bash
-efs [auth_flags] file-key <file> [--info-class <n>] [--use-v1]
+./efs [auth_flags] file-key <file> [--info-class <n>] [--use-v1]
 ```
 
 ### Default path uses EfsRpcFileKeyInfoEx (opnum 16) and requires --info-class.
@@ -70,37 +70,37 @@ efs [auth_flags] file-key <file> [--info-class <n>] [--use-v1]
 ### Syntax
 
 ```bash
-efs [auth_flags] protectors <file>
+./efs [auth_flags] protectors <file>
 ```
 
 ### Syntax
 
 ```bash
-efs [auth_flags] encrypted-metadata <file>
+./efs [auth_flags] encrypted-metadata <file>
 ```
 
 ### Syntax
 
 ```bash
-efs [auth_flags] set-encrypted-metadata <file> [--blob-b64 <base64>|--blob-hex <hex>]
+./efs [auth_flags] set-encrypted-metadata <file> [--blob-b64 <base64>|--blob-hex <hex>]
 ```
 
 ### Syntax
 
 ```bash
-efs [auth_flags] open-raw <file> [--import]
+./efs [auth_flags] open-raw <file> [--import]
 ```
 
 ### Syntax
 
 ```bash
-efs [auth_flags] del-users <file> --hash <sha1-cert-hash>
+./efs [auth_flags] del-users <file> --hash <sha1-cert-hash>
 ```
 
 ### Syntax
 
 ```bash
-efs [auth_flags] add-users <file> --users-json <file>
+./efs [auth_flags] add-users <file> --users-json <file>
 ```
 
 ### users JSON file must be UTF-8 without BOM.
@@ -112,13 +112,13 @@ efs [auth_flags] add-users <file> --users-json <file>
 ### Syntax
 
 ```bash
-efs [auth_flags] clone-meta <src> <dst>
+./efs [auth_flags] clone-meta <src> <dst>
 ```
 
 ### Syntax
 
 ```bash
-efs [auth_flags] flush-cache
+./efs [auth_flags] flush-cache
 ```
 
 ## Notes

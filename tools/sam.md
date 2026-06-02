@@ -7,7 +7,7 @@
 ### Syntax
 
 ```bash
-sam [auth_flags] domains
+./sam [auth_flags] domains
 ```
 
 ### List all SAM domains on the target
@@ -19,7 +19,7 @@ sam [auth_flags] domains
 ### Syntax
 
 ```bash
-sam [auth_flags] domain [-d <name>]
+./sam [auth_flags] domain [-d <name>]
 ```
 
 ### Show detailed info for a domain
@@ -31,7 +31,7 @@ sam [auth_flags] domain [-d <name>]
 ### Syntax
 
 ```bash
-sam [auth_flags] set-domain [-d <name>] [--min-pwd-len <n>] [--lockout-threshold <n>] [--lockout-window <dur>] [--lockout-duration <dur>]
+./sam [auth_flags] set-domain [-d <name>] [--min-pwd-len <n>] [--lockout-threshold <n>] [--lockout-window <dur>] [--lockout-duration <dur>]
 ```
 
 ### Modify domain-level password and lockout policy
@@ -43,7 +43,7 @@ sam [auth_flags] set-domain [-d <name>] [--min-pwd-len <n>] [--lockout-threshold
 ### Syntax
 
 ```bash
-sam [auth_flags] password-policy [-d <name>]
+./sam [auth_flags] password-policy [-d <name>]
 ```
 
 ### Query the domain password policy
@@ -55,7 +55,7 @@ sam [auth_flags] password-policy [-d <name>]
 ### Syntax
 
 ```bash
-sam [auth_flags] get-acl [-d <name>]
+./sam [auth_flags] get-acl [-d <name>]
 ```
 
 ### Read the domain object's security descriptor
@@ -67,7 +67,7 @@ sam [auth_flags] get-acl [-d <name>]
 ### Syntax
 
 ```bash
-sam [auth_flags] set-acl --sd <hex> [-d <name>]
+./sam [auth_flags] set-acl --sd <hex> [-d <name>]
 ```
 
 ### Write a security descriptor to the domain object
@@ -79,7 +79,7 @@ sam [auth_flags] set-acl --sd <hex> [-d <name>]
 ### Syntax
 
 ```bash
-sam [auth_flags] users [-d <name>]
+./sam [auth_flags] users [-d <name>]
 ```
 
 ### Enumerate all user accounts in a domain
@@ -91,7 +91,7 @@ sam [auth_flags] users [-d <name>]
 ### Syntax
 
 ```bash
-sam [auth_flags] display [-d <name>] [--type <users|machines|groups>] [--prefix <str>]
+./sam [auth_flags] display [-d <name>] [--type <users|machines|groups>] [--prefix <str>]
 ```
 
 ### Display accounts with optional prefix filtering (users, machines, or groups)
@@ -103,7 +103,7 @@ sam [auth_flags] display [-d <name>] [--type <users|machines|groups>] [--prefix 
 ### Syntax
 
 ```bash
-sam [auth_flags] user <username|RID> [-d <name>]
+./sam [auth_flags] user <username|RID> [-d <name>]
 ```
 
 ### Show full attributes for a user account
@@ -115,7 +115,7 @@ sam [auth_flags] user <username|RID> [-d <name>]
 ### Syntax
 
 ```bash
-sam [auth_flags] add-user <name> [-d <name>] [-N <s>] [-D <s>] [-w <s>] [--disable]
+./sam [auth_flags] add-user <name> [-d <name>] [-N <s>] [-D <s>] [-w <s>] [--disable]
 ```
 
 ### Create a new user account
@@ -127,7 +127,7 @@ sam [auth_flags] add-user <name> [-d <name>] [-N <s>] [-D <s>] [-w <s>] [--disab
 ### Syntax
 
 ```bash
-sam [auth_flags] del-user <username|RID> [-d <name>]
+./sam [auth_flags] del-user <username|RID> [-d <name>]
 ```
 
 ### Delete a user account
@@ -139,7 +139,7 @@ sam [auth_flags] del-user <username|RID> [-d <name>]
 ### Syntax
 
 ```bash
-sam [auth_flags] set-user <username|RID> [-d <name>] [--full-name <s>] [--description <s>] [--password <s>] [--expires <RFC3339|never>] [--enable-uac <flag>] [--disable-uac <flag>]
+./sam [auth_flags] set-user <username|RID> [-d <name>] [--full-name <s>] [--description <s>] [--password <s>] [--expires <RFC3339|never>] [--enable-uac <flag>] [--disable-uac <flag>]
 ```
 
 ### Modify user account attributes or password
@@ -151,7 +151,7 @@ sam [auth_flags] set-user <username|RID> [-d <name>] [--full-name <s>] [--descri
 ### Syntax
 
 ```bash
-sam [auth_flags] user-groups <username|RID> [-d <name>]
+./sam [auth_flags] user-groups <username|RID> [-d <name>]
 ```
 
 ### List all global groups a user belongs to
@@ -163,7 +163,7 @@ sam [auth_flags] user-groups <username|RID> [-d <name>]
 ### Syntax
 
 ```bash
-sam [auth_flags] user-aliases <username|RID> [-d <name>]
+./sam [auth_flags] user-aliases <username|RID> [-d <name>]
 ```
 
 ### List all aliases (local groups) a user belongs to
@@ -175,7 +175,7 @@ sam [auth_flags] user-aliases <username|RID> [-d <name>]
 ### Syntax
 
 ```bash
-sam [auth_flags] validate-password <password> [-d <name>] [--operation <auth|change|reset>]
+./sam [auth_flags] validate-password <password> [-d <name>] [--operation <auth|change|reset>]
 ```
 
 ### Validate a password against the domain policy
@@ -187,7 +187,7 @@ sam [auth_flags] validate-password <password> [-d <name>] [--operation <auth|cha
 ### Syntax
 
 ```bash
-sam [auth_flags] groups [-d <name>]
+./sam [auth_flags] groups [-d <name>]
 ```
 
 ### Enumerate all global groups in a domain
@@ -199,7 +199,7 @@ sam [auth_flags] groups [-d <name>]
 ### Syntax
 
 ```bash
-sam [auth_flags] group <name|RID> [-d <name>]
+./sam [auth_flags] group <name|RID> [-d <name>]
 ```
 
 ### Show full attributes for a global group
@@ -211,7 +211,7 @@ sam [auth_flags] group <name|RID> [-d <name>]
 ### Syntax
 
 ```bash
-sam [auth_flags] add-group <name> [-d <name>]
+./sam [auth_flags] add-group <name> [-d <name>]
 ```
 
 ### Create a new global group
@@ -223,7 +223,7 @@ sam [auth_flags] add-group <name> [-d <name>]
 ### Syntax
 
 ```bash
-sam [auth_flags] del-group <name|RID> [-d <name>]
+./sam [auth_flags] del-group <name|RID> [-d <name>]
 ```
 
 ### Delete a global group
@@ -235,7 +235,7 @@ sam [auth_flags] del-group <name|RID> [-d <name>]
 ### Syntax
 
 ```bash
-sam [auth_flags] group-members <name|RID> [-d <name>] [--resolve-sids]
+./sam [auth_flags] group-members <name|RID> [-d <name>] [--resolve-sids]
 ```
 
 ### List members of a global group
@@ -247,7 +247,7 @@ sam [auth_flags] group-members <name|RID> [-d <name>] [--resolve-sids]
 ### Syntax
 
 ```bash
-sam [auth_flags] add-group-member <group> <member-username|RID> [-d <name>]
+./sam [auth_flags] add-group-member <group> <member-username|RID> [-d <name>]
 ```
 
 ### Add a member to a global group
@@ -259,7 +259,7 @@ sam [auth_flags] add-group-member <group> <member-username|RID> [-d <name>]
 ### Syntax
 
 ```bash
-sam [auth_flags] del-group-member <group> <member-username|RID> [-d <name>]
+./sam [auth_flags] del-group-member <group> <member-username|RID> [-d <name>]
 ```
 
 ### Remove a member from a global group
@@ -271,7 +271,7 @@ sam [auth_flags] del-group-member <group> <member-username|RID> [-d <name>]
 ### Syntax
 
 ```bash
-sam [auth_flags] set-group <name|RID> [-d <name>] [--name <s>] [--description <s>]
+./sam [auth_flags] set-group <name|RID> [-d <name>] [--name <s>] [--description <s>]
 ```
 
 ### Rename or update the description of a global group
@@ -283,7 +283,7 @@ sam [auth_flags] set-group <name|RID> [-d <name>] [--name <s>] [--description <s
 ### Syntax
 
 ```bash
-sam [auth_flags] set-member-attrs <group> <member-username|RID> [-d <name>] [--attributes <hex>]
+./sam [auth_flags] set-member-attrs <group> <member-username|RID> [-d <name>] [--attributes <hex>]
 ```
 
 ### Set per-member attributes on a group membership
@@ -295,7 +295,7 @@ sam [auth_flags] set-member-attrs <group> <member-username|RID> [-d <name>] [--a
 ### Syntax
 
 ```bash
-sam [auth_flags] aliases [-d <name>] [--builtin]
+./sam [auth_flags] aliases [-d <name>] [--builtin]
 ```
 
 ### Enumerate all aliases (local groups) in a domain
@@ -307,7 +307,7 @@ sam [auth_flags] aliases [-d <name>] [--builtin]
 ### Syntax
 
 ```bash
-sam [auth_flags] alias <name|RID> [-d <name>] [--builtin]
+./sam [auth_flags] alias <name|RID> [-d <name>] [--builtin]
 ```
 
 ### Show full attributes for an alias
@@ -319,7 +319,7 @@ sam [auth_flags] alias <name|RID> [-d <name>] [--builtin]
 ### Syntax
 
 ```bash
-sam [auth_flags] add-alias <name> [-d <name>]
+./sam [auth_flags] add-alias <name> [-d <name>]
 ```
 
 ### Create a new alias (local group)
@@ -331,7 +331,7 @@ sam [auth_flags] add-alias <name> [-d <name>]
 ### Syntax
 
 ```bash
-sam [auth_flags] del-alias <name|RID> [-d <name>] [--builtin]
+./sam [auth_flags] del-alias <name|RID> [-d <name>] [--builtin]
 ```
 
 ### Delete an alias
@@ -343,7 +343,7 @@ sam [auth_flags] del-alias <name|RID> [-d <name>] [--builtin]
 ### Syntax
 
 ```bash
-sam [auth_flags] alias-members <name|RID> [-d <name>] [--builtin] [--resolve-sids]
+./sam [auth_flags] alias-members <name|RID> [-d <name>] [--builtin] [--resolve-sids]
 ```
 
 ### List members of an alias
@@ -355,7 +355,7 @@ sam [auth_flags] alias-members <name|RID> [-d <name>] [--builtin] [--resolve-sid
 ### Syntax
 
 ```bash
-sam [auth_flags] alias-membership <sid> [-d <name>] [--builtin]
+./sam [auth_flags] alias-membership <sid> [-d <name>] [--builtin]
 ```
 
 ### List all alias memberships for a given SID
@@ -367,7 +367,7 @@ sam [auth_flags] alias-membership <sid> [-d <name>] [--builtin]
 ### Syntax
 
 ```bash
-sam [auth_flags] add-alias-member <alias> <sid|username> [-d <name>] [--builtin]
+./sam [auth_flags] add-alias-member <alias> <sid|username> [-d <name>] [--builtin]
 ```
 
 ### Add a member (by SID or username) to an alias
@@ -379,7 +379,7 @@ sam [auth_flags] add-alias-member <alias> <sid|username> [-d <name>] [--builtin]
 ### Syntax
 
 ```bash
-sam [auth_flags] del-alias-member <alias> <sid|username> [-d <name>] [--builtin]
+./sam [auth_flags] del-alias-member <alias> <sid|username> [-d <name>] [--builtin]
 ```
 
 ### Remove a member from an alias
@@ -391,7 +391,7 @@ sam [auth_flags] del-alias-member <alias> <sid|username> [-d <name>] [--builtin]
 ### Syntax
 
 ```bash
-sam [auth_flags] add-alias-members <alias> <sid|username>... [-d <name>] [--builtin]
+./sam [auth_flags] add-alias-members <alias> <sid|username>... [-d <name>] [--builtin]
 ```
 
 ### Add multiple members to an alias in one call
@@ -403,7 +403,7 @@ sam [auth_flags] add-alias-members <alias> <sid|username>... [-d <name>] [--buil
 ### Syntax
 
 ```bash
-sam [auth_flags] del-alias-members <alias> <sid|username>... [-d <name>] [--builtin]
+./sam [auth_flags] del-alias-members <alias> <sid|username>... [-d <name>] [--builtin]
 ```
 
 ### Remove multiple members from an alias in one call
@@ -415,7 +415,7 @@ sam [auth_flags] del-alias-members <alias> <sid|username>... [-d <name>] [--buil
 ### Syntax
 
 ```bash
-sam [auth_flags] set-alias <name|RID> [-d <name>] [--builtin] [--name <s>] [--description <s>]
+./sam [auth_flags] set-alias <name|RID> [-d <name>] [--builtin] [--name <s>] [--description <s>]
 ```
 
 ### Rename or update the description of an alias
@@ -427,7 +427,7 @@ sam [auth_flags] set-alias <name|RID> [-d <name>] [--builtin] [--name <s>] [--de
 ### Syntax
 
 ```bash
-sam [auth_flags] purge-sid <sid> [-d <name>] [--builtin]
+./sam [auth_flags] purge-sid <sid> [-d <name>] [--builtin]
 ```
 
 ### Remove all alias/group memberships for a stale SID (cross-domain cleanup)
@@ -439,7 +439,7 @@ sam [auth_flags] purge-sid <sid> [-d <name>] [--builtin]
 ### Syntax
 
 ```bash
-sam [auth_flags] lookup-names <name>... [-d <name>]
+./sam [auth_flags] lookup-names <name>... [-d <name>]
 ```
 
 ### Resolve one or more account names to RIDs and types
@@ -451,7 +451,7 @@ sam [auth_flags] lookup-names <name>... [-d <name>]
 ### Syntax
 
 ```bash
-sam [auth_flags] lookup-rids <rid>... [-d <name>]
+./sam [auth_flags] lookup-rids <rid>... [-d <name>]
 ```
 
 ### Resolve one or more RIDs to account names and types
@@ -463,7 +463,7 @@ sam [auth_flags] lookup-rids <rid>... [-d <name>]
 ### Syntax
 
 ```bash
-sam [auth_flags] rid-to-sid <rid>
+./sam [auth_flags] rid-to-sid <rid>
 ```
 
 ### Convert a RID to its full SID within the bound domain
@@ -475,7 +475,7 @@ sam [auth_flags] rid-to-sid <rid>
 ### Syntax
 
 ```bash
-sam [auth_flags] set-dsrm-password <new-password>
+./sam [auth_flags] set-dsrm-password <new-password>
 ```
 
 ### Set the Directory Services Restore Mode password on a DC

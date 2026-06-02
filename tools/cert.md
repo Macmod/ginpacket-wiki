@@ -7,7 +7,7 @@
 ### Syntax
 
 ```bash
-cert [auth_flags] ping <ca-name> [--use-v1]
+./cert [auth_flags] ping <ca-name> [--use-v1]
 ```
 
 ### Verify CA reachability and DCOM/RPC connectivity (Ping2 by default)
@@ -23,7 +23,7 @@ cert [auth_flags] ping <ca-name> [--use-v1]
 ### Syntax
 
 ```bash
-cert [auth_flags] my-roles <ca-name>
+./cert [auth_flags] my-roles <ca-name>
 ```
 
 ### Show effective CA roles for the current principal
@@ -35,7 +35,7 @@ cert [auth_flags] my-roles <ca-name>
 ### Syntax
 
 ```bash
-cert [auth_flags] ca-info <ca-name>
+./cert [auth_flags] ca-info <ca-name>
 ```
 
 ### Show CA version/build/signing-cert metadata
@@ -47,7 +47,7 @@ cert [auth_flags] ca-info <ca-name>
 ### Syntax
 
 ```bash
-cert [auth_flags] ca-state <ca-name>
+./cert [auth_flags] ca-state <ca-name>
 ```
 
 ### Query CA state and whether DB read access is available
@@ -59,7 +59,7 @@ cert [auth_flags] ca-state <ca-name>
 ### Syntax
 
 ```bash
-cert [auth_flags] ca-unregister-dcom <ca-name>
+./cert [auth_flags] ca-unregister-dcom <ca-name>
 ```
 
 
@@ -73,7 +73,7 @@ Unregister CA DCOM interfaces (ServerControl flag 1); stops CertSvc - restart to
 ### Syntax
 
 ```bash
-cert [auth_flags] get-sd|get-ca-sd <ca-name> [--out <file>]
+./cert [auth_flags] get-sd|get-ca-sd <ca-name> [--out <file>]
 ```
 
 ### Retrieve the CA security descriptor
@@ -85,7 +85,7 @@ cert [auth_flags] get-sd|get-ca-sd <ca-name> [--out <file>]
 ### Syntax
 
 ```bash
-cert [auth_flags] set-sd|set-ca-sd <ca-name> <value> [--hex|--base64]
+./cert [auth_flags] set-sd|set-ca-sd <ca-name> <value> [--hex|--base64]
 ```
 
 ### Set the CA security descriptor from raw bytes file (default mode)
@@ -103,7 +103,7 @@ cert [auth_flags] set-sd|set-ca-sd <ca-name> <value> [--hex|--base64]
 ### Syntax
 
 ```bash
-cert [auth_flags] get-audit <ca-name>
+./cert [auth_flags] get-audit <ca-name>
 ```
 
 ### Read the CA audit filter bitmask
@@ -115,7 +115,7 @@ cert [auth_flags] get-audit <ca-name>
 ### Syntax
 
 ```bash
-cert [auth_flags] set-audit <ca-name> <mask>
+./cert [auth_flags] set-audit <ca-name> <mask>
 ```
 
 ### Set the CA audit filter (decimal or 0x-prefixed hex)
@@ -127,7 +127,7 @@ cert [auth_flags] set-audit <ca-name> <mask>
 ### Syntax
 
 ```bash
-cert [auth_flags] ca-config <ca-name> <node-path> <entry>
+./cert [auth_flags] ca-config <ca-name> <node-path> <entry>
 ```
 
 ### Read a persisted CA configuration entry
@@ -139,7 +139,7 @@ cert [auth_flags] ca-config <ca-name> <node-path> <entry>
 ### Syntax
 
 ```bash
-cert [auth_flags] set-ca-config <ca-name> <node-path> <entry> <value> [--type <string|dword>]
+./cert [auth_flags] set-ca-config <ca-name> <node-path> <entry> <value> [--type <string|dword>]
 ```
 
 ### Write a persisted CA configuration entry
@@ -151,7 +151,7 @@ cert [auth_flags] set-ca-config <ca-name> <node-path> <entry> <value> [--type <s
 ### Syntax
 
 ```bash
-cert [auth_flags] ca-props <ca-name>
+./cert [auth_flags] ca-props <ca-name>
 ```
 
 ### Enumerate CA property metadata (IDs, types, flags, display names)
@@ -163,7 +163,7 @@ cert [auth_flags] ca-props <ca-name>
 ### Syntax
 
 ```bash
-cert [auth_flags] set-ca-prop <ca-name> <prop-id> <value> [--type <auto|long|string|binary>] [--index <n>] [--file|--base64]
+./cert [auth_flags] set-ca-prop <ca-name> <prop-id> <value> [--type <auto|long|string|binary>] [--index <n>] [--file|--base64]
 ```
 
 ### Set selected CA properties (e.g., KRA counts / template list)
@@ -179,7 +179,7 @@ cert [auth_flags] set-ca-prop <ca-name> <prop-id> <value> [--type <auto|long|str
 ### Syntax
 
 ```bash
-cert [auth_flags] view-default-columns <ca-name> <pending|issued|failed|extension|attribute|crl|revoked>
+./cert [auth_flags] view-default-columns <ca-name> <pending|issued|failed|extension|attribute|crl|revoked>
 ```
 
 ### Retrieve default CA DB column IDs for a predefined view set
@@ -191,7 +191,7 @@ cert [auth_flags] view-default-columns <ca-name> <pending|issued|failed|extensio
 ### Syntax
 
 ```bash
-cert [auth_flags] del-row <ca-name> [row-id] [--table <request|extension|attribute|crl>] [--expired|--pending-failed --before <yyyy-mm-dd>]
+./cert [auth_flags] del-row <ca-name> [row-id] [--table <request|extension|attribute|crl>] [--expired|--pending-failed --before <yyyy-mm-dd>]
 ```
 
 ### Delete one CA DB row by ID
@@ -209,7 +209,7 @@ cert [auth_flags] del-row <ca-name> [row-id] [--table <request|extension|attribu
 ### Syntax
 
 ```bash
-cert [auth_flags] request <ca-name> [--csr <file>] [--template <name>] [--attrs <k:v;...>] [--out <file>] [--cms] [--include-crls]
+./cert [auth_flags] request <ca-name> [--csr <file>] [--template <name>] [--attrs <k:v;...>] [--out <file>] [--cms] [--include-crls]
 ```
 
 ### Submit a PKCS#10 CSR for enrollment
@@ -227,7 +227,7 @@ cert [auth_flags] request <ca-name> [--csr <file>] [--template <name>] [--attrs 
 ### Syntax
 
 ```bash
-cert [auth_flags] retrieve <ca-name> [<request-id>] [--serial <hex>] [--out <file>]
+./cert [auth_flags] retrieve <ca-name> [<request-id>] [--serial <hex>] [--out <file>]
 ```
 
 ### Retrieve issuance status/certificate by request ID
@@ -245,7 +245,7 @@ cert [auth_flags] retrieve <ca-name> [<request-id>] [--serial <hex>] [--out <fil
 ### Syntax
 
 ```bash
-cert [auth_flags] approve|deny <ca-name> <request-id>
+./cert [auth_flags] approve|deny <ca-name> <request-id>
 ```
 
 ### Approve or deny a pending request
@@ -261,7 +261,7 @@ cert [auth_flags] approve|deny <ca-name> <request-id>
 ### Syntax
 
 ```bash
-cert [auth_flags] revoke <ca-name> <serial> [--reason <code|name>] [--date <yyyy-mm-dd>]
+./cert [auth_flags] revoke <ca-name> <serial> [--reason <code|name>] [--date <yyyy-mm-dd>]
 ```
 
 ### Revoke an issued certificate
@@ -273,7 +273,7 @@ cert [auth_flags] revoke <ca-name> <serial> [--reason <code|name>] [--date <yyyy
 ### Syntax
 
 ```bash
-cert [auth_flags] check <ca-name> <serial>
+./cert [auth_flags] check <ca-name> <serial>
 ```
 
 ### Validate a certificate serial against CA revocation/status state
@@ -285,7 +285,7 @@ cert [auth_flags] check <ca-name> <serial>
 ### Syntax
 
 ```bash
-cert [auth_flags] publish-crl <ca-name> [--next <yyyy-mm-dd>] [--delta] [--force] [--legacy]
+./cert [auth_flags] publish-crl <ca-name> [--next <yyyy-mm-dd>] [--delta] [--force] [--legacy]
 ```
 
 ### Publish base CRL (default v2 path)
@@ -309,7 +309,7 @@ cert [auth_flags] publish-crl <ca-name> [--next <yyyy-mm-dd>] [--delta] [--force
 ### Syntax
 
 ```bash
-cert [auth_flags] get-crl <ca-name> [--out <file>]
+./cert [auth_flags] get-crl <ca-name> [--out <file>]
 ```
 
 ### Retrieve current base CRL
@@ -321,7 +321,7 @@ cert [auth_flags] get-crl <ca-name> [--out <file>]
 ### Syntax
 
 ```bash
-cert [auth_flags] import-cert <ca-name> <file> [--allow-foreign] [--existing-row]
+./cert [auth_flags] import-cert <ca-name> <file> [--allow-foreign] [--existing-row]
 ```
 
 ### Import certificate material into the CA database
@@ -333,7 +333,7 @@ cert [auth_flags] import-cert <ca-name> <file> [--allow-foreign] [--existing-row
 ### Syntax
 
 ```bash
-cert [auth_flags] import-key <ca-name> <request-id> <pkcs7-file> [--cert-hash <sha1>] [--overwrite]
+./cert [auth_flags] import-key <ca-name> <request-id> <pkcs7-file> [--cert-hash <sha1>] [--overwrite]
 ```
 
 ### Import archived key blob (key recovery)
@@ -349,7 +349,7 @@ The PKCS#7 EnvelopedData payload must carry an MS-WCCE private key BLOB
 ### Syntax
 
 ```bash
-cert [auth_flags] set-extension <ca-name> <request-id> <oid> <hex-der> [--type <1|2|3|4>] [--critical] [--disabled]
+./cert [auth_flags] set-extension <ca-name> <request-id> <oid> <hex-der> [--type <1|2|3|4>] [--critical] [--disabled]
 ```
 
 ### Set/replace an extension on a pending request
@@ -361,7 +361,7 @@ cert [auth_flags] set-extension <ca-name> <request-id> <oid> <hex-der> [--type <
 ### Syntax
 
 ```bash
-cert [auth_flags] set-attrs <ca-name> <request-id> <attributes> [--file <path>]
+./cert [auth_flags] set-attrs <ca-name> <request-id> <attributes> [--file <path>]
 ```
 
 ### Set request attributes from inline text
@@ -379,7 +379,7 @@ cert [auth_flags] set-attrs <ca-name> <request-id> <attributes> [--file <path>]
 ### Syntax
 
 ```bash
-cert [auth_flags] request-attrs|request-exts|request-meta <ca-name> <request-id>
+./cert [auth_flags] request-attrs|request-exts|request-meta <ca-name> <request-id>
 ```
 
 ### Enumerate request attributes only
@@ -403,7 +403,7 @@ cert [auth_flags] request-attrs|request-exts|request-meta <ca-name> <request-id>
 ### Syntax
 
 ```bash
-cert [auth_flags] restore-paths <ca-name>
+./cert [auth_flags] restore-paths <ca-name>
 ```
 
 ### Show CA DB/log directories used for restore operations
@@ -415,7 +415,7 @@ cert [auth_flags] restore-paths <ca-name>
 ### Syntax
 
 ```bash
-cert [auth_flags] officer-rights <ca-name>
+./cert [auth_flags] officer-rights <ca-name>
 ```
 
 ### Read officer rights configuration
@@ -427,7 +427,7 @@ cert [auth_flags] officer-rights <ca-name>
 ### Syntax
 
 ```bash
-cert [auth_flags] set-officer-rights <ca-name> (--enable|--disable) [--sd-file <path>]
+./cert [auth_flags] set-officer-rights <ca-name> (--enable|--disable) [--sd-file <path>]
 ```
 
 ### Enable officer rights and set descriptor from file
@@ -439,7 +439,7 @@ cert [auth_flags] set-officer-rights <ca-name> (--enable|--disable) [--sd-file <
 ### Syntax
 
 ```bash
-cert [auth_flags] archived-key <ca-name> <request-id> [--out <file>]
+./cert [auth_flags] archived-key <ca-name> <request-id> [--out <file>]
 ```
 
 ### Retrieve archived key blob for a request
@@ -451,7 +451,7 @@ cert [auth_flags] archived-key <ca-name> <request-id> [--out <file>]
 ### Syntax
 
 ```bash
-cert [auth_flags] db <ca-name> [--table <request|extension|attribute|crl>] [--columns c1,c2] [--offset <n>] [--limit <n>] [--format <text|csv|json>] [--use-v1]
+./cert [auth_flags] db <ca-name> [--table <request|extension|attribute|crl>] [--columns c1,c2] [--offset <n>] [--limit <n>] [--format <text|csv|json>] [--use-v1]
 ```
 
 
@@ -483,7 +483,7 @@ Read CA database rows with simple paging and optional column projection (EnumVie
 ### Syntax
 
 ```bash
-cert [auth_flags] requests|pending|issued|failed|revoked <ca-name> [--columns c1,c2] [--offset <n>] [--limit <n>] [--format <text|csv|json>]
+./cert [auth_flags] requests|pending|issued|failed|revoked <ca-name> [--columns c1,c2] [--offset <n>] [--limit <n>] [--format <text|csv|json>]
 ```
 
 ### Convenience presets for request-table triage

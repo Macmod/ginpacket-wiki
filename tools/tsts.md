@@ -7,7 +7,7 @@
 ### Syntax
 
 ```bash
-tsts [auth_flags] sessions [-s <state>] [-f <username>]
+./tsts [auth_flags] sessions [-s <state>] [-f <username>]
 ```
 
 ### Enumerate Terminal Services sessions, optionally filtering by state or user
@@ -27,7 +27,7 @@ tsts [auth_flags] sessions [-s <state>] [-f <username>]
 ### Syntax
 
 ```bash
-tsts [auth_flags] processes [-s <session-id>]
+./tsts [auth_flags] processes [-s <session-id>]
 ```
 
 ### List running processes across Terminal Services sessions
@@ -43,7 +43,7 @@ tsts [auth_flags] processes [-s <session-id>]
 ### Syntax
 
 ```bash
-tsts [auth_flags] policy
+./tsts [auth_flags] policy
 ```
 
 ### Retrieve the Terminal Services machine policy buffer
@@ -55,7 +55,7 @@ tsts [auth_flags] policy
 ### Syntax
 
 ```bash
-tsts [auth_flags] session <id> [-c] [-g]
+./tsts [auth_flags] session <id> [-c] [-g]
 ```
 
 ### Show session details with optional raw client/config blobs
@@ -71,7 +71,7 @@ tsts [auth_flags] session <id> [-c] [-g]
 ### Syntax
 
 ```bash
-tsts [auth_flags] connect <src-session> <dst-session> [-P <target-password>]
+./tsts [auth_flags] connect <src-session> <dst-session> [-P <target-password>]
 ```
 
 ### Connect a source session into a destination session
@@ -83,7 +83,7 @@ tsts [auth_flags] connect <src-session> <dst-session> [-P <target-password>]
 ### Syntax
 
 ```bash
-tsts [auth_flags] watch [-e <event-list>]
+./tsts [auth_flags] watch [-e <event-list>]
 ```
 
 ### Watch Terminal Services events synchronously until Ctrl+C
@@ -99,7 +99,7 @@ tsts [auth_flags] watch [-e <event-list>]
 ### Syntax
 
 ```bash
-tsts [auth_flags] kill-session <id> [-w]
+./tsts [auth_flags] kill-session <id> [-w]
 ```
 
 ### Reset a session forcibly
@@ -111,7 +111,7 @@ tsts [auth_flags] kill-session <id> [-w]
 ### Syntax
 
 ```bash
-tsts [auth_flags] logoff <session-id>
+./tsts [auth_flags] logoff <session-id>
 ```
 
 ### Log off a session via LSM session control
@@ -123,7 +123,7 @@ tsts [auth_flags] logoff <session-id>
 ### Syntax
 
 ```bash
-tsts [auth_flags] disconnect <session-id> [-w]
+./tsts [auth_flags] disconnect <session-id> [-w]
 ```
 
 ### Disconnect a session without logging it off
@@ -135,7 +135,7 @@ tsts [auth_flags] disconnect <session-id> [-w]
 ### Syntax
 
 ```bash
-tsts [auth_flags] kill-process <pid> [-e <exit-code>]
+./tsts [auth_flags] kill-process <pid> [-e <exit-code>]
 ```
 
 ### Terminate a process by PID
@@ -147,7 +147,7 @@ tsts [auth_flags] kill-process <pid> [-e <exit-code>]
 ### Syntax
 
 ```bash
-tsts [auth_flags] message <session-id> -T <title> -m <text> [-s <style>] [-o <seconds>] [-a]
+./tsts [auth_flags] message <session-id> -T <title> -m <text> [-s <style>] [-o <seconds>] [-a]
 ```
 
 ### Show a message box and optionally wait for the user response
@@ -163,7 +163,7 @@ tsts [auth_flags] message <session-id> -T <title> -m <text> [-s <style>] [-o <se
 ### Syntax
 
 ```bash
-tsts [auth_flags] listeners
+./tsts [auth_flags] listeners
 ```
 
 ### List available Terminal Services listeners
@@ -175,7 +175,7 @@ tsts [auth_flags] listeners
 ### Syntax
 
 ```bash
-tsts [auth_flags] stop-listener <name>
+./tsts [auth_flags] stop-listener <name>
 ```
 
 ### Stop a listener such as RDP-Tcp
@@ -187,7 +187,7 @@ tsts [auth_flags] stop-listener <name>
 ### Syntax
 
 ```bash
-tsts [auth_flags] start-listener <name>
+./tsts [auth_flags] start-listener <name>
 ```
 
 ### Start a listener such as RDP-Tcp
@@ -199,7 +199,7 @@ tsts [auth_flags] start-listener <name>
 ### Syntax
 
 ```bash
-tsts [auth_flags] shutdown [-r] [-P] [-l]
+./tsts [auth_flags] shutdown [-r] [-P] [-l]
 ```
 
 

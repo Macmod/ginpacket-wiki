@@ -7,7 +7,7 @@
 ### Syntax
 
 ```bash
-tasks [auth_flags] dump
+./tasks [auth_flags] dump
 ```
 
 ### Dump the full task scheduler folder tree (v2 only)
@@ -19,7 +19,7 @@ tasks [auth_flags] dump
 ### Syntax
 
 ```bash
-tasks [auth_flags] query [--include-hidden]
+./tasks [auth_flags] query [--include-hidden]
 ```
 
 ### List all task paths, optionally including hidden tasks
@@ -31,7 +31,7 @@ tasks [auth_flags] query [--include-hidden]
 ### Syntax
 
 ```bash
-tasks [auth_flags] task <path> [--format xml]
+./tasks [auth_flags] task <path> [--format xml]
 ```
 
 ### Show full task details (info + embedded XML) for a v2 task
@@ -49,7 +49,7 @@ tasks [auth_flags] task <path> [--format xml]
 ### Syntax
 
 ```bash
-tasks [auth_flags] folders [path]
+./tasks [auth_flags] folders [path]
 ```
 
 ### List immediate subfolders of a task scheduler folder path (v2 only)
@@ -65,7 +65,7 @@ tasks [auth_flags] folders [path]
 ### Syntax
 
 ```bash
-tasks [auth_flags] xml <path>
+./tasks [auth_flags] xml <path>
 ```
 
 ### Export a task's raw XML definition
@@ -77,7 +77,7 @@ tasks [auth_flags] xml <path>
 ### Syntax
 
 ```bash
-tasks [auth_flags] add (-P <path> -X <xml> | --use-v1 -c <cmd> --time <HH:MM> [schedule flags])
+./tasks [auth_flags] add (-P <path> -X <xml> | --use-v1 -c <cmd> --time <HH:MM> [schedule flags])
 ```
 
 ### Register a v2 task from an XML file
@@ -95,7 +95,7 @@ tasks [auth_flags] add (-P <path> -X <xml> | --use-v1 -c <cmd> --time <HH:MM> [s
 ### Syntax
 
 ```bash
-tasks [auth_flags] enable|disable <path>
+./tasks [auth_flags] enable|disable <path>
 ```
 
 ### Enable a disabled task
@@ -113,7 +113,7 @@ tasks [auth_flags] enable|disable <path>
 ### Syntax
 
 ```bash
-tasks [auth_flags] run <path>
+./tasks [auth_flags] run <path>
 ```
 
 ### Run a task immediately
@@ -125,7 +125,7 @@ tasks [auth_flags] run <path>
 ### Syntax
 
 ```bash
-tasks [auth_flags] stop ([path] | -G <instance-guid>)
+./tasks [auth_flags] stop ([path] | -G <instance-guid>)
 ```
 
 ### Stop all running instances of a task by path
@@ -143,7 +143,7 @@ tasks [auth_flags] stop ([path] | -G <instance-guid>)
 ### Syntax
 
 ```bash
-tasks [auth_flags] rename <current-path> <new-path>
+./tasks [auth_flags] rename <current-path> <new-path>
 ```
 
 ### Rename a task to a new path
@@ -155,7 +155,7 @@ tasks [auth_flags] rename <current-path> <new-path>
 ### Syntax
 
 ```bash
-tasks [auth_flags] add-folder <path> [-D <sddl>]
+./tasks [auth_flags] add-folder <path> [-D <sddl>]
 ```
 
 ### Create a task scheduler folder
@@ -167,7 +167,7 @@ tasks [auth_flags] add-folder <path> [-D <sddl>]
 ### Syntax
 
 ```bash
-tasks [auth_flags] instances <path>
+./tasks [auth_flags] instances <path>
 ```
 
 ### List currently running instances of a task
@@ -179,7 +179,7 @@ tasks [auth_flags] instances <path>
 ### Syntax
 
 ```bash
-tasks [auth_flags] get-sddl <path> [--parse-dacl]
+./tasks [auth_flags] get-sddl <path> [--parse-dacl]
 ```
 
 ### Read the security descriptor of a task
@@ -197,7 +197,7 @@ tasks [auth_flags] get-sddl <path> [--parse-dacl]
 ### Syntax
 
 ```bash
-tasks [auth_flags] set-sddl <path> -D <sddl>
+./tasks [auth_flags] set-sddl <path> -D <sddl>
 ```
 
 ### Write a security descriptor to a task
@@ -209,7 +209,7 @@ tasks [auth_flags] set-sddl <path> -D <sddl>
 ### Syntax
 
 ```bash
-tasks [auth_flags] missed-runs <path>
+./tasks [auth_flags] missed-runs <path>
 ```
 
 ### List missed runs for a task
@@ -221,7 +221,7 @@ tasks [auth_flags] missed-runs <path>
 ### Syntax
 
 ```bash
-tasks [auth_flags] del ([path] | --use-v1 (--job-id | --min-job-id/--max-job-id))
+./tasks [auth_flags] del ([path] | --use-v1 (--job-id | --min-job-id/--max-job-id))
 ```
 
 ### Delete a v2 task by path
@@ -245,7 +245,7 @@ tasks [auth_flags] del ([path] | --use-v1 (--job-id | --min-job-id/--max-job-id)
 ### Syntax
 
 ```bash
-tasks [auth_flags] del-folder <path>
+./tasks [auth_flags] del-folder <path>
 ```
 
 ### Delete a task scheduler folder

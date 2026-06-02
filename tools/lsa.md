@@ -7,7 +7,7 @@
 ### Syntax
 
 ```bash
-lsa [auth_flags] policy
+./lsa [auth_flags] policy
 ```
 
 ### Query the LSA policy object (audit settings, domain info, quota limits)
@@ -19,7 +19,7 @@ lsa [auth_flags] policy
 ### Syntax
 
 ```bash
-lsa [auth_flags] set-audit [--enable] [--disable] [--event <category>=<none|success|failure|both>]
+./lsa [auth_flags] set-audit [--enable] [--disable] [--event <category>=<none|success|failure|both>]
 ```
 
 ### Configure audit event categories
@@ -31,7 +31,7 @@ lsa [auth_flags] set-audit [--enable] [--disable] [--event <category>=<none|succ
 ### Syntax
 
 ```bash
-lsa [auth_flags] domain-policy
+./lsa [auth_flags] domain-policy
 ```
 
 ### Query the Kerberos domain policy (ticket lifetimes, skew)
@@ -43,7 +43,7 @@ lsa [auth_flags] domain-policy
 ### Syntax
 
 ```bash
-lsa [auth_flags] set-domain-policy [--max-service-ticket <dur>] [--max-tgt <dur>] [--max-renew <dur>] [--max-skew <dur>] [--validate-client] [--no-validate-client]
+./lsa [auth_flags] set-domain-policy [--max-service-ticket <dur>] [--max-tgt <dur>] [--max-renew <dur>] [--max-skew <dur>] [--validate-client] [--no-validate-client]
 ```
 
 ### Set Kerberos ticket lifetime and skew policy
@@ -55,7 +55,7 @@ lsa [auth_flags] set-domain-policy [--max-service-ticket <dur>] [--max-tgt <dur>
 ### Syntax
 
 ```bash
-lsa [auth_flags] get-sd [--security-info <mask>]
+./lsa [auth_flags] get-sd [--security-info <mask>]
 ```
 
 ### Read the security descriptor of the LSA policy object
@@ -67,7 +67,7 @@ lsa [auth_flags] get-sd [--security-info <mask>]
 ### Syntax
 
 ```bash
-lsa [auth_flags] set-sd --sd <hex> [--security-info <mask>]
+./lsa [auth_flags] set-sd --sd <hex> [--security-info <mask>]
 ```
 
 ### Write a security descriptor to the LSA policy object
@@ -79,7 +79,7 @@ lsa [auth_flags] set-sd --sd <hex> [--security-info <mask>]
 ### Syntax
 
 ```bash
-lsa [auth_flags] privileges
+./lsa [auth_flags] privileges
 ```
 
 ### List all privilege constants known to the LSA
@@ -91,7 +91,7 @@ lsa [auth_flags] privileges
 ### Syntax
 
 ```bash
-lsa [auth_flags] lookup-priv -n <privilege-name>
+./lsa [auth_flags] lookup-priv -n <privilege-name>
 ```
 
 ### Look up a privilege by name and return its LUID
@@ -103,7 +103,7 @@ lsa [auth_flags] lookup-priv -n <privilege-name>
 ### Syntax
 
 ```bash
-lsa [auth_flags] priv-name --high <n> --low <n>
+./lsa [auth_flags] priv-name --high <n> --low <n>
 ```
 
 ### Look up the name of a privilege from its high/low LUID components
@@ -115,7 +115,7 @@ lsa [auth_flags] priv-name --high <n> --low <n>
 ### Syntax
 
 ```bash
-lsa [auth_flags] accounts
+./lsa [auth_flags] accounts
 ```
 
 ### List all accounts registered in the LSA policy database
@@ -127,7 +127,7 @@ lsa [auth_flags] accounts
 ### Syntax
 
 ```bash
-lsa [auth_flags] rights [-r <right1,right2>]
+./lsa [auth_flags] rights [-r <right1,right2>]
 ```
 
 ### List accounts holding specific user-rights
@@ -139,7 +139,7 @@ lsa [auth_flags] rights [-r <right1,right2>]
 ### Syntax
 
 ```bash
-lsa [auth_flags] account-rights <sid>
+./lsa [auth_flags] account-rights <sid>
 ```
 
 ### List all user-rights assigned to an account SID
@@ -151,7 +151,7 @@ lsa [auth_flags] account-rights <sid>
 ### Syntax
 
 ```bash
-lsa [auth_flags] account-privs <sid>
+./lsa [auth_flags] account-privs <sid>
 ```
 
 ### List all privileges assigned to an account SID
@@ -163,7 +163,7 @@ lsa [auth_flags] account-privs <sid>
 ### Syntax
 
 ```bash
-lsa [auth_flags] account-access <sid>
+./lsa [auth_flags] account-access <sid>
 ```
 
 ### Query the system-access flags for an account
@@ -175,7 +175,7 @@ lsa [auth_flags] account-access <sid>
 ### Syntax
 
 ```bash
-lsa [auth_flags] set-account-access <sid> <access>
+./lsa [auth_flags] set-account-access <sid> <access>
 ```
 
 ### Set the system-access flags for an account
@@ -187,7 +187,7 @@ lsa [auth_flags] set-account-access <sid> <access>
 ### Syntax
 
 ```bash
-lsa [auth_flags] add-rights <sid> -r <right>
+./lsa [auth_flags] add-rights <sid> -r <right>
 ```
 
 ### Grant user-rights to an account SID
@@ -199,7 +199,7 @@ lsa [auth_flags] add-rights <sid> -r <right>
 ### Syntax
 
 ```bash
-lsa [auth_flags] del-rights <sid> -r <right>
+./lsa [auth_flags] del-rights <sid> -r <right>
 ```
 
 ### Revoke user-rights from an account SID
@@ -211,7 +211,7 @@ lsa [auth_flags] del-rights <sid> -r <right>
 ### Syntax
 
 ```bash
-lsa [auth_flags] add-account <sid>
+./lsa [auth_flags] add-account <sid>
 ```
 
 ### Register an account SID in the LSA policy database
@@ -223,7 +223,7 @@ lsa [auth_flags] add-account <sid>
 ### Syntax
 
 ```bash
-lsa [auth_flags] del-account <sid>
+./lsa [auth_flags] del-account <sid>
 ```
 
 ### Delete an account SID from the LSA policy database
@@ -235,7 +235,7 @@ lsa [auth_flags] del-account <sid>
 ### Syntax
 
 ```bash
-lsa [auth_flags] add-secret <name>
+./lsa [auth_flags] add-secret <name>
 ```
 
 ### Create a new LSA secret object
@@ -247,7 +247,7 @@ lsa [auth_flags] add-secret <name>
 ### Syntax
 
 ```bash
-lsa [auth_flags] secret <name> [--use-tcp]
+./lsa [auth_flags] secret <name> [--use-tcp]
 ```
 
 ### Query metadata about an LSA secret (creation/modification timestamps)
@@ -259,7 +259,7 @@ lsa [auth_flags] secret <name> [--use-tcp]
 ### Syntax
 
 ```bash
-lsa [auth_flags] get-secret <name> [--use-tcp]
+./lsa [auth_flags] get-secret <name> [--use-tcp]
 ```
 
 ### Retrieve the current and previous value of an LSA secret
@@ -271,7 +271,7 @@ lsa [auth_flags] get-secret <name> [--use-tcp]
 ### Syntax
 
 ```bash
-lsa [auth_flags] set-secret <name> -v <hex> [--old-value <hex>]
+./lsa [auth_flags] set-secret <name> -v <hex> [--old-value <hex>]
 ```
 
 ### Set the current value of an LSA secret
@@ -289,7 +289,7 @@ lsa [auth_flags] set-secret <name> -v <hex> [--old-value <hex>]
 ### Syntax
 
 ```bash
-lsa [auth_flags] del-secret <name>
+./lsa [auth_flags] del-secret <name>
 ```
 
 ### Delete an LSA secret object
@@ -301,7 +301,7 @@ lsa [auth_flags] del-secret <name>
 ### Syntax
 
 ```bash
-lsa [auth_flags] trusts
+./lsa [auth_flags] trusts
 ```
 
 ### List trusted domain objects
@@ -313,7 +313,7 @@ lsa [auth_flags] trusts
 ### Syntax
 
 ```bash
-lsa [auth_flags] trust-records -n <domain>
+./lsa [auth_flags] trust-records -n <domain>
 ```
 
 ### Query the forest trust information for a trusted domain
@@ -325,7 +325,7 @@ lsa [auth_flags] trust-records -n <domain>
 ### Syntax
 
 ```bash
-lsa [auth_flags] trust (-n <domain> | -s <sid>)
+./lsa [auth_flags] trust (-n <domain> | -s <sid>)
 ```
 
 ### Query a trust by domain name
@@ -343,7 +343,7 @@ lsa [auth_flags] trust (-n <domain> | -s <sid>)
 ### Syntax
 
 ```bash
-lsa [auth_flags] set-trust -n <domain> [-D <n>] [-T <n>] [--attributes <hex>]
+./lsa [auth_flags] set-trust -n <domain> [-D <n>] [-T <n>] [--attributes <hex>]
 ```
 
 ### Modify attributes of an existing trust
@@ -355,7 +355,7 @@ lsa [auth_flags] set-trust -n <domain> [-D <n>] [-T <n>] [--attributes <hex>]
 ### Syntax
 
 ```bash
-lsa [auth_flags] add-trust -n <domain> --flat-name <name> -s <sid> [-w <secret>] [-D <n>] [-T <n>]
+./lsa [auth_flags] add-trust -n <domain> --flat-name <name> -s <sid> [-w <secret>] [-D <n>] [-T <n>]
 ```
 
 ### Create a new trust relationship
@@ -367,7 +367,7 @@ lsa [auth_flags] add-trust -n <domain> --flat-name <name> -s <sid> [-w <secret>]
 ### Syntax
 
 ```bash
-lsa [auth_flags] del-trust <sid>
+./lsa [auth_flags] del-trust <sid>
 ```
 
 ### Delete a trust by domain SID
@@ -379,7 +379,7 @@ lsa [auth_flags] del-trust <sid>
 ### Syntax
 
 ```bash
-lsa [auth_flags] set-trust-records -n <domain> [--check]
+./lsa [auth_flags] set-trust-records -n <domain> [--check]
 ```
 
 ### Update trust records for a trusted domain (optionally validate first)

@@ -7,7 +7,7 @@
 ### Syntax
 
 ```bash
-ldap [auth_flags] whoami
+./ldap [auth_flags] whoami
 ```
 
 ### Print the authenticated LDAP user identity
@@ -19,7 +19,7 @@ ldap [auth_flags] whoami
 ### Syntax
 
 ```bash
-ldap [auth_flags] info <dn-or-name> [--all]
+./ldap [auth_flags] info <dn-or-name> [--all]
 ```
 
 ### Dump attributes for an object by DN, sAMAccountName, UPN, or GUID
@@ -37,7 +37,7 @@ ldap [auth_flags] info <dn-or-name> [--all]
 ### Syntax
 
 ```bash
-ldap [auth_flags] query users [--enabled] [--disabled]
+./ldap [auth_flags] query users [--enabled] [--disabled]
 ```
 
 ### List all user objects in the domain
@@ -61,7 +61,7 @@ ldap [auth_flags] query users [--enabled] [--disabled]
 ### Syntax
 
 ```bash
-ldap [auth_flags] query groups
+./ldap [auth_flags] query groups
 ```
 
 ### List all group objects in the domain
@@ -73,7 +73,7 @@ ldap [auth_flags] query groups
 ### Syntax
 
 ```bash
-ldap [auth_flags] query computers
+./ldap [auth_flags] query computers
 ```
 
 ### List all computer accounts in the domain
@@ -85,7 +85,7 @@ ldap [auth_flags] query computers
 ### Syntax
 
 ```bash
-ldap [auth_flags] query containers
+./ldap [auth_flags] query containers
 ```
 
 ### List all container objects in the domain
@@ -97,7 +97,7 @@ ldap [auth_flags] query containers
 ### Syntax
 
 ```bash
-ldap [auth_flags] query ous
+./ldap [auth_flags] query ous
 ```
 
 ### List all organizational units in the domain
@@ -109,7 +109,7 @@ ldap [auth_flags] query ous
 ### Syntax
 
 ```bash
-ldap [auth_flags] query service-accounts
+./ldap [auth_flags] query service-accounts
 ```
 
 ### List accounts with service principal names (service accounts)
@@ -121,7 +121,7 @@ ldap [auth_flags] query service-accounts
 ### Syntax
 
 ```bash
-ldap [auth_flags] query gpos
+./ldap [auth_flags] query gpos
 ```
 
 ### List all group policy objects in the domain
@@ -133,7 +133,7 @@ ldap [auth_flags] query gpos
 ### Syntax
 
 ```bash
-ldap [auth_flags] query spns
+./ldap [auth_flags] query spns
 ```
 
 ### List all accounts with service principal names set
@@ -145,7 +145,7 @@ ldap [auth_flags] query spns
 ### Syntax
 
 ```bash
-ldap [auth_flags] query unconstrained-delegation
+./ldap [auth_flags] query unconstrained-delegation
 ```
 
 ### List computers and users with unconstrained Kerberos delegation
@@ -157,7 +157,7 @@ ldap [auth_flags] query unconstrained-delegation
 ### Syntax
 
 ```bash
-ldap [auth_flags] query constrained-delegation
+./ldap [auth_flags] query constrained-delegation
 ```
 
 ### List accounts configured with constrained Kerberos delegation
@@ -169,7 +169,7 @@ ldap [auth_flags] query constrained-delegation
 ### Syntax
 
 ```bash
-ldap [auth_flags] query asreproast
+./ldap [auth_flags] query asreproast
 ```
 
 ### List accounts that have Kerberos pre-authentication disabled
@@ -181,7 +181,7 @@ ldap [auth_flags] query asreproast
 ### Syntax
 
 ```bash
-ldap [auth_flags] query never-expires
+./ldap [auth_flags] query never-expires
 ```
 
 ### List accounts whose password is set to never expire
@@ -193,7 +193,7 @@ ldap [auth_flags] query never-expires
 ### Syntax
 
 ```bash
-ldap [auth_flags] query password-not-required
+./ldap [auth_flags] query password-not-required
 ```
 
 ### List accounts that do not require a password
@@ -205,7 +205,7 @@ ldap [auth_flags] query password-not-required
 ### Syntax
 
 ```bash
-ldap [auth_flags] query cert-templates
+./ldap [auth_flags] query cert-templates
 ```
 
 ### List certificate templates published in the domain
@@ -217,7 +217,7 @@ ldap [auth_flags] query cert-templates
 ### Syntax
 
 ```bash
-ldap [auth_flags] query cert-authorities
+./ldap [auth_flags] query cert-authorities
 ```
 
 ### List enterprise certification authorities in the domain
@@ -229,7 +229,7 @@ ldap [auth_flags] query cert-authorities
 ### Syntax
 
 ```bash
-ldap [auth_flags] query trusts [--transitive]
+./ldap [auth_flags] query trusts [--transitive]
 ```
 
 
@@ -244,7 +244,7 @@ List domain trust relationships rendered as an ASCII tree with direction arrows 
 ### Syntax
 
 ```bash
-ldap [auth_flags] query passpol
+./ldap [auth_flags] query passpol
 ```
 
 ### Show the domain password policy and any fine-grained PSOs
@@ -256,7 +256,7 @@ ldap [auth_flags] query passpol
 ### Syntax
 
 ```bash
-ldap [auth_flags] query mquota
+./ldap [auth_flags] query mquota
 ```
 
 ### Show the ms-DS-MachineAccountQuota value from the domain object
@@ -268,7 +268,7 @@ ldap [auth_flags] query mquota
 ### Syntax
 
 ```bash
-ldap [auth_flags] query shadow-creds [--limit <n>]
+./ldap [auth_flags] query shadow-creds [--limit <n>]
 ```
 
 
@@ -282,7 +282,7 @@ List objects with msDS-KeyCredentialLink set; parse DeviceID, key type, and crea
 ### Syntax
 
 ```bash
-ldap [auth_flags] query rbcd [--limit <n>]
+./ldap [auth_flags] query rbcd [--limit <n>]
 ```
 
 
@@ -296,7 +296,7 @@ List computers with msDS-AllowedToActOnBehalfOfOtherIdentity set; decode the SD 
 ### Syntax
 
 ```bash
-ldap [auth_flags] query gmsa [--limit <n>]
+./ldap [auth_flags] query gmsa [--limit <n>]
 ```
 
 
@@ -310,7 +310,7 @@ List Group Managed Service Accounts; show password rotation interval and who can
 ### Syntax
 
 ```bash
-ldap [auth_flags] query laps [--limit <n>]
+./ldap [auth_flags] query laps [--limit <n>]
 ```
 
 
@@ -324,7 +324,7 @@ List computers that have a LAPS password set (v1: ms-Mcs-AdmPwd, v2: msLAPS-Pass
 ### Syntax
 
 ```bash
-ldap [auth_flags] query sccm [--limit <n>]
+./ldap [auth_flags] query sccm [--limit <n>]
 ```
 
 
@@ -338,7 +338,7 @@ Detect SCCM/MECM management points registered in AD (objectClass=mSSMSManagement
 ### Syntax
 
 ```bash
-ldap [auth_flags] query wds [--limit <n>]
+./ldap [auth_flags] query wds [--limit <n>]
 ```
 
 ### Detect Windows Deployment Services servers via WDSMC SPN on computer objects
@@ -350,7 +350,7 @@ ldap [auth_flags] query wds [--limit <n>]
 ### Syntax
 
 ```bash
-ldap [auth_flags] get-gmsa-password <sAMAccountName>
+./ldap [auth_flags] get-gmsa-password <sAMAccountName>
 ```
 
 
@@ -364,7 +364,7 @@ Read and decode the msDS-ManagedPassword blob for a GMSA (requires group members
 ### Syntax
 
 ```bash
-ldap [auth_flags] get-laps <computer>
+./ldap [auth_flags] get-laps <computer>
 ```
 
 
@@ -382,7 +382,7 @@ Read the LAPS administrator password for a computer (v1 plaintext or v2 JSON blo
 ### Syntax
 
 ```bash
-ldap [auth_flags] enable <dn>
+./ldap [auth_flags] enable <dn>
 ```
 
 ### Enable an AD account by clearing the ACCOUNTDISABLE userAccountControl bit
@@ -394,7 +394,7 @@ ldap [auth_flags] enable <dn>
 ### Syntax
 
 ```bash
-ldap [auth_flags] disable <dn>
+./ldap [auth_flags] disable <dn>
 ```
 
 ### Disable an AD account by setting the ACCOUNTDISABLE userAccountControl bit
@@ -406,7 +406,7 @@ ldap [auth_flags] disable <dn>
 ### Syntax
 
 ```bash
-ldap [auth_flags] uac-modify <dn> <flag> <set|clear>
+./ldap [auth_flags] uac-modify <dn> <flag> <set|clear>
 ```
 
 ### Toggle a single userAccountControl bit by name (or numeric value)
@@ -426,7 +426,7 @@ ldap [auth_flags] uac-modify <dn> <flag> <set|clear>
 ### Syntax
 
 ```bash
-ldap [auth_flags] search -F <filter> [-A <attrs>] [--limit <n>] [--base-dn <dn>] [--scope <scope>]
+./ldap [auth_flags] search -F <filter> [-A <attrs>] [--limit <n>] [--base-dn <dn>] [--scope <scope>]
 ```
 
 ### Run a raw LDAP search with a custom filter and attribute projection
@@ -462,7 +462,7 @@ ldap [auth_flags] search -F <filter> [-A <attrs>] [--limit <n>] [--base-dn <dn>]
 ### Syntax
 
 ```bash
-ldap [auth_flags] <subcommand> -f <filter-chain> -a <attr-chain> -b <base-chain>
+./ldap [auth_flags] <subcommand> -f <filter-chain> -a <attr-chain> -b <base-chain>
 ```
 
 ### Apply ldapx obfuscation chains to a raw search
@@ -486,7 +486,7 @@ ldap [auth_flags] <subcommand> -f <filter-chain> -a <attr-chain> -b <base-chain>
 ### Syntax
 
 ```bash
-ldap [auth_flags] modify <dn> --attr <name> --operation <add|replace|delete> --value <value>
+./ldap [auth_flags] modify <dn> --attr <name> --operation <add|replace|delete> --value <value>
 ```
 
 ### Replace an attribute value on an LDAP object (requires write access)
@@ -504,7 +504,7 @@ ldap [auth_flags] modify <dn> --attr <name> --operation <add|replace|delete> --v
 ### Syntax
 
 ```bash
-ldap [auth_flags] --scheme ldaps|ldap [--starttls] <subcommand>
+./ldap [auth_flags] --scheme ldaps|ldap [--starttls] <subcommand>
 ```
 
 ### Connect over LDAPS (TLS)
@@ -522,7 +522,7 @@ ldap [auth_flags] --scheme ldaps|ldap [--starttls] <subcommand>
 ### Syntax
 
 ```bash
-ldap [auth_flags] create user --name <cn> [--pass <password>] [--enabled] [--parent-dn <dn>] [--scheme ldaps]
+./ldap [auth_flags] create user --name <cn> [--pass <password>] [--enabled] [--parent-dn <dn>] [--scheme ldaps]
 ```
 
 
@@ -550,7 +550,7 @@ Create a new user account (created disabled if --pass is omitted; set password r
 ### Syntax
 
 ```bash
-ldap [auth_flags] create computer --name <cn> [--pass <password>] [--parent-dn <dn>] [--scheme ldaps]
+./ldap [auth_flags] create computer --name <cn> [--pass <password>] [--parent-dn <dn>] [--scheme ldaps]
 ```
 
 
@@ -568,7 +568,7 @@ Create a machine account (requires ms-DS-MachineAccountQuota >= 1 or sufficient 
 ### Syntax
 
 ```bash
-ldap [auth_flags] create group --name <cn> [--type <group-type>] [--parent-dn <dn>]
+./ldap [auth_flags] create group --name <cn> [--type <group-type>] [--parent-dn <dn>]
 ```
 
 
@@ -590,7 +590,7 @@ Create a group (types: GlobalSecurity, GlobalDistribution, DomainLocalSecurity, 
 ### Syntax
 
 ```bash
-ldap [auth_flags] create ou --name <name> [--parent-dn <dn>]
+./ldap [auth_flags] create ou --name <name> [--parent-dn <dn>]
 ```
 
 ### Create an Organizational Unit
@@ -606,7 +606,7 @@ ldap [auth_flags] create ou --name <name> [--parent-dn <dn>]
 ### Syntax
 
 ```bash
-ldap [auth_flags] create container --name <name> [--parent-dn <dn>]
+./ldap [auth_flags] create container --name <name> [--parent-dn <dn>]
 ```
 
 ### Create a container object
@@ -622,7 +622,7 @@ ldap [auth_flags] create container --name <name> [--parent-dn <dn>]
 ### Syntax
 
 ```bash
-ldap [auth_flags] create custom --template <file.yaml>
+./ldap [auth_flags] create custom --template <file.yaml>
 ```
 
 

@@ -7,7 +7,7 @@
 ### Syntax
 
 ```bash
-bkpkey [auth_flags] retrieve [-o <out-file>]
+./bkpkey [auth_flags] retrieve [-o <out-file>]
 ```
 
 ### Retrieve the domain backup key and write it to a file
@@ -19,7 +19,7 @@ bkpkey [auth_flags] retrieve [-o <out-file>]
 ### Syntax
 
 ```bash
-bkpkey [auth_flags] encrypt (--in-file <file> | --in-b64 <base64>) [-o <out-file>]  (alias: backup)
+./bkpkey [auth_flags] encrypt (--in-file <file> | --in-b64 <base64>) [-o <out-file>]  (alias: backup)
 ```
 
 ### Wrap a DPAPI blob using the domain backup key (BACKUPKEY_BACKUP_GUID)
@@ -31,7 +31,7 @@ bkpkey [auth_flags] encrypt (--in-file <file> | --in-b64 <base64>) [-o <out-file
 ### Syntax
 
 ```bash
-bkpkey [auth_flags] decrypt (--in-file <file> | --in-b64 <base64>) [-o <out-file>] [--win2k]  (alias: restore)
+./bkpkey [auth_flags] decrypt (--in-file <file> | --in-b64 <base64>) [-o <out-file>] [--win2k]  (alias: restore)
 ```
 
 ### Unwrap a credential blob using the DC's backup private key

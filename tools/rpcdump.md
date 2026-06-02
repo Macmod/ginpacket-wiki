@@ -7,7 +7,7 @@
 ### Syntax
 
 ```bash
-rpcdump [auth_flags] [-U <interface-uuid>] [--transport <transports>]
+./rpcdump [auth_flags] [-U <interface-uuid>] [--transport <transports>]
 ```
 
 ### Enumerate all registered RPC endpoints via the endpoint mapper

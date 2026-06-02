@@ -7,7 +7,7 @@
 ### Syntax
 
 ```bash
-authz [auth_flags] [--object-uuid <uuid>] <subcommand>
+./authz [auth_flags] [--object-uuid <uuid>] <subcommand>
 ```
 
 ### Show version
@@ -28,7 +28,7 @@ Classes: all, user, groups, restricted, device-groups, user-claims, device-claim
 ### Syntax
 
 ```bash
-authz check <source> <SID|NAME> -T <target> [common flags]
+./authz check <source> <SID|NAME> -T <target> [common flags]
 ```
 
 

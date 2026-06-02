@@ -7,7 +7,7 @@
 ### Syntax
 
 ```bash
-server [auth_flags] shares [--persistent]
+./server [auth_flags] shares [--persistent]
 ```
 
 ### List all shares (optionally only persistent ones)
@@ -25,7 +25,7 @@ server [auth_flags] shares [--persistent]
 ### Syntax
 
 ```bash
-server [auth_flags] share -s <name>
+./server [auth_flags] share -s <name>
 ```
 
 ### Show full SHARE_INFO for a named share
@@ -37,7 +37,7 @@ server [auth_flags] share -s <name>
 ### Syntax
 
 ```bash
-server [auth_flags] share-check <path>
+./server [auth_flags] share-check <path>
 ```
 
 ### Check whether a local path is already shared
@@ -49,7 +49,7 @@ server [auth_flags] share-check <path>
 ### Syntax
 
 ```bash
-server [auth_flags] add-share <name> --path <local> [--remark <text>] [--share-type <n>] [--max-uses <n>] [--persistent=<true|false>]
+./server [auth_flags] add-share <name> --path <local> [--remark <text>] [--share-type <n>] [--max-uses <n>] [--persistent=<true|false>]
 ```
 
 ### Create a new share
@@ -61,7 +61,7 @@ server [auth_flags] add-share <name> --path <local> [--remark <text>] [--share-t
 ### Syntax
 
 ```bash
-server [auth_flags] set-share -s <name> [--remark <text>] [--max-uses <n>]
+./server [auth_flags] set-share -s <name> [--remark <text>] [--max-uses <n>]
 ```
 
 ### Modify the remark or max-uses on an existing share
@@ -73,7 +73,7 @@ server [auth_flags] set-share -s <name> [--remark <text>] [--max-uses <n>]
 ### Syntax
 
 ```bash
-server [auth_flags] del-share -s <name> [--scope <server>] [--use-v1] [--persistent] [--two-phase]
+./server [auth_flags] del-share -s <name> [--scope <server>] [--use-v1] [--persistent] [--two-phase]
 ```
 
 ### Delete a share using NetrShareDelEx (default, opnum 57)
@@ -113,7 +113,7 @@ Delete a share via two-phase commit (NetrShareDelStart + NetrShareDelCommit, opn
 ### Syntax
 
 ```bash
-server [auth_flags] get-file-acl <share[\path]> [--security-info <mask>]
+./server [auth_flags] get-file-acl <share[\path]> [--security-info <mask>]
 ```
 
 ### Read the ACL on a file within a share
@@ -129,7 +129,7 @@ server [auth_flags] get-file-acl <share[\path]> [--security-info <mask>]
 ### Syntax
 
 ```bash
-server [auth_flags] set-file-acl <share[\path]> --sd <hex> [--security-info <mask>]
+./server [auth_flags] set-file-acl <share[\path]> --sd <hex> [--security-info <mask>]
 ```
 
 ### Write an ACL to a file within a share
@@ -145,7 +145,7 @@ server [auth_flags] set-file-acl <share[\path]> --sd <hex> [--security-info <mas
 ### Syntax
 
 ```bash
-server [auth_flags] sessions [--client <name>] [--session-user <user>]
+./server [auth_flags] sessions [--client <name>] [--session-user <user>]
 ```
 
 ### List active SMB sessions
@@ -157,7 +157,7 @@ server [auth_flags] sessions [--client <name>] [--session-user <user>]
 ### Syntax
 
 ```bash
-server [auth_flags] del-session [--client <name>] [--session-user <user>]
+./server [auth_flags] del-session [--client <name>] [--session-user <user>]
 ```
 
 ### Forcibly disconnect an SMB session
@@ -169,7 +169,7 @@ server [auth_flags] del-session [--client <name>] [--session-user <user>]
 ### Syntax
 
 ```bash
-server [auth_flags] connections [--qualifier <share|client>]
+./server [auth_flags] connections [--qualifier <share|client>]
 ```
 
 ### List active share connections
@@ -181,7 +181,7 @@ server [auth_flags] connections [--qualifier <share|client>]
 ### Syntax
 
 ```bash
-server [auth_flags] files [--base-path <path>] [--session-user <user>]
+./server [auth_flags] files [--base-path <path>] [--session-user <user>]
 ```
 
 ### List open files on the server
@@ -193,7 +193,7 @@ server [auth_flags] files [--base-path <path>] [--session-user <user>]
 ### Syntax
 
 ```bash
-server [auth_flags] file <id>
+./server [auth_flags] file <id>
 ```
 
 ### Show details for a specific open file by ID
@@ -205,7 +205,7 @@ server [auth_flags] file <id>
 ### Syntax
 
 ```bash
-server [auth_flags] file-close <id>
+./server [auth_flags] file-close <id>
 ```
 
 ### Force-close an open file by ID
@@ -217,7 +217,7 @@ server [auth_flags] file-close <id>
 ### Syntax
 
 ```bash
-server [auth_flags] transports
+./server [auth_flags] transports
 ```
 
 ### List all transport bindings registered on the server
@@ -229,7 +229,7 @@ server [auth_flags] transports
 ### Syntax
 
 ```bash
-server [auth_flags] add-transport <transport> [-A <addr>] [-d <domain>] [--flags <n>] [--use-v1]
+./server [auth_flags] add-transport <transport> [-A <addr>] [-d <domain>] [--flags <n>] [--use-v1]
 ```
 
 ### Add a transport binding (level 2, opnum 41)
@@ -253,7 +253,7 @@ server [auth_flags] add-transport <transport> [-A <addr>] [-d <domain>] [--flags
 ### Syntax
 
 ```bash
-server [auth_flags] del-transport <transport> [-A <addr>] [-d <domain>] [--use-v1]
+./server [auth_flags] del-transport <transport> [-A <addr>] [-d <domain>] [--use-v1]
 ```
 
 ### Remove a transport binding
@@ -271,7 +271,7 @@ server [auth_flags] del-transport <transport> [-A <addr>] [-d <domain>] [--use-v
 ### Syntax
 
 ```bash
-server [auth_flags] aliases
+./server [auth_flags] aliases
 ```
 
 ### List server name aliases
@@ -283,7 +283,7 @@ server [auth_flags] aliases
 ### Syntax
 
 ```bash
-server [auth_flags] add-alias <name> --alias-target <server>
+./server [auth_flags] add-alias <name> --alias-target <server>
 ```
 
 ### Register a new server name alias
@@ -295,7 +295,7 @@ server [auth_flags] add-alias <name> --alias-target <server>
 ### Syntax
 
 ```bash
-server [auth_flags] del-alias -a <name> [--alias-target <server>]
+./server [auth_flags] del-alias -a <name> [--alias-target <server>]
 ```
 
 ### Remove a server name alias
@@ -307,7 +307,7 @@ server [auth_flags] del-alias -a <name> [--alias-target <server>]
 ### Syntax
 
 ```bash
-server [auth_flags] validate-name <name> <type>
+./server [auth_flags] validate-name <name> <type>
 ```
 
 ### Validate a name against a specific type (share, workgroup, etc.)
@@ -319,7 +319,7 @@ server [auth_flags] validate-name <name> <type>
 ### Syntax
 
 ```bash
-server [auth_flags] info [--detail <basic|standard|full|extended|config|config-full>]
+./server [auth_flags] info [--detail <basic|standard|full|extended|config|config-full>]
 ```
 
 ### Query server configuration at a given info detail (default: full)
@@ -331,7 +331,7 @@ server [auth_flags] info [--detail <basic|standard|full|extended|config|config-f
 ### Syntax
 
 ```bash
-server [auth_flags] set-server <remark>
+./server [auth_flags] set-server <remark>
 ```
 
 ### Update the server's description/remark string
@@ -343,7 +343,7 @@ server [auth_flags] set-server <remark>
 ### Syntax
 
 ```bash
-server [auth_flags] stats
+./server [auth_flags] stats
 ```
 
 ### Query server service statistics
@@ -355,7 +355,7 @@ server [auth_flags] stats
 ### Syntax
 
 ```bash
-server [auth_flags] disks
+./server [auth_flags] disks
 ```
 
 ### List available disk drives on the server

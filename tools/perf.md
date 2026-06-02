@@ -7,7 +7,7 @@
 ### Syntax
 
 ```bash
-perf [auth_flags] csets
+./perf [auth_flags] csets
 ```
 
 ### List all performance counter sets (GUIDs and names)
@@ -19,7 +19,7 @@ perf [auth_flags] csets
 ### Syntax
 
 ```bash
-perf [auth_flags] cset <guid>
+./perf [auth_flags] cset <guid>
 ```
 
 ### Show metadata for a specific counter set by GUID
@@ -31,7 +31,7 @@ perf [auth_flags] cset <guid>
 ### Syntax
 
 ```bash
-perf [auth_flags] instances <guid>
+./perf [auth_flags] instances <guid>
 ```
 
 ### List all instances of a counter set
@@ -43,7 +43,7 @@ perf [auth_flags] instances <guid>
 ### Syntax
 
 ```bash
-perf [auth_flags] query <guid> [-c <counter-id>] [--instance <id>]
+./perf [auth_flags] query <guid> [-c <counter-id>] [--instance <id>]
 ```
 
 ### Query all counters for a counter set
@@ -67,7 +67,7 @@ perf [auth_flags] query <guid> [-c <counter-id>] [--instance <id>]
 ### Syntax
 
 ```bash
-perf [auth_flags] dump
+./perf [auth_flags] dump
 ```
 
 ### Dump all available counter data from all counter sets

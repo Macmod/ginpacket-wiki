@@ -7,7 +7,7 @@
 ### Syntax
 
 ```bash
-smb [auth_flags] shares
+./smb [auth_flags] shares
 ```
 
 ### List available SMB shares on the target
@@ -19,7 +19,7 @@ smb [auth_flags] shares
 ### Syntax
 
 ```bash
-smb [auth_flags] ls <share[\path]> [-l]
+./smb [auth_flags] ls <share[\path]> [-l]
 ```
 
 ### List directory contents of a share
@@ -37,7 +37,7 @@ smb [auth_flags] ls <share[\path]> [-l]
 ### Syntax
 
 ```bash
-smb [auth_flags] tree <share[\path]> [--max-depth <n>]
+./smb [auth_flags] tree <share[\path]> [--max-depth <n>]
 ```
 
 ### Recursively print the directory tree of a share
@@ -49,7 +49,7 @@ smb [auth_flags] tree <share[\path]> [--max-depth <n>]
 ### Syntax
 
 ```bash
-smb [auth_flags] stat <share[\path]>
+./smb [auth_flags] stat <share[\path]>
 ```
 
 ### Show metadata for a remote file or directory
@@ -61,7 +61,7 @@ smb [auth_flags] stat <share[\path]>
 ### Syntax
 
 ```bash
-smb [auth_flags] cat <share[\file]> [--max-bytes <n>]
+./smb [auth_flags] cat <share[\file]> [--max-bytes <n>]
 ```
 
 ### Print the contents of a remote file to stdout
@@ -73,7 +73,7 @@ smb [auth_flags] cat <share[\file]> [--max-bytes <n>]
 ### Syntax
 
 ```bash
-smb [auth_flags] get <share[\remote]> [<local>] [-R]
+./smb [auth_flags] get <share[\remote]> [<local>] [-R]
 ```
 
 ### Download a remote file
@@ -91,7 +91,7 @@ smb [auth_flags] get <share[\remote]> [<local>] [-R]
 ### Syntax
 
 ```bash
-smb [auth_flags] put <local> <share[\remote]> [-R]
+./smb [auth_flags] put <local> <share[\remote]> [-R]
 ```
 
 ### Upload a local file to the share
@@ -109,7 +109,7 @@ smb [auth_flags] put <local> <share[\remote]> [-R]
 ### Syntax
 
 ```bash
-smb [auth_flags] mkdir <share[\dir]> [--parents]
+./smb [auth_flags] mkdir <share[\dir]> [--parents]
 ```
 
 ### Create a remote directory
@@ -127,7 +127,7 @@ smb [auth_flags] mkdir <share[\dir]> [--parents]
 ### Syntax
 
 ```bash
-smb [auth_flags] rm <share[\path]> [-R]
+./smb [auth_flags] rm <share[\path]> [-R]
 ```
 
 ### Remove a remote file
@@ -145,7 +145,7 @@ smb [auth_flags] rm <share[\path]> [-R]
 ### Syntax
 
 ```bash
-smb [auth_flags] mv <share[\src]> <dst>
+./smb [auth_flags] mv <share[\src]> <dst>
 ```
 
 ### Rename or move a remote file or directory within the share
@@ -157,7 +157,7 @@ smb [auth_flags] mv <share[\src]> <dst>
 ### Syntax
 
 ```bash
-smb [auth_flags] cp <share[\src]> <dst>
+./smb [auth_flags] cp <share[\src]> <dst>
 ```
 
 ### Copy a remote file within the same share
@@ -169,7 +169,7 @@ smb [auth_flags] cp <share[\src]> <dst>
 ### Syntax
 
 ```bash
-smb [auth_flags] -s <share> shell
+./smb [auth_flags] -s <share> shell
 ```
 
 ### Start an interactive SMB shell for the share
@@ -181,7 +181,7 @@ smb [auth_flags] -s <share> shell
 ### Syntax
 
 ```bash
-smb [auth_flags] [--require-signing] [--encrypt] [--dialect <ver>] <subcommand>
+./smb [auth_flags] [--require-signing] [--encrypt] [--dialect <ver>] <subcommand>
 ```
 
 ### List share contents with required SMB signing

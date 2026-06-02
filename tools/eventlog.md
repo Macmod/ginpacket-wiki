@@ -7,7 +7,7 @@
 ### Syntax
 
 ```bash
-eventlog [auth_flags] channels
+./eventlog [auth_flags] channels
 ```
 
 ### List all event log channels on the host
@@ -19,7 +19,7 @@ eventlog [auth_flags] channels
 ### Syntax
 
 ```bash
-eventlog [auth_flags] publishers
+./eventlog [auth_flags] publishers
 ```
 
 ### List all registered event publishers
@@ -31,7 +31,7 @@ eventlog [auth_flags] publishers
 ### Syntax
 
 ```bash
-eventlog [auth_flags] query <channel> [-q <xpath>] [-L <n>] [-T <ms>]
+./eventlog [auth_flags] query <channel> [-q <xpath>] [-L <n>] [-T <ms>]
 ```
 
 ### Query events from a channel using an XPath filter
@@ -43,7 +43,7 @@ eventlog [auth_flags] query <channel> [-q <xpath>] [-L <n>] [-T <ms>]
 ### Syntax
 
 ```bash
-eventlog [auth_flags] subscribe <channel> [-q <xpath>] [-L <n>] [-T <ms>]
+./eventlog [auth_flags] subscribe <channel> [-q <xpath>] [-L <n>] [-T <ms>]
 ```
 
 ### Subscribe to a channel and receive events as they arrive
@@ -55,7 +55,7 @@ eventlog [auth_flags] subscribe <channel> [-q <xpath>] [-L <n>] [-T <ms>]
 ### Syntax
 
 ```bash
-eventlog [auth_flags] watch <channel> [--event-id <ids>] [--grep <str>] [-L <n>] [-F <text|json>]
+./eventlog [auth_flags] watch <channel> [--event-id <ids>] [--grep <str>] [-L <n>] [-F <text|json>]
 ```
 
 ### Live-tail a channel for future events, with optional filtering
@@ -71,8 +71,8 @@ eventlog [auth_flags] watch <channel> [--event-id <ids>] [--grep <str>] [-L <n>]
 ### Syntax
 
 ```bash
-eventlog [auth_flags] export <channel> <out-path>
-eventlog [auth_flags] export --evtx-file <in-path> <out-path>
+./eventlog [auth_flags] export <channel> <out-path>
+./eventlog [auth_flags] export --evtx-file <in-path> <out-path>
 ```
 
 ### Export a live channel to an .evtx file
@@ -90,7 +90,7 @@ eventlog [auth_flags] export --evtx-file <in-path> <out-path>
 ### Syntax
 
 ```bash
-eventlog [auth_flags] clear <channel> [-b <backup-path>] [--confirm]
+./eventlog [auth_flags] clear <channel> [-b <backup-path>] [--confirm]
 ```
 
 ### Clear a channel and optionally save a backup
@@ -102,7 +102,7 @@ eventlog [auth_flags] clear <channel> [-b <backup-path>] [--confirm]
 ### Syntax
 
 ```bash
-eventlog [auth_flags] channel [<channel>] [-T config|meta|all]
+./eventlog [auth_flags] channel [<channel>] [-T config|meta|all]
 ```
 
 
@@ -124,7 +124,7 @@ Show channel information: config (EvtRpcGetChannelConfig), meta (EvtRpcGetLogFil
 ### Syntax
 
 ```bash
-eventlog [auth_flags] publisher <name>
+./eventlog [auth_flags] publisher <name>
 ```
 
 ### Show metadata for a registered event publisher (GUID, schema path, etc.)
@@ -136,7 +136,7 @@ eventlog [auth_flags] publisher <name>
 ### Syntax
 
 ```bash
-eventlog [auth_flags] channel-publishers [<channel>]
+./eventlog [auth_flags] channel-publishers [<channel>]
 ```
 
 ### List publishers registered to write to a specific channel
@@ -148,7 +148,7 @@ eventlog [auth_flags] channel-publishers [<channel>]
 ### Syntax
 
 ```bash
-eventlog [auth_flags] classic-name <name>
+./eventlog [auth_flags] classic-name <name>
 ```
 
 ### Resolve a classic event log name to its display name
@@ -160,7 +160,7 @@ eventlog [auth_flags] classic-name <name>
 ### Syntax
 
 ```bash
-eventlog [auth_flags] set-channel [<channel>] [--enabled <true|false>] [--max-size <bytes>]
+./eventlog [auth_flags] set-channel [<channel>] [--enabled <true|false>] [--max-size <bytes>]
 ```
 
 ### Enable or disable a channel and/or change its maximum log file size

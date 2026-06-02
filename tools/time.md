@@ -7,7 +7,7 @@
 ### Syntax
 
 ```bash
-time [auth_flags] sync [--wait <sec>] [--sync-flags <n>]
+./time [auth_flags] sync [--wait <sec>] [--sync-flags <n>]
 ```
 
 ### Trigger a manual time synchronization
@@ -19,7 +19,7 @@ time [auth_flags] sync [--wait <sec>] [--sync-flags <n>]
 ### Syntax
 
 ```bash
-time [auth_flags] bits
+./time [auth_flags] bits
 ```
 
 ### Query the W32TM capability bits advertised by the service
@@ -31,7 +31,7 @@ time [auth_flags] bits
 ### Syntax
 
 ```bash
-time [auth_flags] source
+./time [auth_flags] source
 ```
 
 ### Query the current time source (NTP server) in use
@@ -43,7 +43,7 @@ time [auth_flags] source
 ### Syntax
 
 ```bash
-time [auth_flags] config
+./time [auth_flags] config
 ```
 
 ### Query the global W32TM service configuration
@@ -55,7 +55,7 @@ time [auth_flags] config
 ### Syntax
 
 ```bash
-time [auth_flags] status
+./time [auth_flags] status
 ```
 
 ### Query the current time synchronization status
@@ -67,7 +67,7 @@ time [auth_flags] status
 ### Syntax
 
 ```bash
-time [auth_flags] log
+./time [auth_flags] log
 ```
 
 ### Query the W32TM event log entries
@@ -79,7 +79,7 @@ time [auth_flags] log
 ### Syntax
 
 ```bash
-time [auth_flags] provider-status <provider-name> [--provider-flags <n>]
+./time [auth_flags] provider-status <provider-name> [--provider-flags <n>]
 ```
 
 ### Query the status of a named time provider
@@ -91,7 +91,7 @@ time [auth_flags] provider-status <provider-name> [--provider-flags <n>]
 ### Syntax
 
 ```bash
-time [auth_flags] provider-config <provider-name> [--provider-flags <n>]
+./time [auth_flags] provider-config <provider-name> [--provider-flags <n>]
 ```
 
 ### Query the configuration of a named time provider

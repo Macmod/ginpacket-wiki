@@ -7,7 +7,7 @@
 ### Syntax
 
 ```bash
-changepwd [auth_flags] samr -a <account> -w <new-password> [-o <old-password>] [--transport <smb|tcp>]
+./changepwd [auth_flags] samr -a <account> -w <new-password> [-o <old-password>] [--transport <smb|tcp>]
 ```
 
 ### Change a password via MS-SAMR over SMB named pipe
@@ -25,7 +25,7 @@ changepwd [auth_flags] samr -a <account> -w <new-password> [-o <old-password>] [
 ### Syntax
 
 ```bash
-changepwd [auth_flags] kpasswd -a <account> -w <new-password> [-o <old-password>]
+./changepwd [auth_flags] kpasswd -a <account> -w <new-password> [-o <old-password>]
 ```
 
 
@@ -46,7 +46,7 @@ Note: for this command, --dc is only considered to override the DC for PKINIT wh
 ### Syntax
 
 ```bash
-changepwd [auth_flags] ldap -a <account> -w <new-password> [--scheme <ldap|ldaps>] [--starttls]
+./changepwd [auth_flags] ldap -a <account> -w <new-password> [--scheme <ldap|ldaps>] [--starttls]
 ```
 
 ### Change a password via LDAPS
@@ -58,7 +58,7 @@ changepwd [auth_flags] ldap -a <account> -w <new-password> [--scheme <ldap|ldaps
 ### Syntax
 
 ```bash
-changepwd [auth_flags] adws -a <account> -w <new-password>
+./changepwd [auth_flags] adws -a <account> -w <new-password>
 ```
 
 ### Change a password via ADWS (Active Directory Web Services)

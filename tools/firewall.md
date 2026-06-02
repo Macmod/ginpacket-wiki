@@ -7,7 +7,7 @@
 ### Syntax
 
 ```bash
-firewall [auth_flags] profile [-s <store>] [-P <profile>]
+./firewall [auth_flags] profile [-s <store>] [-P <profile>]
 ```
 
 ### Query settings for all firewall profiles
@@ -25,7 +25,7 @@ firewall [auth_flags] profile [-s <store>] [-P <profile>]
 ### Syntax
 
 ```bash
-firewall [auth_flags] rules [-s <store>] [-P <profile>] [-D <direction>] [-a <allow|block>] [--enabled-only] [-n <name>]
+./firewall [auth_flags] rules [-s <store>] [-P <profile>] [-D <direction>] [-a <allow|block>] [--enabled-only] [-n <name>]
 ```
 
 ### List all firewall rules
@@ -49,7 +49,7 @@ firewall [auth_flags] rules [-s <store>] [-P <profile>] [-D <direction>] [-a <al
 ### Syntax
 
 ```bash
-firewall [auth_flags] products|networks|adapters|config
+./firewall [auth_flags] products|networks|adapters|config
 ```
 
 ### List third-party firewall products registered on the host
@@ -79,7 +79,7 @@ firewall [auth_flags] products|networks|adapters|config
 ### Syntax
 
 ```bash
-firewall [auth_flags] set-config <key> <value> [-s local]
+./firewall [auth_flags] set-config <key> <value> [-s local]
 ```
 
 ### Write a global firewall configuration setting
@@ -95,7 +95,7 @@ firewall [auth_flags] set-config <key> <value> [-s local]
 ### Syntax
 
 ```bash
-firewall [auth_flags] ipsec-csrules|ipsec-mmrules|ipsec-authsets|ipsec-cryptosets|ipsec-sas
+./firewall [auth_flags] ipsec-csrules|ipsec-mmrules|ipsec-authsets|ipsec-cryptosets|ipsec-sas
 ```
 
 ### List IPsec connection rules
@@ -131,7 +131,7 @@ firewall [auth_flags] ipsec-csrules|ipsec-mmrules|ipsec-authsets|ipsec-cryptoset
 ### Syntax
 
 ```bash
-firewall [auth_flags] enable|disable [-s <store>] [-P <profile>]
+./firewall [auth_flags] enable|disable [-s <store>] [-P <profile>]
 ```
 
 ### Disable the firewall for all profiles
@@ -155,7 +155,7 @@ firewall [auth_flags] enable|disable [-s <store>] [-P <profile>]
 ### Syntax
 
 ```bash
-firewall [auth_flags] add-rule <name> -D <in|out> [-a <allow|block>] [--protocol <any|tcp|udp>] [-l <ports>] [-r <ports>] [-A <app>] [-P <profile>]
+./firewall [auth_flags] add-rule <name> -D <in|out> [-a <allow|block>] [--protocol <any|tcp|udp>] [-l <ports>] [-r <ports>] [-A <app>] [-P <profile>]
 ```
 
 ### Allow inbound RDP on all profiles
@@ -179,7 +179,7 @@ firewall [auth_flags] add-rule <name> -D <in|out> [-a <allow|block>] [--protocol
 ### Syntax
 
 ```bash
-firewall [auth_flags] set-rule <rule-id> [--enabled=<bool>]
+./firewall [auth_flags] set-rule <rule-id> [--enabled=<bool>]
 ```
 
 ### Enable or disable an existing firewall rule by ID
@@ -191,7 +191,7 @@ firewall [auth_flags] set-rule <rule-id> [--enabled=<bool>]
 ### Syntax
 
 ```bash
-firewall [auth_flags] add-ipsec-csrule <name> [-a <mode>] [--phase1-auth <id>] [--phase2-crypto <id>] [--phase2-auth <id>]
+./firewall [auth_flags] add-ipsec-csrule <name> [-a <mode>] [--phase1-auth <id>] [--phase2-crypto <id>] [--phase2-auth <id>]
 ```
 
 ### Add an IPsec connection rule (e.g. bypass without authentication)
@@ -209,7 +209,7 @@ firewall [auth_flags] add-ipsec-csrule <name> [-a <mode>] [--phase1-auth <id>] [
 ### Syntax
 
 ```bash
-firewall [auth_flags] set-ipsec-csrule <rule-id> [--enabled=<bool>]
+./firewall [auth_flags] set-ipsec-csrule <rule-id> [--enabled=<bool>]
 ```
 
 ### Enable or disable an IPsec connection-security rule by ID
@@ -221,7 +221,7 @@ firewall [auth_flags] set-ipsec-csrule <rule-id> [--enabled=<bool>]
 ### Syntax
 
 ```bash
-firewall [auth_flags] add-ipsec-mmrule <name> [-P <profile>] --phase1-auth <id> --phase1-crypto <id>
+./firewall [auth_flags] add-ipsec-mmrule <name> [-P <profile>] --phase1-auth <id> --phase1-crypto <id>
 ```
 
 
@@ -235,7 +235,7 @@ Add an IPsec main-mode (IKE phase-1) rule; --phase1-auth and --phase1-crypto are
 ### Syntax
 
 ```bash
-firewall [auth_flags] set-ipsec-mmrule <rule-id> [--enabled=<bool>]
+./firewall [auth_flags] set-ipsec-mmrule <rule-id> [--enabled=<bool>]
 ```
 
 ### Enable or disable an IPsec main-mode rule by ID
@@ -247,7 +247,7 @@ firewall [auth_flags] set-ipsec-mmrule <rule-id> [--enabled=<bool>]
 ### Syntax
 
 ```bash
-firewall [auth_flags] add-ipsec-authset <set-id> [-n <name>] [--phase <1|2>] [-m <method>]
+./firewall [auth_flags] add-ipsec-authset <set-id> [-n <name>] [--phase <1|2>] [-m <method>]
 ```
 
 ### Add an IPsec authentication set (phase 1 by default, Kerberos)
@@ -265,7 +265,7 @@ firewall [auth_flags] add-ipsec-authset <set-id> [-n <name>] [--phase <1|2>] [-m
 ### Syntax
 
 ```bash
-firewall [auth_flags] set-ipsec-authset <set-id> [-n <name>] [--phase <1|2>] [-m <method>]
+./firewall [auth_flags] set-ipsec-authset <set-id> [-n <name>] [--phase <1|2>] [-m <method>]
 ```
 
 ### Replace an IPsec authentication set (must use the same set-id)
@@ -277,7 +277,7 @@ firewall [auth_flags] set-ipsec-authset <set-id> [-n <name>] [--phase <1|2>] [-m
 ### Syntax
 
 ```bash
-firewall [auth_flags] add-ipsec-cryptoset <set-id> [-n <name>] [--phase <1|2>] [--key-exchange <alg>] [--encryption <alg>] [--hash <alg>]
+./firewall [auth_flags] add-ipsec-cryptoset <set-id> [-n <name>] [--phase <1|2>] [--key-exchange <alg>] [--encryption <alg>] [--hash <alg>]
 ```
 
 ### Add an IPsec phase-1 crypto set with AES-256 + SHA-256 + DH2048
@@ -295,7 +295,7 @@ firewall [auth_flags] add-ipsec-cryptoset <set-id> [-n <name>] [--phase <1|2>] [
 ### Syntax
 
 ```bash
-firewall [auth_flags] set-ipsec-cryptoset <set-id> [-n <name>] [--phase <1|2>] [--key-exchange <alg>] [--encryption <alg>] [--hash <alg>]
+./firewall [auth_flags] set-ipsec-cryptoset <set-id> [-n <name>] [--phase <1|2>] [--key-exchange <alg>] [--encryption <alg>] [--hash <alg>]
 ```
 
 ### Replace an IPsec crypto set (must use the same set-id)
@@ -307,7 +307,7 @@ firewall [auth_flags] set-ipsec-cryptoset <set-id> [-n <name>] [--phase <1|2>] [
 ### Syntax
 
 ```bash
-firewall [auth_flags] del-rule <rule-id> | del-all-rules
+./firewall [auth_flags] del-rule <rule-id> | del-all-rules
 ```
 
 ### Delete a specific firewall rule by ID
@@ -325,7 +325,7 @@ firewall [auth_flags] del-rule <rule-id> | del-all-rules
 ### Syntax
 
 ```bash
-firewall [auth_flags] del-ipsec-csrule <rule-id> | del-ipsec-mmrule <rule-id>
+./firewall [auth_flags] del-ipsec-csrule <rule-id> | del-ipsec-mmrule <rule-id>
 ```
 
 ### Delete an IPsec connection rule by ID
@@ -343,7 +343,7 @@ firewall [auth_flags] del-ipsec-csrule <rule-id> | del-ipsec-mmrule <rule-id>
 ### Syntax
 
 ```bash
-firewall [auth_flags] del-ipsec-authset <set-id> [--phase <1|2>] | del-ipsec-cryptoset <set-id> [--phase <1|2>]
+./firewall [auth_flags] del-ipsec-authset <set-id> [--phase <1|2>] | del-ipsec-cryptoset <set-id> [--phase <1|2>]
 ```
 
 ### Delete an IPsec authentication set by ID
@@ -361,7 +361,7 @@ firewall [auth_flags] del-ipsec-authset <set-id> [--phase <1|2>] | del-ipsec-cry
 ### Syntax
 
 ```bash
-firewall [auth_flags] del-all-ipsec-csrules | del-all-ipsec-mmrules
+./firewall [auth_flags] del-all-ipsec-csrules | del-all-ipsec-mmrules
 ```
 
 ### Delete all IPsec connection-security rules from the local store
@@ -379,7 +379,7 @@ firewall [auth_flags] del-all-ipsec-csrules | del-all-ipsec-mmrules
 ### Syntax
 
 ```bash
-firewall [auth_flags] del-all-ipsec-authsets [--phase <1|2>] | del-all-ipsec-cryptosets [--phase <1|2>]
+./firewall [auth_flags] del-all-ipsec-authsets [--phase <1|2>] | del-all-ipsec-cryptosets [--phase <1|2>]
 ```
 
 ### Delete all phase-1 authentication sets from the local store
@@ -397,7 +397,7 @@ firewall [auth_flags] del-all-ipsec-authsets [--phase <1|2>] | del-all-ipsec-cry
 ### Syntax
 
 ```bash
-firewall [auth_flags] del-phase1-sas | del-phase2-sas
+./firewall [auth_flags] del-phase1-sas | del-phase2-sas
 ```
 
 ### Delete all phase-1 IPsec security associations
@@ -415,7 +415,7 @@ firewall [auth_flags] del-phase1-sas | del-phase2-sas
 ### Syntax
 
 ```bash
-firewall [auth_flags] dump | restore-defaults
+./firewall [auth_flags] dump | restore-defaults
 ```
 
 ### Dump the full firewall policy as text

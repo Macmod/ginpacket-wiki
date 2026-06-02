@@ -7,7 +7,7 @@
 ### Syntax
 
 ```bash
-services [auth_flags] dump [--type <mask>] [--state <mask>] [--group <name>]
+./services [auth_flags] dump [--type <mask>] [--state <mask>] [--group <name>]
 ```
 
 ### Enumerate all services with their type, state, and group
@@ -19,7 +19,7 @@ services [auth_flags] dump [--type <mask>] [--state <mask>] [--group <name>]
 ### Syntax
 
 ```bash
-services [auth_flags] query [--type <mask>] [--state <mask>] [--group <name>]
+./services [auth_flags] query [--type <mask>] [--state <mask>] [--group <name>]
 ```
 
 ### Query running services with optional type/state/group filters
@@ -31,7 +31,7 @@ services [auth_flags] query [--type <mask>] [--state <mask>] [--group <name>]
 ### Syntax
 
 ```bash
-services [auth_flags] service <name> [--use-v1]
+./services [auth_flags] service <name> [--use-v1]
 ```
 
 ### Show full configuration info for a service
@@ -43,7 +43,7 @@ services [auth_flags] service <name> [--use-v1]
 ### Syntax
 
 ```bash
-services [auth_flags] get-sd <name> [--parse-dacl]
+./services [auth_flags] get-sd <name> [--parse-dacl]
 ```
 
 ### Read the security descriptor of a service
@@ -55,7 +55,7 @@ services [auth_flags] get-sd <name> [--parse-dacl]
 ### Syntax
 
 ```bash
-services [auth_flags] group <group-name>
+./services [auth_flags] group <group-name>
 ```
 
 ### Query the load-order group for a service group
@@ -67,7 +67,7 @@ services [auth_flags] group <group-name>
 ### Syntax
 
 ```bash
-services [auth_flags] enum-deps <name>
+./services [auth_flags] enum-deps <name>
 ```
 
 ### List all services that depend on a given service
@@ -79,7 +79,7 @@ services [auth_flags] enum-deps <name>
 ### Syntax
 
 ```bash
-services [auth_flags] translate (-K <svc-key> | -N <display-name>)
+./services [auth_flags] translate (-K <svc-key> | -N <display-name>)
 ```
 
 ### Translate between a service's registry key name and its display name
@@ -91,7 +91,7 @@ services [auth_flags] translate (-K <svc-key> | -N <display-name>)
 ### Syntax
 
 ```bash
-services [auth_flags] add-service <name> <binpath> [-N <display>] [--service-type <type>] [-T <start-type>] [--wow64] [--wow-type <arch>]
+./services [auth_flags] add-service <name> <binpath> [-N <display>] [--service-type <type>] [-T <start-type>] [--wow64] [--wow-type <arch>]
 ```
 
 ### Create a new service with an on-demand start type
@@ -121,7 +121,7 @@ Register a service for a specific machine architecture (RCreateWowService, opnum
 ### Syntax
 
 ```bash
-services [auth_flags] set-service <name> [-b <binpath>] [-T <start-type>] [-a <account>] ...
+./services [auth_flags] set-service <name> [-b <binpath>] [-T <start-type>] [-a <account>] ...
 ```
 
 ### Modify configuration of an existing service
@@ -133,7 +133,7 @@ services [auth_flags] set-service <name> [-b <binpath>] [-T <start-type>] [-a <a
 ### Syntax
 
 ```bash
-services [auth_flags] set-failure <name> [-F <command>] [--reset-period <sec>]
+./services [auth_flags] set-failure <name> [-F <command>] [--reset-period <sec>]
 ```
 
 ### Configure failure recovery actions for a service
@@ -145,7 +145,7 @@ services [auth_flags] set-failure <name> [-F <command>] [--reset-period <sec>]
 ### Syntax
 
 ```bash
-services [auth_flags] set-sd <name> --sd <hex-sd>
+./services [auth_flags] set-sd <name> --sd <hex-sd>
 ```
 
 ### Write a custom security descriptor to a service (use hex output from get-sd)
@@ -157,7 +157,7 @@ services [auth_flags] set-sd <name> --sd <hex-sd>
 ### Syntax
 
 ```bash
-services [auth_flags] start <name> [--arg <value> ...]
+./services [auth_flags] start <name> [--arg <value> ...]
 ```
 
 ### Start a service, optionally passing arguments
@@ -169,7 +169,7 @@ services [auth_flags] start <name> [--arg <value> ...]
 ### Syntax
 
 ```bash
-services [auth_flags] stop <name> [--reason <hex>] [--planned] [--comment <text>]
+./services [auth_flags] stop <name> [--reason <hex>] [--planned] [--comment <text>]
 ```
 
 ### Stop a service with an optional reason code
@@ -181,7 +181,7 @@ services [auth_flags] stop <name> [--reason <hex>] [--planned] [--comment <text>
 ### Syntax
 
 ```bash
-services [auth_flags] del-service <name>
+./services [auth_flags] del-service <name>
 ```
 
 ### Delete a service

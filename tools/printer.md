@@ -7,7 +7,7 @@
 ### Syntax
 
 ```bash
-printer [auth_flags] printers
+./printer [auth_flags] printers
 ```
 
 ### List all locally installed printers (name, share, port, driver, status)
@@ -19,7 +19,7 @@ printer [auth_flags] printers
 ### Syntax
 
 ```bash
-printer [auth_flags] dump [--ports] [--monitors] [--forms] [--strict]
+./printer [auth_flags] dump [--ports] [--monitors] [--forms] [--strict]
 ```
 
 ### Collect core printer inventory (server, printers, drivers, processors)
@@ -43,7 +43,7 @@ printer [auth_flags] dump [--ports] [--monitors] [--forms] [--strict]
 ### Syntax
 
 ```bash
-printer [auth_flags] drivers [-e <environment>]
+./printer [auth_flags] drivers [-e <environment>]
 ```
 
 ### List installed driver names, environments, and spool-store paths
@@ -61,7 +61,7 @@ printer [auth_flags] drivers [-e <environment>]
 ### Syntax
 
 ```bash
-printer [auth_flags] ports
+./printer [auth_flags] ports
 ```
 
 ### List configured ports (TCP/IP ports reveal the physical printer IP)
@@ -73,7 +73,7 @@ printer [auth_flags] ports
 ### Syntax
 
 ```bash
-printer [auth_flags] monitors
+./printer [auth_flags] monitors
 ```
 
 ### List port monitor DLLs (third-party monitors reveal loaded code paths)
@@ -85,7 +85,7 @@ printer [auth_flags] monitors
 ### Syntax
 
 ```bash
-printer [auth_flags] server
+./printer [auth_flags] server
 ```
 
 ### Read PrintNightmare mitigation registry flags and server version
@@ -97,7 +97,7 @@ printer [auth_flags] server
 ### Syntax
 
 ```bash
-printer [auth_flags] processors [-e <environment>]
+./printer [auth_flags] processors [-e <environment>]
 ```
 
 ### List all print processors registered for an environment
@@ -115,7 +115,7 @@ printer [auth_flags] processors [-e <environment>]
 ### Syntax
 
 ```bash
-printer [auth_flags] datatypes [-c <print-processor>] [-e <environment>]
+./printer [auth_flags] datatypes [-c <print-processor>] [-e <environment>]
 ```
 
 ### List data types supported by the default print processor
@@ -133,7 +133,7 @@ printer [auth_flags] datatypes [-c <print-processor>] [-e <environment>]
 ### Syntax
 
 ```bash
-printer [auth_flags] info <printer>
+./printer [auth_flags] info <printer>
 ```
 
 ### Show full PRINTER_INFO_2 for one printer (config, status, attributes bitmask)
@@ -145,7 +145,7 @@ printer [auth_flags] info <printer>
 ### Syntax
 
 ```bash
-printer [auth_flags] driver <printer> [-e <environment>]
+./printer [auth_flags] driver <printer> [-e <environment>]
 ```
 
 ### Show DRIVER_INFO_3 for the driver attached to a printer
@@ -163,7 +163,7 @@ printer [auth_flags] driver <printer> [-e <environment>]
 ### Syntax
 
 ```bash
-printer [auth_flags] jobs <printer>
+./printer [auth_flags] jobs <printer>
 ```
 
 ### List queued (and retained) jobs on a printer
@@ -175,7 +175,7 @@ printer [auth_flags] jobs <printer>
 ### Syntax
 
 ```bash
-printer [auth_flags] job <printer> -j <job-id>
+./printer [auth_flags] job <printer> -j <job-id>
 ```
 
 ### Show detailed JOB_INFO_2 for a single print job
@@ -187,7 +187,7 @@ printer [auth_flags] job <printer> -j <job-id>
 ### Syntax
 
 ```bash
-printer [auth_flags] set-job <printer> -j <job-id> -a <pause|resume|cancel|restart|delete|retain|release>
+./printer [auth_flags] set-job <printer> -j <job-id> -a <pause|resume|cancel|restart|delete|retain|release>
 ```
 
 ### Cancel a print job
@@ -205,7 +205,7 @@ printer [auth_flags] set-job <printer> -j <job-id> -a <pause|resume|cancel|resta
 ### Syntax
 
 ```bash
-printer [auth_flags] set-attrs <printer> [-A <add-mask>] [-R <remove-mask>]
+./printer [auth_flags] set-attrs <printer> [-A <add-mask>] [-R <remove-mask>]
 ```
 
 ### Enable KEEPPRINTEDJOBS (0x100) so completed jobs stay visible in the queue
@@ -229,7 +229,7 @@ printer [auth_flags] set-attrs <printer> [-A <add-mask>] [-R <remove-mask>]
 ### Syntax
 
 ```bash
-printer [auth_flags] notify <listener-host>
+./printer [auth_flags] notify <listener-host>
 ```
 
 ### Trigger a change notification to a remote listener (authentication as TARGET$)
@@ -241,7 +241,7 @@ printer [auth_flags] notify <listener-host>
 ### Syntax
 
 ```bash
-printer [auth_flags] add-printer -n <name> -d <driver> -q <port> [-s <share>] [-C <comment>] [-D <datatype>] [-c <processor>]
+./printer [auth_flags] add-printer -n <name> -d <driver> -q <port> [-s <share>] [-C <comment>] [-D <datatype>] [-c <processor>]
 ```
 
 ### Add a printer using an already-installed driver
@@ -277,7 +277,7 @@ printer [auth_flags] add-printer -n <name> -d <driver> -q <port> [-s <share>] [-
 ### Syntax
 
 ```bash
-printer [auth_flags] set-printer <printer> -a <pause|resume|purge>
+./printer [auth_flags] set-printer <printer> -a <pause|resume|purge>
 ```
 
 ### Pause a printer (new jobs are held)
@@ -301,7 +301,7 @@ printer [auth_flags] set-printer <printer> -a <pause|resume|purge>
 ### Syntax
 
 ```bash
-printer [auth_flags] reset-printer <printer> [-D <datatype>]
+./printer [auth_flags] reset-printer <printer> [-D <datatype>]
 ```
 
 ### Reset a printer's data type and device-mode to defaults
@@ -319,7 +319,7 @@ printer [auth_flags] reset-printer <printer> [-D <datatype>]
 ### Syntax
 
 ```bash
-printer [auth_flags] del-printer <printer>
+./printer [auth_flags] del-printer <printer>
 ```
 
 ### Delete a printer
@@ -331,7 +331,7 @@ printer [auth_flags] del-printer <printer>
 ### Syntax
 
 ```bash
-printer [auth_flags] driver-dir [-e <environment>]
+./printer [auth_flags] driver-dir [-e <environment>]
 ```
 
 ### Get the server-side driver staging directory
@@ -349,7 +349,7 @@ printer [auth_flags] driver-dir [-e <environment>]
 ### Syntax
 
 ```bash
-printer [auth_flags] add-driver <driver-name> --driver-path <path> --data-file <path> --config-file <path> [-e <env>]
+./printer [auth_flags] add-driver <driver-name> --driver-path <path> --data-file <path> --config-file <path> [-e <env>]
 ```
 
 ### Install a driver from UNC paths accessible to the print server
@@ -375,7 +375,7 @@ printer [auth_flags] add-driver <driver-name> --driver-path <path> --data-file <
 ### Syntax
 
 ```bash
-printer [auth_flags] del-driver <driver-name> [-e <environment>]
+./printer [auth_flags] del-driver <driver-name> [-e <environment>]
 ```
 
 ### Delete an installed driver
@@ -393,7 +393,7 @@ printer [auth_flags] del-driver <driver-name> [-e <environment>]
 ### Syntax
 
 ```bash
-printer [auth_flags] add-processor <processor-name> --path <dll> [-e <environment>]
+./printer [auth_flags] add-processor <processor-name> --path <dll> [-e <environment>]
 ```
 
 ### Register a print processor DLL (must be in the driver store on the server)
@@ -411,7 +411,7 @@ printer [auth_flags] add-processor <processor-name> --path <dll> [-e <environmen
 ### Syntax
 
 ```bash
-printer [auth_flags] del-processor <processor-name> [-e <environment>]
+./printer [auth_flags] del-processor <processor-name> [-e <environment>]
 ```
 
 ### Remove a print processor
@@ -429,7 +429,7 @@ printer [auth_flags] del-processor <processor-name> [-e <environment>]
 ### Syntax
 
 ```bash
-printer [auth_flags] processor-dir [-e <environment>]
+./printer [auth_flags] processor-dir [-e <environment>]
 ```
 
 ### Get the server-side print processor staging directory
@@ -445,7 +445,7 @@ printer [auth_flags] processor-dir [-e <environment>]
 ### Syntax
 
 ```bash
-printer [auth_flags] forms
+./printer [auth_flags] forms
 ```
 
 
@@ -459,7 +459,7 @@ List all form definitions registered on the print server (built-in and user-defi
 ### Syntax
 
 ```bash
-printer [auth_flags] form <form>
+./printer [auth_flags] form <form>
 ```
 
 ### Show details for a specific form by name
@@ -471,7 +471,7 @@ printer [auth_flags] form <form>
 ### Syntax
 
 ```bash
-printer [auth_flags] add-form <form> --width <mm> --height <mm> [--x-off <n>] [--y-off <n>]
+./printer [auth_flags] add-form <form> --width <mm> --height <mm> [--x-off <n>] [--y-off <n>]
 ```
 
 ### Add a new user-defined form to the print server
@@ -483,7 +483,7 @@ printer [auth_flags] add-form <form> --width <mm> --height <mm> [--x-off <n>] [-
 ### Syntax
 
 ```bash
-printer [auth_flags] set-form <form> --width <mm> --height <mm>
+./printer [auth_flags] set-form <form> --width <mm> --height <mm>
 ```
 
 ### Update dimensions of an existing user-defined form
@@ -495,7 +495,7 @@ printer [auth_flags] set-form <form> --width <mm> --height <mm>
 ### Syntax
 
 ```bash
-printer [auth_flags] del-form <form>
+./printer [auth_flags] del-form <form>
 ```
 
 ### Delete a user-defined form from the print server
@@ -507,7 +507,7 @@ printer [auth_flags] del-form <form>
 ### Syntax
 
 ```bash
-printer [auth_flags] add-port <port> [--monitor <name>]
+./printer [auth_flags] add-port <port> [--monitor <name>]
 ```
 
 ### Register a new printer port on the print server
@@ -523,7 +523,7 @@ printer [auth_flags] add-port <port> [--monitor <name>]
 ### Syntax
 
 ```bash
-printer [auth_flags] del-port <port>
+./printer [auth_flags] del-port <port>
 ```
 
 ### Delete a printer port from the print server
@@ -535,7 +535,7 @@ printer [auth_flags] del-port <port>
 ### Syntax
 
 ```bash
-printer [auth_flags] add-monitor <name> --path <dll> [-e <environment>]
+./printer [auth_flags] add-monitor <name> --path <dll> [-e <environment>]
 ```
 
 ### Register a port monitor DLL on the print server
@@ -547,7 +547,7 @@ printer [auth_flags] add-monitor <name> --path <dll> [-e <environment>]
 ### Syntax
 
 ```bash
-printer [auth_flags] del-monitor <name> [-e <environment>]
+./printer [auth_flags] del-monitor <name> [-e <environment>]
 ```
 
 ### Remove a port monitor from the print server
@@ -559,7 +559,7 @@ printer [auth_flags] del-monitor <name> [-e <environment>]
 ### Syntax
 
 ```bash
-printer [auth_flags] print <printer> -f <file> [-d <doc-name>] [-D <datatype>] [-o <output-path>]
+./printer [auth_flags] print <printer> -f <file> [-d <doc-name>] [-D <datatype>] [-o <output-path>]
 ```
 
 ### Send a raw PRN/PCL/PostScript file to a v3-driver printer
