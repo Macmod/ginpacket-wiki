@@ -14,7 +14,7 @@ The tools span a range of use cases, including:
 Most subcommands map directly to a single protocol operation or RPC call - what you pass on the command line is what gets sent on the wire. A small number chain multiple calls to implement higher-level actions (for example, `dcsync`, `reg secrets`, and `sam dump`, `changepwd` etc).
 
 {% hint style="info" %}
-Despite the name, `ginpacket` is not a Go port of [impacket](https://github.com/fortra/impacket). It is an opinionated toolkit with independently reworked implementations of some features that overlap with impacket, as well as implementations that go beyond what impacket provides. The two projects share goals but differ in scope and design.
+Despite the name, `ginpacket` is **not** a Go port of [impacket](https://github.com/fortra/impacket). It is an opinionated toolkit with independently reworked implementations of some features that overlap with impacket, as well as implementations that go beyond what impacket provides. The two projects share goals but differ in scope and design.
 {% endhint %}
 
 # Protocols implemented
@@ -51,7 +51,7 @@ Despite the name, `ginpacket` is not a Go port of [impacket](https://github.com/
 	* Performance Counter Query ([MS-PCQ](https://winprotocoldocs-bhdugrdyduf5h2e4.b02.azurefd.net/MS-PCQ/%5bMS-PCQ%5d.pdf))
 	* Windows Time Service ([MS-W32T](https://winprotocoldocs-bhdugrdyduf5h2e4.b02.azurefd.net/MS-W32T/%5bMS-W32T%5d.pdf))
 
-For a complete reference of the commands supported by Ginpacket's tools, check the [Subcommands Map](#subcommands-map) or the [Usage](#usage) section.
+For a complete reference of the commands supported by Ginpacket's tools, check the [Subcommands Map](#subcommands-map) or the Usage section for the specific [tools](https://ginpacket.gitbook.io/docs/tools/tools) you intend to use.
 
 # Subcommands Map
 
