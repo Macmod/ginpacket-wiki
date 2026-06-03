@@ -58,6 +58,7 @@ For a complete reference of the commands supported by Ginpacket's tools, check t
 
 Index of provided tools, subcommands & key arguments:
 
+<pre>
 ginpacket/
 +- authz
 │  ├─ version
@@ -569,6 +570,7 @@ ginpacket/
 │  ├─ set-primary-name         <primary-name>
 │  ├─ add-transport            <transport-name> [--quality <n>]
 │  ├─ del-transport            <transport-name> [--force-level <n>]
+</pre>
 
 # License
 
