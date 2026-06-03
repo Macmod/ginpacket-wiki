@@ -2,7 +2,9 @@
 
 **Protocols**: [MS-PCQ](https://winprotocoldocs-bhdugrdyduf5h2e4.b02.azurefd.net/MS-PCQ/%5bMS-PCQ%5d.pdf).
 
-## Subcommands / Usage
+The Performance Counter Query Protocol (MS-PCQ) provides remote access to Windows performance counters. It allows reading real-time metrics such as CPU load, memory usage, disk throughput, and process statistics from a remote host - without requiring WMI or RDP.
+
+## Usage
 
 ### csets
 

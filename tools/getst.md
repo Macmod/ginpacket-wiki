@@ -2,7 +2,9 @@
 
 **Protocols**: [RFC 4120](https://datatracker.ietf.org/doc/html/rfc4120) / [MS-KILE](https://winprotocoldocs-bhdugrdyduf5h2e4.b02.azurefd.net/MS-KILE/%5bMS-KILE%5d.pdf) / [MS-SFU](https://winprotocoldocs-bhdugrdyduf5h2e4.b02.azurefd.net/MS-SFU/%5bMS-SFU%5d.pdf).
 
-## Subcommands / Usage
+Service Tickets (STs) are Kerberos credentials that grant access to a specific service on a specific host. This tool requests them from the KDC using an existing TGT, and supports S4U2Self (impersonating another user) and S4U2Proxy (constrained delegation) - making it useful for both legitimate service access and delegation abuse scenarios.
+
+## Usage
 
 ### General Usage
 

@@ -2,7 +2,9 @@
 
 **Protocols**: [MS-TSTS](https://winprotocoldocs-bhdugrdyduf5h2e4.b02.azurefd.net/MS-TSTS/%5bMS-TSTS%5d.pdf).
 
-## Subcommands / Usage
+The Terminal Services Terminal Server Runtime Interface (MS-TSTS) exposes RDP session management on a Windows Terminal Server or any Windows host with Remote Desktop enabled. It allows enumerating active and disconnected sessions, sending messages, connecting or disconnecting sessions, and watching session state changes in real time.
+
+## Usage
 
 ### sessions
 

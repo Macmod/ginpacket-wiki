@@ -2,7 +2,9 @@
 
 **Protocols**: [MS-RRP](https://winprotocoldoc.z19.web.core.windows.net/MS-RRP/%5bMS-RRP%5d.pdf).
 
-## Subcommands / Usage
+The Windows Remote Registry Protocol (MS-RRP) provides remote read and write access to the Windows registry via RPC. It allows querying, adding, modifying, and deleting keys and values on a remote machine - useful for configuration auditing, persistence, and extracting sensitive data stored in the registry.
+
+## Usage
 
 ### query
 

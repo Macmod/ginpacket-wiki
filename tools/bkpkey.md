@@ -2,7 +2,9 @@
 
 **Protocols**: [MS-BKRP](https://winprotocoldocs-bhdugrdyduf5h2e4.b02.azurefd.net/MS-BKRP/%5bMS-BKRP%5d.pdf).
 
-## Subcommands / Usage
+The Backup Key Recovery Protocol (MS-BKRP) is used by Windows DPAPI to store and retrieve a domain-wide backup key on the Domain Controller. Possessing this key allows decryption of any DPAPI-protected secret in the domain - including credentials stored by browsers, credential manager, and other applications.
+
+## Usage
 
 ### retrieve
 

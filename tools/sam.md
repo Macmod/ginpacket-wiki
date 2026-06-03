@@ -2,7 +2,9 @@
 
 **Protocols**: [MS-SAMR](https://winprotocoldocs-bhdugrdyduf5h2e4.b02.azurefd.net/MS-SAMR/%5bMS-SAMR%5d.pdf).
 
-## Subcommands / Usage
+The Security Account Manager Remote Protocol (MS-SAMR) provides access to the local SAM database on Windows hosts. It allows enumerating and managing local users, groups, and their attributes - including creating accounts, changing passwords, and modifying group memberships, all over the network.
+
+## Usage
 
 ### domains
 

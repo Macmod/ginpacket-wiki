@@ -2,7 +2,9 @@
 
 **Protocols**: [MS-LSAD](https://winprotocoldocs-bhdugrdyduf5h2e4.b02.azurefd.net/MS-LSAD/%5bMS-LSAD%5d.pdf).
 
-## Subcommands / Usage
+The Local Security Authority Domain Policy Protocol (MS-LSAD) provides remote access to a Windows host's security policy configuration. It allows querying and modifying account privileges, audit policy, trusted domain relationships, and secret values - including LSA secrets, which can store service account credentials and other sensitive material.
+
+## Usage
 
 ### policy
 

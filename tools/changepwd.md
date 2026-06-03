@@ -1,8 +1,10 @@
 # 🔄 Password Change (changepwd)
 
-**Protocols**: [MS-SAMR](https://winprotocoldocs-bhdugrdyduf5h2e4.b02.azurefd.net/MS-SAMR/%5bMS-SAMR%5d.pdf), [RFC 3244](https://datatracker.ietf.org/doc/html/rfc3244) (kpasswd), [LDAP](https://datatracker.ietf.org/doc/html/rfc4511), ADWS.
+**Protocols**: [MS-SAMR](https://winprotocoldocs-bhdugrdyduf5h2e4.b02.azurefd.net/MS-SAMR/%5bMS-SAMR%5d.pdf), [RFC 3244](https://datatracker.ietf.org/doc/html/rfc3244) (kpasswd), [LDAP](https://datatracker.ietf.org/doc/html/rfc4511), [MS-ADCAP](https://winprotocoldoc.z19.web.core.windows.net/MS-ADCAP/%5bMS-ADCAP%5d.pdf).
 
-## Subcommands / Usage
+Password changes in Active Directory can be performed through multiple protocols. This tool supports SAMR (over SMB or direct TCP), LDAP/LDAPS (using a password modify extended operation), [MS-ADCAP](https://winprotocoldoc.z19.web.core.windows.net/MS-ADCAP/%5bMS-ADCAP%5d.pdf) (Active Directory Web Services Custom Action Protocol), and Kerberos kpasswd. Depending on the context, some methods require knowing the old password while others can force-set a new one without it.
+
+## Usage
 
 ### samr
 

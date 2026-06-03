@@ -2,7 +2,9 @@
 
 **Protocols**: [MS-SCMR](https://winprotocoldocs-bhdugrdyduf5h2e4.b02.azurefd.net/MS-SCMR/%5bMS-SCMR%5d.pdf).
 
-## Subcommands / Usage
+The Service Control Manager Remote Protocol (MS-SCMR) allows full remote management of Windows services. It lets you enumerate, start, stop, create, modify, and delete services on a target host.
+
+## Usage
 
 ### dump
 

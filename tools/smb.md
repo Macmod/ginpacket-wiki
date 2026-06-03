@@ -2,7 +2,9 @@
 
 **Protocols**: [MS-SMB2](https://winprotocoldocs-bhdugrdyduf5h2e4.b02.azurefd.net/MS-SMB2/%5bMS-SMB2%5d.pdf).
 
-## Subcommands / Usage
+SMB2/3 is the Windows protocol for file and printer sharing over the network. This tool provides a command-line interface for browsing shares, listing and navigating directories, transferring files, and running an interactive shell - all directly over SMB without requiring a mounted drive or GUI.
+
+## Usage
 
 ### shares
 

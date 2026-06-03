@@ -2,7 +2,9 @@
 
 
 
-## Subcommands / Usage
+The Remote Authorization API (MS-RAA) lets you query a Windows host's authorization engine to determine what access rights a given user or security principal would have against a specific resource - without actually performing the access. Useful for auditing and validating ACLs on LDAP objects, files, services, registry keys, WMI namespaces, and more.
+
+## Usage
 
 ### General Usage
 

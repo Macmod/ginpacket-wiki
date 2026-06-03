@@ -2,7 +2,9 @@
 
 **Protocols**: [MS-DNSP](https://winprotocoldocs-bhdugrdyduf5h2e4.b02.azurefd.net/MS-DNSP/%5bMS-DNSP%5d.pdf).
 
-## Subcommands / Usage
+The DNS Server Management Protocol (MS-DNSP) allows remote administration of a Windows DNS server via RPC. It provides full control over DNS zones and records - including querying, adding, modifying, and deleting entries.
+
+## Usage
 
 ### General Usage
 

@@ -2,7 +2,9 @@
 
 **Protocols**: [RFC 4120](https://datatracker.ietf.org/doc/html/rfc4120) / [MS-KILE](https://winprotocoldocs-bhdugrdyduf5h2e4.b02.azurefd.net/MS-KILE/%5bMS-KILE%5d.pdf).
 
-## Subcommands / Usage
+Kerberos is the primary authentication protocol in Active Directory. A Ticket Granting Ticket (TGT) is the initial credential obtained from the Key Distribution Center (KDC) after authentication, and it is used to request access to individual services without re-authenticating. This tool supports multiple authentication methods including password, NTLM hash, AES key, an existing ccache, and certificate-based (PKINIT) authentication.
+
+## Usage
 
 ### General Usage
 

@@ -2,7 +2,9 @@
 
 **Protocols**: [MS-LSAT](https://winprotocoldocs-bhdugrdyduf5h2e4.b02.azurefd.net/MS-LSAT/%5bMS-LSAT%5d.pdf).
 
-## Subcommands / Usage
+The LSA Translate protocol (MS-LSAT) allows resolving Security Identifiers (SIDs) to account names and vice versa on a remote host. This is useful for translating raw SIDs found in ACLs, audit logs, or security descriptors into human-readable account names, and for enumerating domain and local accounts by cycling through RID values.
+
+## Usage
 
 ### General Usage
 

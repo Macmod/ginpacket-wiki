@@ -2,7 +2,9 @@
 
 **Protocols**: [MS-SRVS](https://winprotocoldocs-bhdugrdyduf5h2e4.b02.azurefd.net/MS-SRVS/%5bMS-SRVS%5d.pdf).
 
-## Subcommands / Usage
+The Server Service Remote Protocol (MS-SRVS) exposes information about shared resources and active connections on a Windows host. It allows enumerating network shares, active sessions, open files, and transport-level information.
+
+## Usage
 
 ### shares
 

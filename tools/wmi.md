@@ -2,7 +2,9 @@
 
 **Protocols**: [MS-DCOM](https://winprotocoldocs-bhdugrdyduf5h2e4.b02.azurefd.net/MS-DCOM/%5bMS-DCOM%5d.pdf), [MS-WMI](https://winprotocoldocs-bhdugrdyduf5h2e4.b02.azurefd.net/MS-WMI/%5bMS-WMI%5d.pdf).
 
-## Subcommands / Usage
+Windows Management Instrumentation (WMI) provides a unified interface for querying and managing virtually every aspect of a Windows system. Over the network it uses DCOM and the WMI protocol (MS-WMI), allowing remote execution of queries, method calls on managed objects, and process execution.
+
+## Usage
 
 ### query
 

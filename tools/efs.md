@@ -2,7 +2,9 @@
 
 **Protocols**: [MS-EFSR](https://winprotocoldocs-bhdugrdyduf5h2e4.b02.azurefd.net/MS-EFSR/%5bMS-EFSR%5d.pdf).
 
-## Subcommands / Usage
+The Encrypting File System Remote Protocol (MS-EFSR) supports remote management of encrypted files on Windows. It allows users and administrators to perform operations on encrypted data across the network, such as backing up and restoring EFS keys, or managing encrypted files on remote file servers.
+
+## Usage
 
 **IMPORTANT: use UNC file paths for remote EFSRPC calls. Local paths like C:\Temp\file.txt can return ERROR_ACCESS_DENIED.:**
 

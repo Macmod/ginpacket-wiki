@@ -2,7 +2,9 @@
 
 **Protocols**: [MS-RPCE](https://winprotocoldocs-bhdugrdyduf5h2e4.b02.azurefd.net/MS-RPCE/%5bMS-RPCE%5d.pdf) Endpoint Mapper.
 
-## Subcommands / Usage
+The RPC Endpoint Mapper is a service running on every Windows host that maintains a registry of active RPC server endpoints. Querying it reveals which RPC-based services and interfaces are listening on the target - useful for service discovery and fingerprinting during enumeration.
+
+## Usage
 
 ### General Usage
 

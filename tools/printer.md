@@ -2,7 +2,9 @@
 
 **Protocols**: [MS-RPRN](https://winprotocoldocs-bhdugrdyduf5h2e4.b02.azurefd.net/MS-RPRN/%5bMS-RPRN%5d.pdf) (`\pipe\spoolss` or TCP via `--use-tcp`).
 
-## Subcommands / Usage
+The Print System Remote Protocol (MS-RPRN) allows remote management of the Windows Print Spooler service. It provides capabilities to enumerate, monitor, and manage printers, print jobs, and print servers across the network.
+
+## Usage
 
 ### printers
 

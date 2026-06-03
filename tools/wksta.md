@@ -2,7 +2,9 @@
 
 **Protocols**: [MS-WKST](https://winprotocoldocs-bhdugrdyduf5h2e4.b02.azurefd.net/MS-WKST/%5bMS-WKST%5d.pdf).
 
-## Subcommands / Usage
+The Workstation Service Remote Protocol (MS-WKST) provides information about a Windows workstation's network configuration and active sessions. It allows querying the domain and machine name, enumerating currently logged-on users, and listing active network connections.
+
+## Usage
 
 ### info
 

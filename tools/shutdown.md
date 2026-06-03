@@ -2,7 +2,9 @@
 
 **Protocols**: [MS-RSP](https://winprotocoldocs-bhdugrdyduf5h2e4.b02.azurefd.net/MS-RSP/%5bMS-RSP%5d.pdf).
 
-## Subcommands / Usage
+The Remote Shutdown Protocol (MS-RSP) provides a simple RPC interface for initiating or aborting a system shutdown or reboot on a remote Windows host.
+
+## Usage
 
 ### initiate
 

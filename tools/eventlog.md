@@ -2,7 +2,9 @@
 
 **Protocols**: [MS-EVEN6](https://winprotocoldocs-bhdugrdyduf5h2e4.b02.azurefd.net/MS-EVEN6/%5bMS-EVEN6%5d.pdf).
 
-## Subcommands / Usage
+The EventLog Remoting Protocol v6 (MS-EVEN6) provides remote access to the Windows Event Log service. It allows querying and reading event log channels on a remote host - useful for collecting security events, audit logs, and operational data without needing RDP or local access.
+
+## Usage
 
 ### channels
 

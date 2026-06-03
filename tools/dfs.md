@@ -2,7 +2,9 @@
 
 **Protocols**: [MS-DFSNM](https://winprotocoldocs-bhdugrdyduf5h2e4.b02.azurefd.net/MS-DFSNM/%5bMS-DFSNM%5d.pdf).
 
-## Subcommands / Usage
+The DFS Namespace Management Protocol (MS-DFSNM) allows remote management of Distributed File System namespaces on Windows servers. It lets you enumerate, create, and modify DFS roots and links - the logical namespace that maps user-visible paths to underlying UNC shares across multiple servers.
+
+## Usage
 
 ### namespaces
 

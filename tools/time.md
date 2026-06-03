@@ -2,7 +2,9 @@
 
 **Protocols**: [MS-W32T](https://winprotocoldocs-bhdugrdyduf5h2e4.b02.azurefd.net/MS-W32T/%5bMS-W32T%5d.pdf).
 
-## Subcommands / Usage
+The Windows Time Service Protocol (MS-W32T) is used by Windows hosts for time synchronization across a domain. This tool lets you query the NTP configuration and synchronization status of a remote host, including its current time source and sync interval.
+
+## Usage
 
 ### sync
 

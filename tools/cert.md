@@ -2,7 +2,9 @@
 
 **Protocols**: [MS-WCCE](https://winprotocoldocs-bhdugrdyduf5h2e4.b02.azurefd.net/MS-WCCE/%5bMS-WCCE%5d.pdf), [MS-CSRA](https://winprotocoldocs-bhdugrdyduf5h2e4.b02.azurefd.net/MS-CSRA/%5bMS-CSRA%5d.pdf).
 
-## Subcommands / Usage
+The Certificate Services protocols (MS-WCCE and MS-CSRA) expose Active Directory Certificate Services (ADCS) over RPC. They allow enrolling certificates, managing certificate templates, and interacting with certification authorities - all remotely.
+
+## Usage
 
 ### ping
 

@@ -2,7 +2,9 @@
 
 **Protocols**: [MS-DRSR](https://winprotocoldocs-bhdugrdyduf5h2e4.b02.azurefd.net/MS-DRSR/%5bMS-DRSR%5d.pdf).
 
-## Subcommands / Usage
+DCSync uses the Directory Replication Service (MS-DRSR) to request password hashes for any account directly from a Domain Controller. The DC replicates the requested credentials, bypassing normal authentication flows. Requires Replicating Directory Changes and Replicating Directory Changes All privileges - typically held by Domain Admins and certain service accounts.
+
+## Usage
 
 ### General Usage
 

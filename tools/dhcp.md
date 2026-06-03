@@ -2,7 +2,9 @@
 
 **Protocols**: [MS-DHCPM](https://winprotocoldocs-bhdugrdyduf5h2e4.b02.azurefd.net/MS-DHCPM/%5bMS-DHCPM%5d.pdf).
 
-## Subcommands / Usage
+The DHCP Server Management Protocol (MS-DHCPM) exposes the Windows DHCP Server for remote administration. It allows enumerating and modifying DHCP scopes, leases, reservations, and server options - useful for network reconnaissance, understanding IP allocation within an Active Directory environment, and modifying sensitive network configurations like default gateways or DNS servers.
+
+## Usage
 
 ### server-version
 

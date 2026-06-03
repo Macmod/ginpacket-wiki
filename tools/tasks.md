@@ -2,7 +2,9 @@
 
 **Protocols**: [MS-TSCH](https://winprotocoldocs-bhdugrdyduf5h2e4.b02.azurefd.net/MS-TSCH/%5bMS-TSCH%5d.pdf), ATSvc.
 
-## Subcommands / Usage
+The Task Scheduler protocols (MS-TSCH and ATSvc) allow managing scheduled tasks on a remote Windows host. Tasks can be enumerated, created, modified, run on demand, and deleted.
+
+## Usage
 
 ### dump
 

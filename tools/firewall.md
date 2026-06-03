@@ -2,7 +2,9 @@
 
 **Protocols**: [MS-FASP](https://winprotocoldocs-bhdugrdyduf5h2e4.b02.azurefd.net/MS-FASP/%5bMS-FASP%5d.pdf).
 
-## Subcommands / Usage
+The Firewall and Advanced Security Protocol (MS-FASP) exposes the Windows Firewall service for remote management via RPC. It allows enumerating, creating, and modifying firewall rules and profiles - accessible to network operators and local admins.
+
+## Usage
 
 ### profile
 

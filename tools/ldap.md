@@ -2,7 +2,9 @@
 
 **Protocols**: [RFC 4511](https://datatracker.ietf.org/doc/html/rfc4511) / [MS-ADTS](https://winprotocoldocs-bhdugrdyduf5h2e4.b02.azurefd.net/MS-ADTS/%5bMS-ADTS%5d.pdf).
 
-## Subcommands / Usage
+LDAP is the primary protocol for querying and managing objects in Active Directory - users, groups, computers, OUs, GPOs, and more. This tool exposes a broad set of read and write operations, from simple queries to creating objects and modifying attributes, all directly against the AD LDAP interface. It also supports LDAPS and StartTLS for encrypted connections.
+
+## Usage
 
 ### whoami
 
