@@ -14,7 +14,7 @@ The tools span a range of use cases, including:
 Most subcommands map directly to a single protocol operation or RPC call - what you pass on the command line is what gets sent on the wire. A small number chain multiple calls to implement higher-level actions (for example, `dcsync`, `reg secrets`, and `sam dump`, `changepwd` etc).
 
 {% hint style="info" %}
-Despite the name, `ginpacket` is **not** a Go port of [impacket](https://github.com/fortra/impacket). It is an opinionated toolkit with independently reworked implementations of some features that overlap with impacket, as well as implementations that go beyond what impacket provides. The two projects share goals but differ in scope and design.
+Despite the name, [ginpacket](https://github.com/Macmod/ginpacket) is **not** a Go port of [impacket](https://github.com/fortra/impacket). It is an opinionated toolkit with independently reworked implementations of some features that overlap with impacket, as well as implementations that go beyond what impacket provides. The two projects share goals but differ in scope and design.
 {% endhint %}
 
 # Protocols implemented
