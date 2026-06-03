@@ -53,6 +53,33 @@ Despite the name, [ginpacket](https://github.com/Macmod/ginpacket) is **not** a 
 
 For a complete reference of the commands supported by Ginpacket's tools, check the [Subcommands Map](#subcommands-map) or the Usage section for the specific [tools](https://ginpacket.gitbook.io/docs/tools/tools) you intend to use.
 
+# Acknowledgements
+
+Big thanks to the main libraries used in this project. Although I implemented lots of additional logic, this project is really just a "big wrapper" around these:
+* [oiweiwei/go-msrpc](https://github.com/oiweiwei/go-msrpc)
+* [RedTeamPentesting/adauth](https://github.com/RedTeamPentesting/adauth)
+* [TheManticoreProject/winacl](https://github.com/TheManticoreProject/winacl)
+* [go-ldap/ldap](https://github.com/go-ldap/ldap)
+
+# References
+
+Many tools/libraries were used as reference during the development of `ginpacket`, but the main ones:
+
+* [fortra/impacket](https://github.com/fortra/impacket/)
+* [trustedsec/Titanis](https://github.com/trustedsec/Titanis)
+* [NeffIsBack/EVENmonitor](https://github.com/NeffIsBack/EVENmonitor) - the source for the logic behind the `eventlog watch` command.
+* [p0dalirius/smbclient-ng](https://github.com/p0dalirius/smbclient-ng) - the source for the logic behind most of the `smb` commands.
+
+# Other Tools
+
+If you like this repo, you may also like these tools:
+
+* [Macmod/godap](https://github.com/Macmod/godap) - A complete terminal user interface (TUI) for LDAP.
+* [Macmod/sopa](https://github.com/Macmod/sopa) - A practical client for ADWS in Golang.
+* [Macmod/flashingestor](https://github.com/Macmod/flashingestor) - A TUI for Active Directory collection.
+* [FalconOpsLLC/goexec](https://github.com/FalconOpsLLC/goexec) - Windows remote execution multitool.
+* [RedTeamPentesting/keycred](https://github.com/RedTeamPentesting/keycred) - Generate and Manage KeyCredentialLinks
+
 # Subcommands Map
 
 <pre>
@@ -570,3 +597,15 @@ ginpacket/
 │  ├─ add-transport            &lt;transport-name&gt; [--quality &lt;n&gt;]
 │  ├─ del-transport            &lt;transport-name&gt; [--force-level &lt;n&gt;]
 </pre>
+
+# License
+
+The MIT License (MIT)
+
+Copyright (c) 2023 Artur Henrique Marzano Gonzaga
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
