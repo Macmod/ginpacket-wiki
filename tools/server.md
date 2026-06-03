@@ -306,20 +306,20 @@ The Server Service Remote Protocol (MS-SRVS) exposes information about shared re
 **Register a new server name alias:**
 
 ```bash
-./server [auth_flags] add-alias TESTDC --alias-target WIN-6BKCP1FPPCI
+./server [auth_flags] add-alias SERVERALIAS --alias-target SERVERNAME 
 ```
 
 ### del-alias
 
 **Syntax:**
 ```bash
-./server [auth_flags] del-alias -a <name> [--alias-target <server>]
+./server [auth_flags] del-alias <name>
 ```
 
 **Remove a server name alias:**
 
 ```bash
-./server [auth_flags] del-alias -a TESTDC --alias-target WIN-6BKCP1FPPCI
+./server [auth_flags] del-alias SERVERALIAS
 ```
 
 ### validate-name
