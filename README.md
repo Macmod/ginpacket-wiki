@@ -82,9 +82,9 @@ If you like this repo, you may also like these tools:
 
 # Subcommands Map
 
-<pre>
-Index of provided tools, subcommands &amp; key arguments:
+Index of provided tools, subcommands & key arguments:
 
+<pre>
 ginpacket/
 +- authz
 │  ├─ version
