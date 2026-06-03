@@ -1,8 +1,21 @@
 # Ginpacket
 
-🍸 Ginpacket is a collection of tools written in Go to work with network protocols, mostly aimed at Windows / Active Directory environments.
+﻿🍸 Ginpacket is a collection of Go tools for working with Windows / Active Directory network protocols. The philosophy is to provide a **simple** and **comprehensive** command-line interface to complex but useful protocol operations, turning researching & interacting with these protocols a simpler task.
 
-This project wraps complex protocol families behind focused commands, exposing a subset of features of these protocols under intuitive and uniform commandlines.
+The tools span a range of use cases, including:
+
+- **Authentication and credentials**: obtain Kerberos tickets (`gettgt`, `getst`), replicate directory secrets (`dcsync`), retrieve DPAPI backup keys (`bkpkey`), and change passwords (`changepwd`).
+- **Directory and identity services**: query and modify AD objects (`ldap`), enumerate accounts and groups (`sam`), manage LSA policy and secrets (`lsa`), resolve SIDs and names (`lookupsid`), and inspect machine domain roles (`machinerole`).
+- **Network infrastructure**: manage DNS zones and records (`dns`), DHCP scopes and leases (`dhcp`), DFS namespaces (`dfs`), firewall rules (`firewall`), and certificate authorities (`cert`).
+- **Host management**: interact with the registry (`reg`), services (`services`), scheduled tasks (`tasks`), WMI (`wmi`), EFS (`efs`), printers (`printer`), SMB shares and files (`smb`), server shares (`server`), initiate remote shutdowns (`shutdown`).
+- **System observability**: read event logs (`eventlog`), query performance counters (`perf`), inspect Terminal Services sessions (`tsts`), probe workstation state (`wksta`), check W32Time (`time`), and enumerate RPC endpoints (`rpcdump`).
+- **Authorization**: simulate access checks against security descriptors (`authz`).
+
+Most subcommands map directly to a single protocol operation or RPC call - what you pass on the command line is what gets sent on the wire. A small number chain multiple calls to implement higher-level actions (for example, `dcsync`, `reg secrets`, and `sam dump`, `changepwd` etc).
+
+{% hint style="info" %}
+Despite the name, `ginpacket` is not a Go port of [impacket](https://github.com/fortra/impacket). It is an opinionated toolkit with independently reworked implementations of some features that overlap with impacket, as well as implementations that go beyond what impacket provides. The two projects share goals but differ in scope and design.
+{% endhint %}
 
 # Protocols implemented
 * Kerberos ([RFC 4120](https://datatracker.ietf.org/doc/html/rfc4120) and [MS-KILE](https://winprotocoldocs-bhdugrdyduf5h2e4.b02.azurefd.net/MS-KILE/%5bMS-KILE%5d.pdf))
@@ -37,9 +50,5 @@ This project wraps complex protocol families behind focused commands, exposing a
 	* Remote Shutdown ([MS-RSP](https://winprotocoldocs-bhdugrdyduf5h2e4.b02.azurefd.net/MS-RSP/%5bMS-RSP%5d.pdf))
 	* Performance Counter Query ([MS-PCQ](https://winprotocoldocs-bhdugrdyduf5h2e4.b02.azurefd.net/MS-PCQ/%5bMS-PCQ%5d.pdf))
 	* Windows Time Service ([MS-W32T](https://winprotocoldocs-bhdugrdyduf5h2e4.b02.azurefd.net/MS-W32T/%5bMS-W32T%5d.pdf))
-
-Ginpacket's philosophy is to be **useful**, **easy** and **comprehensive** - if a feature is exposed by Microsoft and it could be useful for any sort of research or task, I probably tried to implement a suitable interface for it, but of course not all opnums of the RPC-based protocols were implemented - some RPC calls that still exist are legacy features that don't do anything or don't work in modern systems, or features that are too niche and offer little value for most users.
-
-Regardless, most RPC features we did implement can be thought as 1-1 maps from cmdline args to corresponding opnums, although some implement more elaborated algorithms (chaining multiple calls) to perform more specific actions (e.g. `dcsync`, `reg secrets`, `sam dump`, etc). 
 
 For a complete reference of the commands supported by Ginpacket's tools, check the [Subcommands Map](#subcommands-map) or the [Usage](#usage) section.

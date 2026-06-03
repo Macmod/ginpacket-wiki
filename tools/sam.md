@@ -27,7 +27,7 @@
 **Show detailed info for a domain:**
 
 ```bash
-./sam [auth_flags] domain -d EXAMPLE
+./sam [auth_flags] domain -d DOMAIN
 ```
 
 ### set-domain
@@ -40,7 +40,7 @@
 **Modify domain-level password and lockout policy:**
 
 ```bash
-./sam [auth_flags] set-domain -d EXAMPLE --min-pwd-len 8 --lockout-threshold 5 --lockout-window 30m --lockout-duration 30m
+./sam [auth_flags] set-domain -d DOMAIN --min-pwd-len 8 --lockout-threshold 5 --lockout-window 30m --lockout-duration 30m
 ```
 
 ### password-policy
@@ -53,7 +53,7 @@
 **Query the domain password policy:**
 
 ```bash
-./sam [auth_flags] password-policy -d EXAMPLE
+./sam [auth_flags] password-policy -d DOMAIN
 ```
 
 ### get-acl
@@ -66,7 +66,7 @@
 **Read the domain object's security descriptor:**
 
 ```bash
-./sam [auth_flags] get-acl -d EXAMPLE
+./sam [auth_flags] get-acl -d DOMAIN
 ```
 
 ### set-acl
@@ -79,7 +79,7 @@
 **Write a security descriptor to the domain object:**
 
 ```bash
-./sam [auth_flags] set-acl --sd 01000480200000002c00000000000000 -d EXAMPLE
+./sam [auth_flags] set-acl --sd 01000480200000002c00000000000000 -d DOMAIN
 ```
 
 ### users
@@ -92,7 +92,7 @@
 **Enumerate all user accounts in a domain:**
 
 ```bash
-./sam [auth_flags] users -d EXAMPLE
+./sam [auth_flags] users -d DOMAIN
 ```
 
 ### display
@@ -105,7 +105,7 @@
 **Display accounts with optional prefix filtering (users, machines, or groups):**
 
 ```bash
-./sam [auth_flags] display -d EXAMPLE --type users --prefix adm
+./sam [auth_flags] display -d DOMAIN --type users --prefix adm
 ```
 
 ### user
@@ -118,7 +118,7 @@
 **Show full attributes for a user account:**
 
 ```bash
-./sam [auth_flags] user Administrator -d EXAMPLE
+./sam [auth_flags] user Administrator -d DOMAIN
 ```
 
 ### add-user
@@ -131,7 +131,7 @@
 **Create a new user account:**
 
 ```bash
-./sam [auth_flags] add-user jdoe -d EXAMPLE -N 'John Doe' -D 'Test user' -w 'P@ssw0rd!'
+./sam [auth_flags] add-user sampleuser -d DOMAIN -N 'John Doe' -D 'Test user' -w 'P@ssw0rd!'
 ```
 
 ### del-user
@@ -144,7 +144,7 @@
 **Delete a user account:**
 
 ```bash
-./sam [auth_flags] del-user jdoe -d EXAMPLE
+./sam [auth_flags] del-user sampleuser -d DOMAIN
 ```
 
 ### set-user
@@ -157,7 +157,7 @@
 **Modify user account attributes or password:**
 
 ```bash
-./sam [auth_flags] set-user jdoe -d EXAMPLE --password 'NewP@ssw0rd!' --expires never
+./sam [auth_flags] set-user sampleuser -d DOMAIN --password 'NewP@ssw0rd!' --expires never
 ```
 
 ### user-groups
@@ -170,7 +170,7 @@
 **List all global groups a user belongs to:**
 
 ```bash
-./sam [auth_flags] user-groups Administrator -d EXAMPLE
+./sam [auth_flags] user-groups Administrator -d DOMAIN
 ```
 
 ### user-aliases
@@ -183,7 +183,7 @@
 **List all aliases (local groups) a user belongs to:**
 
 ```bash
-./sam [auth_flags] user-aliases Administrator -d EXAMPLE
+./sam [auth_flags] user-aliases Administrator -d DOMAIN
 ```
 
 ### validate-password
@@ -196,7 +196,7 @@
 **Validate a password against the domain policy:**
 
 ```bash
-./sam [auth_flags] validate-password 'P@ssw0rd!' -d EXAMPLE --operation auth
+./sam [auth_flags] validate-password 'P@ssw0rd!' -d DOMAIN --operation auth
 ```
 
 ### groups
@@ -209,7 +209,7 @@
 **Enumerate all global groups in a domain:**
 
 ```bash
-./sam [auth_flags] groups -d EXAMPLE
+./sam [auth_flags] groups -d DOMAIN
 ```
 
 ### group
@@ -222,7 +222,7 @@
 **Show full attributes for a global group:**
 
 ```bash
-./sam [auth_flags] group 'Domain Admins' -d EXAMPLE
+./sam [auth_flags] group 'Domain Admins' -d DOMAIN
 ```
 
 ### add-group
@@ -235,7 +235,7 @@
 **Create a new global group:**
 
 ```bash
-./sam [auth_flags] add-group TestGroup -d EXAMPLE
+./sam [auth_flags] add-group TestGroup -d DOMAIN
 ```
 
 ### del-group
@@ -248,7 +248,7 @@
 **Delete a global group:**
 
 ```bash
-./sam [auth_flags] del-group TestGroup -d EXAMPLE
+./sam [auth_flags] del-group TestGroup -d DOMAIN
 ```
 
 ### group-members
@@ -261,7 +261,7 @@
 **List members of a global group:**
 
 ```bash
-./sam [auth_flags] group-members 'Domain Admins' -d EXAMPLE --resolve-sids
+./sam [auth_flags] group-members 'Domain Admins' -d DOMAIN --resolve-sids
 ```
 
 ### add-group-member
@@ -274,7 +274,7 @@
 **Add a member to a global group:**
 
 ```bash
-./sam [auth_flags] add-group-member 'Domain Admins' jdoe -d EXAMPLE
+./sam [auth_flags] add-group-member 'Domain Admins' sampleuser -d DOMAIN
 ```
 
 ### del-group-member
@@ -287,7 +287,7 @@
 **Remove a member from a global group:**
 
 ```bash
-./sam [auth_flags] del-group-member 'Domain Admins' jdoe -d EXAMPLE
+./sam [auth_flags] del-group-member 'Domain Admins' sampleuser -d DOMAIN
 ```
 
 ### set-group
@@ -300,7 +300,7 @@
 **Rename or update the description of a global group:**
 
 ```bash
-./sam [auth_flags] set-group TestGroup -d EXAMPLE --name RenamedGroup --description 'Updated desc'
+./sam [auth_flags] set-group TestGroup -d DOMAIN --name RenamedGroup --description 'Updated desc'
 ```
 
 ### set-member-attrs
@@ -313,7 +313,7 @@
 **Set per-member attributes on a group membership:**
 
 ```bash
-./sam [auth_flags] set-member-attrs 'Domain Admins' jdoe -d EXAMPLE --attributes 0x7
+./sam [auth_flags] set-member-attrs 'Domain Admins' sampleuser -d DOMAIN --attributes 0x7
 ```
 
 ### aliases
@@ -326,7 +326,7 @@
 **Enumerate all aliases (local groups) in a domain:**
 
 ```bash
-./sam [auth_flags] aliases -d EXAMPLE
+./sam [auth_flags] aliases -d DOMAIN
 ```
 
 ### alias
@@ -352,7 +352,7 @@
 **Create a new alias (local group):**
 
 ```bash
-./sam [auth_flags] add-alias TestAlias -d EXAMPLE
+./sam [auth_flags] add-alias TestAlias -d DOMAIN
 ```
 
 ### del-alias
@@ -365,7 +365,7 @@
 **Delete an alias:**
 
 ```bash
-./sam [auth_flags] del-alias TestAlias -d EXAMPLE
+./sam [auth_flags] del-alias TestAlias -d DOMAIN
 ```
 
 ### alias-members
@@ -391,7 +391,7 @@
 **List all alias memberships for a given SID:**
 
 ```bash
-./sam [auth_flags] alias-membership S-1-5-21-111-222-333-1105 -d EXAMPLE
+./sam [auth_flags] alias-membership S-1-5-21-111-222-333-1105 -d DOMAIN
 ```
 
 ### add-alias-member
@@ -456,7 +456,7 @@
 **Rename or update the description of an alias:**
 
 ```bash
-./sam [auth_flags] set-alias TestAlias -d EXAMPLE --name RenamedAlias --description 'Updated desc'
+./sam [auth_flags] set-alias TestAlias -d DOMAIN --name RenamedAlias --description 'Updated desc'
 ```
 
 ### purge-sid
@@ -469,7 +469,7 @@
 **Remove all alias/group memberships for a stale SID (cross-domain cleanup):**
 
 ```bash
-./sam [auth_flags] purge-sid S-1-5-21-111-222-333-1105 -d EXAMPLE
+./sam [auth_flags] purge-sid S-1-5-21-111-222-333-1105 -d DOMAIN
 ```
 
 ### lookup-names
@@ -482,7 +482,7 @@
 **Resolve one or more account names to RIDs and types:**
 
 ```bash
-./sam [auth_flags] lookup-names Administrator jdoe -d EXAMPLE
+./sam [auth_flags] lookup-names Administrator sampleuser -d DOMAIN
 ```
 
 ### lookup-rids
@@ -495,7 +495,7 @@
 **Resolve one or more RIDs to account names and types:**
 
 ```bash
-./sam [auth_flags] lookup-rids 500 512 -d EXAMPLE
+./sam [auth_flags] lookup-rids 500 512 -d DOMAIN
 ```
 
 ### rid-to-sid

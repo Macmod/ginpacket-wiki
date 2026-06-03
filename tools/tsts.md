@@ -89,7 +89,7 @@
 
 **Syntax:**
 ```bash
-./tsts [auth_flags] watch [-e <event-list>]
+./tsts [auth_flags] watch [-e <event-list>] [-m <method>] [--wait-timeout <duration>]
 ```
 
 **Watch Terminal Services events synchronously until Ctrl+C:**
@@ -100,6 +100,14 @@
 
 ```bash
 ./tsts [auth_flags] watch -e logon,logoff,connect,disconnect
+```
+
+```bash
+./tsts [auth_flags] watch -m polling
+```
+
+```bash
+./tsts [auth_flags] watch -m waitsysevent --wait-timeout 30s
 ```
 
 ### kill-session
@@ -229,7 +237,7 @@
 
 ## Notes
 {% hint style="info" %}
-`tsts watch` polls Terminal Services session state every 2 seconds and reports matching create/delete/rename/connect/disconnect/logon/logoff/state changes until you interrupt it. `tsts message` (without `-a` / `--async`) intentionally uses a no-deadline caller context so it can block synchronously until a user responds or you interrupt it.
+`tsts watch` supports two methods: `waitsysevent` (default) uses `RpcWinStationWaitSystemEvent` to block until the server signals a change, then diffs session snapshots for per-session detail; `polling` snapshots session state every 2 seconds and diffs directly. Both report create/delete/rename/connect/disconnect/logon/logoff/state-change events and print a summary count on Ctrl-C. With `--wait-timeout 0` (default) the event call blocks indefinitely; pass a duration such as `30s` to have it return an error if no event fires within that window. If an event fires but the snapshot diff produces no recognisable change, an `[Unknown]` line with the raw event mask is shown.
 {% endhint %}
 
 {% hint style="info" %}

@@ -14,13 +14,13 @@
 **Change a password via MS-SAMR over SMB named pipe:**
 
 ```bash
-./changepwd [auth_flags] samr -a jdoe -w 'NewP@ssw0rd!' --transport smb
+./changepwd [auth_flags] samr -a sampleuser -w 'NewP@ssw0rd!' --transport smb
 ```
 
 **Change a password via MS-SAMR over TCP:**
 
 ```bash
-./changepwd [auth_flags] samr -a jdoe -w 'NewP@ssw0rd!' --transport tcp
+./changepwd [auth_flags] samr -a sampleuser -w 'NewP@ssw0rd!' --transport tcp
 ```
 
 ### kpasswd
@@ -36,13 +36,13 @@ Note: for this command, --dc is only considered to override the DC for PKINIT wh
 **Change a password using the Kerberos kpasswd protocol (self-change):**
 
 ```bash
-./changepwd [auth_flags] kpasswd -a jdoe -w 'NewP@ssw0rd!' -o 'OldP@ssw0rd!'
+./changepwd [auth_flags] kpasswd -a sampleuser -w 'NewP@ssw0rd!' -o 'OldP@ssw0rd!'
 ```
 
 **Perform an admin password reset via kpasswd:**
 
 ```bash
-./changepwd [auth_flags] kpasswd -a jdoe -w 'NewP@ssw0rd!'
+./changepwd [auth_flags] kpasswd -a sampleuser -w 'NewP@ssw0rd!'
 ```
 
 ### ldap
@@ -55,7 +55,7 @@ Note: for this command, --dc is only considered to override the DC for PKINIT wh
 **Change a password via LDAPS:**
 
 ```bash
-./changepwd [auth_flags] ldap -a jdoe -w 'NewP@ssw0rd!' --scheme ldaps
+./changepwd [auth_flags] ldap -a sampleuser -w 'NewP@ssw0rd!' --scheme ldaps
 ```
 
 ### adws
@@ -68,5 +68,5 @@ Note: for this command, --dc is only considered to override the DC for PKINIT wh
 **Change a password via ADWS (Active Directory Web Services):**
 
 ```bash
-./changepwd [auth_flags] adws -a jdoe -w 'NewP@ssw0rd!'
+./changepwd [auth_flags] adws -a sampleuser -w 'NewP@ssw0rd!'
 ```

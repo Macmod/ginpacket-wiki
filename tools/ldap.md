@@ -33,8 +33,13 @@
 **Show all attributes including non-default ones:**
 
 ```bash
-./ldap [auth_flags] info 'CN=Domain Users,CN=Users,DC=example,DC=com' --all
+./ldap [auth_flags] info 'CN=Domain Users,CN=Users,DC=domain,DC=local' --all
 ```
+
+
+All query subcommands accept: [-A <attrs>] [--hex] [--limit <n>] [--scheme <ldap|ldaps>] [--starttls]  
+-A selects attributes to display; append :hex to any name to print that attribute as raw hex  
+--hex prints all attributes as raw hex  
 
 ### query users
 
@@ -47,6 +52,12 @@
 
 ```bash
 ./ldap [auth_flags] query users
+```
+
+**Show selected attributes including nTSecurityDescriptor as hex:**
+
+```bash
+./ldap [auth_flags] query users -A cn,sAMAccountName,nTSecurityDescriptor:hex
 ```
 
 **List only enabled user accounts:**
@@ -117,7 +128,7 @@
 
 **Syntax:**
 ```bash
-./ldap [auth_flags] query service-accounts
+./ldap [auth_flags] query service-accounts (alias: svcs)
 ```
 
 **List accounts with service principal names (service accounts):**
@@ -156,7 +167,7 @@
 
 **Syntax:**
 ```bash
-./ldap [auth_flags] query unconstrained-delegation
+./ldap [auth_flags] query unconstrained-delegation (alias: unconst)
 ```
 
 **List computers and users with unconstrained Kerberos delegation:**
@@ -169,7 +180,7 @@
 
 **Syntax:**
 ```bash
-./ldap [auth_flags] query constrained-delegation
+./ldap [auth_flags] query constrained-delegation (alias: const)
 ```
 
 **List accounts configured with constrained Kerberos delegation:**
@@ -204,17 +215,17 @@
 ./ldap [auth_flags] query never-expires
 ```
 
-### query password-not-required
+### query pwd-not-required
 
 **Syntax:**
 ```bash
-./ldap [auth_flags] query password-not-required
+./ldap [auth_flags] query pwd-not-required
 ```
 
 **List accounts that do not require a password:**
 
 ```bash
-./ldap [auth_flags] query password-not-required
+./ldap [auth_flags] query pwd-not-required
 ```
 
 ### query cert-templates
@@ -370,7 +381,7 @@
 **Read and decode the msDS-ManagedPassword blob for a GMSA (requires group membership listed in msDS-GroupMSAMembership):**
 
 ```bash
-./ldap [auth_flags] get-gmsa-password 'svc_backup$'
+./ldap [auth_flags] get-gmsa-password 'sampleuser$'
 ```
 
 ### get-laps
@@ -387,7 +398,7 @@
 ```
 
 ```bash
-./ldap [auth_flags] get-laps WIN-DC01.corp.local
+./ldap [auth_flags] get-laps WIN-DC01.domain.local
 ```
 
 ### enable
@@ -400,7 +411,7 @@
 **Enable an AD account by clearing the ACCOUNTDISABLE userAccountControl bit:**
 
 ```bash
-./ldap [auth_flags] enable 'CN=jdoe,CN=Users,DC=example,DC=com'
+./ldap [auth_flags] enable 'CN=sampleuser,CN=Users,DC=domain,DC=local'
 ```
 
 ### disable
@@ -413,7 +424,7 @@
 **Disable an AD account by setting the ACCOUNTDISABLE userAccountControl bit:**
 
 ```bash
-./ldap [auth_flags] disable 'CN=jdoe,CN=Users,DC=example,DC=com'
+./ldap [auth_flags] disable 'CN=sampleuser,CN=Users,DC=domain,DC=local'
 ```
 
 ### uac-modify
@@ -426,22 +437,22 @@
 **Toggle a single userAccountControl bit by name (or numeric value):**
 
 ```bash
-./ldap [auth_flags] uac-modify 'CN=jdoe,CN=Users,DC=example,DC=com' DONT_REQUIRE_PREAUTH set
+./ldap [auth_flags] uac-modify 'CN=sampleuser,CN=Users,DC=domain,DC=local' DONT_REQUIRE_PREAUTH set
 ```
 
 ```bash
-./ldap [auth_flags] uac-modify 'CN=jdoe,CN=Users,DC=example,DC=com' DONT_EXPIRE_PASSWORD set
+./ldap [auth_flags] uac-modify 'CN=sampleuser,CN=Users,DC=domain,DC=local' DONT_EXPIRE_PASSWORD set
 ```
 
 ```bash
-./ldap [auth_flags] uac-modify 'CN=jdoe,CN=Users,DC=example,DC=com' TRUSTED_FOR_DELEGATION clear
+./ldap [auth_flags] uac-modify 'CN=sampleuser,CN=Users,DC=domain,DC=local' TRUSTED_FOR_DELEGATION clear
 ```
 
 ### search
 
 **Syntax:**
 ```bash
-./ldap [auth_flags] search -F <filter> [-A <attrs>] [--limit <n>] [--base-dn <dn>] [--scope <scope>]
+./ldap [auth_flags] search -F <filter> [-A <attrs>] [--hex] [--limit <n>] [--base-dn <dn>] [--scope <scope>]
 ```
 
 **Run a raw LDAP search with a custom filter and attribute projection:**
@@ -459,7 +470,7 @@
 **Filter group members with a result limit:**
 
 ```bash
-./ldap [auth_flags] search -F '(memberof=CN=Domain Admins,CN=Groups,DC=example,DC=com)' --limit 100
+./ldap [auth_flags] search -F '(memberof=CN=Domain Admins,CN=Groups,DC=domain,DC=local)' --limit 100
 ```
 
 **Search for accounts with SPNs:**
@@ -472,6 +483,18 @@
 
 ```bash
 ./ldap [auth_flags] search -F '(userAccountControl:1.2.840.113556.1.4.803:=524288)'
+```
+
+**Print all attributes as raw hex:**
+
+```bash
+./ldap [auth_flags] search -F '(objectClass=user)' --hex -A cn,objectSid
+```
+
+**Print a specific attribute as hex using the per-attribute :hex suffix:**
+
+```bash
+./ldap [auth_flags] search -F '(objectClass=user)' -A cn,nTSecurityDescriptor:hex
 ```
 
 ### General Usage
@@ -509,13 +532,13 @@
 **Replace an attribute value on an LDAP object (requires write access):**
 
 ```bash
-./ldap [auth_flags] modify 'CN=User,CN=Users,DC=example,DC=com' --attr description --operation replace --value 'Updated description'
+./ldap [auth_flags] modify 'CN=User,CN=Users,DC=domain,DC=local' --attr description --operation replace --value 'Updated description'
 ```
 
 **Add a member to a group:**
 
 ```bash
-./ldap [auth_flags] modify 'CN=Group,CN=Users,DC=example,DC=com' --attr member --operation add --value 'CN=User,CN=Users,DC=example,DC=com'
+./ldap [auth_flags] modify 'CN=Group,CN=Users,DC=domain,DC=local' --attr member --operation add --value 'CN=User,CN=Users,DC=domain,DC=local'
 ```
 
 ### General Usage
@@ -547,21 +570,21 @@
 **Create a new user account (created disabled if --pass is omitted; set password requires LDAPS/StartTLS):**
 
 ```bash
-./ldap [auth_flags] create user --name jdoe --scheme ldaps
+./ldap [auth_flags] create user --name sampleuser --scheme ldaps
 ```
 
 ```bash
-./ldap [auth_flags] create user --name jdoe --pass 'P@ssw0rd!' --scheme ldaps
+./ldap [auth_flags] create user --name sampleuser --pass 'P@ssw0rd!' --scheme ldaps
 ```
 
 ```bash
-./ldap [auth_flags] create user --name jdoe --pass 'P@ssw0rd!' --enabled=false --scheme ldaps
+./ldap [auth_flags] create user --name sampleuser --pass 'P@ssw0rd!' --enabled=false --scheme ldaps
 ```
 
 **Create user in a custom OU:**
 
 ```bash
-./ldap [auth_flags] create user --name svc_backup --parent-dn 'OU=ServiceAccounts,DC=example,DC=com' --scheme ldaps
+./ldap [auth_flags] create user --name sampleuser --parent-dn 'OU=ServiceAccounts,DC=domain,DC=local' --scheme ldaps
 ```
 
 ### create computer
@@ -599,7 +622,7 @@
 ```
 
 ```bash
-./ldap [auth_flags] create group --name 'Pentesters' --parent-dn 'OU=Groups,DC=example,DC=com'
+./ldap [auth_flags] create group --name 'Pentesters' --parent-dn 'OU=Groups,DC=domain,DC=local'
 ```
 
 ### create ou
@@ -616,7 +639,7 @@
 ```
 
 ```bash
-./ldap [auth_flags] create ou --name 'RedTeam' --parent-dn 'DC=example,DC=com'
+./ldap [auth_flags] create ou --name 'RedTeam' --parent-dn 'DC=domain,DC=local'
 ```
 
 ### create container
@@ -633,7 +656,7 @@
 ```
 
 ```bash
-./ldap [auth_flags] create container --name 'TestContainer' --parent-dn 'DC=example,DC=com'
+./ldap [auth_flags] create container --name 'TestContainer' --parent-dn 'DC=domain,DC=local'
 ```
 
 ### create custom

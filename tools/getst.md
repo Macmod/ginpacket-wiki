@@ -8,17 +8,32 @@
 
 **Syntax:**
 ```bash
-./getst [auth_flags] -c <ccache> -s <spn> --dc <dc> -o <out> [--self -i <user>]
+./getst -c <ccache> -s <spn> --dc <DC> -o <out> [-i <user> [--self]] [-a <evidence-ccache>]
 ```
+
+
+[-x <socks5-host:port>] [--dns <IP[:port]>]  
 
 **Request a service ticket for a given SPN using an existing TGT:**
 
 ```bash
-./getst [auth_flags] -c administrator@EXAMPLE.LOCAL.ccache -s cifs/dc01.example.com --dc dc01.example.com -o cifs_dc01.ccache
+./getst -c administrator@DOMAIN.LOCAL.ccache -s cifs/dc01.domain.local --dc dc01.domain.local -o cifs_dc01.ccache
 ```
 
-**Request an S4U2Self impersonation evidence ticket:**
+**Request a service ticket via S4U2Proxy (impersonating a user):**
 
 ```bash
-./getst [auth_flags] -c svc_iis@EXAMPLE.LOCAL.ccache -i jdoe --self --dc dc01.example.com -o jdoe_evidence.ccache
+./getst -c sampleuser@DOMAIN.LOCAL.ccache -s cifs/dc01.domain.local -i sampleuser --dc dc01.domain.local -o sampleuser_cifs.ccache
+```
+
+**Request an S4U2Self evidence ticket only (no S4U2Proxy):**
+
+```bash
+./getst -c sampleuser@DOMAIN.LOCAL.ccache -i sampleuser --self --dc dc01.domain.local -o sampleuser_evidence.ccache
+```
+
+**Skip S4U2Self and perform S4U2Proxy directly using a pre-obtained evidence ticket:**
+
+```bash
+./getst -c sampleuser@DOMAIN.LOCAL.ccache -s cifs/dc01.domain.local -i sampleuser -a sampleuser_evidence.ccache --dc dc01.domain.local -o sampleuser_cifs.ccache
 ```

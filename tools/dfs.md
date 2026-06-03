@@ -40,7 +40,7 @@
 **Enumerate all links within a namespace:**
 
 ```bash
-./dfs [auth_flags] links '\\EXAMPLE.LOCAL\dfs'
+./dfs [auth_flags] links '\\DOMAIN.LOCAL\dfs'
 ```
 
 ### info
@@ -53,19 +53,19 @@
 **Show full info for a namespace root or link:**
 
 ```bash
-./dfs [auth_flags] info '\\EXAMPLE.LOCAL\dfs'
+./dfs [auth_flags] info '\\DOMAIN.LOCAL\dfs'
 ```
 
 **Show info and regenerate the stored GUID for a namespace entry:**
 
 ```bash
-./dfs [auth_flags] info '\\EXAMPLE.LOCAL\dfs' --gen-guid
+./dfs [auth_flags] info '\\DOMAIN.LOCAL\dfs' --gen-guid
 ```
 
 **Show the protocol version negotiated for a namespace entry:**
 
 ```bash
-./dfs [auth_flags] info '\\EXAMPLE.LOCAL\dfs' --version
+./dfs [auth_flags] info '\\DOMAIN.LOCAL\dfs' --version
 ```
 
 ### add-link
@@ -78,7 +78,7 @@
 **Add a new DFS link pointing to a target share:**
 
 ```bash
-./dfs [auth_flags] add-link '\\EXAMPLE.LOCAL\dfs\apps' --server FILES01 -s Data
+./dfs [auth_flags] add-link '\\DOMAIN.LOCAL\dfs\apps' --server FILES01 -s Data
 ```
 
 ### del-link
@@ -91,7 +91,7 @@
 **Remove a DFS link:**
 
 ```bash
-./dfs [auth_flags] del-link '\\EXAMPLE.LOCAL\dfs\apps'
+./dfs [auth_flags] del-link '\\DOMAIN.LOCAL\dfs\apps'
 ```
 
 ### move
@@ -104,7 +104,7 @@
 **Rename/move a DFS link to a new path:**
 
 ```bash
-./dfs [auth_flags] move '\\EXAMPLE.LOCAL\dfs\old' '\\EXAMPLE.LOCAL\dfs\new'
+./dfs [auth_flags] move '\\DOMAIN.LOCAL\dfs\old' '\\DOMAIN.LOCAL\dfs\new'
 ```
 
 ### set-comment
@@ -117,7 +117,7 @@
 **Set a descriptive comment on a namespace root or link:**
 
 ```bash
-./dfs [auth_flags] set-comment '\\EXAMPLE.LOCAL\dfs\apps' -c 'Application share'
+./dfs [auth_flags] set-comment '\\DOMAIN.LOCAL\dfs\apps' -c 'Application share'
 ```
 
 ### set-state
@@ -130,25 +130,25 @@
 **Set a link offline:**
 
 ```bash
-./dfs [auth_flags] set-state '\\EXAMPLE.LOCAL\dfs\apps' -e offline
+./dfs [auth_flags] set-state '\\DOMAIN.LOCAL\dfs\apps' -e offline
 ```
 
 **Set a link online using the legacy v1 API:**
 
 ```bash
-./dfs [auth_flags] set-state '\\EXAMPLE.LOCAL\dfs\apps' -e online --use-v1
+./dfs [auth_flags] set-state '\\DOMAIN.LOCAL\dfs\apps' -e online --use-v1
 ```
 
 **Set a specific link target online:**
 
 ```bash
-./dfs [auth_flags] set-state '\\EXAMPLE.LOCAL\dfs\apps' --server FILES01 -s Data -e online --pdc dc01.example.com
+./dfs [auth_flags] set-state '\\DOMAIN.LOCAL\dfs\apps' --server FILES01 -s Data -e online --pdc dc01.domain.local
 ```
 
 **Trigger resynchronization on a namespace root:**
 
 ```bash
-./dfs [auth_flags] set-state '\\EXAMPLE.LOCAL\dfs' -e resynchronize --pdc dc01.example.com
+./dfs [auth_flags] set-state '\\DOMAIN.LOCAL\dfs' -e resynchronize --pdc dc01.domain.local
 ```
 
 ### set-timeout
@@ -161,13 +161,13 @@
 **Set the client referral cache timeout on a link:**
 
 ```bash
-./dfs [auth_flags] set-timeout '\\EXAMPLE.LOCAL\dfs\apps' -T 600
+./dfs [auth_flags] set-timeout '\\DOMAIN.LOCAL\dfs\apps' -T 600
 ```
 
 **Set the client referral timeout using the legacy v1 API:**
 
 ```bash
-./dfs [auth_flags] set-timeout '\\EXAMPLE.LOCAL\dfs\apps' -T 300 --use-v1
+./dfs [auth_flags] set-timeout '\\DOMAIN.LOCAL\dfs\apps' -T 300 --use-v1
 ```
 
 ### set-flags
@@ -180,19 +180,19 @@
 **Set DFS flags on a link:**
 
 ```bash
-./dfs [auth_flags] set-flags '\\EXAMPLE.LOCAL\dfs\apps' -f 32
+./dfs [auth_flags] set-flags '\\DOMAIN.LOCAL\dfs\apps' -f 32
 ```
 
 **Set DFS flags using the legacy v1 API:**
 
 ```bash
-./dfs [auth_flags] set-flags '\\EXAMPLE.LOCAL\dfs\apps' -f 8 --use-v1
+./dfs [auth_flags] set-flags '\\DOMAIN.LOCAL\dfs\apps' -f 8 --use-v1
 ```
 
 **Set DFS flags with a bitmask (update only the masked bits):**
 
 ```bash
-./dfs [auth_flags] set-flags '\\EXAMPLE.LOCAL\dfs\apps' -f 0 -m 47
+./dfs [auth_flags] set-flags '\\DOMAIN.LOCAL\dfs\apps' -f 0 -m 47
 ```
 
 ### set-priority
@@ -205,13 +205,13 @@
 **Set referral priority class and rank for a link target:**
 
 ```bash
-./dfs [auth_flags] set-priority '\\EXAMPLE.LOCAL\dfs\apps' --server FILES01 -s Data -c 1 -R 0
+./dfs [auth_flags] set-priority '\\DOMAIN.LOCAL\dfs\apps' --server FILES01 -s Data -c 1 -R 0
 ```
 
 **Set referral priority using the legacy v1 API:**
 
 ```bash
-./dfs [auth_flags] set-priority '\\EXAMPLE.LOCAL\dfs\apps' --server FILES01 -s Data -c 2 -R 5 --use-v1
+./dfs [auth_flags] set-priority '\\DOMAIN.LOCAL\dfs\apps' --server FILES01 -s Data -c 2 -R 5 --use-v1
 ```
 
 ### get-sd
@@ -224,7 +224,7 @@
 **Read the security descriptor of a namespace root or link:**
 
 ```bash
-./dfs [auth_flags] get-sd '\\EXAMPLE.LOCAL\dfs\apps'
+./dfs [auth_flags] get-sd '\\DOMAIN.LOCAL\dfs\apps'
 ```
 
 ### set-sd
@@ -237,7 +237,7 @@
 **Write a security descriptor to a namespace root or link:**
 
 ```bash
-./dfs [auth_flags] set-sd '\\EXAMPLE.LOCAL\dfs\apps' --sd '01000480...'
+./dfs [auth_flags] set-sd '\\DOMAIN.LOCAL\dfs\apps' --sd '01000480...'
 ```
 
 ### dc-address
@@ -263,19 +263,19 @@
 **Set the DFS metadata DC for a DFS server (server is required):**
 
 ```bash
-./dfs [auth_flags] set-dc-address --server FILES01 --pdc dc01.example.com
+./dfs [auth_flags] set-dc-address --server FILES01 --pdc dc01.domain.local
 ```
 
 **Set metadata DC and explicitly apply timeout value:**
 
 ```bash
-./dfs [auth_flags] set-dc-address --server FILES01 --pdc dc01.example.com --set-timeout -T 300
+./dfs [auth_flags] set-dc-address --server FILES01 --pdc dc01.domain.local --set-timeout -T 300
 ```
 
 **Set metadata DC and request immediate metadata re-sync:**
 
 ```bash
-./dfs [auth_flags] set-dc-address --server FILES01 --pdc dc01.example.com -i
+./dfs [auth_flags] set-dc-address --server FILES01 --pdc dc01.domain.local -i
 ```
 
 ### add-root
@@ -294,13 +294,13 @@
 **Create a new domain-based DFS namespace (v2) with a root target:**
 
 ```bash
-./dfs [auth_flags] add-root '\\EXAMPLE.LOCAL\dfs' --root-target '\\FILES01\dfsroot' --version 2 --new
+./dfs [auth_flags] add-root '\\DOMAIN.LOCAL\dfs' --root-target '\\FILES01\dfsroot' --version 2 --new
 ```
 
 **Add a root target to an existing domain-based namespace:**
 
 ```bash
-./dfs [auth_flags] add-root '\\EXAMPLE.LOCAL\dfs' --root-target '\\FILES02\dfsroot'
+./dfs [auth_flags] add-root '\\DOMAIN.LOCAL\dfs' --root-target '\\FILES02\dfsroot'
 ```
 
 ### del-root
@@ -319,7 +319,7 @@
 **Remove a specific root target from a domain-based namespace:**
 
 ```bash
-./dfs [auth_flags] del-root '\\EXAMPLE.LOCAL\dfs' --root-target '\\FILES02\dfsroot'
+./dfs [auth_flags] del-root '\\DOMAIN.LOCAL\dfs' --root-target '\\FILES02\dfsroot'
 ```
 
 ### initialize
@@ -375,7 +375,7 @@
 **Purge the domainv1 DFS referral cache entry on a domain controller:**
 
 ```bash
-./dfs [auth_flags] flush-ft-table --pdc dc01.example.com --namespace dfs
+./dfs [auth_flags] flush-ft-table --pdc dc01.domain.local --namespace dfs
 ```
 
 ## Notes
@@ -387,5 +387,3 @@
 
 Root paths intentionally reject `online`, `offline`, and `ok` because they commonly fail with `ERROR_INVALID_PARAMETER` on Windows.
 {% endhint %}
-
-Note: Levels 105, 106 and 107 are intentionally not exposed yet due to CLI complexity.

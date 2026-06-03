@@ -253,7 +253,7 @@
 **Add a transport binding with domain/flags at level 2:**
 
 ```bash
-./server [auth_flags] add-transport '\Device\NetBT_Tcpip_{6BFFD098-A112-610E-9FBF-00A0C90D67DA}' -d CRETA --flags 0   # level 2 (opnum 41)
+./server [auth_flags] add-transport '\Device\NetBT_Tcpip_{6BFFD098-A112-610E-9FBF-00A0C90D67DA}' -d DOMAIN --flags 0   # level 2 (opnum 41)
 ```
 
 **Add a transport binding using the legacy NetrServerTransportAdd (opnum 25):**

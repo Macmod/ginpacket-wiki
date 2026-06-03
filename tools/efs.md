@@ -132,4 +132,6 @@ $f='\\WIN-6BKCP1FPPCI\C$\Temp\secret.txt'
 ```
 
 ## Notes
-> **Compatibility note:** Per MS-EFSR, `file-key` default (`EfsRpcFileKeyInfoEx`, opnum 16), `encrypted-metadata` (opnum 18), and `set-encrypted-metadata` (opnum 19) can legitimately return nonzero and are implementation-specific on many servers. On Server 2022 they commonly return `ERROR_NOT_SUPPORTED`. Use `file-key --use-v1` (opnum 12) when you need stable key-info output. `encrypt` default (`EfsRpcEncryptFileExSrv`, opnum 21) is available on modern Windows and works on Server 2022 with UNC paths. `protectors` (opnum 22) is unavailable on older systems (up to 2012 R2) and may still return `ERROR_NOT_SUPPORTED` depending on implementation/protector support.
+{% hint style="info" %}
+Per MS-EFSR, `file-key` default (`EfsRpcFileKeyInfoEx`, opnum 16), `encrypted-metadata` (opnum 18), and `set-encrypted-metadata` (opnum 19) can legitimately return nonzero and are implementation-specific on many servers. On Server 2022 they commonly return `ERROR_NOT_SUPPORTED`. Use `file-key --use-v1` (opnum 12) when you need stable key-info output. `encrypt` default (`EfsRpcEncryptFileExSrv`, opnum 21) is available on modern Windows and works on Server 2022 with UNC paths. `protectors` (opnum 22) is unavailable on older systems (up to 2012 R2) and may still return `ERROR_NOT_SUPPORTED` depending on implementation/protector support.
+{% endhint %}

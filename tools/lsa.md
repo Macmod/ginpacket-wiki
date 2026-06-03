@@ -345,7 +345,7 @@
 **Query the forest trust information for a trusted domain:**
 
 ```bash
-./lsa [auth_flags] trust-records -n child.example.com
+./lsa [auth_flags] trust-records -n child.domain.local
 ```
 
 ### trust
@@ -358,7 +358,7 @@
 **Query a trust by domain name:**
 
 ```bash
-./lsa [auth_flags] trust -n child.example.com
+./lsa [auth_flags] trust -n child.domain.local
 ```
 
 **Query a trust by domain SID:**
@@ -377,7 +377,7 @@
 **Modify attributes of an existing trust:**
 
 ```bash
-./lsa [auth_flags] set-trust -n child.example.com -D 3 -T 2 --attributes 0x20
+./lsa [auth_flags] set-trust -n child.domain.local -D 3 -T 2 --attributes 0x20
 ```
 
 ### add-trust
@@ -390,7 +390,7 @@
 **Create a new trust relationship:**
 
 ```bash
-./lsa [auth_flags] add-trust -n child.example.com --flat-name CHILD -s S-1-5-21-111-222-333 -D 2 -T 2
+./lsa [auth_flags] add-trust -n child.domain.local --flat-name CHILD -s S-1-5-21-111-222-333 -D 2 -T 2
 ```
 
 ### del-trust
@@ -416,5 +416,5 @@
 **Update trust records for a trusted domain (optionally validate first):**
 
 ```bash
-./lsa [auth_flags] set-trust-records -n child.example.com --check
+./lsa [auth_flags] set-trust-records -n child.domain.local --check
 ```

@@ -40,13 +40,13 @@
 **List all DNS records in a zone:**
 
 ```bash
-./dns [auth_flags] records EXAMPLE.LOCAL
+./dns [auth_flags] records DOMAIN.LOCAL
 ```
 
 **List records of a specific node and type within a zone:**
 
 ```bash
-./dns [auth_flags] records EXAMPLE.LOCAL -n _tcp -T SRV
+./dns [auth_flags] records DOMAIN.LOCAL -n _tcp -T SRV
 ```
 
 ### nodes
@@ -59,13 +59,13 @@
 **List all nodes in a DNS zone:**
 
 ```bash
-./dns [auth_flags] nodes EXAMPLE.LOCAL
+./dns [auth_flags] nodes DOMAIN.LOCAL
 ```
 
 **List child nodes under a parent node in a zone:**
 
 ```bash
-./dns [auth_flags] nodes EXAMPLE.LOCAL -n _tcp
+./dns [auth_flags] nodes DOMAIN.LOCAL -n _tcp
 ```
 
 ### dump
@@ -84,7 +84,7 @@
 **Dump all DNS records from a specific zone (optionally including cache):**
 
 ```bash
-./dns [auth_flags] dump -z EXAMPLE.LOCAL --skip-cache=false
+./dns [auth_flags] dump -z DOMAIN.LOCAL --skip-cache=false
 ```
 
 ### add-record
@@ -97,7 +97,7 @@
 **Add a DNS resource record to a zone:**
 
 ```bash
-./dns [auth_flags] add-record EXAMPLE.LOCAL -n myhost -T A -v 10.0.0.99 --ttl 600
+./dns [auth_flags] add-record DOMAIN.LOCAL -n myhost -T A -v 10.0.0.99 --ttl 600
 ```
 
 ### del-record
@@ -110,7 +110,7 @@
 **Delete a DNS resource record from a zone:**
 
 ```bash
-./dns [auth_flags] del-record EXAMPLE.LOCAL -n myhost -T A -v 10.0.0.99
+./dns [auth_flags] del-record DOMAIN.LOCAL -n myhost -T A -v 10.0.0.99
 ```
 
 ### server-props
@@ -174,13 +174,13 @@
 **Query full zone configuration:**
 
 ```bash
-./dns [auth_flags] zone EXAMPLE.LOCAL
+./dns [auth_flags] zone DOMAIN.LOCAL
 ```
 
 **Query a specific zone property:**
 
 ```bash
-./dns [auth_flags] zone EXAMPLE.LOCAL --property AllowUpdate
+./dns [auth_flags] zone DOMAIN.LOCAL --property AllowUpdate
 ```
 
 ### zone-stats
@@ -193,13 +193,13 @@
 **Query zone statistics:**
 
 ```bash
-./dns [auth_flags] zone-stats EXAMPLE.LOCAL
+./dns [auth_flags] zone-stats DOMAIN.LOCAL
 ```
 
 **Query and clear zone statistics:**
 
 ```bash
-./dns [auth_flags] zone-stats EXAMPLE.LOCAL --clear
+./dns [auth_flags] zone-stats DOMAIN.LOCAL --clear
 ```
 
 ### zone-scopes
@@ -212,7 +212,7 @@
 **List scopes for a DNS zone:**
 
 ```bash
-./dns [auth_flags] zone-scopes EXAMPLE.LOCAL
+./dns [auth_flags] zone-scopes DOMAIN.LOCAL
 ```
 
 **List scopes for the server cache:**
@@ -237,7 +237,7 @@
 **List policies for a specific zone:**
 
 ```bash
-./dns [auth_flags] policies -z EXAMPLE.LOCAL
+./dns [auth_flags] policies -z DOMAIN.LOCAL
 ```
 
 ### policy
@@ -256,7 +256,7 @@
 **Show a zone-level policy by name:**
 
 ```bash
-./dns [auth_flags] policy ZonePolicy1 -z EXAMPLE.LOCAL
+./dns [auth_flags] policy ZonePolicy1 -z DOMAIN.LOCAL
 ```
 
 ### client-subnets
@@ -339,7 +339,7 @@
 **Pause a DNS zone (stops it from answering queries):**
 
 ```bash
-./dns [auth_flags] pause-zone EXAMPLE.LOCAL
+./dns [auth_flags] pause-zone DOMAIN.LOCAL
 ```
 
 ### resume-zone
@@ -352,7 +352,7 @@
 **Resume a paused DNS zone:**
 
 ```bash
-./dns [auth_flags] resume-zone EXAMPLE.LOCAL
+./dns [auth_flags] resume-zone DOMAIN.LOCAL
 ```
 
 ### reload-zone
@@ -365,7 +365,7 @@
 **Reload a DNS zone from its storage backend:**
 
 ```bash
-./dns [auth_flags] reload-zone EXAMPLE.LOCAL
+./dns [auth_flags] reload-zone DOMAIN.LOCAL
 ```
 
 ### set-forwarders

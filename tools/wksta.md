@@ -121,7 +121,7 @@
 **Enumerate OUs in a domain that this machine can join:**
 
 ```bash
-./wksta [auth_flags] joinable-ous EXAMPLE.LOCAL
+./wksta [auth_flags] joinable-ous DOMAIN.LOCAL
 ```
 
 ### join-domain
@@ -134,7 +134,7 @@
 **Join the workstation to a domain:**
 
 ```bash
-./wksta [auth_flags] join-domain EXAMPLE.LOCAL --options 0
+./wksta [auth_flags] join-domain DOMAIN.LOCAL --options 0
 ```
 
 ### unjoin-domain
@@ -186,7 +186,7 @@
 **Add a DNS alternate computer name to the workstation:**
 
 ```bash
-./wksta [auth_flags] add-alt-name alias.example.local
+./wksta [auth_flags] add-alt-name alias.DOMAIN.LOCAL
 ```
 
 ### del-alt-name
@@ -199,7 +199,7 @@
 **Remove a DNS alternate computer name from the workstation:**
 
 ```bash
-./wksta [auth_flags] del-alt-name alias.example.local
+./wksta [auth_flags] del-alt-name alias.DOMAIN.LOCAL
 ```
 
 ### set-primary-name
@@ -212,7 +212,7 @@
 **Promote an existing alternate DNS computer name to primary:**
 
 ```bash
-./wksta [auth_flags] set-primary-name newname.example.local
+./wksta [auth_flags] set-primary-name newname.DOMAIN.LOCAL
 ```
 
 

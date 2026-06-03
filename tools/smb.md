@@ -1,6 +1,6 @@
 # 📂 SMB2/3 (smb)
 
-**Protocols**: [MS-SMB2](https://winprotocoldocs-bhdugrdyduf5h2e4.b02.azurefd.net/MS-SMB2/%5bMS-SMB2%5d.pdf) (direct TCP/445 - non-RPC).
+**Protocols**: [MS-SMB2](https://winprotocoldocs-bhdugrdyduf5h2e4.b02.azurefd.net/MS-SMB2/%5bMS-SMB2%5d.pdf).
 
 ## Subcommands / Usage
 
