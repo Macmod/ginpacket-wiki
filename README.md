@@ -51,53 +51,52 @@ Despite the name, [ginpacket](https://github.com/Macmod/ginpacket) is **not** a 
 	* Performance Counter Query ([MS-PCQ](https://winprotocoldocs-bhdugrdyduf5h2e4.b02.azurefd.net/MS-PCQ/%5bMS-PCQ%5d.pdf))
 	* Windows Time Service ([MS-W32T](https://winprotocoldocs-bhdugrdyduf5h2e4.b02.azurefd.net/MS-W32T/%5bMS-W32T%5d.pdf))
 
-For a complete reference of the commands supported by Ginpacket's tools, check the subcommands map below or the usage examples for the specific [tools](https://ginpacket.gitbook.io/docs/tools/tools) you intend to use.
-
+For a complete reference of the commands supported by Ginpacket's tools, check the [Subcommands Map](#subcommands-map) or the [Usage](#usage) section.
 
 # Subcommands Map
 
-Index of provided tools, subcommands & key arguments:
-
 <pre>
+Index of provided tools, subcommands &amp; key arguments:
+
 ginpacket/
-+- authz
++- <a href="tools/authz.md">authz</a>
 │  ├─ version
-│  ├─ info                     <SID|NAME> [--class <all|user|groups|restricted|device-groups|user-claims|device-claims>]
+│  ├─ info                     &lt;SID|NAME&gt; [--class &lt;all|user|groups|restricted|device-groups|user-claims|device-claims&gt;]
 │  ├─ check
 │  │  ├─ [common flags]        --desired-access --principal-self --device -O/--object-types -P/--privileges --print-sd
-│  │  ├─ sd                    <SID|NAME> -T <hex-sd|sddl> [common check flags]
-│  │  ├─ ldap                  <SID|NAME> -T <distinguished-name> [--ldap-scheme <ldap|ldaps>] [--ldap-starttls] [common check flags]
-│  │  ├─ services              <SID|NAME> -T <service-name> [common check flags]
-│  │  ├─ tasks                 <SID|NAME> -T <task-path> [--task-folder] [common check flags]
-│  │  ├─ registry              <SID|NAME> -T <registry-path> [common check flags]
-│  │  ├─ smb                   <SID|NAME> -T <share|share\\path> [common check flags]
-│  │  ├─ wmi-ns                <SID|NAME> -T <namespace> [common check flags]
-+- gettgt                      -u <user> --dc <DC> -o <ccache> (-p <password> | -H <LM:NT|NT> | --aes-key <hex> | --pfx <file> | --crt <file> --key <file>)
-+- getst                       -c <ccache> -s <spn> --dc <DC> -o <out> [-i <user> [--self]] [-a <evidence-ccache>]
-+- changepwd
-│  ├─ samr                     -a <account> -w <new-password> [-o <old-password>] [-T <smb|tcp>]
-│  ├─ ldap                     -a <account> -w <new-password> [--scheme <ldap|ldaps>] [--starttls]
-│  ├─ adws                     -a <account> -w <new-password>
-│  ├─ kpasswd                  -a <account> -w <new-password> [-o <old-password>]
-+- smb
+│  │  ├─ sd                    &lt;SID|NAME&gt; -T &lt;hex-sd|sddl&gt; [common check flags]
+│  │  ├─ ldap                  &lt;SID|NAME&gt; -T &lt;distinguished-name&gt; [--ldap-scheme &lt;ldap|ldaps&gt;] [--ldap-starttls] [common check flags]
+│  │  ├─ services              &lt;SID|NAME&gt; -T &lt;service-name&gt; [common check flags]
+│  │  ├─ tasks                 &lt;SID|NAME&gt; -T &lt;task-path&gt; [--task-folder] [common check flags]
+│  │  ├─ registry              &lt;SID|NAME&gt; -T &lt;registry-path&gt; [common check flags]
+│  │  ├─ smb                   &lt;SID|NAME&gt; -T &lt;share|share\\path&gt; [common check flags]
+│  │  ├─ wmi-ns                &lt;SID|NAME&gt; -T &lt;namespace&gt; [common check flags]
++- <a href="tools/gettgt.md">gettgt</a>                      -u &lt;user&gt; --dc &lt;DC&gt; -o &lt;ccache&gt; (-p &lt;password&gt; | -H &lt;LM:NT|NT&gt; | --aes-key &lt;hex&gt; | --pfx &lt;file&gt; | --crt &lt;file&gt; --key &lt;file&gt;)
++- <a href="tools/getst.md">getst</a>                       -c &lt;ccache&gt; -s &lt;spn&gt; --dc &lt;DC&gt; -o &lt;out&gt; [-i &lt;user&gt; [--self]] [-a &lt;evidence-ccache&gt;]
++- <a href="tools/changepwd.md">changepwd</a>
+│  ├─ samr                     -a &lt;account&gt; -w &lt;new-password&gt; [-o &lt;old-password&gt;] [-T &lt;smb|tcp&gt;]
+│  ├─ ldap                     -a &lt;account&gt; -w &lt;new-password&gt; [--scheme &lt;ldap|ldaps&gt;] [--starttls]
+│  ├─ adws                     -a &lt;account&gt; -w &lt;new-password&gt;
+│  ├─ kpasswd                  -a &lt;account&gt; -w &lt;new-password&gt; [-o &lt;old-password&gt;]
++- <a href="tools/smb.md">smb</a>
 │  ├─ shares                   
-│  ├─ ls                       <share[\path]> [-l]
-│  ├─ tree                     <share[\path]> [--max-depth <n>]
-│  ├─ stat                     <share[\path]>
-│  ├─ cat                      <share[\file]> [--max-bytes <n>]
-│  ├─ get                      <share[\remote]> [<local>] [-R]
-│  ├─ put                      <local> <share[\remote]> [-R]
-│  ├─ mkdir                    <share[\dir]> [--parents]
-│  ├─ rm                       <share[\path]> [-R]
-│  ├─ mv                       <share[\src]> <dst>
-│  ├─ cp                       <share[\src]> <dst>
-│  ├─ shell                    -s <share>
-+- ldap
+│  ├─ ls                       &lt;share[\path]&gt; [-l]
+│  ├─ tree                     &lt;share[\path]&gt; [--max-depth &lt;n&gt;]
+│  ├─ stat                     &lt;share[\path]&gt;
+│  ├─ cat                      &lt;share[\file]&gt; [--max-bytes &lt;n&gt;]
+│  ├─ get                      &lt;share[\remote]&gt; [&lt;local&gt;] [-R]
+│  ├─ put                      &lt;local&gt; &lt;share[\remote]&gt; [-R]
+│  ├─ mkdir                    &lt;share[\dir]&gt; [--parents]
+│  ├─ rm                       &lt;share[\path]&gt; [-R]
+│  ├─ mv                       &lt;share[\src]&gt; &lt;dst&gt;
+│  ├─ cp                       &lt;share[\src]&gt; &lt;dst&gt;
+│  ├─ shell                    -s &lt;share&gt;
++- <a href="tools/ldap.md">ldap</a>
 │  ├─ whoami                   
-│  ├─ info                     <dn-or-name> [--all]
-│  ├─ search                   -F <filter> [-A <attrs>] [--hex] [--limit <n>] [--base-dn <dn>] [--scope <scope>]
-│  ├─ modify                   <dn> --attr <name> --operation <add|replace|delete> --value <value>
-│  ├─ query                    [-A <attrs>] [--hex] [--limit <n>] (flags apply to all subcommands)
+│  ├─ info                     &lt;dn-or-name&gt; [--all]
+│  ├─ search                   -F &lt;filter&gt; [-A &lt;attrs&gt;] [--hex] [--limit &lt;n&gt;] [--base-dn &lt;dn&gt;] [--scope &lt;scope&gt;]
+│  ├─ modify                   &lt;dn&gt; --attr &lt;name&gt; --operation &lt;add|replace|delete&gt; --value &lt;value&gt;
+│  ├─ query                    [-A &lt;attrs&gt;] [--hex] [--limit &lt;n&gt;] (flags apply to all subcommands)
 │  │  ├─ users                 [--enabled] [--disabled]
 │  │  ├─ groups                
 │  │  ├─ computers             
@@ -115,471 +114,459 @@ ginpacket/
 │  │  ├─ cert-authorities      
 │  │  ├─ trusts                
 │  ├─ create
-│  │  ├─ user                  --name <cn> [--pass <password>] [--enabled] [--parent-dn <dn>] [--scheme ldaps|ldap] [--starttls]
-│  │  ├─ computer              --name <cn> [--pass <password>] [--parent-dn <dn>] [--scheme ldaps|ldap] [--starttls]
-│  │  ├─ group                 --name <cn> [--type <GlobalSecurity|...>] [--parent-dn <dn>]
-│  │  ├─ ou                    --name <name> [--parent-dn <dn>]
-│  │  ├─ container             --name <name> [--parent-dn <dn>]
-│  │  ├─ custom                --template <file.yaml>
-+- rpcdump                     [-U <interface-uuid>] [-T <ncacn_ip_tcp,ncacn_np>]
-+- reg
-│  ├─ query                    <registry-path> [-v <value-name>] [-s]
-│  ├─ info                     <registry-path>
-│  ├─ add                      <registry-path> -v <value-name> -T <type> -d <data>
-│  ├─ set                      <registry-path> -v <value-name> -T <type> -d <data>
-│  ├─ delete                   <registry-path> [-v <value-name>]
-│  ├─ copy                     <source-path> <destination-path> [-R]
-│  ├─ compare                  <source-path> <destination-path> [-R] [-O <format>]
-│  ├─ export                   <registry-path> -o <file> [-R]
-│  ├─ import                   <file>
-│  ├─ save                     <registry-path> <file>
-│  ├─ restore                  <registry-path> <file>
-│  ├─ replace                  <registry-path> -f <new-file> [-b <backup-file>]
-│  ├─ load                     <mount-path> <file>
-│  ├─ unload                   <mount-path>
-│  ├─ flush                    <key>
-│  ├─ get-sd                   <registry-path> [--parse-dacl]
-│  ├─ set-sd                   <registry-path> --sd <hex-sd>
+│  │  ├─ user                  --name &lt;cn&gt; [--pass &lt;password&gt;] [--enabled] [--parent-dn &lt;dn&gt;] [--scheme ldaps|ldap] [--starttls]
+│  │  ├─ computer              --name &lt;cn&gt; [--pass &lt;password&gt;] [--parent-dn &lt;dn&gt;] [--scheme ldaps|ldap] [--starttls]
+│  │  ├─ group                 --name &lt;cn&gt; [--type &lt;GlobalSecurity|...&gt;] [--parent-dn &lt;dn&gt;]
+│  │  ├─ ou                    --name &lt;name&gt; [--parent-dn &lt;dn&gt;]
+│  │  ├─ container             --name &lt;name&gt; [--parent-dn &lt;dn&gt;]
+│  │  ├─ custom                --template &lt;file.yaml&gt;
++- <a href="tools/rpcdump.md">rpcdump</a>                     [-U &lt;interface-uuid&gt;] [-T &lt;ncacn_ip_tcp,ncacn_np&gt;]
++- <a href="tools/reg.md">reg</a>
+│  ├─ query                    &lt;registry-path&gt; [-v &lt;value-name&gt;] [-s]
+│  ├─ info                     &lt;registry-path&gt;
+│  ├─ add                      &lt;registry-path&gt; -v &lt;value-name&gt; -T &lt;type&gt; -d &lt;data&gt;
+│  ├─ set                      &lt;registry-path&gt; -v &lt;value-name&gt; -T &lt;type&gt; -d &lt;data&gt;
+│  ├─ delete                   &lt;registry-path&gt; [-v &lt;value-name&gt;]
+│  ├─ copy                     &lt;source-path&gt; &lt;destination-path&gt; [-R]
+│  ├─ compare                  &lt;source-path&gt; &lt;destination-path&gt; [-R] [-O &lt;format&gt;]
+│  ├─ export                   &lt;registry-path&gt; -o &lt;file&gt; [-R]
+│  ├─ import                   &lt;file&gt;
+│  ├─ save                     &lt;registry-path&gt; &lt;file&gt;
+│  ├─ restore                  &lt;registry-path&gt; &lt;file&gt;
+│  ├─ replace                  &lt;registry-path&gt; -f &lt;new-file&gt; [-b &lt;backup-file&gt;]
+│  ├─ load                     &lt;mount-path&gt; &lt;file&gt;
+│  ├─ unload                   &lt;mount-path&gt;
+│  ├─ flush                    &lt;key&gt;
+│  ├─ get-sd                   &lt;registry-path&gt; [--parse-dacl]
+│  ├─ set-sd                   &lt;registry-path&gt; --sd &lt;hex-sd&gt;
 │  ├─ secrets                  [--sam] [--lsa] [--cache]
-│  ├─ server-version           [--hive <HKLM|HKCU|HKCR|HKU|HKCC>]
+│  ├─ server-version           [--hive &lt;HKLM|HKCU|HKCR|HKU|HKCC&gt;]
 │  ├─ shell                    (interactive: ls, cd, get, set, add, del, info, acl, flush)
-+- services
-│  ├─ query                    [--type <mask>] [--state <mask>] [--group <name>]
-│  ├─ dump                     [--type <mask>] [--state <mask>] [--group <name>]
-│  ├─ service                  <name> [--use-v1]
-│  ├─ get-sd                   <name> [--parse-dacl]
-│  ├─ translate                (-K <svc-key> | -N <display-name>)
-│  ├─ group                    <name>
-│  ├─ enum-deps                <name>
-│  ├─ add-service              <name> <binpath> [-N <display-name>] [-T <start-type>] [--service-type <own|share|kernel|filesys>] [--error-control <ignore|normal|severe|critical>] [--wow64] [--wow-type <i386|amd64|arm64|hex>]
-│  ├─ set-service              <name> [-N <display-name>] [-b <binpath>] [-T <start-type>] [-a <account>] [--svc-password <password>]
-│  ├─ start                    <name> [--arg <value> (repeatable)]
-│  ├─ stop                     <name> [--reason <hex>] [--planned] [--comment <text>]
-│  ├─ set-failure              <name> [-F <command>] [--reset-period <sec>] [--reboot-message <text>] [--failure-actions <none|restart|reboot|run>]
-│  ├─ set-sd                   <name> --sd <hex>
-│  ├─ del-service              <name>
-+- tasks
-│  ├─ query                    [-P <path>] [--include-hidden] [--use-v1]
-│  ├─ task                     <path> [--format xml]
++- <a href="tools/services.md">services</a>
+│  ├─ query                    [--type &lt;mask&gt;] [--state &lt;mask&gt;] [--group &lt;name&gt;]
+│  ├─ dump                     [--type &lt;mask&gt;] [--state &lt;mask&gt;] [--group &lt;name&gt;]
+│  ├─ service                  &lt;name&gt; [--use-v1]
+│  ├─ get-sd                   &lt;name&gt; [--parse-dacl]
+│  ├─ translate                (-K &lt;svc-key&gt; | -N &lt;display-name&gt;)
+│  ├─ group                    &lt;name&gt;
+│  ├─ enum-deps                &lt;name&gt;
+│  ├─ add-service              &lt;name&gt; &lt;binpath&gt; [-N &lt;display-name&gt;] [-T &lt;start-type&gt;] [--service-type &lt;own|share|kernel|filesys&gt;] [--error-control &lt;ignore|normal|severe|critical&gt;] [--wow64] [--wow-type &lt;i386|amd64|arm64|hex&gt;]
+│  ├─ set-service              &lt;name&gt; [-N &lt;display-name&gt;] [-b &lt;binpath&gt;] [-T &lt;start-type&gt;] [-a &lt;account&gt;] [--svc-password &lt;password&gt;]
+│  ├─ start                    &lt;name&gt; [--arg &lt;value&gt; (repeatable)]
+│  ├─ stop                     &lt;name&gt; [--reason &lt;hex&gt;] [--planned] [--comment &lt;text&gt;]
+│  ├─ set-failure              &lt;name&gt; [-F &lt;command&gt;] [--reset-period &lt;sec&gt;] [--reboot-message &lt;text&gt;] [--failure-actions &lt;none|restart|reboot|run&gt;]
+│  ├─ set-sd                   &lt;name&gt; --sd &lt;hex&gt;
+│  ├─ del-service              &lt;name&gt;
++- <a href="tools/tasks.md">tasks</a>
+│  ├─ query                    [-P &lt;path&gt;] [--include-hidden] [--use-v1]
+│  ├─ task                     &lt;path&gt; [--format xml]
 │  ├─ folders                  [path]
-│  ├─ xml                      <path>
-│  ├─ instances                <path>
-│  ├─ missed-runs              <path>
+│  ├─ xml                      &lt;path&gt;
+│  ├─ instances                &lt;path&gt;
+│  ├─ missed-runs              &lt;path&gt;
 │  ├─ dump                     [--include-hidden]
-│  ├─ add                      <path> -X <task-xml> [--use-v1]
-│  ├─ add-folder               <path>
-│  ├─ rename                   <path> <new-path>
-│  ├─ run                      <path>
-│  ├─ enable                   <path>
-│  ├─ disable                  <path>
-│  ├─ get-sddl                 <path>
-│  ├─ set-sddl                 <path> --sddl <text>
-│  ├─ stop                     <path> [--instance <guid>]
-│  ├─ del                      <path> [--use-v1]
-│  ├─ del-folder               <path>
-+- eventlog
-│  ├─ query                    <channel> [-q <query>] [-L <n>] [--timeout-ms <ms>]
-│  ├─ subscribe                <channel> [-q <query>] [-L <n>] [--timeout-ms <ms>]
-│  ├─ watch                    <channel> [-q <query>] [-F <text|json>] [-L <n>] [--timeout-ms <ms>]
+│  ├─ add                      &lt;path&gt; -X &lt;task-xml&gt; [--use-v1]
+│  ├─ add-folder               &lt;path&gt;
+│  ├─ rename                   &lt;path&gt; &lt;new-path&gt;
+│  ├─ run                      &lt;path&gt;
+│  ├─ enable                   &lt;path&gt;
+│  ├─ disable                  &lt;path&gt;
+│  ├─ get-sddl                 &lt;path&gt;
+│  ├─ set-sddl                 &lt;path&gt; --sddl &lt;text&gt;
+│  ├─ stop                     &lt;path&gt; [--instance &lt;guid&gt;]
+│  ├─ del                      &lt;path&gt; [--use-v1]
+│  ├─ del-folder               &lt;path&gt;
++- <a href="tools/eventlog.md">eventlog</a>
+│  ├─ query                    &lt;channel&gt; [-q &lt;query&gt;] [-L &lt;n&gt;] [--timeout-ms &lt;ms&gt;]
+│  ├─ subscribe                &lt;channel&gt; [-q &lt;query&gt;] [-L &lt;n&gt;] [--timeout-ms &lt;ms&gt;]
+│  ├─ watch                    &lt;channel&gt; [-q &lt;query&gt;] [-F &lt;text|json&gt;] [-L &lt;n&gt;] [--timeout-ms &lt;ms&gt;]
 │  ├─ channels                 
 │  ├─ publishers               
-│  ├─ export                   <channel> <out-path> [-q <query>]
-│  ├─ clear                    <channel> [-b <backup-path>] [--confirm]
-│  ├─ channel                  [<channel>] [-T config|meta|all]
-│  ├─ publisher                <name>
-│  ├─ channel-publishers       [<channel>]
-│  ├─ classic-name             <name>
-│  ├─ set-channel              [<channel>] [--enabled <true|false>] [--max-size <bytes>]
-+- cert
-│  ├─ ping                     <ca-name> [--use-v1]
-│  ├─ my-roles                 <ca-name>
-│  ├─ ca-info                  <ca-name>
-│  ├─ ca-state                 <ca-name>
-│  ├─ ca-unregister-dcom       <ca-name>
-│  ├─ get-sd|get-ca-sd         <ca-name> [--out <file>]
-│  ├─ set-sd|set-ca-sd         <ca-name> <value> [--hex|--base64]
-│  ├─ get-audit                <ca-name>
-│  ├─ set-audit                <ca-name> <mask>
-│  ├─ ca-config                <ca-name> <node-path> <entry>
-│  ├─ set-ca-config            <ca-name> <node-path> <entry> <value> [--type <string|dword>]
-│  ├─ ca-props                 <ca-name>
-│  ├─ set-ca-prop              <ca-name> <prop-id> <value> [--type <auto|long|string|binary>] [--index <n>] [--file|--base64]
-│  ├─ view-default-columns     <ca-name> <pending|issued|failed|extension|attribute|crl|revoked>
-│  ├─ request                  <ca-name> [--csr <file>] [--template <name>] [--attrs <k:v;...>] [--out <file>] [--cms]
-│  ├─ retrieve                 <ca-name> [<request-id>] [--serial <hex>] [--out <file>]
-│  ├─ approve                  <ca-name> <request-id>
-│  ├─ deny                     <ca-name> <request-id>
-│  ├─ revoke                   <ca-name> <serial> [--reason <code|name>] [--date <yyyy-mm-dd>]
-│  ├─ check                    <ca-name> <serial>
-│  ├─ publish-crl              <ca-name> [--next <yyyy-mm-dd>] [--delta] [--force] [--legacy]
-│  ├─ get-crl                  <ca-name> [--out <file>]
-│  ├─ import-cert              <ca-name> <file> [--allow-foreign] [--existing-row]
-│  ├─ import-key               <ca-name> <request-id> <pkcs7-file> [--cert-hash <sha1>] [--overwrite]
-│  ├─ set-extension            <ca-name> <request-id> <oid> <hex-der> [--type <1|2|3|4>] [--critical] [--disabled]
-│  ├─ set-attrs                <ca-name> <request-id> <attributes> [--file <path>]
-│  ├─ request-attrs            <ca-name> <request-id>
-│  ├─ request-exts             <ca-name> <request-id>
-│  ├─ request-meta             <ca-name> <request-id>
-│  ├─ restore-paths            <ca-name>
-│  ├─ officer-rights           <ca-name>
-│  ├─ set-officer-rights       <ca-name> [--enable|--disable] [--sd-file <path>]
-│  ├─ archived-key             <ca-name> <request-id> [--out <file>]
-│  ├─ db                       <ca-name> [--table <request|extension|attribute|crl>] [--columns c1,c2] [--offset <n>] [--limit <n>] [--format <text|csv|json>] [--use-v1]
-│  ├─ requests                 <ca-name> [--columns c1,c2] [--offset <n>] [--limit <n>] [--format <text|csv|json>] [--use-v1]
-│  ├─ pending                  <ca-name> [--columns c1,c2] [--offset <n>] [--limit <n>] [--format <text|csv|json>] [--use-v1]
-│  ├─ issued                   <ca-name> [--columns c1,c2] [--offset <n>] [--limit <n>] [--format <text|csv|json>] [--use-v1]
-│  ├─ failed                   <ca-name> [--columns c1,c2] [--offset <n>] [--limit <n>] [--format <text|csv|json>] [--use-v1]
-│  ├─ revoked                  <ca-name> [--columns c1,c2] [--offset <n>] [--limit <n>] [--format <text|csv|json>] [--use-v1]
-│  ├─ del-row                  <ca-name> [row-id] [--table <request|extension|attribute|crl>] [--expired|--pending-failed --before <yyyy-mm-dd>]
-+- tsts
-│  ├─ sessions                 [-s <state>] [-f <username>]
-│  ├─ processes                [-s <session-id>]
+│  ├─ export                   &lt;channel&gt; &lt;out-path&gt; [-q &lt;query&gt;]
+│  ├─ clear                    &lt;channel&gt; [-b &lt;backup-path&gt;] [--confirm]
+│  ├─ channel                  [&lt;channel&gt;] [-T config|meta|all]
+│  ├─ publisher                &lt;name&gt;
+│  ├─ channel-publishers       [&lt;channel&gt;]
+│  ├─ classic-name             &lt;name&gt;
+│  ├─ set-channel              [&lt;channel&gt;] [--enabled &lt;true|false&gt;] [--max-size &lt;bytes&gt;]
++- <a href="tools/cert.md">cert</a>
+│  ├─ ping                     &lt;ca-name&gt; [--use-v1]
+│  ├─ my-roles                 &lt;ca-name&gt;
+│  ├─ ca-info                  &lt;ca-name&gt;
+│  ├─ ca-state                 &lt;ca-name&gt;
+│  ├─ ca-unregister-dcom       &lt;ca-name&gt;
+│  ├─ get-sd|get-ca-sd         &lt;ca-name&gt; [--out &lt;file&gt;]
+│  ├─ set-sd|set-ca-sd         &lt;ca-name&gt; &lt;value&gt; [--hex|--base64]
+│  ├─ get-audit                &lt;ca-name&gt;
+│  ├─ set-audit                &lt;ca-name&gt; &lt;mask&gt;
+│  ├─ ca-config                &lt;ca-name&gt; &lt;node-path&gt; &lt;entry&gt;
+│  ├─ set-ca-config            &lt;ca-name&gt; &lt;node-path&gt; &lt;entry&gt; &lt;value&gt; [--type &lt;string|dword&gt;]
+│  ├─ ca-props                 &lt;ca-name&gt;
+│  ├─ set-ca-prop              &lt;ca-name&gt; &lt;prop-id&gt; &lt;value&gt; [--type &lt;auto|long|string|binary&gt;] [--index &lt;n&gt;] [--file|--base64]
+│  ├─ view-default-columns     &lt;ca-name&gt; &lt;pending|issued|failed|extension|attribute|crl|revoked&gt;
+│  ├─ request                  &lt;ca-name&gt; [--csr &lt;file&gt;] [--template &lt;name&gt;] [--attrs &lt;k:v;...&gt;] [--out &lt;file&gt;] [--cms]
+│  ├─ retrieve                 &lt;ca-name&gt; [&lt;request-id&gt;] [--serial &lt;hex&gt;] [--out &lt;file&gt;]
+│  ├─ approve                  &lt;ca-name&gt; &lt;request-id&gt;
+│  ├─ deny                     &lt;ca-name&gt; &lt;request-id&gt;
+│  ├─ revoke                   &lt;ca-name&gt; &lt;serial&gt; [--reason &lt;code|name&gt;] [--date &lt;yyyy-mm-dd&gt;]
+│  ├─ check                    &lt;ca-name&gt; &lt;serial&gt;
+│  ├─ publish-crl              &lt;ca-name&gt; [--next &lt;yyyy-mm-dd&gt;] [--delta] [--force] [--legacy]
+│  ├─ get-crl                  &lt;ca-name&gt; [--out &lt;file&gt;]
+│  ├─ import-cert              &lt;ca-name&gt; &lt;file&gt; [--allow-foreign] [--existing-row]
+│  ├─ import-key               &lt;ca-name&gt; &lt;request-id&gt; &lt;pkcs7-file&gt; [--cert-hash &lt;sha1&gt;] [--overwrite]
+│  ├─ set-extension            &lt;ca-name&gt; &lt;request-id&gt; &lt;oid&gt; &lt;hex-der&gt; [--type &lt;1|2|3|4&gt;] [--critical] [--disabled]
+│  ├─ set-attrs                &lt;ca-name&gt; &lt;request-id&gt; &lt;attributes&gt; [--file &lt;path&gt;]
+│  ├─ request-attrs            &lt;ca-name&gt; &lt;request-id&gt;
+│  ├─ request-exts             &lt;ca-name&gt; &lt;request-id&gt;
+│  ├─ request-meta             &lt;ca-name&gt; &lt;request-id&gt;
+│  ├─ restore-paths            &lt;ca-name&gt;
+│  ├─ officer-rights           &lt;ca-name&gt;
+│  ├─ set-officer-rights       &lt;ca-name&gt; [--enable|--disable] [--sd-file &lt;path&gt;]
+│  ├─ archived-key             &lt;ca-name&gt; &lt;request-id&gt; [--out &lt;file&gt;]
+│  ├─ db                       &lt;ca-name&gt; [--table &lt;request|extension|attribute|crl&gt;] [--columns c1,c2] [--offset &lt;n&gt;] [--limit &lt;n&gt;] [--format &lt;text|csv|json&gt;] [--use-v1]
+│  ├─ requests                 &lt;ca-name&gt; [--columns c1,c2] [--offset &lt;n&gt;] [--limit &lt;n&gt;] [--format &lt;text|csv|json&gt;] [--use-v1]
+│  ├─ pending                  &lt;ca-name&gt; [--columns c1,c2] [--offset &lt;n&gt;] [--limit &lt;n&gt;] [--format &lt;text|csv|json&gt;] [--use-v1]
+│  ├─ issued                   &lt;ca-name&gt; [--columns c1,c2] [--offset &lt;n&gt;] [--limit &lt;n&gt;] [--format &lt;text|csv|json&gt;] [--use-v1]
+│  ├─ failed                   &lt;ca-name&gt; [--columns c1,c2] [--offset &lt;n&gt;] [--limit &lt;n&gt;] [--format &lt;text|csv|json&gt;] [--use-v1]
+│  ├─ revoked                  &lt;ca-name&gt; [--columns c1,c2] [--offset &lt;n&gt;] [--limit &lt;n&gt;] [--format &lt;text|csv|json&gt;] [--use-v1]
+│  ├─ del-row                  &lt;ca-name&gt; [row-id] [--table &lt;request|extension|attribute|crl&gt;] [--expired|--pending-failed --before &lt;yyyy-mm-dd&gt;]
++- <a href="tools/tsts.md">tsts</a>
+│  ├─ sessions                 [-s &lt;state&gt;] [-f &lt;username&gt;]
+│  ├─ processes                [-s &lt;session-id&gt;]
 │  ├─ policy
-│  ├─ session                  <id> [-c] [-g]
-│  ├─ watch                    [-e <create,delete,rename,connect,disconnect,logon,logoff,statechange|all>]
+│  ├─ session                  &lt;id&gt; [-c] [-g]
+│  ├─ watch                    [-e &lt;create,delete,rename,connect,disconnect,logon,logoff,statechange|all&gt;]
 │  ├─ listeners
-│  ├─ connect                  <src-session> <dst-session> [-P <target-password>]
-│  ├─ message                  <session-id> -T <title> -m <text> [-s <style>] [-o <seconds>] [-a]
-│  ├─ kill-session             <id> [-w]
-│  ├─ logoff                   <session-id>
-│  ├─ disconnect               <session-id> [-w]
-│  ├─ kill-process             <pid> [-e <exit-code>]
-│  ├─ stop-listener            <name>
-│  ├─ start-listener           <name>
+│  ├─ connect                  &lt;src-session&gt; &lt;dst-session&gt; [-P &lt;target-password&gt;]
+│  ├─ message                  &lt;session-id&gt; -T &lt;title&gt; -m &lt;text&gt; [-s &lt;style&gt;] [-o &lt;seconds&gt;] [-a]
+│  ├─ kill-session             &lt;id&gt; [-w]
+│  ├─ logoff                   &lt;session-id&gt;
+│  ├─ disconnect               &lt;session-id&gt; [-w]
+│  ├─ kill-process             &lt;pid&gt; [-e &lt;exit-code&gt;]
+│  ├─ stop-listener            &lt;name&gt;
+│  ├─ start-listener           &lt;name&gt;
 │  ├─ shutdown                 [-r] [-P] [-l]
-+- wmi
-│  ├─ query                    [-n <namespace>] <wql> [-f <fields>] [-L <n>]
-│  ├─ namespaces               [-n <namespace>]
-│  ├─ classes                  [-n <namespace>] [--superclass <str>] [-L <n>]
-│  ├─ instance                 [-n <namespace>] <object-path>
-│  ├─ class                    [-n <namespace>] <class>
-│  ├─ methods                  [-n <namespace>] <class>
-│  ├─ exec                     [-n <namespace>] <command>
-│  ├─ invoke                   [-n <namespace>] <object::method> [--arg <k=v>]
-│  ├─ del-instance             [-n <namespace>] <object-path>
-+- sam
++- <a href="tools/wmi.md">wmi</a>
+│  ├─ query                    [-n &lt;namespace&gt;] &lt;wql&gt; [-f &lt;fields&gt;] [-L &lt;n&gt;]
+│  ├─ namespaces               [-n &lt;namespace&gt;]
+│  ├─ classes                  [-n &lt;namespace&gt;] [--superclass &lt;str&gt;] [-L &lt;n&gt;]
+│  ├─ instance                 [-n &lt;namespace&gt;] &lt;object-path&gt;
+│  ├─ class                    [-n &lt;namespace&gt;] &lt;class&gt;
+│  ├─ methods                  [-n &lt;namespace&gt;] &lt;class&gt;
+│  ├─ exec                     [-n &lt;namespace&gt;] &lt;command&gt;
+│  ├─ invoke                   [-n &lt;namespace&gt;] &lt;object::method&gt; [--arg &lt;k=v&gt;]
+│  ├─ del-instance             [-n &lt;namespace&gt;] &lt;object-path&gt;
++- <a href="tools/sam.md">sam</a>
 │  ├─ domains
-│  ├─ domain                   [-d <name>]
-│  ├─ set-domain               [-d <name>] [--min-pwd-len <n>] [--lockout-threshold <n>] [--lockout-window <dur>] [--lockout-duration <dur>]
-│  ├─ password-policy          [-d <name>]
-│  ├─ get-acl                  [-d <name>]
-│  ├─ set-acl                  --sd <hex> [-d <name>]
-│  ├─ users                    [-d <name>]
-│  ├─ display                  [-d <name>] [--type <users|machines|groups>] [--prefix <str>]
-│  ├─ user                     <username|RID> [-d <name>]
-│  ├─ add-user                 <name> [-d <name>] [-N <s>] [-D <s>] [-w <s>] [--disable]
-│  ├─ del-user                 <username|RID> [-d <name>]
-│  ├─ set-user                 <username|RID> [-d <name>] [-N <s>] [-D <s>] [-w <s>] [-e <RFC3339|never>] [--uac-set <flag>] [--uac-clear <flag>]
-│  ├─ user-groups              <username|RID> [-d <name>]
-│  ├─ user-aliases             <username|RID> [-d <name>]
-│  ├─ validate-password        <password> [-d <name>] [-O <auth|change|reset>] [--account <s>]
-│  ├─ groups                   [-d <name>]
-│  ├─ group                    <name|RID> [-d <name>]
-│  ├─ add-group                <name> [-d <name>]
-│  ├─ del-group                <name|RID> [-d <name>]
-│  ├─ group-members            <name|RID> [-d <name>] [--resolve-sids]
-│  ├─ add-group-member         <group> <member> [-d <name>]
-│  ├─ del-group-member         <group> <member> [-d <name>]
-│  ├─ set-group                <name|RID> [-d <name>] [--name <s>] [--description <s>]
-│  ├─ set-member-attrs         <group> <member> [-d <name>] [--attributes <hex>]
-│  ├─ aliases                  [-d <name>] [--builtin]
-│  ├─ alias                    <name|RID> [-d <name>] [--builtin]
-│  ├─ add-alias                <name> [-d <name>]
-│  ├─ del-alias                <name|RID> [-d <name>] [--builtin]
-│  ├─ alias-members            <name|RID> [-d <name>] [--builtin] [--resolve-sids]
-│  ├─ alias-membership         <sid> [-d <name>] [--builtin]
-│  ├─ add-alias-member         <alias> <sid|username> [-d <name>] [--builtin]
-│  ├─ del-alias-member         <alias> <sid|username> [-d <name>] [--builtin]
-│  ├─ add-alias-members        <alias> <sid|username>... [-d <name>] [--builtin]
-│  ├─ del-alias-members        <alias> <sid|username>... [-d <name>] [--builtin]
-│  ├─ set-alias                <name|RID> [-d <name>] [--builtin] [--name <s>] [--description <s>]
-│  ├─ purge-sid                <sid> [-d <name>] [--builtin]
-│  ├─ lookup-names             <name>... [-d <name>]
-│  ├─ lookup-rids              <rid>... [-d <name>]
-│  ├─ rid-to-sid               <rid>
-│  ├─ set-dsrm-password        <new-password>
-+- lsa                         [--use-tcp]
+│  ├─ domain                   [-d &lt;name&gt;]
+│  ├─ set-domain               [-d &lt;name&gt;] [--min-pwd-len &lt;n&gt;] [--lockout-threshold &lt;n&gt;] [--lockout-window &lt;dur&gt;] [--lockout-duration &lt;dur&gt;]
+│  ├─ password-policy          [-d &lt;name&gt;]
+│  ├─ get-acl                  [-d &lt;name&gt;]
+│  ├─ set-acl                  --sd &lt;hex&gt; [-d &lt;name&gt;]
+│  ├─ users                    [-d &lt;name&gt;]
+│  ├─ display                  [-d &lt;name&gt;] [--type &lt;users|machines|groups&gt;] [--prefix &lt;str&gt;]
+│  ├─ user                     &lt;username|RID&gt; [-d &lt;name&gt;]
+│  ├─ add-user                 &lt;name&gt; [-d &lt;name&gt;] [-N &lt;s&gt;] [-D &lt;s&gt;] [-w &lt;s&gt;] [--disable]
+│  ├─ del-user                 &lt;username|RID&gt; [-d &lt;name&gt;]
+│  ├─ set-user                 &lt;username|RID&gt; [-d &lt;name&gt;] [-N &lt;s&gt;] [-D &lt;s&gt;] [-w &lt;s&gt;] [-e &lt;RFC3339|never&gt;] [--uac-set &lt;flag&gt;] [--uac-clear &lt;flag&gt;]
+│  ├─ user-groups              &lt;username|RID&gt; [-d &lt;name&gt;]
+│  ├─ user-aliases             &lt;username|RID&gt; [-d &lt;name&gt;]
+│  ├─ validate-password        &lt;password&gt; [-d &lt;name&gt;] [-O &lt;auth|change|reset&gt;] [--account &lt;s&gt;]
+│  ├─ groups                   [-d &lt;name&gt;]
+│  ├─ group                    &lt;name|RID&gt; [-d &lt;name&gt;]
+│  ├─ add-group                &lt;name&gt; [-d &lt;name&gt;]
+│  ├─ del-group                &lt;name|RID&gt; [-d &lt;name&gt;]
+│  ├─ group-members            &lt;name|RID&gt; [-d &lt;name&gt;] [--resolve-sids]
+│  ├─ add-group-member         &lt;group&gt; &lt;member&gt; [-d &lt;name&gt;]
+│  ├─ del-group-member         &lt;group&gt; &lt;member&gt; [-d &lt;name&gt;]
+│  ├─ set-group                &lt;name|RID&gt; [-d &lt;name&gt;] [--name &lt;s&gt;] [--description &lt;s&gt;]
+│  ├─ set-member-attrs         &lt;group&gt; &lt;member&gt; [-d &lt;name&gt;] [--attributes &lt;hex&gt;]
+│  ├─ aliases                  [-d &lt;name&gt;] [--builtin]
+│  ├─ alias                    &lt;name|RID&gt; [-d &lt;name&gt;] [--builtin]
+│  ├─ add-alias                &lt;name&gt; [-d &lt;name&gt;]
+│  ├─ del-alias                &lt;name|RID&gt; [-d &lt;name&gt;] [--builtin]
+│  ├─ alias-members            &lt;name|RID&gt; [-d &lt;name&gt;] [--builtin] [--resolve-sids]
+│  ├─ alias-membership         &lt;sid&gt; [-d &lt;name&gt;] [--builtin]
+│  ├─ add-alias-member         &lt;alias&gt; &lt;sid|username&gt; [-d &lt;name&gt;] [--builtin]
+│  ├─ del-alias-member         &lt;alias&gt; &lt;sid|username&gt; [-d &lt;name&gt;] [--builtin]
+│  ├─ add-alias-members        &lt;alias&gt; &lt;sid|username&gt;... [-d &lt;name&gt;] [--builtin]
+│  ├─ del-alias-members        &lt;alias&gt; &lt;sid|username&gt;... [-d &lt;name&gt;] [--builtin]
+│  ├─ set-alias                &lt;name|RID&gt; [-d &lt;name&gt;] [--builtin] [--name &lt;s&gt;] [--description &lt;s&gt;]
+│  ├─ purge-sid                &lt;sid&gt; [-d &lt;name&gt;] [--builtin]
+│  ├─ lookup-names             &lt;name&gt;... [-d &lt;name&gt;]
+│  ├─ lookup-rids              &lt;rid&gt;... [-d &lt;name&gt;]
+│  ├─ rid-to-sid               &lt;rid&gt;
+│  ├─ set-dsrm-password        &lt;new-password&gt;
++- <a href="tools/lsa.md">lsa</a>                         [--use-tcp]
 │  ├─ policy             
 │  ├─ domain-policy      
-│  ├─ get-sd                   [--security-info <mask>]
-│  ├─ set-sd                   --sd <hex> [--security-info <mask>]
+│  ├─ get-sd                   [--security-info &lt;mask&gt;]
+│  ├─ set-sd                   --sd &lt;hex&gt; [--security-info &lt;mask&gt;]
 │  ├─ privileges               
-│  ├─ lookup-priv              <priv-name>
-│  ├─ priv-name                --high <n> --low <n>
+│  ├─ lookup-priv              &lt;priv-name&gt;
+│  ├─ priv-name                --high &lt;n&gt; --low &lt;n&gt;
 │  ├─ accounts                 
-│  ├─ rights                   [-r <right,right,...>]
-│  ├─ account-rights           <sid>
-│  ├─ account-privs            <sid>
-│  ├─ account-access           <sid>
-│  ├─ set-account-access       <sid> <access>
-│  ├─ add-rights               <sid> -r <right,right,...>
-│  ├─ del-rights               <sid> -r <right,right,...>
-│  ├─ add-account              <sid>
-│  ├─ del-account              <sid>
-│  ├─ add-secret               <name>
-│  ├─ get-secret               <name>
-│  ├─ secret                   <name>
-│  ├─ set-secret               <name> -v <hex>
-│  ├─ del-secret               <name>
+│  ├─ rights                   [-r &lt;right,right,...&gt;]
+│  ├─ account-rights           &lt;sid&gt;
+│  ├─ account-privs            &lt;sid&gt;
+│  ├─ account-access           &lt;sid&gt;
+│  ├─ set-account-access       &lt;sid&gt; &lt;access&gt;
+│  ├─ add-rights               &lt;sid&gt; -r &lt;right,right,...&gt;
+│  ├─ del-rights               &lt;sid&gt; -r &lt;right,right,...&gt;
+│  ├─ add-account              &lt;sid&gt;
+│  ├─ del-account              &lt;sid&gt;
+│  ├─ add-secret               &lt;name&gt;
+│  ├─ get-secret               &lt;name&gt;
+│  ├─ secret                   &lt;name&gt;
+│  ├─ set-secret               &lt;name&gt; -v &lt;hex&gt;
+│  ├─ del-secret               &lt;name&gt;
 │  ├─ trusts                   [--use-v1]
-│  ├─ trust-records            <domain>
-│  ├─ trust                    (-n <domain> | -s <sid>) [--use-v1]
-│  ├─ set-trust                (-n <domain> | -s <sid>) [-D <n>] [-T <n>] [--attributes <hex>]
-│  ├─ add-trust                -n <domain> --flat-name <name> -s <sid> [-w <secret>] [-D <n>] [-T <n>]
-│  ├─ del-trust                <sid>
-│  ├─ set-trust-records        <domain> [--check]
-│  ├─ set-audit                [--enable] [--disable] [--event <cat=none|success|failure|both>]
-│  ├─ set-domain-policy        [--max-service-ticket <dur>] [--max-tgt <dur>] [--max-renew <dur>] [--max-skew <dur>] [--validate-client] [--no-validate-client]
-+- lookupsid                   (-s <sid> | -n <name> | -D <domain-sid> -F <start-rid> -T <end-rid>) [--use-v1]
-+- bkpkey
-│  ├─ backup                   --in-file <request.bin> -o <response.bin>
-│  ├─ restore                  (--in-file <restore.bin> | --in-b64 <base64>) [--win2k]
-│  ├─ retrieve                 -o <backupkey.bin>
-+- dfs
+│  ├─ trust-records            &lt;domain&gt;
+│  ├─ trust                    (-n &lt;domain&gt; | -s &lt;sid&gt;) [--use-v1]
+│  ├─ set-trust                (-n &lt;domain&gt; | -s &lt;sid&gt;) [-D &lt;n&gt;] [-T &lt;n&gt;] [--attributes &lt;hex&gt;]
+│  ├─ add-trust                -n &lt;domain&gt; --flat-name &lt;name&gt; -s &lt;sid&gt; [-w &lt;secret&gt;] [-D &lt;n&gt;] [-T &lt;n&gt;]
+│  ├─ del-trust                &lt;sid&gt;
+│  ├─ set-trust-records        &lt;domain&gt; [--check]
+│  ├─ set-audit                [--enable] [--disable] [--event &lt;cat=none|success|failure|both&gt;]
+│  ├─ set-domain-policy        [--max-service-ticket &lt;dur&gt;] [--max-tgt &lt;dur&gt;] [--max-renew &lt;dur&gt;] [--max-skew &lt;dur&gt;] [--validate-client] [--no-validate-client]
++- <a href="tools/lookupsid.md">lookupsid</a>                   (-s &lt;sid&gt; | -n &lt;name&gt; | -D &lt;domain-sid&gt; -F &lt;start-rid&gt; -T &lt;end-rid&gt;) [--use-v1]
++- <a href="tools/bkpkey.md">bkpkey</a>
+│  ├─ backup                   --in-file &lt;request.bin&gt; -o &lt;response.bin&gt;
+│  ├─ restore                  (--in-file &lt;restore.bin&gt; | --in-b64 &lt;base64&gt;) [--win2k]
+│  ├─ retrieve                 -o &lt;backupkey.bin&gt;
++- <a href="tools/dfs.md">dfs</a>
 │  ├─ namespaces               
 │  ├─ dump                     
-│  ├─ links                    <namespace-path>
-│  ├─ info                     <path> [--gen-guid] [--version]
-│  ├─ add-link                 <link-path> --server <server> -s <share>
-│  ├─ del-link                 <link-path>
-│  ├─ move                     <from> <to>
-│  ├─ set-comment              <dfs-path> -c <text>
-│  ├─ set-state                <dfs-path> -e <online|offline|resynchronize> [--use-v1]
-│  ├─ set-timeout              <dfs-path> -T <sec> [--use-v1]
-│  ├─ set-flags                <dfs-path> -f <flags> [-m <mask>] [--use-v1]
-│  ├─ set-priority             <dfs-path> --server <server> -s <share> -c <class> -R <rank> [--use-v1]
-│  ├─ get-sd                   <dfs-path>
-│  ├─ set-sd                   <dfs-path> --sd <hex>
-│  ├─ add-root                 <dfs-path> [--root-target <\\server\share>] [--new] [--version <0|1|2>]
-│  ├─ del-root                 <dfs-path> [--root-target <\\server\share>] [--force]
-│  ├─ dc-address               --server <server> [--pdc <dc>]
-│  ├─ set-dc-address           --server <server> --pdc <pdc> [--set-timeout -T <seconds>] [-i]
+│  ├─ links                    &lt;namespace-path&gt;
+│  ├─ info                     &lt;path&gt; [--gen-guid] [--version]
+│  ├─ add-link                 &lt;link-path&gt; --server &lt;server&gt; -s &lt;share&gt;
+│  ├─ del-link                 &lt;link-path&gt;
+│  ├─ move                     &lt;from&gt; &lt;to&gt;
+│  ├─ set-comment              &lt;dfs-path&gt; -c &lt;text&gt;
+│  ├─ set-state                &lt;dfs-path&gt; -e &lt;online|offline|resynchronize&gt; [--use-v1]
+│  ├─ set-timeout              &lt;dfs-path&gt; -T &lt;sec&gt; [--use-v1]
+│  ├─ set-flags                &lt;dfs-path&gt; -f &lt;flags&gt; [-m &lt;mask&gt;] [--use-v1]
+│  ├─ set-priority             &lt;dfs-path&gt; --server &lt;server&gt; -s &lt;share&gt; -c &lt;class&gt; -R &lt;rank&gt; [--use-v1]
+│  ├─ get-sd                   &lt;dfs-path&gt;
+│  ├─ set-sd                   &lt;dfs-path&gt; --sd &lt;hex&gt;
+│  ├─ add-root                 &lt;dfs-path&gt; [--root-target &lt;\\server\share&gt;] [--new] [--version &lt;0|1|2&gt;]
+│  ├─ del-root                 &lt;dfs-path&gt; [--root-target &lt;\\server\share&gt;] [--force]
+│  ├─ dc-address               --server &lt;server&gt; [--pdc &lt;dc&gt;]
+│  ├─ set-dc-address           --server &lt;server&gt; --pdc &lt;pdc&gt; [--set-timeout -T &lt;seconds&gt;] [-i]
 │  ├─ flush-ft-table           
 │  ├─ initialize               
 │  ├─ ns-version               
 │  ├─ server-version           
-+- efs
-│  ├─ users                    <file>
-│  ├─ recovery                 <file>
-│  ├─ protectors               <file>
-│  ├─ file-key                 <file> [--info-class <n>] [--flags <n>] [--use-v1]
-│  ├─ encrypted-metadata       <file>
-│  ├─ encrypt                  <file> [--use-v1]
-│  ├─ decrypt                  <file>
-│  ├─ add-users                <file> --users-json <file> [--use-v1]
-│  ├─ del-users                <file> --hash <sha1>
-│  ├─ set-encrypted-metadata   <file> --blob-b64 <base64>
-│  ├─ clone-meta               <src> <dst>
-│  ├─ open-raw                 <file> [--import]
++- <a href="tools/efs.md">efs</a>
+│  ├─ users                    &lt;file&gt;
+│  ├─ recovery                 &lt;file&gt;
+│  ├─ protectors               &lt;file&gt;
+│  ├─ file-key                 &lt;file&gt; [--info-class &lt;n&gt;] [--flags &lt;n&gt;] [--use-v1]
+│  ├─ encrypted-metadata       &lt;file&gt;
+│  ├─ encrypt                  &lt;file&gt; [--use-v1]
+│  ├─ decrypt                  &lt;file&gt;
+│  ├─ add-users                &lt;file&gt; --users-json &lt;file&gt; [--use-v1]
+│  ├─ del-users                &lt;file&gt; --hash &lt;sha1&gt;
+│  ├─ set-encrypted-metadata   &lt;file&gt; --blob-b64 &lt;base64&gt;
+│  ├─ clone-meta               &lt;src&gt; &lt;dst&gt;
+│  ├─ open-raw                 &lt;file&gt; [--import]
 │  ├─ flush-cache              
-+- dns                         (defaults to `zones`)
++- <a href="tools/dns.md">dns</a>                         (defaults to `zones`)
 │  ├─ zones                    
-│  ├─ records                  <zone> [-n <node>] [-T <A|AAAA|MX|TXT|CNAME|SRV|NS|PTR|SOA|ALL>]
-│  ├─ nodes                    <zone> [-n <parent-node>]
-│  ├─ dump                     [-z <zone>] [--skip-cache=<true|false>]
-│  ├─ add-record               <zone> -n <node> -T <type> -v <value> [--ttl <sec>]
-│  ├─ del-record               <zone> -n <node> -T <type> -v <value> [--ttl <sec>]
-│  ├─ server-props             [-o <operation>] [--property <name>]
+│  ├─ records                  &lt;zone&gt; [-n &lt;node&gt;] [-T &lt;A|AAAA|MX|TXT|CNAME|SRV|NS|PTR|SOA|ALL&gt;]
+│  ├─ nodes                    &lt;zone&gt; [-n &lt;parent-node&gt;]
+│  ├─ dump                     [-z &lt;zone&gt;] [--skip-cache=&lt;true|false&gt;]
+│  ├─ add-record               &lt;zone&gt; -n &lt;node&gt; -T &lt;type&gt; -v &lt;value&gt; [--ttl &lt;sec&gt;]
+│  ├─ del-record               &lt;zone&gt; -n &lt;node&gt; -T &lt;type&gt; -v &lt;value&gt; [--ttl &lt;sec&gt;]
+│  ├─ server-props             [-o &lt;operation&gt;] [--property &lt;name&gt;]
 │  ├─ server-stats             [--clear]
 │  ├─ server-scopes            
-│  ├─ zone                     <zone> [--property <name>]
-│  ├─ zone-stats               <zone> [--clear]
-│  ├─ zone-scopes              <zone|..cache>
-│  ├─ policies                 [-z <zone>]
-│  ├─ policy                   <policy-name> [-z <zone>]
+│  ├─ zone                     &lt;zone&gt; [--property &lt;name&gt;]
+│  ├─ zone-stats               &lt;zone&gt; [--clear]
+│  ├─ zone-scopes              &lt;zone|..cache&gt;
+│  ├─ policies                 [-z &lt;zone&gt;]
+│  ├─ policy                   &lt;policy-name&gt; [-z &lt;zone&gt;]
 │  ├─ client-subnets           
-│  ├─ client-subnet            <subnet-record-name>
-│  ├─ add-zone                 <zone> [--type <primary|secondary|stub|forwarder>] [--master <ip> (repeatable)] [--ds]
-│  ├─ del-zone                 <zone>
-│  ├─ pause-zone               <zone>
-│  ├─ resume-zone              <zone>
-│  ├─ reload-zone              <zone>
-│  ├─ set-forwarders           [--forwarder <ipv4> (repeatable)] [--timeout <sec>] [--no-recurse]
+│  ├─ client-subnet            &lt;subnet-record-name&gt;
+│  ├─ add-zone                 &lt;zone&gt; [--type &lt;primary|secondary|stub|forwarder&gt;] [--master &lt;ip&gt; (repeatable)] [--ds]
+│  ├─ del-zone                 &lt;zone&gt;
+│  ├─ pause-zone               &lt;zone&gt;
+│  ├─ resume-zone              &lt;zone&gt;
+│  ├─ reload-zone              &lt;zone&gt;
+│  ├─ set-forwarders           [--forwarder &lt;ipv4&gt; (repeatable)] [--timeout &lt;sec&gt;] [--no-recurse]
 │  ├─ version                  
-+- dhcp
++- <a href="tools/dhcp.md">dhcp</a>
 │  ├─ scopes                   
-│  ├─ scope                    <scope-ip>
-│  ├─ leases                   [-s <scope-ip>]
-│  ├─ ranges                   <scope-ip>
-│  ├─ exclusions               <scope-ip>
-│  ├─ reservations             <scope-ip>
+│  ├─ scope                    &lt;scope-ip&gt;
+│  ├─ leases                   [-s &lt;scope-ip&gt;]
+│  ├─ ranges                   &lt;scope-ip&gt;
+│  ├─ exclusions               &lt;scope-ip&gt;
+│  ├─ reservations             &lt;scope-ip&gt;
 │  ├─ stats                    
-│  ├─ add-scope                <scope-ip> -m <netmask> --name <name> [--comment <text>]
-│  ├─ del-scope                <scope-ip> [-f]
-│  ├─ set-scope                <scope-ip> [--name <name>] [--state <enabled|disabled>]
-│  ├─ add-range                <scope-ip> -F <start-ip> -T <end-ip>
-│  ├─ del-range                <scope-ip> -F <start-ip> -T <end-ip> [--force]
-│  ├─ add-exclusion            <scope-ip> -F <start-ip> -T <end-ip>
-│  ├─ del-exclusion            <scope-ip> -F <start-ip> -T <end-ip>
-│  ├─ add-reservation          <scope-ip> --ip <ip> --mac <mac>
-│  ├─ del-reservation          <scope-ip> --ip <ip>
-│  ├─ add-lease                --ip <ip> --mac <mac> [--name <name>] [--comment <text>]
-│  ├─ lease                    <ip>
-│  ├─ set-lease                --ip <ip> --mac <mac> [--name <name>] [--comment <text>]
-│  ├─ options                  [-s <scope-ip>]
-│  ├─ set-option               <option-id> [-s <scope-ip>] --type <type> --value <value>
-│  ├─ option                   <option-id> [-s <scope-ip>]
-│  ├─ del-option               <option-id> [-s <scope-ip>]
-│  ├─ add-option-type          <option-id> --name <name> [--type <type>] [--array]
-│  ├─ set-option-type          <option-id> --name <name> [--type <type>]
-│  ├─ option-type              <option-id>
+│  ├─ add-scope                &lt;scope-ip&gt; -m &lt;netmask&gt; --name &lt;name&gt; [--comment &lt;text&gt;]
+│  ├─ del-scope                &lt;scope-ip&gt; [-f]
+│  ├─ set-scope                &lt;scope-ip&gt; [--name &lt;name&gt;] [--state &lt;enabled|disabled&gt;]
+│  ├─ add-range                &lt;scope-ip&gt; -F &lt;start-ip&gt; -T &lt;end-ip&gt;
+│  ├─ del-range                &lt;scope-ip&gt; -F &lt;start-ip&gt; -T &lt;end-ip&gt; [--force]
+│  ├─ add-exclusion            &lt;scope-ip&gt; -F &lt;start-ip&gt; -T &lt;end-ip&gt;
+│  ├─ del-exclusion            &lt;scope-ip&gt; -F &lt;start-ip&gt; -T &lt;end-ip&gt;
+│  ├─ add-reservation          &lt;scope-ip&gt; --ip &lt;ip&gt; --mac &lt;mac&gt;
+│  ├─ del-reservation          &lt;scope-ip&gt; --ip &lt;ip&gt;
+│  ├─ add-lease                --ip &lt;ip&gt; --mac &lt;mac&gt; [--name &lt;name&gt;] [--comment &lt;text&gt;]
+│  ├─ lease                    &lt;ip&gt;
+│  ├─ set-lease                --ip &lt;ip&gt; --mac &lt;mac&gt; [--name &lt;name&gt;] [--comment &lt;text&gt;]
+│  ├─ options                  [-s &lt;scope-ip&gt;]
+│  ├─ set-option               &lt;option-id&gt; [-s &lt;scope-ip&gt;] --type &lt;type&gt; --value &lt;value&gt;
+│  ├─ option                   &lt;option-id&gt; [-s &lt;scope-ip&gt;]
+│  ├─ del-option               &lt;option-id&gt; [-s &lt;scope-ip&gt;]
+│  ├─ add-option-type          &lt;option-id&gt; --name &lt;name&gt; [--type &lt;type&gt;] [--array]
+│  ├─ set-option-type          &lt;option-id&gt; --name &lt;name&gt; [--type &lt;type&gt;]
+│  ├─ option-type              &lt;option-id&gt;
 │  ├─ option-types         
-│  ├─ del-option-type          <option-id>
+│  ├─ del-option-type          &lt;option-id&gt;
 │  ├─ config               
-│  ├─ set-config               [--backup-path <path>]
+│  ├─ set-config               [--backup-path &lt;path&gt;]
 │  ├─ scan-db                  [--repair]
-│  ├─ del-lease                <client-ip>
+│  ├─ del-lease                &lt;client-ip&gt;
 │  ├─ server-version           
-+- firewall
-│  ├─ profile                  [-s <store>] [-P <profile>]
-│  ├─ rules                    [-s <store>] [-P <profile>] [-D <direction>] [-a <allow|block>] [--enabled-only] [-n <name>]
++- <a href="tools/firewall.md">firewall</a>
+│  ├─ profile                  [-s &lt;store&gt;] [-P &lt;profile&gt;]
+│  ├─ rules                    [-s &lt;store&gt;] [-P &lt;profile&gt;] [-D &lt;direction&gt;] [-a &lt;allow|block&gt;] [--enabled-only] [-n &lt;name&gt;]
 │  ├─ products                 
 │  ├─ networks                 
 │  ├─ adapters                 
-│  ├─ config                   [-s <store>]
-│  ├─ set-config               <key> <value> [-s local]
-│  ├─ dump                     [-s <store>]
+│  ├─ config                   [-s &lt;store&gt;]
+│  ├─ set-config               &lt;key&gt; &lt;value&gt; [-s local]
+│  ├─ dump                     [-s &lt;store&gt;]
 │  ├─ ipsec-csrules            
 │  ├─ ipsec-mmrules            
 │  ├─ ipsec-authsets           
 │  ├─ ipsec-cryptosets         
 │  ├─ ipsec-sas                
-│  ├─ enable                   [-s <store>] [-P <profile>]
-│  ├─ disable                  [-s <store>] [-P <profile>]
-│  ├─ add-rule                 [-s <store>] <name> -D <in|out> -a <allow|block> [-P <profile-mask>]
-│  ├─ set-rule                 [-s <store>] <rule-id> [--enabled <true|false>]
-│  ├─ add-ipsec-csrule         <name> [-a <mode>] [--phase1-auth <id>] [--phase2-crypto <id>] [--phase2-auth <id>] [-P <profile-mask>]
-│  ├─ set-ipsec-csrule         <rule-id> [--enabled <true|false>]
-│  ├─ add-ipsec-mmrule         <name> [-P <profile-mask>] --phase1-auth <id> --phase1-crypto <id>
-│  ├─ set-ipsec-mmrule         <rule-id> [--enabled <true|false>]
-│  ├─ add-ipsec-authset        <set-id> [-n <name>] [--phase <1|2>] [-m <method>]
-│  ├─ set-ipsec-authset        <set-id> [-n <name>] [--phase <1|2>] [-m <method>]
-│  ├─ add-ipsec-cryptoset      <set-id> [-n <name>] [--phase <1|2>] [--key-exchange <alg>] [--encryption <alg>] [--hash <alg>]
-│  ├─ set-ipsec-cryptoset      <set-id> [-n <name>] [--phase <1|2>] [--key-exchange <alg>] [--encryption <alg>] [--hash <alg>]
-│  ├─ del-rule                 [-s <store>] <rule-id>
+│  ├─ enable                   [-s &lt;store&gt;] [-P &lt;profile&gt;]
+│  ├─ disable                  [-s &lt;store&gt;] [-P &lt;profile&gt;]
+│  ├─ add-rule                 [-s &lt;store&gt;] &lt;name&gt; -D &lt;in|out&gt; -a &lt;allow|block&gt; [-P &lt;profile-mask&gt;]
+│  ├─ set-rule                 [-s &lt;store&gt;] &lt;rule-id&gt; [--enabled &lt;true|false&gt;]
+│  ├─ add-ipsec-csrule         &lt;name&gt; [-a &lt;mode&gt;] [--phase1-auth &lt;id&gt;] [--phase2-crypto &lt;id&gt;] [--phase2-auth &lt;id&gt;] [-P &lt;profile-mask&gt;]
+│  ├─ set-ipsec-csrule         &lt;rule-id&gt; [--enabled &lt;true|false&gt;]
+│  ├─ add-ipsec-mmrule         &lt;name&gt; [-P &lt;profile-mask&gt;] --phase1-auth &lt;id&gt; --phase1-crypto &lt;id&gt;
+│  ├─ set-ipsec-mmrule         &lt;rule-id&gt; [--enabled &lt;true|false&gt;]
+│  ├─ add-ipsec-authset        &lt;set-id&gt; [-n &lt;name&gt;] [--phase &lt;1|2&gt;] [-m &lt;method&gt;]
+│  ├─ set-ipsec-authset        &lt;set-id&gt; [-n &lt;name&gt;] [--phase &lt;1|2&gt;] [-m &lt;method&gt;]
+│  ├─ add-ipsec-cryptoset      &lt;set-id&gt; [-n &lt;name&gt;] [--phase &lt;1|2&gt;] [--key-exchange &lt;alg&gt;] [--encryption &lt;alg&gt;] [--hash &lt;alg&gt;]
+│  ├─ set-ipsec-cryptoset      &lt;set-id&gt; [-n &lt;name&gt;] [--phase &lt;1|2&gt;] [--key-exchange &lt;alg&gt;] [--encryption &lt;alg&gt;] [--hash &lt;alg&gt;]
+│  ├─ del-rule                 [-s &lt;store&gt;] &lt;rule-id&gt;
 │  ├─ del-all-rules            
-│  ├─ del-ipsec-csrule         <id>
+│  ├─ del-ipsec-csrule         &lt;id&gt;
 │  ├─ del-all-ipsec-csrules    
-│  ├─ del-ipsec-mmrule         <id>
+│  ├─ del-ipsec-mmrule         &lt;id&gt;
 │  ├─ del-all-ipsec-mmrules    
-│  ├─ del-ipsec-authset        <id> [--phase <1|2>]
-│  ├─ del-all-ipsec-authsets   [--phase <1|2>]
-│  ├─ del-ipsec-cryptoset      <id> [--phase <1|2>]
-│  ├─ del-all-ipsec-cryptosets [--phase <1|2>]
-│  ├─ del-phase1-sas           [--src <cidr>] [--dst <cidr>] [--protocol <num>]
-│  ├─ del-phase2-sas           [--src <cidr>] [--dst <cidr>] [--protocol <num>]
+│  ├─ del-ipsec-authset        &lt;id&gt; [--phase &lt;1|2&gt;]
+│  ├─ del-all-ipsec-authsets   [--phase &lt;1|2&gt;]
+│  ├─ del-ipsec-cryptoset      &lt;id&gt; [--phase &lt;1|2&gt;]
+│  ├─ del-all-ipsec-cryptosets [--phase &lt;1|2&gt;]
+│  ├─ del-phase1-sas           [--src &lt;cidr&gt;] [--dst &lt;cidr&gt;] [--protocol &lt;num&gt;]
+│  ├─ del-phase2-sas           [--src &lt;cidr&gt;] [--dst &lt;cidr&gt;] [--protocol &lt;num&gt;]
 │  ├─ restore-defaults         
-+- printer
++- <a href="tools/printer.md">printer</a>
 │  ├─ printers                 
 │  ├─ dump                     [--ports] [--monitors] [--forms] [--strict]
-│  ├─ drivers                  [-e <environment>]
+│  ├─ drivers                  [-e &lt;environment&gt;]
 │  ├─ ports                    
 │  ├─ monitors                 
-│  ├─ processors               [-e <environment>]
-│  ├─ datatypes                [-c <print-processor>] [-e <environment>]
+│  ├─ processors               [-e &lt;environment&gt;]
+│  ├─ datatypes                [-c &lt;print-processor&gt;] [-e &lt;environment&gt;]
 │  ├─ server               
 │  ├─ forms                    
-│  ├─ info                     <printer>
-│  ├─ jobs                     <printer>
-│  ├─ job                      <printer> -j <job-id>
-│  ├─ set-job                  <printer> -j <job-id> -a <pause|resume|cancel|restart|delete|retain|release>
-│  ├─ form                     <form>
-│  ├─ print                    <printer> -f <file> [-d <doc-name>] [-D <datatype>]
-│  ├─ driver                   <printer> [-e <environment>]
-│  ├─ driver-dir               [-e <environment>]
-│  ├─ processor-dir            [-e <environment>]
-│  ├─ add-printer              -n <name> -d <driver> -q <port> [-s <share>] [-C <comment>] [-l <location>] [-c <processor>] [-D <datatype>]
-│  ├─ del-printer              <printer>
-│  ├─ set-printer              <printer> -a <pause|resume|purge>
-│  ├─ set-attrs                <printer> [-A <hex>] [-R <hex>]
-│  ├─ reset-printer            <printer> [-D <datatype>]
-│  ├─ add-driver               <driver-name> [-e <environment>] --driver-path <path> --data-file <path> --config-file <path>
-│  ├─ del-driver               <driver-name> [-e <environment>]
-│  ├─ add-form                 <form> --width <mm> --height <mm> [--x-off <n>] [--y-off <n>]
-│  ├─ set-form                 <form> --width <mm> --height <mm> [--x-off <n>] [--y-off <n>]
-│  ├─ del-form                 <form>
-│  ├─ add-port                 <port> [--monitor <name>]
-│  ├─ del-port                 <port>
-│  ├─ add-processor            <processor-name> --path <dll> [-e <environment>]
-│  ├─ del-processor            <processor-name> [-e <environment>]
-│  ├─ del-port                 <port>
-│  ├─ add-monitor              <name> --path <dll> [-e <environment>]
-│  ├─ del-monitor              <name> [-e <environment>]
-│  ├─ notify                   <listener>
-+- machinerole                 [--use-named-pipe]
-+- shutdown
-│  ├─ initiate                 [-m <message>] [--timeout <sec>] [--force] [-r] [--reason <text>] [--interface <initshutdown|winreg|windowsshutdown>] [--use-v1]
-│  ├─ abort                    [--interface <initshutdown|winreg|windowsshutdown>]
-+- perf
+│  ├─ info                     &lt;printer&gt;
+│  ├─ jobs                     &lt;printer&gt;
+│  ├─ job                      &lt;printer&gt; -j &lt;job-id&gt;
+│  ├─ set-job                  &lt;printer&gt; -j &lt;job-id&gt; -a &lt;pause|resume|cancel|restart|delete|retain|release&gt;
+│  ├─ form                     &lt;form&gt;
+│  ├─ print                    &lt;printer&gt; -f &lt;file&gt; [-d &lt;doc-name&gt;] [-D &lt;datatype&gt;]
+│  ├─ driver                   &lt;printer&gt; [-e &lt;environment&gt;]
+│  ├─ driver-dir               [-e &lt;environment&gt;]
+│  ├─ processor-dir            [-e &lt;environment&gt;]
+│  ├─ add-printer              -n &lt;name&gt; -d &lt;driver&gt; -q &lt;port&gt; [-s &lt;share&gt;] [-C &lt;comment&gt;] [-l &lt;location&gt;] [-c &lt;processor&gt;] [-D &lt;datatype&gt;]
+│  ├─ del-printer              &lt;printer&gt;
+│  ├─ set-printer              &lt;printer&gt; -a &lt;pause|resume|purge&gt;
+│  ├─ set-attrs                &lt;printer&gt; [-A &lt;hex&gt;] [-R &lt;hex&gt;]
+│  ├─ reset-printer            &lt;printer&gt; [-D &lt;datatype&gt;]
+│  ├─ add-driver               &lt;driver-name&gt; [-e &lt;environment&gt;] --driver-path &lt;path&gt; --data-file &lt;path&gt; --config-file &lt;path&gt;
+│  ├─ del-driver               &lt;driver-name&gt; [-e &lt;environment&gt;]
+│  ├─ add-form                 &lt;form&gt; --width &lt;mm&gt; --height &lt;mm&gt; [--x-off &lt;n&gt;] [--y-off &lt;n&gt;]
+│  ├─ set-form                 &lt;form&gt; --width &lt;mm&gt; --height &lt;mm&gt; [--x-off &lt;n&gt;] [--y-off &lt;n&gt;]
+│  ├─ del-form                 &lt;form&gt;
+│  ├─ add-port                 &lt;port&gt; [--monitor &lt;name&gt;]
+│  ├─ del-port                 &lt;port&gt;
+│  ├─ add-processor            &lt;processor-name&gt; --path &lt;dll&gt; [-e &lt;environment&gt;]
+│  ├─ del-processor            &lt;processor-name&gt; [-e &lt;environment&gt;]
+│  ├─ del-port                 &lt;port&gt;
+│  ├─ add-monitor              &lt;name&gt; --path &lt;dll&gt; [-e &lt;environment&gt;]
+│  ├─ del-monitor              &lt;name&gt; [-e &lt;environment&gt;]
+│  ├─ notify                   &lt;listener&gt;
++- <a href="tools/machinerole.md">machinerole</a>                 [--use-named-pipe]
++- <a href="tools/shutdown.md">shutdown</a>
+│  ├─ initiate                 [-m &lt;message&gt;] [--timeout &lt;sec&gt;] [--force] [-r] [--reason &lt;text&gt;] [--interface &lt;initshutdown|winreg|windowsshutdown&gt;] [--use-v1]
+│  ├─ abort                    [--interface &lt;initshutdown|winreg|windowsshutdown&gt;]
++- <a href="tools/perf.md">perf</a>
 │  ├─ csets                    
-│  ├─ cset                     <guid>
-│  ├─ instances                <guid>
-│  ├─ query                    <guid> [-c <counter-id>] [--instance <id>]
+│  ├─ cset                     &lt;guid&gt;
+│  ├─ instances                &lt;guid&gt;
+│  ├─ query                    &lt;guid&gt; [-c &lt;counter-id&gt;] [--instance &lt;id&gt;]
 │  ├─ dump                     [-v] [-i]
-+- time
-│  ├─ sync                     [--wait <sec>] [--sync-flags <mask>]
++- <a href="tools/time.md">time</a>
+│  ├─ sync                     [--wait &lt;sec&gt;] [--sync-flags &lt;mask&gt;]
 │  ├─ bits                     
-│  ├─ provider-status          <provider-name> [--provider-flags <mask>]
+│  ├─ provider-status          &lt;provider-name&gt; [--provider-flags &lt;mask&gt;]
 │  ├─ source                   
-│  ├─ provider-config          <provider-name> [--provider-flags <mask>]
+│  ├─ provider-config          &lt;provider-name&gt; [--provider-flags &lt;mask&gt;]
 │  ├─ config                   
 │  ├─ status                   
 │  ├─ log                      
-+- dcsync                      --dc <dc> (-n <name1,name2> | -N <file> | -g <object-guid> | -s <sid> | -S <sid-file> | -q <ldap-filter> | -a) [--history] [--all ektypes] [--resume-file <file>]
-+- server
++- <a href="tools/dcsync.md">dcsync</a>                      --dc &lt;dc&gt; (-n &lt;name1,name2&gt; | -N &lt;file&gt; | -g &lt;object-guid&gt; | -s &lt;sid&gt; | -S &lt;sid-file&gt; | -q &lt;ldap-filter&gt; | -a) [--history] [--all ektypes] [--resume-file &lt;file&gt;]
++- <a href="tools/server.md">server</a>
 │  ├─ shares                   [--persistent]
-│  ├─ share                    <name>
-│  ├─ share-check              <path>
-│  ├─ sessions                 [--client <name>] [--session-user <user>]
-│  ├─ connections              [--qualifier <share|client>]
-│  ├─ files                    [--base-path <path>] [--session-user <user>]
-│  ├─ file                     <id>
-│  ├─ get-file-acl             <share[\path]> [--security-info <mask>]
+│  ├─ share                    &lt;name&gt;
+│  ├─ share-check              &lt;path&gt;
+│  ├─ sessions                 [--client &lt;name&gt;] [--session-user &lt;user&gt;]
+│  ├─ connections              [--qualifier &lt;share|client&gt;]
+│  ├─ files                    [--base-path &lt;path&gt;] [--session-user &lt;user&gt;]
+│  ├─ file                     &lt;id&gt;
+│  ├─ get-file-acl             &lt;share[\path]&gt; [--security-info &lt;mask&gt;]
 │  ├─ aliases                  
-│  ├─ validate-name            <name> <type>
-│  ├─ info                     [--detail <basic|standard|full|extended|config|config-full>]
-│  ├─ add-share                <name> --path <local> [--remark <text>] [--share-type <n>] [--max-uses <n>] [--persistent=<true|false>]
-│  ├─ set-share                <name> [--remark <text>] [--max-uses <n>]
-│  ├─ set-server               <remark>
-│  ├─ add-alias                <name> --alias-target <server>
-│  ├─ set-file-acl             <share[\path]> --sd <hex> [--security-info <mask>]
-│  ├─ del-share                <name> [--persistent]
-│  ├─ del-session              [--client <name>] [--session-user <user>]
-│  ├─ file-close               <id>
-│  ├─ del-alias                <name>
+│  ├─ validate-name            &lt;name&gt; &lt;type&gt;
+│  ├─ info                     [--detail &lt;basic|standard|full|extended|config|config-full&gt;]
+│  ├─ add-share                &lt;name&gt; --path &lt;local&gt; [--remark &lt;text&gt;] [--share-type &lt;n&gt;] [--max-uses &lt;n&gt;] [--persistent=&lt;true|false&gt;]
+│  ├─ set-share                &lt;name&gt; [--remark &lt;text&gt;] [--max-uses &lt;n&gt;]
+│  ├─ set-server               &lt;remark&gt;
+│  ├─ add-alias                &lt;name&gt; --alias-target &lt;server&gt;
+│  ├─ set-file-acl             &lt;share[\path]&gt; --sd &lt;hex&gt; [--security-info &lt;mask&gt;]
+│  ├─ del-share                &lt;name&gt; [--persistent]
+│  ├─ del-session              [--client &lt;name&gt;] [--session-user &lt;user&gt;]
+│  ├─ file-close               &lt;id&gt;
+│  ├─ del-alias                &lt;name&gt;
 │  ├─ disks                    
 │  ├─ stats                    
 │  ├─ transports               
-│  ├─ add-transport            <transport> [-A <addr>] [-d <domain>] [--flags <n>] [--use-v1]
-│  ├─ del-transport            <transport> [-A <addr>] [-d <domain>] [--use-v1]
-+- wksta
-│  ├─ info                     [--detail <basic|lan|full|config>]
+│  ├─ add-transport            &lt;transport&gt; [-A &lt;addr&gt;] [-d &lt;domain&gt;] [--flags &lt;n&gt;] [--use-v1]
+│  ├─ del-transport            &lt;transport&gt; [-A &lt;addr&gt;] [-d &lt;domain&gt;] [--use-v1]
++- <a href="tools/wksta.md">wksta</a>
+│  ├─ info                     [--detail &lt;basic|lan|full|config&gt;]
 │  ├─ loggedon                 
 │  ├─ transports               
 │  ├─ join-info                
 │  ├─ stats                    
-│  ├─ set-info                 (--keep-conn | --sess-timeout | --dormant-file-limit) <n>
-│  ├─ join-domain              <domain> [--options <n>]
-│  ├─ unjoin-domain            [--options <n>]
-│  ├─ rename-machine           <new-name> [--rename-account] [--dns-only]
-│  ├─ validate-name            <name> [--name-type <id>]
-│  ├─ names                    [-T <primary|alternate|all>]
-│  ├─ joinable-ous             <domain>
-│  ├─ add-alt-name             <alt-name>
-│  ├─ del-alt-name             <alt-name>
-│  ├─ set-primary-name         <primary-name>
-│  ├─ add-transport            <transport-name> [--quality <n>]
-│  ├─ del-transport            <transport-name> [--force-level <n>]
+│  ├─ set-info                 (--keep-conn | --sess-timeout | --dormant-file-limit) &lt;n&gt;
+│  ├─ join-domain              &lt;domain&gt; [--options &lt;n&gt;]
+│  ├─ unjoin-domain            [--options &lt;n&gt;]
+│  ├─ rename-machine           &lt;new-name&gt; [--rename-account] [--dns-only]
+│  ├─ validate-name            &lt;name&gt; [--name-type &lt;id&gt;]
+│  ├─ names                    [-T &lt;primary|alternate|all&gt;]
+│  ├─ joinable-ous             &lt;domain&gt;
+│  ├─ add-alt-name             &lt;alt-name&gt;
+│  ├─ del-alt-name             &lt;alt-name&gt;
+│  ├─ set-primary-name         &lt;primary-name&gt;
+│  ├─ add-transport            &lt;transport-name&gt; [--quality &lt;n&gt;]
+│  ├─ del-transport            &lt;transport-name&gt; [--force-level &lt;n&gt;]
 </pre>
-
-# License
-
-The MIT License (MIT)
-
-Copyright (c) 2023 Artur Henrique Marzano Gonzaga
-
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
