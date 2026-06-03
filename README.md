@@ -14,7 +14,7 @@ The tools span a range of use cases, including:
 Most subcommands map directly to a single protocol operation or RPC call - what you pass on the command line is what gets sent on the wire. A small number chain multiple calls to implement higher-level actions (for example, `dcsync`, `reg secrets`, and `sam dump`, `changepwd` etc).
 
 {% hint style="info" %}
-Despite the name, [ginpacket](https://github.com/Macmod/ginpacket) is **not** a Go port of [impacket](https://github.com/fortra/impacket). It is an opinionated toolkit with independently reworked implementations of some features that overlap with impacket, as well as implementations that go beyond what impacket provides. The two projects share goals but differ in scope and design.
+Despite the name, `ginpacket` is not a Go port of [impacket](https://github.com/fortra/impacket). It is an opinionated toolkit with independently reworked implementations of some features that overlap with impacket, as well as implementations that go beyond what impacket provides. The two projects share goals but differ in scope and design.
 {% endhint %}
 
 # Protocols implemented
@@ -59,7 +59,7 @@ For a complete reference of the commands supported by Ginpacket's tools, check t
 Index of provided tools, subcommands &amp; key arguments:
 
 ginpacket/
-+- <a href="tools/authz.md">authz</a>
++- authz
 │  ├─ version
 │  ├─ info                     &lt;SID|NAME&gt; [--class &lt;all|user|groups|restricted|device-groups|user-claims|device-claims&gt;]
 │  ├─ check
@@ -71,14 +71,14 @@ ginpacket/
 │  │  ├─ registry              &lt;SID|NAME&gt; -T &lt;registry-path&gt; [common check flags]
 │  │  ├─ smb                   &lt;SID|NAME&gt; -T &lt;share|share\\path&gt; [common check flags]
 │  │  ├─ wmi-ns                &lt;SID|NAME&gt; -T &lt;namespace&gt; [common check flags]
-+- <a href="tools/gettgt.md">gettgt</a>                      -u &lt;user&gt; --dc &lt;DC&gt; -o &lt;ccache&gt; (-p &lt;password&gt; | -H &lt;LM:NT|NT&gt; | --aes-key &lt;hex&gt; | --pfx &lt;file&gt; | --crt &lt;file&gt; --key &lt;file&gt;)
-+- <a href="tools/getst.md">getst</a>                       -c &lt;ccache&gt; -s &lt;spn&gt; --dc &lt;DC&gt; -o &lt;out&gt; [-i &lt;user&gt; [--self]] [-a &lt;evidence-ccache&gt;]
-+- <a href="tools/changepwd.md">changepwd</a>
++- gettgt                      -u &lt;user&gt; --dc &lt;DC&gt; -o &lt;ccache&gt; (-p &lt;password&gt; | -H &lt;LM:NT|NT&gt; | --aes-key &lt;hex&gt; | --pfx &lt;file&gt; | --crt &lt;file&gt; --key &lt;file&gt;)
++- getst                       -c &lt;ccache&gt; -s &lt;spn&gt; --dc &lt;DC&gt; -o &lt;out&gt; [-i &lt;user&gt; [--self]] [-a &lt;evidence-ccache&gt;]
++- changepwd
 │  ├─ samr                     -a &lt;account&gt; -w &lt;new-password&gt; [-o &lt;old-password&gt;] [-T &lt;smb|tcp&gt;]
 │  ├─ ldap                     -a &lt;account&gt; -w &lt;new-password&gt; [--scheme &lt;ldap|ldaps&gt;] [--starttls]
 │  ├─ adws                     -a &lt;account&gt; -w &lt;new-password&gt;
 │  ├─ kpasswd                  -a &lt;account&gt; -w &lt;new-password&gt; [-o &lt;old-password&gt;]
-+- <a href="tools/smb.md">smb</a>
++- smb
 │  ├─ shares                   
 │  ├─ ls                       &lt;share[\path]&gt; [-l]
 │  ├─ tree                     &lt;share[\path]&gt; [--max-depth &lt;n&gt;]
@@ -91,7 +91,7 @@ ginpacket/
 │  ├─ mv                       &lt;share[\src]&gt; &lt;dst&gt;
 │  ├─ cp                       &lt;share[\src]&gt; &lt;dst&gt;
 │  ├─ shell                    -s &lt;share&gt;
-+- <a href="tools/ldap.md">ldap</a>
++- ldap
 │  ├─ whoami                   
 │  ├─ info                     &lt;dn-or-name&gt; [--all]
 │  ├─ search                   -F &lt;filter&gt; [-A &lt;attrs&gt;] [--hex] [--limit &lt;n&gt;] [--base-dn &lt;dn&gt;] [--scope &lt;scope&gt;]
@@ -120,8 +120,8 @@ ginpacket/
 │  │  ├─ ou                    --name &lt;name&gt; [--parent-dn &lt;dn&gt;]
 │  │  ├─ container             --name &lt;name&gt; [--parent-dn &lt;dn&gt;]
 │  │  ├─ custom                --template &lt;file.yaml&gt;
-+- <a href="tools/rpcdump.md">rpcdump</a>                     [-U &lt;interface-uuid&gt;] [-T &lt;ncacn_ip_tcp,ncacn_np&gt;]
-+- <a href="tools/reg.md">reg</a>
++- rpcdump                     [-U &lt;interface-uuid&gt;] [-T &lt;ncacn_ip_tcp,ncacn_np&gt;]
++- reg
 │  ├─ query                    &lt;registry-path&gt; [-v &lt;value-name&gt;] [-s]
 │  ├─ info                     &lt;registry-path&gt;
 │  ├─ add                      &lt;registry-path&gt; -v &lt;value-name&gt; -T &lt;type&gt; -d &lt;data&gt;
@@ -142,7 +142,7 @@ ginpacket/
 │  ├─ secrets                  [--sam] [--lsa] [--cache]
 │  ├─ server-version           [--hive &lt;HKLM|HKCU|HKCR|HKU|HKCC&gt;]
 │  ├─ shell                    (interactive: ls, cd, get, set, add, del, info, acl, flush)
-+- <a href="tools/services.md">services</a>
++- services
 │  ├─ query                    [--type &lt;mask&gt;] [--state &lt;mask&gt;] [--group &lt;name&gt;]
 │  ├─ dump                     [--type &lt;mask&gt;] [--state &lt;mask&gt;] [--group &lt;name&gt;]
 │  ├─ service                  &lt;name&gt; [--use-v1]
@@ -157,7 +157,7 @@ ginpacket/
 │  ├─ set-failure              &lt;name&gt; [-F &lt;command&gt;] [--reset-period &lt;sec&gt;] [--reboot-message &lt;text&gt;] [--failure-actions &lt;none|restart|reboot|run&gt;]
 │  ├─ set-sd                   &lt;name&gt; --sd &lt;hex&gt;
 │  ├─ del-service              &lt;name&gt;
-+- <a href="tools/tasks.md">tasks</a>
++- tasks
 │  ├─ query                    [-P &lt;path&gt;] [--include-hidden] [--use-v1]
 │  ├─ task                     &lt;path&gt; [--format xml]
 │  ├─ folders                  [path]
@@ -176,7 +176,7 @@ ginpacket/
 │  ├─ stop                     &lt;path&gt; [--instance &lt;guid&gt;]
 │  ├─ del                      &lt;path&gt; [--use-v1]
 │  ├─ del-folder               &lt;path&gt;
-+- <a href="tools/eventlog.md">eventlog</a>
++- eventlog
 │  ├─ query                    &lt;channel&gt; [-q &lt;query&gt;] [-L &lt;n&gt;] [--timeout-ms &lt;ms&gt;]
 │  ├─ subscribe                &lt;channel&gt; [-q &lt;query&gt;] [-L &lt;n&gt;] [--timeout-ms &lt;ms&gt;]
 │  ├─ watch                    &lt;channel&gt; [-q &lt;query&gt;] [-F &lt;text|json&gt;] [-L &lt;n&gt;] [--timeout-ms &lt;ms&gt;]
@@ -189,7 +189,7 @@ ginpacket/
 │  ├─ channel-publishers       [&lt;channel&gt;]
 │  ├─ classic-name             &lt;name&gt;
 │  ├─ set-channel              [&lt;channel&gt;] [--enabled &lt;true|false&gt;] [--max-size &lt;bytes&gt;]
-+- <a href="tools/cert.md">cert</a>
++- cert
 │  ├─ ping                     &lt;ca-name&gt; [--use-v1]
 │  ├─ my-roles                 &lt;ca-name&gt;
 │  ├─ ca-info                  &lt;ca-name&gt;
@@ -230,7 +230,7 @@ ginpacket/
 │  ├─ failed                   &lt;ca-name&gt; [--columns c1,c2] [--offset &lt;n&gt;] [--limit &lt;n&gt;] [--format &lt;text|csv|json&gt;] [--use-v1]
 │  ├─ revoked                  &lt;ca-name&gt; [--columns c1,c2] [--offset &lt;n&gt;] [--limit &lt;n&gt;] [--format &lt;text|csv|json&gt;] [--use-v1]
 │  ├─ del-row                  &lt;ca-name&gt; [row-id] [--table &lt;request|extension|attribute|crl&gt;] [--expired|--pending-failed --before &lt;yyyy-mm-dd&gt;]
-+- <a href="tools/tsts.md">tsts</a>
++- tsts
 │  ├─ sessions                 [-s &lt;state&gt;] [-f &lt;username&gt;]
 │  ├─ processes                [-s &lt;session-id&gt;]
 │  ├─ policy
@@ -246,7 +246,7 @@ ginpacket/
 │  ├─ stop-listener            &lt;name&gt;
 │  ├─ start-listener           &lt;name&gt;
 │  ├─ shutdown                 [-r] [-P] [-l]
-+- <a href="tools/wmi.md">wmi</a>
++- wmi
 │  ├─ query                    [-n &lt;namespace&gt;] &lt;wql&gt; [-f &lt;fields&gt;] [-L &lt;n&gt;]
 │  ├─ namespaces               [-n &lt;namespace&gt;]
 │  ├─ classes                  [-n &lt;namespace&gt;] [--superclass &lt;str&gt;] [-L &lt;n&gt;]
@@ -256,7 +256,7 @@ ginpacket/
 │  ├─ exec                     [-n &lt;namespace&gt;] &lt;command&gt;
 │  ├─ invoke                   [-n &lt;namespace&gt;] &lt;object::method&gt; [--arg &lt;k=v&gt;]
 │  ├─ del-instance             [-n &lt;namespace&gt;] &lt;object-path&gt;
-+- <a href="tools/sam.md">sam</a>
++- sam
 │  ├─ domains
 │  ├─ domain                   [-d &lt;name&gt;]
 │  ├─ set-domain               [-d &lt;name&gt;] [--min-pwd-len &lt;n&gt;] [--lockout-threshold &lt;n&gt;] [--lockout-window &lt;dur&gt;] [--lockout-duration &lt;dur&gt;]
@@ -297,7 +297,7 @@ ginpacket/
 │  ├─ lookup-rids              &lt;rid&gt;... [-d &lt;name&gt;]
 │  ├─ rid-to-sid               &lt;rid&gt;
 │  ├─ set-dsrm-password        &lt;new-password&gt;
-+- <a href="tools/lsa.md">lsa</a>                         [--use-tcp]
++- lsa                         [--use-tcp]
 │  ├─ policy             
 │  ├─ domain-policy      
 │  ├─ get-sd                   [--security-info &lt;mask&gt;]
@@ -329,12 +329,12 @@ ginpacket/
 │  ├─ set-trust-records        &lt;domain&gt; [--check]
 │  ├─ set-audit                [--enable] [--disable] [--event &lt;cat=none|success|failure|both&gt;]
 │  ├─ set-domain-policy        [--max-service-ticket &lt;dur&gt;] [--max-tgt &lt;dur&gt;] [--max-renew &lt;dur&gt;] [--max-skew &lt;dur&gt;] [--validate-client] [--no-validate-client]
-+- <a href="tools/lookupsid.md">lookupsid</a>                   (-s &lt;sid&gt; | -n &lt;name&gt; | -D &lt;domain-sid&gt; -F &lt;start-rid&gt; -T &lt;end-rid&gt;) [--use-v1]
-+- <a href="tools/bkpkey.md">bkpkey</a>
++- lookupsid                   (-s &lt;sid&gt; | -n &lt;name&gt; | -D &lt;domain-sid&gt; -F &lt;start-rid&gt; -T &lt;end-rid&gt;) [--use-v1]
++- bkpkey
 │  ├─ backup                   --in-file &lt;request.bin&gt; -o &lt;response.bin&gt;
 │  ├─ restore                  (--in-file &lt;restore.bin&gt; | --in-b64 &lt;base64&gt;) [--win2k]
 │  ├─ retrieve                 -o &lt;backupkey.bin&gt;
-+- <a href="tools/dfs.md">dfs</a>
++- dfs
 │  ├─ namespaces               
 │  ├─ dump                     
 │  ├─ links                    &lt;namespace-path&gt;
@@ -357,7 +357,7 @@ ginpacket/
 │  ├─ initialize               
 │  ├─ ns-version               
 │  ├─ server-version           
-+- <a href="tools/efs.md">efs</a>
++- efs
 │  ├─ users                    &lt;file&gt;
 │  ├─ recovery                 &lt;file&gt;
 │  ├─ protectors               &lt;file&gt;
@@ -371,7 +371,7 @@ ginpacket/
 │  ├─ clone-meta               &lt;src&gt; &lt;dst&gt;
 │  ├─ open-raw                 &lt;file&gt; [--import]
 │  ├─ flush-cache              
-+- <a href="tools/dns.md">dns</a>                         (defaults to `zones`)
++- dns                         (defaults to `zones`)
 │  ├─ zones                    
 │  ├─ records                  &lt;zone&gt; [-n &lt;node&gt;] [-T &lt;A|AAAA|MX|TXT|CNAME|SRV|NS|PTR|SOA|ALL&gt;]
 │  ├─ nodes                    &lt;zone&gt; [-n &lt;parent-node&gt;]
@@ -395,7 +395,7 @@ ginpacket/
 │  ├─ reload-zone              &lt;zone&gt;
 │  ├─ set-forwarders           [--forwarder &lt;ipv4&gt; (repeatable)] [--timeout &lt;sec&gt;] [--no-recurse]
 │  ├─ version                  
-+- <a href="tools/dhcp.md">dhcp</a>
++- dhcp
 │  ├─ scopes                   
 │  ├─ scope                    &lt;scope-ip&gt;
 │  ├─ leases                   [-s &lt;scope-ip&gt;]
@@ -429,7 +429,7 @@ ginpacket/
 │  ├─ scan-db                  [--repair]
 │  ├─ del-lease                &lt;client-ip&gt;
 │  ├─ server-version           
-+- <a href="tools/firewall.md">firewall</a>
++- firewall
 │  ├─ profile                  [-s &lt;store&gt;] [-P &lt;profile&gt;]
 │  ├─ rules                    [-s &lt;store&gt;] [-P &lt;profile&gt;] [-D &lt;direction&gt;] [-a &lt;allow|block&gt;] [--enabled-only] [-n &lt;name&gt;]
 │  ├─ products                 
@@ -468,7 +468,7 @@ ginpacket/
 │  ├─ del-phase1-sas           [--src &lt;cidr&gt;] [--dst &lt;cidr&gt;] [--protocol &lt;num&gt;]
 │  ├─ del-phase2-sas           [--src &lt;cidr&gt;] [--dst &lt;cidr&gt;] [--protocol &lt;num&gt;]
 │  ├─ restore-defaults         
-+- <a href="tools/printer.md">printer</a>
++- printer
 │  ├─ printers                 
 │  ├─ dump                     [--ports] [--monitors] [--forms] [--strict]
 │  ├─ drivers                  [-e &lt;environment&gt;]
@@ -505,17 +505,17 @@ ginpacket/
 │  ├─ add-monitor              &lt;name&gt; --path &lt;dll&gt; [-e &lt;environment&gt;]
 │  ├─ del-monitor              &lt;name&gt; [-e &lt;environment&gt;]
 │  ├─ notify                   &lt;listener&gt;
-+- <a href="tools/machinerole.md">machinerole</a>                 [--use-named-pipe]
-+- <a href="tools/shutdown.md">shutdown</a>
++- machinerole                 [--use-named-pipe]
++- shutdown
 │  ├─ initiate                 [-m &lt;message&gt;] [--timeout &lt;sec&gt;] [--force] [-r] [--reason &lt;text&gt;] [--interface &lt;initshutdown|winreg|windowsshutdown&gt;] [--use-v1]
 │  ├─ abort                    [--interface &lt;initshutdown|winreg|windowsshutdown&gt;]
-+- <a href="tools/perf.md">perf</a>
++- perf
 │  ├─ csets                    
 │  ├─ cset                     &lt;guid&gt;
 │  ├─ instances                &lt;guid&gt;
 │  ├─ query                    &lt;guid&gt; [-c &lt;counter-id&gt;] [--instance &lt;id&gt;]
 │  ├─ dump                     [-v] [-i]
-+- <a href="tools/time.md">time</a>
++- time
 │  ├─ sync                     [--wait &lt;sec&gt;] [--sync-flags &lt;mask&gt;]
 │  ├─ bits                     
 │  ├─ provider-status          &lt;provider-name&gt; [--provider-flags &lt;mask&gt;]
@@ -524,8 +524,8 @@ ginpacket/
 │  ├─ config                   
 │  ├─ status                   
 │  ├─ log                      
-+- <a href="tools/dcsync.md">dcsync</a>                      --dc &lt;dc&gt; (-n &lt;name1,name2&gt; | -N &lt;file&gt; | -g &lt;object-guid&gt; | -s &lt;sid&gt; | -S &lt;sid-file&gt; | -q &lt;ldap-filter&gt; | -a) [--history] [--all ektypes] [--resume-file &lt;file&gt;]
-+- <a href="tools/server.md">server</a>
++- dcsync                      --dc &lt;dc&gt; (-n &lt;name1,name2&gt; | -N &lt;file&gt; | -g &lt;object-guid&gt; | -s &lt;sid&gt; | -S &lt;sid-file&gt; | -q &lt;ldap-filter&gt; | -a) [--history] [--all ektypes] [--resume-file &lt;file&gt;]
++- server
 │  ├─ shares                   [--persistent]
 │  ├─ share                    &lt;name&gt;
 │  ├─ share-check              &lt;path&gt;
@@ -551,7 +551,7 @@ ginpacket/
 │  ├─ transports               
 │  ├─ add-transport            &lt;transport&gt; [-A &lt;addr&gt;] [-d &lt;domain&gt;] [--flags &lt;n&gt;] [--use-v1]
 │  ├─ del-transport            &lt;transport&gt; [-A &lt;addr&gt;] [-d &lt;domain&gt;] [--use-v1]
-+- <a href="tools/wksta.md">wksta</a>
++- wksta
 │  ├─ info                     [--detail &lt;basic|lan|full|config&gt;]
 │  ├─ loggedon                 
 │  ├─ transports               
