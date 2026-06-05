@@ -6,7 +6,7 @@ The DNS Server Management Protocol (MS-DNSP) allows remote administration of a W
 
 ## Usage
 
-### General Usage
+### General
 
 **Syntax:**
 ```bash

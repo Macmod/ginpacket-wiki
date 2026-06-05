@@ -6,7 +6,7 @@ The LSA Translate protocol (MS-LSAT) allows resolving Security Identifiers (SIDs
 
 ## Usage
 
-### General Usage
+### General
 
 **Syntax:**
 ```bash

@@ -6,7 +6,7 @@ Service Tickets (STs) are Kerberos credentials that grant access to a specific s
 
 ## Usage
 
-### General Usage
+### General
 
 **Syntax:**
 ```bash

@@ -6,7 +6,7 @@ The RPC Endpoint Mapper is a service running on every Windows host that maintain
 
 ## Usage
 
-### General Usage
+### General
 
 **Syntax:**
 ```bash

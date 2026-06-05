@@ -6,6 +6,31 @@ SMB2/3 is the Windows protocol for file and printer sharing over the network. Th
 
 ## Usage
 
+### General
+
+**Syntax:**
+```bash
+./smb [auth_flags] [--require-signing] [--encrypt] [--dialect <ver>] <subcommand>
+```
+
+**List share contents with required SMB signing:**
+
+```bash
+./smb [auth_flags] --require-signing ls C$
+```
+
+**List with message encryption enabled:**
+
+```bash
+./smb [auth_flags] --encrypt ls C$
+```
+
+**Force a specific SMB dialect:**
+
+```bash
+./smb [auth_flags] --dialect 3.1.1 ls C$
+```
+
 ### shares
 
 **Syntax:**
@@ -192,32 +217,3 @@ SMB2/3 is the Windows protocol for file and printer sharing over the network. Th
 ./smb [auth_flags] -s C$ shell
 ```
 
-### General Usage
-
-**Syntax:**
-```bash
-./smb [auth_flags] [--require-signing] [--encrypt] [--dialect <ver>] <subcommand>
-```
-
-**List share contents with required SMB signing:**
-
-```bash
-./smb [auth_flags] --require-signing ls C$
-```
-
-**List with message encryption enabled:**
-
-```bash
-./smb [auth_flags] --encrypt ls C$
-```
-
-**Force a specific SMB dialect:**
-
-```bash
-./smb [auth_flags] --dialect 3.1.1 ls C$
-```
-
-## Notes
-{% hint style="info" %}
-Recursive operations are supported for `get`, `put`, and `rm` commands. The interactive `shell` command reuses a single connection and supports both remote and local workflow commands.
-{% endhint %}

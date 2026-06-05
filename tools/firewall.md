@@ -237,7 +237,7 @@ The Firewall and Advanced Security Protocol (MS-FASP) exposes the Windows Firewa
 ./firewall [auth_flags] add-ipsec-mmrule <name> [-P <profile>] --phase1-auth <id> --phase1-crypto <id>
 ```
 
-**Add an IPsec main-mode (IKE phase-1) rule; --phase1-auth and --phase1-crypto are required:**
+**Add an IPsec main-mode (IKE phase-1) rule:**
 
 ```bash
 ./firewall [auth_flags] add-ipsec-mmrule 'Custom MM Rule' --phase1-auth '{my-authset-id}' --phase1-crypto '{my-cryptoset-id}'

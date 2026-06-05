@@ -115,7 +115,7 @@ The EventLog Remoting Protocol v6 (MS-EVEN6) provides remote access to the Windo
 ./eventlog [auth_flags] channel [<channel>] [-T config|meta|all]
 ```
 
-**Show channel information: config (EvtRpcGetChannelConfig), meta (EvtRpcGetLogFileInfo), or all (default):**
+**Show channel information:**
 
 ```bash
 ./eventlog [auth_flags] channel Security

@@ -6,7 +6,7 @@ Kerberos is the primary authentication protocol in Active Directory. A Ticket Gr
 
 ## Usage
 
-### General Usage
+### General
 
 **Syntax:**
 ```bash
