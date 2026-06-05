@@ -6,7 +6,7 @@ The Directory Services Setup Protocol (MS-DSSP) allows querying basic domain mem
 
 ## Usage
 
-### General Usage
+### General
 
 **Syntax:**
 ```bash

@@ -2,16 +2,18 @@
 
 **Protocols**: [MS-DRSR](https://winprotocoldocs-bhdugrdyduf5h2e4.b02.azurefd.net/MS-DRSR/%5bMS-DRSR%5d.pdf).
 
-DCSync uses the Directory Replication Service (MS-DRSR) to request password hashes for any account directly from a Domain Controller. The DC replicates the requested credentials, bypassing normal authentication flows. Requires Replicating Directory Changes and Replicating Directory Changes All privileges - typically held by Domain Admins and certain service accounts.
+DCSync uses the Directory Replication Service (MS-DRSR) to request password hashes for any account directly from a Domain Controller. The DC replicates the requested credentials, bypassing normal authentication flows. Requires Replicating Directory Changes and Replicating Directory Changes All privileges - typically held by Domain Admins and certain service accounts. Note that this implements the raw replication operation only and does NOT perform the additional steps that impacket's `secretsdump.py` does.
 
 ## Usage
 
-### General Usage
+### General
 
 **Syntax:**
 ```bash
 ./dcsync [auth_flags] --dc <DC> (-n <name1,name2> | -N <file> | -g <guid> | -s <sid> | -S <sid-file> | -q <ldap-filter> | -a) [--history] [--all eytypes] [--resume-file <file>]
 ```
+
+When Kerberos is in use, `--dc` specifies the KDC for authentication while `-t` specifies the actual DC target for replication - they can differ.
 
 **Replicate specific accounts by name (comma-separated):**
 
@@ -55,6 +57,10 @@ DCSync uses the Directory Replication Service (MS-DRSR) to request password hash
 ./dcsync [auth_flags] --dc dc01.domain.local -a -M 1000
 ```
 
+{% hint style="warning" %}
+`-a` must be set explicitly to replicate all objects - without it the tool defaults to just the standard Administrator account. Output is always saved to files under `output/` unless `-O` / `--stdout-only` is set.
+{% endhint %}
+
 **Include password history for a specific account:**
 
 ```bash
@@ -97,11 +103,3 @@ DCSync uses the Directory Replication Service (MS-DRSR) to request password hash
 ./dcsync [auth_flags] --dc dc01.domain.local -a --resume-file output/DOMAIN.LOCAL_1234567890.resume
 ```
 
-## Notes
-Since replication is necessarily an operation for a domain controller, `-t` and `--dc` may seem strange, but it's actually relevant when Kerberos is in use - `--dc` specifies the KDC to be used for auth, while `-t` specifies the target for the replication itself. 
-
-Also note that our implementation does NOT perform the same actions as impacket's `secretsdump.py` (which performs more actions beyond DCSync) - ginpacket's `dcsync` implements the raw replication operation with some basic improvements.
-
-{% hint style="warning" %}
-If you want to replicate hashes for all objects you MUST set `-a` - otherwise it'll default to target just the standard Administrator user. This is intentional to avoid mistakes. The tool also always saves the replicated credential material to files under `output` (unless the user enables `-O` / `--stdout-only`).
-{% endhint %}

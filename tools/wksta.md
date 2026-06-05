@@ -103,7 +103,11 @@ The Workstation Service Remote Protocol (MS-WKST) provides information about a W
 ./wksta [auth_flags] names [--type <primary|alternate|all>]
 ```
 
-**List registered computer names for the workstation (default: --type all) PrimaryComputerName is printed as a single value; AlternateComputerNames are listed.:**
+**List registered computer names for the workstation:**
+
+{% hint style="info" %}
+PrimaryComputerName is printed as a single value; AlternateComputerNames are listed. Defaults to --type all.
+{% endhint %}
 
 ```bash
 ./wksta [auth_flags] names
@@ -159,7 +163,11 @@ The Workstation Service Remote Protocol (MS-WKST) provides information about a W
 ./wksta [auth_flags] rename-machine <new-name> [--rename-account] [--dns-only]
 ```
 
-**Rename the machine account within the domain --rename-account  also rename the computer account in AD (NETSETUP_ACCT_CREATE, 0x2) --dns-only        limit updates to DNS-based names only (NETSETUP_DNS_NAME_CHANGES_ONLY, 0x1000):**
+**Rename the machine account within the domain:**
+
+{% hint style="info" %}
+--rename-account also renames the computer account in AD. --dns-only limits updates to DNS-based names only.
+{% endhint %}
 
 ```bash
 ./wksta [auth_flags] rename-machine WS02 --rename-account

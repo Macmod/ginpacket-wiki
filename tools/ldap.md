@@ -6,6 +6,48 @@ LDAP is the primary protocol for querying and managing objects in Active Directo
 
 ## Usage
 
+### General
+
+**Syntax:**
+```bash
+./ldap [auth_flags] <subcommand> -f <filter-chain> -a <attr-chain> -b <base-chain>
+```
+
+**Apply ldapx obfuscation chains to a raw search:**
+
+```bash
+./ldap [auth_flags] search -F '(objectClass=user)' -A cn,sAMAccountName -f OGDR -a Owp -b OX
+```
+
+**Apply obfuscation chains to a predefined query:**
+
+```bash
+./ldap [auth_flags] query users -f OGDR -a Owp -b OX
+```
+
+**Apply obfuscation chains to an info lookup:**
+
+```bash
+./ldap [auth_flags] info 'Administrator' -f OGDR -b OX
+```
+
+**Syntax:**
+```bash
+./ldap [auth_flags] --scheme ldaps|ldap [--starttls] <subcommand>
+```
+
+**Connect over LDAPS (TLS):**
+
+```bash
+./ldap [auth_flags] --scheme ldaps query users
+```
+
+**Connect using StartTLS upgrade on plain LDAP:**
+
+```bash
+./ldap [auth_flags] --scheme ldap --starttls query users
+```
+
 ### whoami
 
 **Syntax:**
@@ -263,7 +305,11 @@ All query subcommands accept: [-A <attrs>] [--hex] [--limit <n>] [--scheme <ldap
 ./ldap [auth_flags] query trusts [--transitive]
 ```
 
-**List domain trust relationships rendered as an ASCII tree with direction arrows and trust attribute flags ← inbound (they trust us), → outbound (we trust them), ↔ bidirectional:**
+**List domain trusts as an ASCII tree:**
+
+{% hint style="info" %}
+← inbound (they trust us), → outbound (we trust them), ↔ bidirectional.
+{% endhint %}
 
 ```bash
 ./ldap [auth_flags] query trusts
@@ -302,7 +348,7 @@ All query subcommands accept: [-A <attrs>] [--hex] [--limit <n>] [--scheme <ldap
 ./ldap [auth_flags] query shadow-creds [--limit <n>]
 ```
 
-**List objects with msDS-KeyCredentialLink set; parse DeviceID, key type, and creation time:**
+**List objects with msDS-KeyCredentialLink set:**
 
 ```bash
 ./ldap [auth_flags] query shadow-creds
@@ -315,7 +361,7 @@ All query subcommands accept: [-A <attrs>] [--hex] [--limit <n>] [--scheme <ldap
 ./ldap [auth_flags] query rbcd [--limit <n>]
 ```
 
-**List computers with msDS-AllowedToActOnBehalfOfOtherIdentity set; decode the SD DACL:**
+**List computers with msDS-AllowedToActOnBehalfOfOtherIdentity set:**
 
 ```bash
 ./ldap [auth_flags] query rbcd
@@ -328,7 +374,7 @@ All query subcommands accept: [-A <attrs>] [--hex] [--limit <n>] [--scheme <ldap
 ./ldap [auth_flags] query gmsa [--limit <n>]
 ```
 
-**List Group Managed Service Accounts; show password rotation interval and who can read the password (msDS-GroupMSAMembership DACL):**
+**List Group Managed Service Accounts:**
 
 ```bash
 ./ldap [auth_flags] query gmsa
@@ -341,7 +387,11 @@ All query subcommands accept: [-A <attrs>] [--hex] [--limit <n>] [--scheme <ldap
 ./ldap [auth_flags] query laps [--limit <n>]
 ```
 
-**List computers that have a LAPS password set (v1: ms-Mcs-AdmPwd, v2: msLAPS-Password); show expiry timestamps:**
+**List computers with a LAPS password set:**
+
+{% hint style="info" %}
+Checks both v1 (ms-Mcs-AdmPwd) and v2 (msLAPS-Password), and shows expiry timestamps.
+{% endhint %}
 
 ```bash
 ./ldap [auth_flags] query laps
@@ -380,7 +430,11 @@ All query subcommands accept: [-A <attrs>] [--hex] [--limit <n>] [--scheme <ldap
 ./ldap [auth_flags] get-gmsa-password <sAMAccountName>
 ```
 
-**Read and decode the msDS-ManagedPassword blob for a GMSA (requires group membership listed in msDS-GroupMSAMembership):**
+**Read and decode the msDS-ManagedPassword blob for a GMSA:**
+
+{% hint style="info" %}
+Requires membership in the group listed in msDS-GroupMSAMembership.
+{% endhint %}
 
 ```bash
 ./ldap [auth_flags] get-gmsa-password 'sampleuser$'
@@ -393,7 +447,11 @@ All query subcommands accept: [-A <attrs>] [--hex] [--limit <n>] [--scheme <ldap
 ./ldap [auth_flags] get-laps <computer>
 ```
 
-**Read the LAPS administrator password for a computer (v1 plaintext or v2 JSON blob); requires LAPS read rights:**
+**Read the LAPS administrator password for a computer:**
+
+{% hint style="info" %}
+Returns v1 plaintext or v2 JSON blob. Requires LAPS read rights.
+{% endhint %}
 
 ```bash
 ./ldap [auth_flags] get-laps WIN-DC01
@@ -410,7 +468,7 @@ All query subcommands accept: [-A <attrs>] [--hex] [--limit <n>] [--scheme <ldap
 ./ldap [auth_flags] enable <dn>
 ```
 
-**Enable an AD account by clearing the ACCOUNTDISABLE userAccountControl bit:**
+**Enable an AD account:**
 
 ```bash
 ./ldap [auth_flags] enable 'CN=sampleuser,CN=Users,DC=domain,DC=local'
@@ -423,7 +481,7 @@ All query subcommands accept: [-A <attrs>] [--hex] [--limit <n>] [--scheme <ldap
 ./ldap [auth_flags] disable <dn>
 ```
 
-**Disable an AD account by setting the ACCOUNTDISABLE userAccountControl bit:**
+**Disable an AD account:**
 
 ```bash
 ./ldap [auth_flags] disable 'CN=sampleuser,CN=Users,DC=domain,DC=local'
@@ -499,31 +557,6 @@ All query subcommands accept: [-A <attrs>] [--hex] [--limit <n>] [--scheme <ldap
 ./ldap [auth_flags] search -F '(objectClass=user)' -A cn,nTSecurityDescriptor:hex
 ```
 
-### General Usage
-
-**Syntax:**
-```bash
-./ldap [auth_flags] <subcommand> -f <filter-chain> -a <attr-chain> -b <base-chain>
-```
-
-**Apply ldapx obfuscation chains to a raw search:**
-
-```bash
-./ldap [auth_flags] search -F '(objectClass=user)' -A cn,sAMAccountName -f OGDR -a Owp -b OX
-```
-
-**Apply obfuscation chains to a predefined query:**
-
-```bash
-./ldap [auth_flags] query users -f OGDR -a Owp -b OX
-```
-
-**Apply obfuscation chains to an info lookup:**
-
-```bash
-./ldap [auth_flags] info 'Administrator' -f OGDR -b OX
-```
-
 ### modify
 
 **Syntax:**
@@ -531,7 +564,7 @@ All query subcommands accept: [-A <attrs>] [--hex] [--limit <n>] [--scheme <ldap
 ./ldap [auth_flags] modify <dn> --attr <name> --operation <add|replace|delete> --value <value>
 ```
 
-**Replace an attribute value on an LDAP object (requires write access):**
+**Replace an attribute value on an LDAP object:**
 
 ```bash
 ./ldap [auth_flags] modify 'CN=User,CN=Users,DC=domain,DC=local' --attr description --operation replace --value 'Updated description'
@@ -543,25 +576,6 @@ All query subcommands accept: [-A <attrs>] [--hex] [--limit <n>] [--scheme <ldap
 ./ldap [auth_flags] modify 'CN=Group,CN=Users,DC=domain,DC=local' --attr member --operation add --value 'CN=User,CN=Users,DC=domain,DC=local'
 ```
 
-### General Usage
-
-**Syntax:**
-```bash
-./ldap [auth_flags] --scheme ldaps|ldap [--starttls] <subcommand>
-```
-
-**Connect over LDAPS (TLS):**
-
-```bash
-./ldap [auth_flags] --scheme ldaps query users
-```
-
-**Connect using StartTLS upgrade on plain LDAP:**
-
-```bash
-./ldap [auth_flags] --scheme ldap --starttls query users
-```
-
 ### create user
 
 **Syntax:**
@@ -569,7 +583,11 @@ All query subcommands accept: [-A <attrs>] [--hex] [--limit <n>] [--scheme <ldap
 ./ldap [auth_flags] create user --name <cn> [--pass <password>] [--enabled] [--parent-dn <dn>] [--scheme ldaps]
 ```
 
-**Create a new user account (created disabled if --pass is omitted; set password requires LDAPS/StartTLS):**
+**Create a new user account:**
+
+{% hint style="info" %}
+Created disabled if --pass is omitted. Setting a password requires LDAPS or StartTLS.
+{% endhint %}
 
 ```bash
 ./ldap [auth_flags] create user --name sampleuser --scheme ldaps
@@ -596,7 +614,11 @@ All query subcommands accept: [-A <attrs>] [--hex] [--limit <n>] [--scheme <ldap
 ./ldap [auth_flags] create computer --name <cn> [--pass <password>] [--parent-dn <dn>] [--scheme ldaps]
 ```
 
-**Create a machine account (requires ms-DS-MachineAccountQuota >= 1 or sufficient privileges):**
+**Create a machine account:**
+
+{% hint style="info" %}
+Requires ms-DS-MachineAccountQuota >= 1 or sufficient privileges.
+{% endhint %}
 
 ```bash
 ./ldap [auth_flags] create computer --name PENTEST$ --scheme ldaps
@@ -613,7 +635,11 @@ All query subcommands accept: [-A <attrs>] [--hex] [--limit <n>] [--scheme <ldap
 ./ldap [auth_flags] create group --name <cn> [--type <group-type>] [--parent-dn <dn>]
 ```
 
-**Create a group (types: GlobalSecurity, GlobalDistribution, DomainLocalSecurity, DomainLocalDistribution, UniversalSecurity, UniversalDistribution):**
+**Create a group:**
+
+{% hint style="info" %}
+Available types: GlobalSecurity, GlobalDistribution, DomainLocalSecurity, DomainLocalDistribution, UniversalSecurity, UniversalDistribution.
+{% endhint %}
 
 ```bash
 ./ldap [auth_flags] create group --name 'Pentesters'
