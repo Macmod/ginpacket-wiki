@@ -10,6 +10,25 @@ LDAP is the primary protocol for querying and managing objects in Active Directo
 
 **Syntax:**
 ```bash
+./ldap [auth_flags] --scheme ldaps|ldap [--starttls] <subcommand>
+```
+
+**Connect over LDAPS (TLS):**
+
+```bash
+./ldap [auth_flags] --scheme ldaps query users
+```
+
+**Connect using StartTLS upgrade on plain LDAP:**
+
+```bash
+./ldap [auth_flags] --scheme ldap --starttls query users
+```
+
+### Obfuscation
+
+**Syntax:**
+```bash
 ./ldap [auth_flags] <subcommand> -f <filter-chain> -a <attr-chain> -b <base-chain>
 ```
 
@@ -29,23 +48,6 @@ LDAP is the primary protocol for querying and managing objects in Active Directo
 
 ```bash
 ./ldap [auth_flags] info 'Administrator' -f OGDR -b OX
-```
-
-**Syntax:**
-```bash
-./ldap [auth_flags] --scheme ldaps|ldap [--starttls] <subcommand>
-```
-
-**Connect over LDAPS (TLS):**
-
-```bash
-./ldap [auth_flags] --scheme ldaps query users
-```
-
-**Connect using StartTLS upgrade on plain LDAP:**
-
-```bash
-./ldap [auth_flags] --scheme ldap --starttls query users
 ```
 
 ### whoami
