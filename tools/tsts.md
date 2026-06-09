@@ -10,7 +10,7 @@ The Terminal Services Terminal Server Runtime Interface (MS-TSTS) exposes RDP se
 
 **Syntax:**
 ```bash
-./tsts [auth_flags] sessions [-s <state>] [-f <username>]
+./tsts [auth_flags] sessions [-s <state>] [-f <username>] [--check-lock] [--own]
 ```
 
 **Enumerate Terminal Services sessions, optionally filtering by state or user:**
@@ -25,6 +25,18 @@ The Terminal Services Terminal Server Runtime Interface (MS-TSTS) exposes RDP se
 
 ```bash
 ./tsts [auth_flags] sessions -f administrator
+```
+
+**Include desktop lock state per session (extra RPC round-trip):**
+
+```bash
+./tsts [auth_flags] sessions --check-lock
+```
+
+**Restrict to sessions owned by the authenticated caller:**
+
+```bash
+./tsts [auth_flags] sessions --own
 ```
 
 ### processes
@@ -86,6 +98,10 @@ The Terminal Services Terminal Server Runtime Interface (MS-TSTS) exposes RDP se
 ```bash
 ./tsts [auth_flags] connect 2 1
 ```
+
+{% hint style="info" %}
+Moves all processes from the source session into the destination session and disconnects the source. If `-P` is not provided, the target session will be locked before the change.
+{% endhint %}
 
 ### watch
 

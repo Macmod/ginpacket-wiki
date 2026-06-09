@@ -23,13 +23,19 @@ The EventLog Remoting Protocol v6 (MS-EVEN6) provides remote access to the Windo
 
 **Syntax:**
 ```bash
-./eventlog [auth_flags] publishers
+./eventlog [auth_flags] publishers [<channel>]
 ```
 
 **List all registered event publishers:**
 
 ```bash
 ./eventlog [auth_flags] publishers
+```
+
+**List only publishers registered for a specific channel:**
+
+```bash
+./eventlog [auth_flags] publishers Security
 ```
 
 ### query
@@ -140,19 +146,6 @@ The EventLog Remoting Protocol v6 (MS-EVEN6) provides remote access to the Windo
 
 ```bash
 ./eventlog [auth_flags] publisher 'Microsoft-Windows-Security-Auditing'
-```
-
-### channel-publishers
-
-**Syntax:**
-```bash
-./eventlog [auth_flags] channel-publishers [<channel>]
-```
-
-**List publishers registered to write to a specific channel:**
-
-```bash
-./eventlog [auth_flags] channel-publishers Security
 ```
 
 ### classic-name

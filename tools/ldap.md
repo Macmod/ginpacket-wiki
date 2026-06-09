@@ -67,7 +67,7 @@ LDAP is the primary protocol for querying and managing objects in Active Directo
 
 **Syntax:**
 ```bash
-./ldap [auth_flags] info <dn-or-name> [--all]
+./ldap [auth_flags] info <dn-or-name> [--hex]
 ```
 
 **Dump attributes for an object by DN, sAMAccountName, UPN, or GUID:**
@@ -76,10 +76,10 @@ LDAP is the primary protocol for querying and managing objects in Active Directo
 ./ldap [auth_flags] info 'Administrator'
 ```
 
-**Show all attributes including non-default ones:**
+**Print all attribute values as raw hex:**
 
 ```bash
-./ldap [auth_flags] info 'CN=Domain Users,CN=Users,DC=domain,DC=local' --all
+./ldap [auth_flags] info 'CN=Domain Users,CN=Users,DC=domain,DC=local' --hex
 ```
 
 
