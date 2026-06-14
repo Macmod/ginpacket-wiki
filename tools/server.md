@@ -29,13 +29,13 @@ The Server Service Remote Protocol (MS-SRVS) exposes information about shared re
 
 **Syntax:**
 ```bash
-./server [auth_flags] share -s <name>
+./server [auth_flags] share <name>
 ```
 
 **Show full SHARE_INFO for a named share:**
 
 ```bash
-./server [auth_flags] share -s C$
+./server [auth_flags] share C$
 ```
 
 ### share-check
@@ -68,50 +68,50 @@ The Server Service Remote Protocol (MS-SRVS) exposes information about shared re
 
 **Syntax:**
 ```bash
-./server [auth_flags] set-share -s <name> [--remark <text>] [--max-uses <n>]
+./server [auth_flags] set-share <name> [--remark <text>] [--max-uses <n>]
 ```
 
 **Modify the remark or max-uses on an existing share:**
 
 ```bash
-./server [auth_flags] set-share -s TempShare --remark 'renamed share' --max-uses 5
+./server [auth_flags] set-share TempShare --remark 'renamed share' --max-uses 5
 ```
 
 ### del-share
 
 **Syntax:**
 ```bash
-./server [auth_flags] del-share -s <name> [--scope <server>] [--use-v1] [--persistent] [--two-phase]
+./server [auth_flags] del-share <name> [--scope <server>] [--use-v1] [--persistent] [--two-phase]
 ```
 
 **Delete a share using NetrShareDelEx (default, opnum 57):**
 
 ```bash
-./server [auth_flags] del-share -s TempShare
+./server [auth_flags] del-share TempShare
 ```
 
 **Delete a share using the legacy NetrShareDel (opnum 18):**
 
 ```bash
-./server [auth_flags] del-share -s TempShare --use-v1
+./server [auth_flags] del-share TempShare --use-v1
 ```
 
 **Clear share persistence only, keeping the runtime share (NetrShareDelSticky, opnum 19):**
 
 ```bash
-./server [auth_flags] del-share -s TempShare --persistent
+./server [auth_flags] del-share TempShare --persistent
 ```
 
 **Delete a share via two-phase commit (NetrShareDelStart + NetrShareDelCommit, opnums 37+38):**
 
 ```bash
-./server [auth_flags] del-share -s TempShare --two-phase
+./server [auth_flags] del-share TempShare --two-phase
 ```
 
 **Delete a scoped share on a named virtual server endpoint:**
 
 ```bash
-./server [auth_flags] del-share -s TempShare --scope CLUS1
+./server [auth_flags] del-share TempShare --scope CLUS1
 ```
 
 ### get-file-acl
@@ -352,13 +352,32 @@ The Server Service Remote Protocol (MS-SRVS) exposes information about shared re
 
 **Syntax:**
 ```bash
-./server [auth_flags] set-server <remark>
+./server [auth_flags] set-server [--comment <text>] [--max-users <n>] [--auto-disc <minutes>] [--hidden] [--announce <sec>] [--announce-delta <ms>]
 ```
 
 **Update the server's description/remark string:**
 
 ```bash
-./server [auth_flags] set-server 'My DC'
+./server [auth_flags] set-server --comment 'My DC'
+```
+
+**Hide the server from the browse list and set a connection limit:**
+
+```bash
+./server [auth_flags] set-server --hidden --max-users 50
+```
+
+### dump
+
+**Syntax:**
+```bash
+./server [auth_flags] dump
+```
+
+**Dump all server info, shares, sessions, connections, open files, and transports in one pass:**
+
+```bash
+./server [auth_flags] dump
 ```
 
 ### stats

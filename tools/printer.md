@@ -623,18 +623,20 @@ The Print System Remote Protocol (MS-RPRN) allows remote management of the Windo
 ```
 
 ## Notes
+
 {% hint style="success" %}
-? run the read-only commands first to find valid values before making changes:
-1. `printers` ? records exact `\\TARGET\PrinterName` strings to use with `-P`
-2. `drivers` ? confirms driver name/environment for `add-driver` / `del-driver`
-3. `driver-dir` ? reveals the server-side staging path so you can pre-stage driver files via `smb put`
-4. `server` ? checks `NoAddPrinterDrivers` and `RestrictDriverInstallationToAdministrators` flags before attempting driver operations
-5. `info -P ...` ? shows the current `Attributes` bitmask before using `set-attrs`
+Run the read-only commands first to find valid values before making changes:
+1. `printers` - records exact `\\TARGET\PrinterName` strings to use with `-P`
+2. `drivers` - confirms driver name/environment for `add-driver` / `del-driver`
+3. `driver-dir` - reveals the server-side staging path so you can pre-stage driver files via `smb put`
+4. `server` - checks `NoAddPrinterDrivers` and `RestrictDriverInstallationToAdministrators` flags before attempting driver operations
+5. `info <printer>` - shows the current `Attributes` bitmask before using `set-attrs`
 
-**Job retention** ? by default Windows discards jobs once printed. Enable `KEEPPRINTEDJOBS` (bit `0x100`) with `set-attrs -A 0x100` to keep completed jobs visible for inspection with `jobs` and `job`.
+**Job retention**: by default Windows discards jobs once printed. Enable `KEEPPRINTEDJOBS` (bit `0x100`) with `set-attrs -A 0x100` to keep completed jobs visible for inspection with `jobs` and `job`.
 
-**v3 vs v4 drivers** ? only v3 drivers (e.g. "Microsoft Shared Fax Driver") support the `RpcStartDocPrinter` / `RpcWritePrinter` RPRN print path. v4 drivers (Print to PDF, XPS Writer) return `ERROR_NOT_SUPPORTED`. Use `drivers` to check the driver version column.
+**v3 vs v4 drivers**: only v3 drivers (e.g. "Microsoft Shared Fax Driver") support the `RpcStartDocPrinter` / `RpcWritePrinter` RPRN print path. v4 drivers (Print to PDF, XPS Writer) return `ERROR_NOT_SUPPORTED`. Use `drivers` to check the driver version column.
+{% endhint %}
 
 {% hint style="info" %}
-? named-pipe transport (`\pipe\spoolss`, default) requires domain credentials and will silently reject operations on hardened hosts. Add `--use-tcp` to fall back to the RPC-over-TCP path registered via the endpoint mapper on port 135.
+The named-pipe transport (`\pipe\spoolss`, default) requires domain credentials and will silently reject operations on hardened hosts. Add `--use-tcp` to fall back to the RPC-over-TCP path registered via the endpoint mapper on port 135.
 {% endhint %}

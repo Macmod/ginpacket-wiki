@@ -13,13 +13,13 @@ The Encrypting File System Remote Protocol (MS-EFSR) supports remote management 
 ./efs [auth_flags] encrypt <file> [--use-v1]
 ```
 
-**Default is EfsRpcEncryptFileExSrv (opnum 21).:**
+**Default - EfsRpcEncryptFileExSrv (opnum 21):**
 
 ```bash
 ./efs [auth_flags] encrypt '\\TARGET\C$\Temp\secret.txt'
 ```
 
-**Use legacy EfsRpcEncryptFileSrv (opnum 4) on older servers.:**
+**Legacy - EfsRpcEncryptFileSrv (opnum 4) on older servers:**
 
 ```bash
 ./efs [auth_flags] encrypt '\\TARGET\C$\Temp\secret.txt' --use-v1
@@ -53,13 +53,13 @@ The Encrypting File System Remote Protocol (MS-EFSR) supports remote management 
 ./efs [auth_flags] file-key <file> [--info-class <n>] [--use-v1]
 ```
 
-**Default path uses EfsRpcFileKeyInfoEx (opnum 16) and requires --info-class.:**
+**Default - EfsRpcFileKeyInfoEx (opnum 16), requires `--info-class`:**
 
 ```bash
 ./efs [auth_flags] file-key '\\TARGET\C$\Temp\secret.txt' --info-class 1
 ```
 
-**Legacy path uses EfsRpcFileKeyInfo (opnum 12).:**
+**Legacy - EfsRpcFileKeyInfo (opnum 12):**
 
 ```bash
 ./efs [auth_flags] file-key '\\TARGET\C$\Temp\secret.txt' --use-v1
@@ -107,7 +107,7 @@ The Encrypting File System Remote Protocol (MS-EFSR) supports remote management 
 ./efs [auth_flags] add-users <file> --users-json <file>
 ```
 
-**users JSON file must be UTF-8 without BOM.:**
+**The users JSON file must be UTF-8 without BOM:**
 
 ```bash
 ./efs [auth_flags] add-users '\\TARGET\C$\Temp\secret.txt' --users-json users.json

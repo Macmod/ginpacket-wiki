@@ -74,11 +74,23 @@ The Performance Counter Query Protocol (MS-PCQ) provides remote access to Window
 
 **Syntax:**
 ```bash
-./perf [auth_flags] dump
+./perf [auth_flags] dump [-v] [-i]
 ```
 
 **Dump all available counter data from all counter sets:**
 
 ```bash
 ./perf [auth_flags] dump
+```
+
+**Dump with current counter values:**
+
+```bash
+./perf [auth_flags] dump -v
+```
+
+**Dump with per-instance values for multi-instance counter sets:**
+
+```bash
+./perf [auth_flags] dump -v -i
 ```

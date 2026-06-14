@@ -1,6 +1,6 @@
 # Ginpacket
 
-﻿🍸 Ginpacket is a collection of Go tools for working with Windows / Active Directory network protocols. The philosophy is to provide a **simple** and **comprehensive** command-line interface to complex but useful protocol operations, turning researching & interacting with these protocols a simpler task.
+🍸 Ginpacket is a collection of Go tools for working with Windows / Active Directory network protocols. The philosophy is to provide a **simple** and **comprehensive** command-line interface to complex but useful protocol operations, turning researching & interacting with these protocols a simpler task.
 
 The tools span a range of use cases, including:
 
@@ -147,6 +147,14 @@ ginpacket/
 │  │  ├─ ou                    --name &lt;name&gt; [--parent-dn &lt;dn&gt;]
 │  │  ├─ container             --name &lt;name&gt; [--parent-dn &lt;dn&gt;]
 │  │  ├─ custom                --template &lt;file.yaml&gt;
+│  ├─ dacl
+│  │  ├─ show                  &lt;target-dn&gt;
+│  │  ├─ add                   &lt;target-dn&gt; &lt;grantee&gt; &lt;right&gt;
+│  │  ├─ remove                &lt;target-dn&gt; &lt;grantee&gt; &lt;right&gt;
+│  │  ├─ set-dcsync            &lt;domain-dn&gt; &lt;grantee&gt;
+│  │  ├─ del-dcsync            &lt;domain-dn&gt; &lt;grantee&gt;
+│  │  ├─ set-genericall        &lt;target-dn&gt; &lt;grantee&gt;
+│  ├─ set-owner                &lt;target-dn&gt; &lt;new-owner&gt;
 +- rpcdump                     [-U &lt;interface-uuid&gt;] [-T &lt;ncacn_ip_tcp,ncacn_np&gt;]
 +- reg
 │  ├─ query                    &lt;registry-path&gt; [-v &lt;value-name&gt;] [-s]
@@ -551,8 +559,9 @@ ginpacket/
 │  ├─ config                   
 │  ├─ status                   
 │  ├─ log                      
-+- dcsync                      --dc &lt;dc&gt; (-n &lt;name1,name2&gt; | -N &lt;file&gt; | -g &lt;object-guid&gt; | -s &lt;sid&gt; | -S &lt;sid-file&gt; | -q &lt;ldap-filter&gt; | -a) [--history] [--all ektypes] [--resume-file &lt;file&gt;]
++- dcsync                      --dc &lt;dc&gt; (-n &lt;name1,name2&gt; | -N &lt;file&gt; | -g &lt;object-guid&gt; | -G &lt;guids-file&gt; | -s &lt;sid&gt; | -S &lt;sid-file&gt; | -q &lt;ldap-filter&gt; | -a) [--history] [--all-keytypes] [--resume-file &lt;file&gt;]
 +- server
+│  ├─ dump                     
 │  ├─ shares                   [--persistent]
 │  ├─ share                    &lt;name&gt;
 │  ├─ share-check              &lt;path&gt;
@@ -566,7 +575,7 @@ ginpacket/
 │  ├─ info                     [--detail &lt;basic|standard|full|extended|config|config-full&gt;]
 │  ├─ add-share                &lt;name&gt; --path &lt;local&gt; [--remark &lt;text&gt;] [--share-type &lt;n&gt;] [--max-uses &lt;n&gt;] [--persistent=&lt;true|false&gt;]
 │  ├─ set-share                &lt;name&gt; [--remark &lt;text&gt;] [--max-uses &lt;n&gt;]
-│  ├─ set-server               &lt;remark&gt;
+│  ├─ set-server               [--comment &lt;text&gt;] [--max-users &lt;n&gt;] [--auto-disc &lt;min&gt;] [--hidden] [--announce &lt;sec&gt;] [--announce-delta &lt;ms&gt;]
 │  ├─ add-alias                &lt;name&gt; --alias-target &lt;server&gt;
 │  ├─ set-file-acl             &lt;share[\path]&gt; --sd &lt;hex&gt; [--security-info &lt;mask&gt;]
 │  ├─ del-share                &lt;name&gt; [--persistent]

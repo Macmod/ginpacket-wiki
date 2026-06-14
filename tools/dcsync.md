@@ -10,7 +10,7 @@ DCSync uses the Directory Replication Service (MS-DRSR) to request password hash
 
 **Syntax:**
 ```bash
-./dcsync [auth_flags] --dc <DC> (-n <name1,name2> | -N <file> | -g <guid> | -s <sid> | -S <sid-file> | -q <ldap-filter> | -a) [--history] [--all eytypes] [--resume-file <file>]
+./dcsync [auth_flags] --dc <DC> (-n <name1,name2> | -N <file> | -g <guid> | -G <guids-file> | -s <sid> | -S <sid-file> | -q <ldap-filter> | -a) [--history] [--all-keytypes] [--resume-file <file>]
 ```
 
 When Kerberos is in use, `--dc` specifies the KDC for authentication while `-t` specifies the actual DC target for replication - they can differ.

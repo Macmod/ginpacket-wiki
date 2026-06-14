@@ -1,6 +1,6 @@
 # 🧾 Remote Authorization API (authz)
 
-**Protocols**
+**Protocols**:
 
 * [MS-RAA](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-raa/) for the access check itself.
 * [RFC 4511](https://datatracker.ietf.org/doc/html/rfc4511) / [MS-ADTS](https://winprotocoldocs-bhdugrdyduf5h2e4.b02.azurefd.net/MS-ADTS/%5bMS-ADTS%5d.pdf) to fetch SDs from LDAP objects (`check ldap`).
@@ -40,14 +40,17 @@ The Remote Authorization API (MS-RAA) lets you query a Windows host's authorizat
 ./authz check <source> <SID|NAME> -T <target> [common flags]
 ```
 
+Common check flags:
 
-Common check flags:  
---desired-access <mask>      default 0x02000000 (MAXIMUM_ALLOWED)  
---principal-self <sid|name>  PrincipalSelf substitution SID/name  
---device <sid|name>          optional device identity for compound AccessCheck  
--O, --object-types <list>    comma-separated [level:]guid entries  
--P, --privileges             request privilege computation  
---print-sd <no|dacl|sacl|all>  
+| Flag | Description |
+|------|-------------|
+| `--desired-access <mask>` | Access mask to check (default `0x02000000` = MAXIMUM_ALLOWED) |
+| `--principal-self <sid\|name>` | PrincipalSelf substitution SID or name |
+| `--device <sid\|name>` | Optional device identity for compound AccessCheck |
+| `-O, --object-types <list>` | Comma-separated `[level:]guid` entries |
+| `-P, --privileges` | Request privilege computation |
+| `--print-sd <no\|dacl\|sacl\|all>` | Print the resolved security descriptor |
+
 
 **Inline SD (hex or SDDL):**
 
@@ -109,7 +112,7 @@ First entry defaults to level 0, subsequent entries default to level 1.
 	-O '00299570-246d-11d0-a768-00aa006e0529,bf967aba-0de6-11d0-a285-00aa003049e2'
 ```
 
-**explicit levels:**
+**Explicit levels:**
 
 ```bash
 ./authz [auth_flags] check ldap 'DOMAIN\sampleuser' -T 'CN=Administrator,CN=Users,DC=domain,DC=local'  \

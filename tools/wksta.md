@@ -226,8 +226,9 @@ PrimaryComputerName is printed as a single value; AlternateComputerNames are lis
 ```
 
 
-Note: the new primary name must already exist as an alternate name.  
-Example flow: add-alt-name -> set-primary-name -> (optional) del-alt-name oldname  
+{% hint style="info" %}
+The new primary name must already exist as an alternate name. Typical flow: `add-alt-name` → `set-primary-name` → (optional) `del-alt-name <oldname>`.
+{% endhint %}
 
 ### add-transport
 

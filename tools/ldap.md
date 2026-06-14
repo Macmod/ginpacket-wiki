@@ -83,9 +83,9 @@ LDAP is the primary protocol for querying and managing objects in Active Directo
 ```
 
 
-All query subcommands accept: [-A <attrs>] [--hex] [--limit <n>] [--scheme <ldap|ldaps>] [--starttls]  
--A selects attributes to display; append :hex to any name to print that attribute as raw hex  
---hex prints all attributes as raw hex  
+{% hint style="info" %}
+All `query` subcommands accept `-A <attrs>`, `--hex`, `--limit <n>`, `--scheme <ldap|ldaps>`, and `--starttls`. Use `-A attr:hex` to print a specific attribute as raw hex; `--hex` prints all attributes as raw hex.
+{% endhint %}
 
 ### query users
 
@@ -700,4 +700,109 @@ Available types: GlobalSecurity, GlobalDistribution, DomainLocalSecurity, Domain
 
 ```bash
 ./ldap [auth_flags] create custom --template myobject.yaml
+```
+
+### dacl show
+
+**Syntax:**
+```bash
+./ldap [auth_flags] dacl show <target-dn> [--scheme <ldap|ldaps>] [--starttls]
+```
+
+**Display all ACEs in an object's DACL:**
+
+```bash
+./ldap [auth_flags] dacl show 'CN=Administrator,CN=Users,DC=domain,DC=local'
+```
+
+### dacl add
+
+**Syntax:**
+```bash
+./ldap [auth_flags] dacl add <target-dn> <grantee> <right> [--scheme <ldap|ldaps>] [--starttls]
+```
+
+{% hint style="info" %}
+Known named rights: `genericall`, `writedacl`, `writeowner`, `genericwrite`, `allextended`, `forcechangepassword`, `addmember`, `ds-replication-get-changes`, `ds-replication-get-changes-all`, `dcsync`, `certs-enrollment`, `certs-autoenrollment`, `shadow-cred`.
+{% endhint %}
+
+**Grant WriteDACL on an object:**
+
+```bash
+./ldap [auth_flags] dacl add 'CN=User,CN=Users,DC=domain,DC=local' svc_account writedacl
+```
+
+**Grant GenericAll on an object:**
+
+```bash
+./ldap [auth_flags] dacl add 'CN=User,CN=Users,DC=domain,DC=local' svc_account genericall
+```
+
+### dacl remove
+
+**Syntax:**
+```bash
+./ldap [auth_flags] dacl remove <target-dn> <grantee> <right> [--scheme <ldap|ldaps>] [--starttls]
+```
+
+**Remove a WriteDACL ACE from an object:**
+
+```bash
+./ldap [auth_flags] dacl remove 'CN=User,CN=Users,DC=domain,DC=local' svc_account writedacl
+```
+
+### dacl set-dcsync
+
+**Syntax:**
+```bash
+./ldap [auth_flags] dacl set-dcsync <domain-dn> <grantee> [--scheme <ldap|ldaps>] [--starttls]
+```
+
+**Grant DCSync rights (DS-Replication-Get-Changes + DS-Replication-Get-Changes-All):**
+
+```bash
+./ldap [auth_flags] dacl set-dcsync 'DC=domain,DC=local' svc_account
+```
+
+### dacl del-dcsync
+
+**Syntax:**
+```bash
+./ldap [auth_flags] dacl del-dcsync <domain-dn> <grantee> [--scheme <ldap|ldaps>] [--starttls]
+```
+
+**Revoke DCSync rights:**
+
+```bash
+./ldap [auth_flags] dacl del-dcsync 'DC=domain,DC=local' svc_account
+```
+
+### dacl set-genericall
+
+**Syntax:**
+```bash
+./ldap [auth_flags] dacl set-genericall <target-dn> <grantee> [--scheme <ldap|ldaps>] [--starttls]
+```
+
+**Grant GenericAll (full control) on an object:**
+
+```bash
+./ldap [auth_flags] dacl set-genericall 'CN=User,CN=Users,DC=domain,DC=local' svc_account
+```
+
+### set-owner
+
+**Syntax:**
+```bash
+./ldap [auth_flags] set-owner <target-dn> <new-owner> [--scheme <ldap|ldaps>] [--starttls]
+```
+
+{% hint style="info" %}
+Requires WriteOwner right on the target object. `<new-owner>` may be a sAMAccountName or a SID string (S-1-...).
+{% endhint %}
+
+**Change the owner of an AD object:**
+
+```bash
+./ldap [auth_flags] set-owner 'CN=User,CN=Users,DC=domain,DC=local' svc_account
 ```

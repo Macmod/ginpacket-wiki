@@ -76,7 +76,7 @@ The Certificate Services protocols (MS-WCCE and MS-CSRA) expose Active Directory
 ```
 
 {% hint style="warning" %}
-Uses ServerControl flag 1. This stops CertSvc — restart the service to recover.
+Uses ServerControl flag 1. This stops CertSvc - restart the service to recover.
 {% endhint %}
 
 ### get-sd|get-ca-sd
