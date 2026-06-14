@@ -61,7 +61,7 @@ Big thanks to the main libraries used in this project. Although I implemented lo
 * [TheManticoreProject/winacl](https://github.com/TheManticoreProject/winacl)
 * [go-ldap/ldap](https://github.com/go-ldap/ldap)
 
-# References
+## References
 
 Many tools/libraries were used as reference during the development of `ginpacket`, but the main ones:
 
