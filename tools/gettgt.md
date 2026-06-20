@@ -13,9 +13,6 @@ Kerberos is the primary authentication protocol in Active Directory. A Ticket Gr
 ./gettgt -u <user> --dc <DC> -o <ccache> (-p <password> | -H <LM:NT|NT> | --aes-key <hex> | --pfx <file> | --crt <file> --key <file>)
 ```
 
-
-[-x <socks5-host:port>] [--dns <IP[:port]>]  
-
 **Request a TGT using password credentials:**
 
 ```bash

@@ -13,9 +13,6 @@ Service Tickets (STs) are Kerberos credentials that grant access to a specific s
 ./getst -c <ccache> -s <spn> --dc <DC> -o <out> [-i <user> [--self]] [-a <evidence-ccache>]
 ```
 
-
-[-x <socks5-host:port>] [--dns <IP[:port]>]  
-
 **Request a service ticket for a given SPN using an existing TGT:**
 
 ```bash
