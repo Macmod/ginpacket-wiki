@@ -4,7 +4,7 @@ Output in Ginpacket tries to be as friendly as possible, but of course not every
 
 ## Headers & Footers
 
-Headers are enabled by default. To remove the header (banner/version/target) and footer (usually result counts) and see only raw output from a tool, just discard `stderr`:
+Headers and footers are enabled by default. To remove the header (banner/version/target) and footer (usually result counts) and see only raw output from a tool, just discard `stderr`:
 
 ```bash
 # Linux / MacOS
@@ -32,6 +32,14 @@ For tool subcommands that query and return data (instead of performing changes),
 ```bash
 ./tool -t <target> -u <user>@<domain> -p <password> --json
 ```
+
+{% hint style="info" %}
+In some cases, such as in the `eventlog`, `cert` and `tasks` tools, the tool has its own `--format` flag. When that happens, `-j` / `--json` is simply an alias of `--format json`.
+{% endhint %}
+
+{% hint style="info" %}
+If JSON output is not supported by a subcommand, `-j` / `--json` is simply ignored.
+{% endhint %}
 
 JSON output is supported by the following tools / subcommands:
 
