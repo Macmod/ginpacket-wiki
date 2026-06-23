@@ -3,6 +3,7 @@
 * [👋 Introduction](README.md)
 * [🚀 Installation](INSTALLATION.md)
 * [🔐 Authentication](AUTHENTICATION.md)
+* [👁️ Output](OUTPUT.md)
 
 ## 🧰 Tools
 * [📋 Overview](tools/README.md)
