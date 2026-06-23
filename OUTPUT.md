@@ -29,7 +29,7 @@ Colors are enabled by default. To remove colors just include the `-Z` / `--no-co
 
 For tool subcommands that query and return data (instead of performing changes), you can also set `-j` or `--json` to get the result as NDJSON:
 
-``bash
+```bash
 ./tool -t <target> -u <user>@<domain> -p <password> --json
 ```
 
