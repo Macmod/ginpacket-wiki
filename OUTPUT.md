@@ -35,7 +35,7 @@ For tool subcommands that query and return data (instead of performing changes),
 
 JSON output is supported by the following tools / subcommands:
 
-```
+```bash
 authz info
 authz check
 cert db
