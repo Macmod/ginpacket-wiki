@@ -44,64 +44,149 @@ If JSON output is not supported by a subcommand, `-j` / `--json` is simply ignor
 JSON output is supported by the following tools / subcommands:
 
 ```bash
-authz info
-authz check
+lookupsid
+rpcdump
+sam users
+sam groups
+sam display
+sam user
+sam group
+server shares
+server sessions
+server connections
+server files
+services
+wksta loggedon
+wksta info
+wksta transports
+wksta join-info
+wksta stats
+wksta names
+wksta joinable-ous
+dcsync
+eventlog channels
+eventlog publishers
+eventlog query
+eventlog subscribe
+eventlog watch
 cert db
+cert requests
 cert pending
 cert issued
 cert failed
-dcsync
-dfs list
+cert revoked
+tasks list-folders
+tasks list
+tasks dump
+dhcp stats
+dhcp stats-v6
+dhcp scopes
+dhcp scope
+dhcp leases
+dhcp ranges
+dhcp exclusions
+dhcp reservations
+dhcp options
+dhcp option-types
+dhcp config
+dhcp dump
+dns zones
+dns zone
+dns zone-stats
+dns records
+dns record
+dns nodes
+dns dump
+dns server
+dns server-stats
+dns client-subnets
+dns client-subnet
+dns server-scopes
+dns zone-scopes
+dns policies
+dns policy
+firewall
+smb shares
+smb ls
+smb tree
+smb stat
+lsa trusts
+lsa privileges
+lsa accounts
+lsa rights
+lsa account-rights
+lsa policy
+tsts sessions
+tsts processes
+printer printers
+printer drivers
+printer ports
+printer monitors
+printer jobs
+printer server-info
+ldap search
+ldap query users
+ldap query groups
+ldap query computers
+ldap query containers
+ldap query ous
+ldap query service-accounts
+ldap query gpos
+ldap query spns
+ldap query unconstrained-delegation
+ldap query constrained-delegation
+ldap query asreproast
+ldap query never-expires
+ldap query pwd-not-required
+ldap query cert-templates
+ldap query cert-authorities
+ldap query trusts
+ldap query sccm
+ldap query wds
+ldap query passpol
+ldap query mquota
+ldap query key-creds
+ldap query rbcd
+ldap query gmsa
+ldap query laps
+ldap whoami
+ldap info
+ldap get-gmsa
+ldap get-laps
+ldap dacl show
+wmi query
+wmi list-namespaces
+wmi list-classes
+dfs namespaces
 dfs dump
 dfs links
-dhcp stats
-dns zones
-efs query-users
-efs query-recovery
-efs file-key-info
-efs file-key-info-ex
-efs query-protectors
-efs get-encrypted-metadata
-firewall rules
-ldap search
-lookupsid
-lsa privs
-lsa trust
-lsa forest-trust
-lsa policy
-lsa accounts
-lsa enum-rights
-lsa account-rights
+efs users
+efs recovery
+efs file-key
+efs protectors
+efs encrypted-metadata
 perf csets
 perf dump
 perf cset
 perf instances
 perf query
-printer list
-printer drivers
-printer ports
-printer monitors
-printer jobs
+time bits
+time source
+time status
+time provider-status
+time provider-config
 reg query
-reg enum
-reg dump
-reg export
-rpcdump
-sam users
-sam groups
-server shares
-server sessions
-server connections
-server files
-services list
-smb shares
-tasks list
-tasks query
-tasks dump
-tsts sessions
-tsts processes
-wksta
-wmi query
-wmi classes
-wmi instances
+reg info
+authz info
+authz check sd
+authz check registry
+authz check smb
+authz check ldap
+authz check tasks
+authz check services
+authz check wmi-ns
+machinerole
+bkpkey retrieve
+bkpkey backup
+bkpkey restore
 ```
