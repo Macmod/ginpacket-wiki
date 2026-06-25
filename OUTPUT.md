@@ -51,11 +51,21 @@ sam groups
 sam display
 sam user
 sam group
+sam group-members
+sam user-groups
 server shares
 server sessions
 server connections
 server files
-services
+services query
+services dump
+services service
+services deps
+services get-sd
+services group
+services groups
+services display-name
+services key-name
 wksta loggedon
 wksta info
 wksta transports
@@ -105,7 +115,17 @@ dns server-scopes
 dns zone-scopes
 dns policies
 dns policy
-firewall
+firewall rules
+firewall profile
+firewall config
+firewall products
+firewall networks
+firewall adapters
+firewall ipsec-csrules
+firewall ipsec-mmrules
+firewall ipsec-authsets
+firewall ipsec-cryptosets
+firewall ipsec-sas
 smb shares
 smb ls
 smb tree
@@ -116,6 +136,7 @@ lsa accounts
 lsa rights
 lsa account-rights
 lsa policy
+lsa forest-trust
 tsts sessions
 tsts processes
 printer printers
