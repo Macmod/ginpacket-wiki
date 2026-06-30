@@ -36,3 +36,28 @@ Service Tickets (STs) are Kerberos credentials that grant access to a specific s
 ```bash
 ./getst -c sampleuser@DOMAIN.LOCAL.ccache -s cifs/dc01.domain.local -i sampleuser -a sampleuser_evidence.ccache --dc dc01.domain.local -o sampleuser_cifs.ccache
 ```
+
+### TGT Renewal
+
+**Syntax:**
+```bash
+./getst --renew -c <tgt.ccache> [--dc <DC>] [-o <out.ccache>]
+```
+
+**Renew an existing TGT (instead of requesting a service ticket):**
+
+{% hint style="info" %}
+Output defaults to `<input>_renewed.ccache` when `-o` is not specified.
+{% endhint %}
+
+```bash
+./getst --renew -c administrator@DOMAIN.LOCAL.ccache --dc dc01.domain.local
+```
+
+```bash
+./getst --renew -c administrator@DOMAIN.LOCAL.ccache --dc dc01.domain.local -o renewed.ccache
+```
+
+{% hint style="warning" %}
+**Cross-realm note**: when the target service is in a different realm (external or forest trust), always use the fully-qualified hostname in the SPN (e.g. `cifs/server.foreign.realm` rather than `cifs/server`). The cross-realm fallback derives the target realm from the hostname suffix; a short name provides no suffix and the fallback is skipped, causing the request to fail with `KDC_ERR_S_PRINCIPAL_UNKNOWN`.
+{% endhint %}

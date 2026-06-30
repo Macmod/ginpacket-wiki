@@ -10,7 +10,7 @@ LDAP is the primary protocol for querying and managing objects in Active Directo
 
 **Syntax:**
 ```bash
-./ldap [auth_flags] --scheme ldaps|ldap [--starttls] <subcommand>
+./ldap [auth_flags] --scheme ldaps|ldap [--starttls] [--adws] <subcommand>
 ```
 
 **Connect over LDAPS (TLS):**
@@ -24,6 +24,16 @@ LDAP is the primary protocol for querying and managing objects in Active Directo
 ```bash
 ./ldap [auth_flags] --scheme ldap --starttls query users
 ```
+
+**Use ADWS (Active Directory Web Services, port 9389) instead of LDAP:**
+
+```bash
+./ldap [auth_flags] --adws query users
+```
+
+{% hint style="info" %}
+`--adws` routes queries through the ADWS endpoint (TCP/9389) using NNS/NMF transport. Incompatible with `--scheme ldaps` and `--starttls`. Useful when LDAP (TCP/389) is blocked.
+{% endhint %}
 
 ### Obfuscation
 
@@ -356,6 +366,19 @@ All `query` subcommands accept `-A <attrs>`, `--hex`, `--limit <n>`, `--scheme <
 ./ldap [auth_flags] query shadow-creds
 ```
 
+### query key-creds
+
+**Syntax:**
+```bash
+./ldap [auth_flags] query key-creds [--limit <n>]
+```
+
+**List objects with msDS-KeyCredentialLink set; parse DeviceID, key type, and creation time:**
+
+```bash
+./ldap [auth_flags] query key-creds
+```
+
 ### query rbcd
 
 **Syntax:**
@@ -452,7 +475,7 @@ Requires membership in the group listed in msDS-GroupMSAMembership.
 **Read the LAPS administrator password for a computer:**
 
 {% hint style="info" %}
-Returns v1 plaintext or v2 JSON blob. Requires LAPS read rights.
+Requires LAPS read rights. Plaintext (v1/v2) is shown directly. Encrypted v2 (`msLAPS-EncryptedPassword`) is printed as base64 and can be decrypted with [`gkdi decrypt-laps --blob <value>`](gkdi.md#decrypt-laps).
 {% endhint %}
 
 ```bash
@@ -723,7 +746,7 @@ Available types: GlobalSecurity, GlobalDistribution, DomainLocalSecurity, Domain
 ```
 
 {% hint style="info" %}
-Known named rights: `genericall`, `writedacl`, `writeowner`, `genericwrite`, `allextended`, `forcechangepassword`, `addmember`, `ds-replication-get-changes`, `ds-replication-get-changes-all`, `dcsync`, `certs-enrollment`, `certs-autoenrollment`, `shadow-cred`.
+Known named rights: `genericall`, `writedacl`, `writeowner`, `genericwrite`, `allextended`, `forcechangepassword`, `addmember`, `ds-replication-get-changes`, `ds-replication-get-changes-all`, `dcsync`, `certs-enrollment`, `certs-autoenrollment`, `shadow-cred`, `keycredlink-write`.
 {% endhint %}
 
 **Grant WriteDACL on an object:**
@@ -805,4 +828,61 @@ Requires WriteOwner right on the target object. `<new-owner>` may be a sAMAccoun
 
 ```bash
 ./ldap [auth_flags] set-owner 'CN=User,CN=Users,DC=domain,DC=local' svc_account
+```
+
+### keycred list
+
+**Syntax:**
+```bash
+./ldap [auth_flags] keycred list <target>
+```
+
+**List all Key Credential Links on an object:**
+
+```bash
+./ldap [auth_flags] keycred list jsmith
+```
+
+```bash
+./ldap [auth_flags] keycred list 'CN=jsmith,CN=Users,DC=domain,DC=local'
+```
+
+### keycred add
+
+**Syntax:**
+```bash
+./ldap [auth_flags] keycred add <target> [--out-pfx <file>] [--out-cert <file>] [--subject <cn>] [--device-id <guid>] [--key-size <bits>] [--pfx-password <pass>]
+```
+
+**Add a shadow credential (Key Credential Link) to an object:**
+
+{% hint style="info" %}
+Generates an RSA key pair and certificate, creates a `KeyCredentialLink` blob, and appends it to `msDS-KeyCredentialLink`. Use the generated PFX with certificate-based Kerberos tools.
+{% endhint %}
+
+```bash
+./ldap [auth_flags] keycred add jsmith --out-pfx jsmith.pfx
+```
+
+```bash
+./ldap [auth_flags] keycred add jsmith --out-pfx jsmith.pfx --out-cert jsmith.pem --pfx-password 'secret'
+```
+
+### keycred clear
+
+**Syntax:**
+```bash
+./ldap [auth_flags] keycred clear <target> [--device-id <uuid>]
+```
+
+**Remove all key credentials from an object:**
+
+```bash
+./ldap [auth_flags] keycred clear jsmith
+```
+
+**Remove only a specific key credential by device ID:**
+
+```bash
+./ldap [auth_flags] keycred clear jsmith --device-id 'a1b2c3d4-...'
 ```

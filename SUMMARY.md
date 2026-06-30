@@ -13,6 +13,8 @@
 * [🧬 DCSync (dcsync)](tools/dcsync.md)
 * [📂 SMB2/3 (smb)](tools/smb.md)
 * [📇 LDAP (ldap)](tools/ldap.md)
+* [🔁 Replicated LDAP (repldap)](tools/repldap.md)
+* [🔑 Group Key Distribution (gkdi)](tools/gkdi.md)
 * [🧩 RPC Endpoint Mapper (rpcdump)](tools/rpcdump.md)
 * [🧾 Remote Authorization API (authz)](tools/authz.md)
 * [🧾 Registry (reg)](tools/reg.md)

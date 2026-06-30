@@ -4,8 +4,8 @@
 
 The tools span a range of use cases, including:
 
-- **Authentication and credentials**: obtain Kerberos tickets (`gettgt`, `getst`), replicate directory secrets (`dcsync`), retrieve DPAPI backup keys (`bkpkey`), and change passwords (`changepwd`).
-- **Directory and identity services**: query and modify AD objects (`ldap`), enumerate accounts and groups (`sam`), manage LSA policy and secrets (`lsa`), resolve SIDs and names (`lookupsid`), and inspect machine domain roles (`machinerole`).
+- **Authentication and credentials**: obtain Kerberos tickets (`gettgt`, `getst`), replicate directory secrets (`dcsync`), retrieve DPAPI backup keys (`bkpkey`), fetch group keys and decrypt LAPS v2 passwords (`gkdi`), and change passwords (`changepwd`).
+- **Directory and identity services**: query and modify AD objects (`ldap`), LDAP writes via DFSRHelper (`repldap`), enumerate accounts and groups (`sam`), manage LSA policy and secrets (`lsa`), resolve SIDs and names (`lookupsid`), and inspect machine domain roles (`machinerole`).
 - **Network infrastructure**: manage DNS zones and records (`dns`), DHCP scopes and leases (`dhcp`), DFS namespaces (`dfs`), firewall rules (`firewall`), and certificate authorities (`cert`).
 - **Host management**: interact with the registry (`reg`), services (`services`), scheduled tasks (`tasks`), WMI (`wmi`), EFS (`efs`), printers (`printer`), SMB shares and files (`smb`), server shares (`server`), initiate remote shutdowns (`shutdown`).
 - **System observability**: read event logs (`eventlog`), query performance counters (`perf`), inspect Terminal Services sessions (`tsts`), probe workstation state (`wksta`), check W32Time (`time`), and enumerate RPC endpoints (`rpcdump`).
@@ -38,9 +38,11 @@ Despite the name, [ginpacket](https://github.com/Macmod/ginpacket) is **not** a 
 	* Security Accounts Manager ([MS-SAMR](https://winprotocoldocs-bhdugrdyduf5h2e4.b02.azurefd.net/MS-SAMR/%5bMS-SAMR%5d.pdf))
 	* LSA ([MS-LSAD](https://winprotocoldocs-bhdugrdyduf5h2e4.b02.azurefd.net/MS-LSAD/%5bMS-LSAD%5d.pdf) and [MS-LSAT](https://winprotocoldocs-bhdugrdyduf5h2e4.b02.azurefd.net/MS-LSAT/%5bMS-LSAT%5d.pdf))
 	* Backup Key Retrieval ([MS-BKRP](https://winprotocoldocs-bhdugrdyduf5h2e4.b02.azurefd.net/MS-BKRP/%5bMS-BKRP%5d.pdf))
+	* Group Key Distribution ([MS-GKDI](https://winprotocoldocs-bhdugrdyduf5h2e4.b02.azurefd.net/MS-GKDI/%5bMS-GKDI%5d.pdf))
 	* Server Service ([MS-SRVS](https://winprotocoldocs-bhdugrdyduf5h2e4.b02.azurefd.net/MS-SRVS/%5bMS-SRVS%5d.pdf))
 	* Workstation Service ([MS-WKST](https://winprotocoldocs-bhdugrdyduf5h2e4.b02.azurefd.net/MS-WKST/%5bMS-WKST%5d.pdf))
 	* DFS Namespace Management ([MS-DFSNM](https://winprotocoldocs-bhdugrdyduf5h2e4.b02.azurefd.net/MS-DFSNM/%5bMS-DFSNM%5d.pdf))
+	* DFS Replication Helper (ADProxy Interface from [MS-DFSRH](https://winprotocoldocs-bhdugrdyduf5h2e4.b02.azurefd.net/MS-DFSRH/%5bMS-DFSRH%5d.pdf))
 	* Encrypting File System Remote ([MS-EFSR](https://winprotocoldocs-bhdugrdyduf5h2e4.b02.azurefd.net/MS-EFSR/%5bMS-EFSR%5d.pdf))
 	* DNS Server Management ([MS-DNSP](https://winprotocoldocs-bhdugrdyduf5h2e4.b02.azurefd.net/MS-DNSP/%5bMS-DNSP%5d.pdf))
 	* DHCP Server Management ([MS-DHCPM](https://winprotocoldocs-bhdugrdyduf5h2e4.b02.azurefd.net/MS-DHCPM/%5bMS-DHCPM%5d.pdf))
@@ -140,6 +142,7 @@ ginpacket/
 │  │  ├─ cert-templates        
 │  │  ├─ cert-authorities      
 │  │  ├─ trusts                
+│  │  ├─ key-creds              [--limit &lt;n&gt;]
 │  ├─ create
 │  │  ├─ user                  --name &lt;cn&gt; [--pass &lt;password&gt;] [--enabled] [--parent-dn &lt;dn&gt;] [--scheme ldaps|ldap] [--starttls]
 │  │  ├─ computer              --name &lt;cn&gt; [--pass &lt;password&gt;] [--parent-dn &lt;dn&gt;] [--scheme ldaps|ldap] [--starttls]
@@ -154,6 +157,10 @@ ginpacket/
 │  │  ├─ set-dcsync            &lt;domain-dn&gt; &lt;grantee&gt;
 │  │  ├─ del-dcsync            &lt;domain-dn&gt; &lt;grantee&gt;
 │  │  ├─ set-genericall        &lt;target-dn&gt; &lt;grantee&gt;
+│  ├─ keycred
+│  │  ├─ list                  &lt;target-dn&gt;
+│  │  ├─ add                   &lt;target-dn&gt; [--subject &lt;s&gt;] [--device-id &lt;guid&gt;] [--key-size &lt;bits&gt;] [--pfx-password &lt;s&gt;] [--out-pfx &lt;file&gt;] [--out-cert &lt;file&gt;]
+│  │  ├─ clear                 &lt;target-dn&gt;
 │  ├─ set-owner                &lt;target-dn&gt; &lt;new-owner&gt;
 +- rpcdump                     [-U &lt;interface-uuid&gt;] [-T &lt;ncacn_ip_tcp,ncacn_np&gt;]
 +- reg
@@ -369,6 +376,9 @@ ginpacket/
 │  ├─ backup                   --in-file &lt;request.bin&gt; -o &lt;response.bin&gt;
 │  ├─ restore                  (--in-file &lt;restore.bin&gt; | --in-b64 &lt;base64&gt;) [--win2k]
 │  ├─ retrieve                 -o &lt;backupkey.bin&gt;
++- gkdi
+│  ├─ get-key                  -s &lt;SDDL|hex&gt; [--root-key-id &lt;GUID&gt;] [--l0 &lt;n&gt;] [--l1 &lt;n&gt;] [--l2 &lt;n&gt;] [-r]
+│  ├─ decrypt-laps             (--blob &lt;base64&gt; | --blob-hex &lt;hex&gt;)
 +- dfs
 │  ├─ namespaces               
 │  ├─ dump                     
@@ -392,6 +402,13 @@ ginpacket/
 │  ├─ initialize               
 │  ├─ ns-version               
 │  ├─ server-version           
++- repldap                     --target-dc &lt;DC&gt; (per-subcommand)
+│  ├─ create                   &lt;distinguished-name&gt; --attr name=value (repeatable) [--verify-dc &lt;DC&gt;]
+│  ├─ modify (mod)             &lt;distinguished-name&gt; [--add name=value] [--replace name=value] [--delete name]
+│  ├─ delete (del)             &lt;distinguished-name&gt;
+│  ├─ keycred
+│  │  ├─ add                   &lt;distinguished-name&gt; [--subject &lt;s&gt;] [--device-id &lt;guid&gt;] [--key-size &lt;bits&gt;] [--pfx-password &lt;s&gt;] [--out-pfx &lt;file&gt;] [--out-cert &lt;file&gt;]
+│  │  ├─ clear                 &lt;distinguished-name&gt;
 +- efs
 │  ├─ users                    &lt;file&gt;
 │  ├─ recovery                 &lt;file&gt;
