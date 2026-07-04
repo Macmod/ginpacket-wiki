@@ -1,6 +1,5 @@
 ---
 layout:
-  width: wide
   title:
     visible: true
   description:

@@ -37,7 +37,7 @@
 * [🔥 Firewall (firewall)](tools/firewall.md)
 * [🖨️ Printer (printer)](tools/printer.md)
 * [🧭 Machine Role (machinerole)](tools/machinerole.md)
-* [⏻ Shutdown (shutdown)](tools/shutdown.md)
+* [📴 Shutdown (shutdown)](tools/shutdown.md)
 * [📊 Performance Counter (perf)](tools/perf.md)
 * [🕒 Time (time)](tools/time.md)
 
