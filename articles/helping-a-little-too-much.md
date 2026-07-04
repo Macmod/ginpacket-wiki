@@ -2,29 +2,23 @@
 
 For reasons that are unknown to me, one day I decided to read through the `MS-DFSRH` spec. I think I was looking for more methods related to DFS as I thought at the time that `MS-DFSNM` (DFS Namespace Management protocol) didn't have all methods that were relevant for DFS management. One thing stood out immediately - the "DFS Replication Helper" protocol includes DCOM interfaces called `IADProxy` / `IADProxy2` and basically states that these can be used by any local admin to perform write-only LDAP operations (Create, Modify, Delete):
 
-<p align="center">
-  <img width="806" alt="iadproxy" src="../.gitbook/assets/615389929-a05a4f92-9ef6-4689-817d-0bc25f6500e2.png" />
-  <img width="806" height="259" alt="iadproxy_opnums" src="../.gitbook/assets/615390062-2c966c48-ae95-4272-b1ad-26dc617509ee.png" />
-</p>
+<figure><img src="../.gitbook/assets/615389929-a05a4f92-9ef6-4689-817d-0bc25f6500e2.png" alt=""><figcaption></figcaption></figure>
+
+<figure><img src="../.gitbook/assets/615390062-2c966c48-ae95-4272-b1ad-26dc617509ee.png" alt=""><figcaption></figcaption></figure>
 
 I had no idea (and still don't) why is it that DFS needs this sort of thing - maybe to look up important information about AD-integrated DFS namespaces or something like that. All it takes for these interfaces to exist is the **DFS Replication** feature installed on the host.
 
 Let's look at the `Create` call, as `Modify` and `Delete` aren't much different:
 
-<p align="center">
-  <img width="797" height="525" alt="iadproxy_create" src="../.gitbook/assets/615390188-3bec1a94-31cb-4369-accf-cf0181e78a4b.png" />
-</p>
+<figure><img src="../.gitbook/assets/615390188-3bec1a94-31cb-4369-accf-cf0181e78a4b.png" alt=""><figcaption></figcaption></figure>
 
 Two things are interesting here: the first is the fact the actions are performed with the target's computer account. This is often a "feature", as many organizations still grant sensitive Allow ACEs (Full Control, Generic Write, etc) on critical objects to the `Domain Computers` group or to specific computer objects.
 
 The second is that you can specify the domain controller to receive the operation in the call arguments. Can it be any address, I wondered? The answer is yes: you could even run `Responder` on a VPS, issue one of these calls to a target, and capture NetNTLM hashes for the target's computer account from the LDAP bind, or maybe run ntlmrelayx on a pivot host and relay the credentials into the real DC for a full LDAP shell (confirm):
 
-<p align="center">
-  <img width="760"  alt="repldap_external_dc" src="../.gitbook/assets/615399073-d8c8afba-2000-49c9-a41f-32ac626f5cc9.png" />
-  <img width="760" height="344" alt="repldap_responder" src="../.gitbook/assets/615397616-31c8ed06-e07d-4237-a7e0-2424b6ad8f7a.png" />
-</p>
+<figure><img src="../.gitbook/assets/615399073-d8c8afba-2000-49c9-a41f-32ac626f5cc9.png" alt=""><figcaption></figcaption></figure>
 
-[img](!pic2)
+<figure><img src="../.gitbook/assets/615397616-31c8ed06-e07d-4237-a7e0-2424b6ad8f7a.png" alt=""><figcaption></figcaption></figure>
 
 If the DC itself has the **DFS Replication** feature, you can also ask it to **connect to itself**, but then the security context would be tied to the `NETWORK SERVICE` user instead of the computer account, changing the scope of actions that can actually be performed. Whenever the DC passed in the call is different from the host receiving it, the call must go through the network, so the `TARGET$` computer account is used instead of the `NETWORK SERVICE` principal. This is standard behavior of virtual accounts such as `NETWORK SERVICE`, as described in [Becoming the Machine, A Virtual Account's Guide To Total Control](https://www.abdulmhsblog.com/posts/iammachine/) by Abdul Mhanni.
 
@@ -43,9 +37,7 @@ One relevant example of what can be accomplished here is using `repldap` to mana
 ./repldap [auth_flags] --target-dc WIN-6BKCP1FPPCI keycred add 'CN=WIN-6BKCP1FPPCI,OU=Domain Controllers,DC=creta,DC=local'
 ```
 
-<p align="center">
-  <img width="1183" height="473" alt="image" src="../.gitbook/assets/617124036-808d808e-a407-4702-854a-bc00dd55eda5.png" />
-</p>
+<figure><img src="../.gitbook/assets/617124036-808d808e-a407-4702-854a-bc00dd55eda5.png" alt=""><figcaption></figcaption></figure>
 
 What makes the DFSRHelper path interesting here is that the write goes through the target's own machine account, so if the machine account has write access to its own msDS-KeyCredentialLink (which is the default), you can do this with a single ./repldap modify call (as long as the target is different from the supplied DC).
 
@@ -64,9 +56,7 @@ $ ./changepwd dfsrh [auth_flags] \
 $ ./bin/repldap [auth_flags] modify DN_FOR_TARGETOBJECT --replace unicodePwd=Banana@1338 --target-dc DCHOSTNAME
 ```
 
-<p align="center">
-<img width="713" height="162" alt="changepwd_admin_reset" src="../.gitbook/assets/615908939-d0164dac-1707-4b83-a18f-93b66112308e.png" />
-</p>
+<figure><img src="../.gitbook/assets/615908939-d0164dac-1707-4b83-a18f-93b66112308e.png" alt=""><figcaption></figcaption></figure>
 
 {% hint style="warning" %}
 Since password operations in LDAP can only be performed via LDAPS on 636, you must always use the proper DC hostname instead of its IP in `--target-dc` to avoid certificate validation issues between the `target` and the `targetDC`.

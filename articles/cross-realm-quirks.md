@@ -10,23 +10,17 @@ These are relationships between an arbitrary domain from forest A and another ar
 
 For all cross-realm trusts, the trust can be either one-way or two-way, as forests are the security boundary in AD. For intra-realm trust types, such as parent-child or tree-root trusts, the trust is always **transitive and bidirectional**.
 
-<p align="center">
-  <img width="1201" height="587" alt="image" src="../.gitbook/assets/615687139-a9221185-4107-4ffb-aee3-9cb37caeeb2f.png" />
-</p>
+<figure><img src="../.gitbook/assets/615687139-a9221185-4107-4ffb-aee3-9cb37caeeb2f.png" alt=""><figcaption></figcaption></figure>
 
 Regardless of that, all sources that talk about requesting a cross-realm service ticket always document it as a two-step process: first obtain a referral TGT (an inter-realm TGT encrypted with the trust key), then present it to the remote KDC to get the final service ticket.
 
 The main issue here that some don't seem to be aware is that, to proceed with the flow, you (as the tool) often need to first receive a "referral" pointing to the target domain. But the feature that actually controls whether the DC returns a referral or not for TGS-REQ requests is called `Name suffix routing` (NSR), a list that exists in the properties of each **forest trust** and specifies which name suffixes (domains) are to be "routed" through that forest trust. This list gets populated when you set up the forest trust:
 
-<p align="center">
-  <img width="403" height="323" alt="image" src="../.gitbook/assets/615391760-706be10c-2c15-4d21-9c7e-4fbaf178aa35.png" />
-</p>
+<figure><img src="../.gitbook/assets/615391760-706be10c-2c15-4d21-9c7e-4fbaf178aa35.png" alt=""><figcaption></figcaption></figure>
 
 If your name suffix routing list was broken from the start (i.e. if your DNS is broken when you set up the trust), or if an admin manually removes an entry afterwards, upon receiving TGS-REQ requests a DC will **not issue** referrals pointing to the foreign DC and will raise an error instead. This has annoyed me a couple times in my lab, as I had lots of trouble simulating referrals when using external trusts: **external trusts simply do NOT add entries to the NSR list** upon creation - the `Name Suffix Routing` tab does not even exist in the trust properties panel in the standard Windows UI for external trust properties:
 
-<p align="center">
-  <img width="490" height="400" alt="image" src="../.gitbook/assets/615392592-b6136c2c-720d-467a-aa4d-759e5baaddba.png" />
-</p>
+<figure><img src="../.gitbook/assets/615392592-b6136c2c-720d-467a-aa4d-759e5baaddba.png" alt=""><figcaption></figcaption></figure>
 
 In other cases, I've also seen companies remove NSR entries in what was presumably an effort to **break the trust in one way** instead of actually changing trust attributes.
 
