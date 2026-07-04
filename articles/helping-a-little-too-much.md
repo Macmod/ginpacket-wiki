@@ -1,4 +1,24 @@
-# Helping a Little Too Much: The DFS Replication Helper
+---
+layout:
+  title:
+    visible: true
+  description:
+    visible: true
+  tableOfContents:
+    visible: true
+  outline:
+    visible: false
+  pagination:
+    visible: true
+  metadata:
+    visible: true
+  tags:
+    visible: true
+  actions:
+    visible: true
+---
+
+# 🔁 Helping a Little Too Much: The DFS Replication Helper
 
 For reasons that are unknown to me, one day I decided to read through the `MS-DFSRH` spec. I think I was looking for more methods related to DFS as I thought at the time that `MS-DFSNM` (DFS Namespace Management protocol) didn't have all methods that were relevant for DFS management. One thing stood out immediately - the "DFS Replication Helper" protocol includes DCOM interfaces called `IADProxy` / `IADProxy2` and basically states that these can be used by any local admin to perform write-only LDAP operations (Create, Modify, Delete):
 
@@ -24,10 +44,10 @@ If the DC itself has the **DFS Replication** feature, you can also ask it to **c
 
 What this means is that:
 
-1) If you have admin privileges on a host with DFS Replication, you can take control of its computer account with these calls instead of other well known coercion methods;
-2) Instead of capturing NetNTLM or relaying it, you could just use the `Create` / `Modify` / `Delete` calls directly to tell DFSRHelper to perform the action for you;
-3) If there are two DCs and one has DFS Replication, you could ask it to perform actions on the other DC's LDAP using its' own computer account;
-4) If there is only one DC, you could ask it to perform actions on behalf of `NETWORK SERVICE` if any object allows this principal explicitly in its' DACL.
+1. If you have admin privileges on a host with DFS Replication, you can take control of its computer account with these calls instead of other well known coercion methods;
+2. Instead of capturing NetNTLM or relaying it, you could just use the `Create` / `Modify` / `Delete` calls directly to tell DFSRHelper to perform the action for you;
+3. If there are two DCs and one has DFS Replication, you could ask it to perform actions on the other DC's LDAP using its' own computer account;
+4. If there is only one DC, you could ask it to perform actions on behalf of `NETWORK SERVICE` if any object allows this principal explicitly in its' DACL.
 
 ## Shadow Credentials
 
@@ -64,11 +84,11 @@ Since password operations in LDAP can only be performed via LDAPS on 636, you mu
 
 ### Self password changes
 
-Not sure if this is possible yet :)
+TODO
 
 ## Internals
 
-All of this logic is implemented in `DFSRHelper.dll`, and can be called from any admin of the target host. ELABORATE
+TODO
 
 ## Limitations
 
@@ -79,7 +99,7 @@ This primitive doesn't seem to cross any security boundaries, as admin privilege
 {% hint style="warning" %}
 The `_AdAttributeData` structure, used to pass a list of arguments to the ADProxy methods, carries exactly **one value field** (not a **list of values** as is usual behavior), and the `DfsrHelper.dll` only forwards that value field through the LDAP operation for `Modify/add` and `Modify/replace` calls (not for `Modify/delete`). The practical consequences:
 
-1) For attribute modifications (`repldap modify`), **replacements** (`--replace`) clear all existing values of the attribute and set the single supplied value - there is no way to replace a multi-valued attribute with multiple new values in one call;
-2) For attribute modifications (`repldap modify`), **deletes** (`--delete`) always remove all values of the attribute regardless of what value is supplied - value-specific deletes are not supported.
-3) For object creation (`repldap create`), **multi-valued attributes cannot be set** - passing the same attribute name twice issues two separate LDAP Add operations on the same attribute, which AD rejects sometimes (e.g. `objectClass` may return an Object Class Violation). The typed `repldap create [XXX]` subcommands already handle these constraints. For **custom creations** (`repldap create custom`) more testing is needed to verify the scope of this limitation.
+1. For attribute modifications (`repldap modify`), **replacements** (`--replace`) clear all existing values of the attribute and set the single supplied value - there is no way to replace a multi-valued attribute with multiple new values in one call;
+2. For attribute modifications (`repldap modify`), **deletes** (`--delete`) always remove all values of the attribute regardless of what value is supplied - value-specific deletes are not supported.
+3. For object creation (`repldap create`), **multi-valued attributes cannot be set** - passing the same attribute name twice issues two separate LDAP Add operations on the same attribute, which AD rejects sometimes (e.g. `objectClass` may return an Object Class Violation). The typed `repldap create [XXX]` subcommands already handle these constraints. For **custom creations** (`repldap create custom`) more testing is needed to verify the scope of this limitation.
 {% endhint %}

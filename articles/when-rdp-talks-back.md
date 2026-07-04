@@ -1,4 +1,24 @@
-# When RDP Talks Back: Hello From The Terminal Server
+---
+layout:
+  title:
+    visible: true
+  description:
+    visible: true
+  tableOfContents:
+    visible: true
+  outline:
+    visible: false
+  pagination:
+    visible: true
+  metadata:
+    visible: true
+  tags:
+    visible: true
+  actions:
+    visible: true
+---
+
+# 🖥️ When RDP Talks Back: Hello From The Terminal Server
 
 Remember the `Users` tab in task manager, where you could select a session and click on this button?
 

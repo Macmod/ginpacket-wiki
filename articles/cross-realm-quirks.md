@@ -1,12 +1,29 @@
-# Cross-realm quirks: the strange case of NSR & referral tickets
+---
+layout:
+  title:
+    visible: true
+  description:
+    visible: true
+  tableOfContents:
+    visible: true
+  outline:
+    visible: false
+  pagination:
+    visible: true
+  metadata:
+    visible: true
+  tags:
+    visible: true
+  actions:
+    visible: true
+---
+
+# 🌉 Cross-realm quirks: the strange case of NSR & referral tickets
 
 Cross-realm trusts in Active Directory come in two flavors:
 
-1) **Forest trusts**
-These can only exist between two forest-root domains, and are always **forest-transitive** - if forest root domain A trusts forest root domain B, A trusts all domains in forest B, but A does **not** trust any domains outside of B automatically.
-
-2) **External trusts**:
-These are relationships between an arbitrary domain from forest A and another arbitrary domain from forest B, and are always **non-transitive** - if an external trust exists from A to B and B trusts C, A does not trust C by transitivity.
+1. **Forest trusts** These can only exist between two forest-root domains, and are always **forest-transitive** - if forest root domain A trusts forest root domain B, A trusts all domains in forest B, but A does **not** trust any domains outside of B automatically.
+2. **External trusts**: These are relationships between an arbitrary domain from forest A and another arbitrary domain from forest B, and are always **non-transitive** - if an external trust exists from A to B and B trusts C, A does not trust C by transitivity.
 
 For all cross-realm trusts, the trust can be either one-way or two-way, as forests are the security boundary in AD. For intra-realm trust types, such as parent-child or tree-root trusts, the trust is always **transitive and bidirectional**.
 
