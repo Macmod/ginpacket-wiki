@@ -53,6 +53,21 @@ sam user
 sam group
 sam group-members
 sam user-groups
+sam user-aliases
+sam aliases
+sam alias
+sam alias-members
+sam alias-membership
+sam domains
+sam domain
+sam password-policy
+sam lookup-names
+sam lookup-rids
+server info
+server aliases
+server stats
+server disks
+server transports
 server shares
 server sessions
 server connections
@@ -85,6 +100,13 @@ cert pending
 cert issued
 cert failed
 cert revoked
+cert my-roles
+cert ca-info
+cert ca-props
+cert restore-paths
+cert request-attrs
+cert request-exts
+cert request-meta
 tasks list-folders
 tasks list
 tasks dump
@@ -135,16 +157,22 @@ lsa privileges
 lsa accounts
 lsa rights
 lsa account-rights
+lsa account-privs
 lsa policy
+lsa domain-policy
 lsa forest-trust
 tsts sessions
 tsts processes
+tsts listeners
 printer printers
 printer drivers
 printer ports
 printer monitors
+printer server
 printer jobs
-printer server-info
+printer forms
+printer processors
+printer datatypes
 ldap search
 ldap query users
 ldap query groups
@@ -175,9 +203,13 @@ ldap info
 ldap get-gmsa
 ldap get-laps
 ldap dacl show
+ldap keycred list
 wmi query
 wmi list-namespaces
 wmi list-classes
+wmi instance
+wmi class
+wmi methods
 dfs namespaces
 dfs dump
 dfs links
@@ -207,6 +239,8 @@ authz check tasks
 authz check services
 authz check wmi-ns
 machinerole
+gkdi get-key
+gkdi decrypt-laps
 bkpkey retrieve
 bkpkey backup
 bkpkey restore
