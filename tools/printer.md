@@ -96,7 +96,7 @@ The Print System Remote Protocol (MS-RPRN) allows remote management of the Windo
 ./printer [auth_flags] server
 ```
 
-**Read PrintNightmare mitigation registry flags and server version:**
+**Read PrintNightmare mitigation registry flags and the server version:**
 
 ```bash
 ./printer [auth_flags] server

@@ -7,10 +7,10 @@ Output in Ginpacket tries to be as friendly as possible, but of course not every
 Headers and footers are enabled by default. To remove the header (banner/version/target) and footer (usually result counts) and see only raw output from a tool, just discard `stderr`:
 
 ```bash
-# Linux / MacOS
+# Linux / macOS
 ./tool -t <target> -u <user>@<domain> -p Password [subcommand] 2> /dev/null
 
-# Windows Prompt
+# Windows Command Prompt
 ./tool.exe -t <target> -u <user>@<domain> -p Password [subcommand] 2>nul
 
 # PowerShell
@@ -34,7 +34,7 @@ For tool subcommands that query and return data (instead of performing changes),
 ```
 
 {% hint style="info" %}
-In some cases, such as in the `eventlog`, `cert` and `tasks` tools, the tool has its own `--format` flag. When that happens, `-j` / `--json` is simply an alias of `--format json`.
+In some cases, such as the `eventlog`, `cert` and `tasks` tools, the tool has its own `--format` flag. When that happens, `-j` / `--json` is simply an alias of `--format json`.
 {% endhint %}
 
 {% hint style="info" %}
@@ -43,7 +43,6 @@ If JSON output is not supported by a subcommand, `-j` / `--json` is simply ignor
 
 JSON output is supported by the following tools / subcommands:
 
-```bash
 lookupsid
 rpcdump
 sam users
@@ -244,4 +243,3 @@ gkdi decrypt-laps
 bkpkey retrieve
 bkpkey backup
 bkpkey restore
-```

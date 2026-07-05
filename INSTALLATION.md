@@ -11,8 +11,8 @@ git clone https://github.com/Macmod/ginpacket
 cd ginpacket
 ```
 
-## Linux / MacOS
-To build all commands into `./bin` on Linux or MacOS, use the `build.sh` script:
+## Linux / macOS
+To build all commands into `./bin` on Linux or macOS, use the `build.sh` script:
 ```bash
 chmod +x build.sh
 ./build.sh --all
@@ -49,7 +49,7 @@ Or you can specify the tools you want to build via command-line arguments:
 ## Static Build (Disable CGO)
 If you want to build the binaries statically without relying on CGO (which is useful for portability), you can disable it by setting the `CGO_ENABLED` environment variable to `0` before building.
 
-**On Linux / MacOS:**
+**On Linux / macOS:**
 ```bash
 CGO_ENABLED=0 ./build.sh --all
 ```

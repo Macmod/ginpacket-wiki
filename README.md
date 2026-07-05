@@ -1,17 +1,17 @@
 # Ginpacket
 
-🍸 Ginpacket is a collection of Go tools for working with Windows / Active Directory network protocols. The philosophy is to provide a **simple** and **comprehensive** command-line interface to complex but useful protocol operations, turning researching & interacting with these protocols a simpler task.
+🍸 Ginpacket is a collection of Go tools for working with Windows / Active Directory network protocols. The philosophy is to provide a **simple** and **comprehensive** command-line interface to complex but useful protocol operations, making researching & interacting with these protocols a simpler task.
 
 The tools span a range of use cases, including:
 
 - **Authentication and credentials**: obtain Kerberos tickets (`gettgt`, `getst`), replicate directory secrets (`dcsync`), retrieve DPAPI backup keys (`bkpkey`), fetch group keys and decrypt LAPS v2 passwords (`gkdi`), and change passwords (`changepwd`).
 - **Directory and identity services**: query and modify AD objects (`ldap`), LDAP writes via DFSRHelper (`repldap`), enumerate accounts and groups (`sam`), manage LSA policy and secrets (`lsa`), resolve SIDs and names (`lookupsid`), and inspect machine domain roles (`machinerole`).
 - **Network infrastructure**: manage DNS zones and records (`dns`), DHCP scopes and leases (`dhcp`), DFS namespaces (`dfs`), firewall rules (`firewall`), and certificate authorities (`cert`).
-- **Host management**: interact with the registry (`reg`), services (`services`), scheduled tasks (`tasks`), WMI (`wmi`), EFS (`efs`), printers (`printer`), SMB shares and files (`smb`), server shares (`server`), initiate remote shutdowns (`shutdown`).
+- **Host management**: interact with the registry (`reg`), services (`services`), scheduled tasks (`tasks`), WMI (`wmi`), EFS (`efs`), printers (`printer`), SMB shares and files (`smb`), server shares (`server`), and initiate remote shutdowns (`shutdown`).
 - **System observability**: read event logs (`eventlog`), query performance counters (`perf`), inspect Terminal Services sessions (`tsts`), probe workstation state (`wksta`), check W32Time (`time`), and enumerate RPC endpoints (`rpcdump`).
 - **Authorization**: simulate access checks against security descriptors (`authz`).
 
-Most subcommands map directly to a single protocol operation or RPC call - what you pass on the command line is what gets sent on the wire. A small number chain multiple calls to implement higher-level actions (for example, `dcsync`, `reg secrets`, and `sam dump`, `changepwd` etc).
+Most subcommands map directly to a single protocol operation or RPC call - what you pass on the command line is what gets sent on the wire. A small number chain multiple calls to implement higher-level actions (for example, `dcsync`, `reg secrets`, `sam dump`, `changepwd`, etc.).
 
 {% hint style="info" %}
 Despite the name, [ginpacket](https://github.com/Macmod/ginpacket) is **not** a Go port of [impacket](https://github.com/fortra/impacket). It is an opinionated toolkit with independently reworked implementations of some features that overlap with impacket, as well as implementations that go beyond what impacket provides. The two projects share goals but differ in scope and design.
@@ -182,7 +182,7 @@ ginpacket/
 │  ├─ import                   &lt;file&gt;
 │  ├─ save                     &lt;registry-path&gt; &lt;file&gt;
 │  ├─ restore                  &lt;registry-path&gt; &lt;file&gt;
-│  ├─ replace                  &lt;registry-path&gt; -f &lt;new-file&gt; [-b &lt;backup-file&gt;]
+│  ├─ replace                  &lt;registry-path&gt; -n &lt;new-file&gt; [-b &lt;backup-file&gt;]
 │  ├─ load                     &lt;mount-path&gt; &lt;file&gt;
 │  ├─ unload                   &lt;mount-path&gt;
 │  ├─ flush                    &lt;key&gt;

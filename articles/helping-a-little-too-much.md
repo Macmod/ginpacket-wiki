@@ -26,15 +26,15 @@ For reasons that are unknown to me, one day I decided to read through the `MS-DF
 
 <figure><img src="../.gitbook/assets/615390062-2c966c48-ae95-4272-b1ad-26dc617509ee.png" alt=""><figcaption></figcaption></figure>
 
-I had no idea (and still don't) why is it that DFS needs this sort of thing - maybe to look up important information about AD-integrated DFS namespaces or something like that. All it takes for these interfaces to exist is the **DFS Replication** feature installed on the host.
+I had no idea (and still don't) why DFS needs this sort of thing - maybe to look up important information about AD-integrated DFS namespaces or something like that. All it takes for these interfaces to exist is the **DFS Replication** feature installed on the host.
 
 Let's look at the `Create` call, as `Modify` and `Delete` aren't much different:
 
 <figure><img src="../.gitbook/assets/615390188-3bec1a94-31cb-4369-accf-cf0181e78a4b.png" alt=""><figcaption></figcaption></figure>
 
-Two things are interesting here: the first is the fact the actions are performed with the target's computer account. This is often a "feature", as many organizations still grant sensitive Allow ACEs (Full Control, Generic Write, etc) on critical objects to the `Domain Computers` group or to specific computer objects.
+Two things are interesting here: the first is that the actions are performed with the target's computer account. This is often a "feature", as many organizations still grant sensitive Allow ACEs (Full Control, Generic Write, etc) on critical objects to the `Domain Computers` group or to specific computer objects.
 
-The second is that you can specify the domain controller to receive the operation in the call arguments. Can it be any address, I wondered? The answer is yes: you could even run `Responder` on a VPS, issue one of these calls to a target, and capture NetNTLM hashes for the target's computer account from the LDAP bind, or maybe run ntlmrelayx on a pivot host and relay the credentials into the real DC for a full LDAP shell (confirm):
+The second is that you can specify the domain controller to receive the operation in the call arguments. Can it be any address, I wondered? The answer is yes: you could even run `Responder` on a VPS, issue one of these calls to a target, and capture NetNTLM hashes for the target's computer account from the LDAP bind, or maybe run ntlmrelayx on a pivot host and relay the credentials into the real DC for a full LDAP shell (confirmed below):
 
 <figure><img src="../.gitbook/assets/615399073-d8c8afba-2000-49c9-a41f-32ac626f5cc9.png" alt=""><figcaption></figcaption></figure>
 
@@ -46,12 +46,12 @@ What this means is that:
 
 1. If you have admin privileges on a host with DFS Replication, you can take control of its computer account with these calls instead of other well known coercion methods;
 2. Instead of capturing NetNTLM or relaying it, you could just use the `Create` / `Modify` / `Delete` calls directly to tell DFSRHelper to perform the action for you;
-3. If there are two DCs and one has DFS Replication, you could ask it to perform actions on the other DC's LDAP using its' own computer account;
-4. If there is only one DC, you could ask it to perform actions on behalf of `NETWORK SERVICE` if any object allows this principal explicitly in its' DACL.
+3. If there are two DCs and one has DFS Replication, you could ask it to perform actions on the other DC's LDAP using its own computer account;
+4. If there is only one DC, you could ask it to perform actions on behalf of `NETWORK SERVICE` if any object allows this principal explicitly in its own DACL.
 
 ## Shadow Credentials
 
-One relevant example of what can be accomplished here is using `repldap` to manage the `msDS-KeyCredentialLink` value on the target computer object pointing to a keypair you control (aka "shadow credentials"), giving you the ability to use the matching private key to request a TGT as that computer account via PKINIT, effectively giving persistent Kerberos access to its user without touching LSASS or modifying passwords:
+One relevant example of what can be accomplished here is using `repldap` to manage the `msDS-KeyCredentialLink` value on the target computer object pointing to a keypair you control (aka "shadow credentials"), giving you the ability to use the matching private key to request a TGT as that computer account via PKINIT, effectively giving persistent Kerberos access to the account without touching LSASS or modifying passwords:
 
 ```bash
 ./repldap [auth_flags] --target-dc WIN-6BKCP1FPPCI keycred add 'CN=WIN-6BKCP1FPPCI,OU=Domain Controllers,DC=creta,DC=local'
@@ -97,7 +97,7 @@ This primitive doesn't seem to cross any security boundaries, as admin privilege
 {% endhint %}
 
 {% hint style="warning" %}
-The `_AdAttributeData` structure, used to pass a list of arguments to the ADProxy methods, carries exactly **one value field** (not a **list of values** as is usual behavior), and the `DfsrHelper.dll` only forwards that value field through the LDAP operation for `Modify/add` and `Modify/replace` calls (not for `Modify/delete`). The practical consequences:
+The `_AdAttributeData` structure, used to pass a list of arguments to the ADProxy methods, carries exactly **one value field** (not a **list of values** as is the usual behavior), and the `DfsrHelper.dll` only forwards that value field through the LDAP operation for `Modify/add` and `Modify/replace` calls (not for `Modify/delete`). The practical consequences:
 
 1. For attribute modifications (`repldap modify`), **replacements** (`--replace`) clear all existing values of the attribute and set the single supplied value - there is no way to replace a multi-valued attribute with multiple new values in one call;
 2. For attribute modifications (`repldap modify`), **deletes** (`--delete`) always remove all values of the attribute regardless of what value is supplied - value-specific deletes are not supported.

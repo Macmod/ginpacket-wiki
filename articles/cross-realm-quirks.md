@@ -22,7 +22,7 @@ layout:
 
 Cross-realm trusts in Active Directory come in two flavors:
 
-1. **Forest trusts** These can only exist between two forest-root domains, and are always **forest-transitive** - if forest root domain A trusts forest root domain B, A trusts all domains in forest B, but A does **not** trust any domains outside of B automatically.
+1. **Forest trusts**: These can only exist between two forest-root domains, and are always **forest-transitive** - if forest root domain A trusts forest root domain B, A trusts all domains in forest B, but A does **not** trust any domains outside of B automatically.
 2. **External trusts**: These are relationships between an arbitrary domain from forest A and another arbitrary domain from forest B, and are always **non-transitive** - if an external trust exists from A to B and B trusts C, A does not trust C by transitivity.
 
 For all cross-realm trusts, the trust can be either one-way or two-way, as forests are the security boundary in AD. For intra-realm trust types, such as parent-child or tree-root trusts, the trust is always **transitive and bidirectional**.
@@ -31,7 +31,7 @@ For all cross-realm trusts, the trust can be either one-way or two-way, as fores
 
 Regardless of that, all sources that talk about requesting a cross-realm service ticket always document it as a two-step process: first obtain a referral TGT (an inter-realm TGT encrypted with the trust key), then present it to the remote KDC to get the final service ticket.
 
-The main issue here that some don't seem to be aware is that, to proceed with the flow, you (as the tool) often need to first receive a "referral" pointing to the target domain. But the feature that actually controls whether the DC returns a referral or not for TGS-REQ requests is called `Name suffix routing` (NSR), a list that exists in the properties of each **forest trust** and specifies which name suffixes (domains) are to be "routed" through that forest trust. This list gets populated when you set up the forest trust:
+The main issue here that some don't seem to be aware of is that, to proceed with the flow, you (as the tool) often need to first receive a referral pointing to the target domain. But the feature that actually controls whether the DC returns a referral or not for TGS-REQ requests is called **Name suffix routing** (NSR), a list that exists in the properties of each **forest trust** and specifies which name suffixes (domains) are to be routed through that forest trust. This list gets populated when you set up the forest trust:
 
 <figure><img src="../.gitbook/assets/615391760-706be10c-2c15-4d21-9c7e-4fbaf178aa35.png" alt=""><figcaption></figcaption></figure>
 
@@ -45,7 +45,7 @@ The "good" news is that this **actually breaks cross-realm Kerberos authenticati
 
 But the referral is not the only way to cross a realm boundary. When a KDC doesn't issue a referral, it often returns `KDC_ERR_S_PRINCIPAL_UNKNOWN` instead - that's a meaningful signal, not a dead end. If you know the target realm (because you extracted it from the SPN, or because you know the trust topology), you can bypass the missing routing entry entirely by explicitly requesting the inter-realm TGT (`krbtgt/<FOREIGN-REALM>`) from the home KDC - the same TGT the KDC would have returned automatically as a referral - then presenting it to the foreign KDC to get the service ticket. In `getst` this is handled automatically for the common single-hop case: when it receives `KDC_ERR_S_PRINCIPAL_UNKNOWN` on the first hop and can infer the foreign realm from the SPN, it falls back to an explicit inter-realm TGT request and continues the referral chain from there.
 
-For more complex topologies - multi-hop trust chains including external trusts and/or forest trusts with missing NSR entries - the automatic fallback may not enough, because the tool would need to know which intermediate realm to ask for first, and that information isn't in the SPN. For these cases `getst` accepts a `--via` flag (repeatable, ordered) that lets you specify the intermediate realms explicitly:
+For more complex topologies - multi-hop trust chains including external trusts and/or forest trusts with missing NSR entries - the automatic fallback may not be enough, because the tool would need to know which intermediate realm to ask for first, and that information isn't in the SPN. For these cases `getst` accepts a `--via` flag (repeatable, ordered) that lets you specify the intermediate realms explicitly:
 
 ```
 getst --via B.LOCAL -s host/server.C.LOCAL

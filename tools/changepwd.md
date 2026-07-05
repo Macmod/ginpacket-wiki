@@ -32,8 +32,9 @@ Password changes in Active Directory can be performed through multiple protocols
 ./changepwd [auth_flags] kpasswd -a <account> -w <new-password> [-o <old-password>]
 ```
 
-
-Note: for this command, --dc is only considered to override the DC for PKINIT when authenticating with a client certificate. In that case, if --dc is not specified, the target (-t) will be used for both PKINIT and the operation itself.  
+{% hint style="info" %}
+For this command, `--dc` is only considered to override the DC for PKINIT when authenticating with a client certificate. In that case, if `--dc` is not specified, the target (`-t`) will be used for both PKINIT and the operation itself.
+{% endhint %}
 
 **Change a password using the Kerberos kpasswd protocol (self-change):**
 

@@ -64,7 +64,7 @@ The DNS Server Management Protocol (MS-DNSP) allows remote administration of a W
 ./dns [auth_flags] nodes DOMAIN.LOCAL
 ```
 
-**List child nodes under a parent node in a zone:**
+**List the child nodes under a parent node in a zone:**
 
 ```bash
 ./dns [auth_flags] nodes DOMAIN.LOCAL -n _tcp
