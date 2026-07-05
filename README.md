@@ -564,10 +564,10 @@ ginpacket/
 │  ├─ add-monitor              &lt;name&gt; --path &lt;dll&gt; [-e &lt;environment&gt;]
 │  ├─ del-monitor              &lt;name&gt; [-e &lt;environment&gt;]
 │  ├─ notify                   &lt;listener&gt;
-+- machinerole                 [--use-named-pipe]
 +- shutdown
 │  ├─ initiate                 [-m &lt;message&gt;] [--timeout &lt;sec&gt;] [--force] [-r] [--reason &lt;text&gt;] [--interface &lt;initshutdown|winreg|windowsshutdown&gt;] [--use-v1]
 │  ├─ abort                    [--interface &lt;initshutdown|winreg|windowsshutdown&gt;]
++- machinerole                 [--use-named-pipe]
 +- perf
 │  ├─ csets                    
 │  ├─ cset                     &lt;guid&gt;
