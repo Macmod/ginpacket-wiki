@@ -1,4 +1,4 @@
-# ⏻ Shutdown (shutdown)
+# 📴 Shutdown (shutdown)
 
 **Protocols**: [MS-RSP](https://winprotocoldocs-bhdugrdyduf5h2e4.b02.azurefd.net/MS-RSP/%5bMS-RSP%5d.pdf).
 
