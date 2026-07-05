@@ -48,8 +48,8 @@ Despite the name, [ginpacket](https://github.com/Macmod/ginpacket) is **not** a 
 	* DHCP Server Management ([MS-DHCPM](https://winprotocoldocs-bhdugrdyduf5h2e4.b02.azurefd.net/MS-DHCPM/%5bMS-DHCPM%5d.pdf))
 	* Firewall and Advanced Security ([MS-FASP](https://winprotocoldocs-bhdugrdyduf5h2e4.b02.azurefd.net/MS-FASP/%5bMS-FASP%5d.pdf))
 	* Print System Remote ([MS-RPRN](https://winprotocoldocs-bhdugrdyduf5h2e4.b02.azurefd.net/MS-RPRN/%5bMS-RPRN%5d.pdf))
-	* Directory Services Setup ([MS-DSSP](https://winprotocoldocs-bhdugrdyduf5h2e4.b02.azurefd.net/MS-DSSP/%5bMS-DSSP%5d.pdf))
 	* Remote Shutdown ([MS-RSP](https://winprotocoldocs-bhdugrdyduf5h2e4.b02.azurefd.net/MS-RSP/%5bMS-RSP%5d.pdf))
+	* Directory Services Setup ([MS-DSSP](https://winprotocoldocs-bhdugrdyduf5h2e4.b02.azurefd.net/MS-DSSP/%5bMS-DSSP%5d.pdf))
 	* Performance Counter Query ([MS-PCQ](https://winprotocoldocs-bhdugrdyduf5h2e4.b02.azurefd.net/MS-PCQ/%5bMS-PCQ%5d.pdf))
 	* Windows Time Service ([MS-W32T](https://winprotocoldocs-bhdugrdyduf5h2e4.b02.azurefd.net/MS-W32T/%5bMS-W32T%5d.pdf))
 
@@ -57,18 +57,26 @@ For a complete reference of the commands supported by Ginpacket's tools, check t
 
 # Acknowledgements
 
-Big thanks to the main libraries used in this project. Although I implemented lots of additional logic, this project is really just a "big wrapper" around these:
-* [oiweiwei/go-msrpc](https://github.com/oiweiwei/go-msrpc)
-* [RedTeamPentesting/adauth](https://github.com/RedTeamPentesting/adauth)
-* [TheManticoreProject/winacl](https://github.com/TheManticoreProject/winacl)
-* [go-ldap/ldap](https://github.com/go-ldap/ldap)
+Big thanks to the authors of the main libraries used in this project. Although I implemented lots of additional logic and structure, this project is really just a "big wrapper" around these:
+
+| Repository | Description |
+|------------|-------------|
+| [`oiweiwei/go-msrpc`](https://github.com/oiweiwei/go-msrpc) | Stubs for all flavors of MSRPC interfaces |
+| [`oiweiwei/gokrb5.fork`](https://github.com/oiweiwei/gokrb5.fork) | Kerberos library |
+| [`oiweiwei/go-smb2.fork`](https://github.com/oiweiwei/go-smb2.fork) | SMB library |
+| [`RedTeamPentesting/adauth`](https://github.com/RedTeamPentesting/adauth) | Authentication library |
+| [`TheManticoreProject/winacl`](https://github.com/TheManticoreProject/winacl) | ACL parsing library |
+| [`go-ldap/ldap`](https://github.com/go-ldap/ldap) | Base LDAP client library |
+| [`Macmod/go-adws`](https://github.com/Macmod/go-adws) | Base ADWS client library |
+| [`RedTeamPentesting/keycred`](https://github.com/RedTeamPentesting/keycred) | KeyCredentialLinks management |
+
+Also thanks to my friend [@lgstvo](https://github.com/lgstvo) for the project banner, and to all other friends that collaborated with discussions and ideas ([ThatTotallyRealMyth](https://github.com/ThatTotallyRealMyth), [BryanMcnulty](https://github.com/bryanmcnulty), [j0hnZ3RA](https://github.com/j0hnZ3RA), etc).
 
 ## References
 
-Many tools/libraries were used as reference during the development of `ginpacket`, but the main ones:
+Many tools/libraries were also used as reference during the development of `ginpacket`, but the main ones:
 
-* [fortra/impacket](https://github.com/fortra/impacket/)
-* [trustedsec/Titanis](https://github.com/trustedsec/Titanis)
+* [fortra/impacket](https://github.com/fortra/impacket/) and [trustedsec/Titanis](https://github.com/trustedsec/Titanis) - main protocol references.
 * [NeffIsBack/EVENmonitor](https://github.com/NeffIsBack/EVENmonitor) - the source for the logic behind the `eventlog watch` command.
 * [p0dalirius/smbclient-ng](https://github.com/p0dalirius/smbclient-ng) - the source for the logic behind most of the `smb` commands.
 
@@ -80,7 +88,6 @@ If you like this repo, you may also like these tools:
 * [Macmod/sopa](https://github.com/Macmod/sopa) - A practical client for ADWS in Golang.
 * [Macmod/flashingestor](https://github.com/Macmod/flashingestor) - A TUI for Active Directory collection.
 * [FalconOpsLLC/goexec](https://github.com/FalconOpsLLC/goexec) - Windows remote execution multitool.
-* [RedTeamPentesting/keycred](https://github.com/RedTeamPentesting/keycred) - Generate and Manage KeyCredentialLinks
 
 # Subcommands Map
 

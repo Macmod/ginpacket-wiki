@@ -1,4 +1,4 @@
-# 🔁 Replicated LDAP (repldap)
+# 🗃️ Proxied LDAP (repldap)
 
 **Protocols**: [MS-DFSRH](https://winprotocoldocs-bhdugrdyduf5h2e4.b02.azurefd.net/MS-DFSRH/%5bMS-DFSRH%5d.pdf).
 
