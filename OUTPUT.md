@@ -43,6 +43,7 @@ If JSON output is not supported by a subcommand, `-j` / `--json` is simply ignor
 
 JSON output is supported by the following tools / subcommands:
 
+```
 lookupsid
 rpcdump
 sam users
@@ -243,3 +244,4 @@ gkdi decrypt-laps
 bkpkey retrieve
 bkpkey backup
 bkpkey restore
+```
