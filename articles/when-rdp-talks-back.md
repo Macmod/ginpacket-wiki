@@ -32,7 +32,7 @@ I have not seen anyone talk about this sort of thing before, but it could be a f
 
 <figure><img src="../.gitbook/assets/615400431-520b33c3-ae4e-4990-97b8-f47a0b0bf7d9.png" alt=""><figcaption></figcaption></figure>
 
-Since the icon, title and buttons are also free to change (`szTitle`, `ulStyle`, controlled via `--buttons`/`-b` and `--icon`/`-i`), it could be used to trick the user into arbitrary actions. Some examples:
+Since the icon, title and buttons are also free to change (`szTitle`, `ulStyle`, controlled via `-T`/`--title`, `--buttons`/`-b` and `--icon`/`-i`), it could be used to trick the user into arbitrary actions. Some examples:
 
 <figure><img src="../.gitbook/assets/615413092-1202327c-b93f-4402-b2e7-6f06114a32ec.png" alt=""><figcaption></figcaption></figure>
 
