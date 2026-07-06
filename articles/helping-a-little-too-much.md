@@ -20,7 +20,7 @@ layout:
 
 # 🔁 Helping a Little Too Much: The DFS Replication Helper
 
-For reasons that are unknown to me, one day I decided to read through the `MS-DFSRH` spec. I think I was looking for more methods related to DFS as I thought at the time that `MS-DFSNM` (DFS Namespace Management protocol) didn't have all methods that were relevant for DFS management. One thing stood out immediately - the "DFS Replication Helper" protocol includes DCOM interfaces called `IADProxy` / `IADProxy2` and basically states that these can be used by any local admin to perform write-only LDAP operations (Create, Modify, Delete):
+For reasons that are unknown to me, one day I decided to read through the [MS-DFSRH](https://winprotocoldoc.z19.web.core.windows.net/MS-DFSRH/%5bMS-DFSRH%5d.pdf) (DFS Replication Helper) spec. I think I was looking for more methods related to DFS as I thought at the time that [MS-DFSNM](https://winprotocoldoc.z19.web.core.windows.net/MS-DFSNM/[MS-DFSNM].pdf) (DFS Namespace Management protocol) didn't have all methods that were relevant for DFS management ("where were the methods to deal with the replication part of DFS?" was likely what I had in mind). I did not get an answer to that question, but one thing stood out immediately - the DFSRH protocol includes DCOM interfaces called `IADProxy` / `IADProxy2` and basically states that these can be used by any local admin to perform write-only LDAP operations (Create, Modify, Delete):
 
 <figure><img src="../.gitbook/assets/615389929-a05a4f92-9ef6-4689-817d-0bc25f6500e2.png" alt=""><figcaption></figcaption></figure>
 
