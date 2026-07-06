@@ -24,7 +24,11 @@ Remember the `Users` tab in Task Manager, where you could select a session and c
 
 <figure><img src="../.gitbook/assets/615401500-27ec2bcb-2ad9-4ea1-ae3e-4124bf94557a.png" alt=""><figcaption></figcaption></figure>
 
-As it turns out, MS-TSTS includes a method called `ShowMessageBox` that does just that. With admin privileges, you can just send a message to any session on any Windows host you can reach. I have not seen anyone talk about this sort of thing before, but it could be a fun way of demonstrating impact or coercing the user. Imagine you're one day working at a company, troubleshooting a server, and suddenly a message pops up asking you to do something, or to not do something you would usually do. The call even works on console and locked sessions, as the alert pops up on the lock screen:
+As it turns out, [MS-TSTS](https://winprotocoldoc.z19.web.core.windows.net/MS-TSTS/[MS-TSTS].pdf) includes a method called `ShowMessageBox` that does just that - with admin privileges, you can just send a message to any session on any Windows host you can reach:
+
+<figure><img src="../.gitbook/assets/615392593-031b92cc-ec3e-4c4b-8441-607c46b3748c.png" alt=""><figcaption></figcaption></figure>
+
+I have not seen anyone talk about this sort of thing before, but it could be a fun way of demonstrating impact or coercing the user. Imagine you're one day working at a company, troubleshooting a server, and suddenly a message pops up asking you to do something, or to not do something you would usually do. The call even works on console and locked sessions, as the alert pops up on the lock screen:
 
 <figure><img src="../.gitbook/assets/615400431-520b33c3-ae4e-4990-97b8-f47a0b0bf7d9.png" alt=""><figcaption></figcaption></figure>
 
