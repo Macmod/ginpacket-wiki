@@ -2,7 +2,7 @@
 
 **Protocols**: [MS-DFSRH](https://winprotocoldocs-bhdugrdyduf5h2e4.b02.azurefd.net/MS-DFSRH/%5bMS-DFSRH%5d.pdf).
 
-`repldap` proxies LDAP write operations through the DFSRH `IADProxy2` DCOM interface. The DC's DfsrHelper service executes each LDAP command under its own machine account. This is useful when direct LDAP (TCP/389) is blocked but RPC/135 is accessible and the caller can invoke the DFSRH service.
+`repldap` proxies LDAP write operations through the DFSRH `IADProxy2` DCOM interface. The target's DfsrHelper service executes each LDAP command under its own machine account. This is useful when direct LDAP (TCP/389) is blocked but RPC is accessible on an arbitrary server and the caller can invoke the DFSRH service. For more information on this primitive read [Helping a Little Too Much: The DFS Replication Helper](https://ginpacket.gitbook.io/docs/articles/helping-a-little-too-much).
 
 All write subcommands require `--target-dc` (the FQDN of the DC that will execute the LDAP operation).
 
