@@ -6,7 +6,7 @@
 * [👁️ Output](OUTPUT.md)
 
 ## 🧰 Tools
-* [📋 Overview](tools/README.md)
+* [📋 Overview](tools/overview.md)
 * [🎫 Kerberos TGT (gettgt)](tools/gettgt.md)
 * [🎟️ Kerberos ST (getst)](tools/getst.md)
 * [🔄 Password Change (changepwd)](tools/changepwd.md)
@@ -42,7 +42,7 @@
 * [🕒 Time (time)](tools/time.md)
 
 ## 📚 Articles
-* [📋 Overview](articles/README.md)
+* [📋 Overview](articles/overview.md)
 * [🖥️ When RDP Talks Back: Hello From The Terminal Server](articles/when-rdp-talks-back.md)
 * [🔁 Helping a Little Too Much: The DFS Replication Helper](articles/helping-a-little-too-much.md)
 * [🧾 Leveraging MS-RAA as a Remote Authorization Oracle](articles/remote-authorization-oracle.md)
