@@ -29,7 +29,7 @@ For all cross-realm trusts, the trust can be either one-way or two-way, as fores
 
 <figure><img src="../.gitbook/assets/615687139-a9221185-4107-4ffb-aee3-9cb37caeeb2f.png" alt=""><figcaption></figcaption></figure>
 
-Regardless of that, all sources that talk about requesting a cross-realm service ticket always document it as a two-step process: first obtain a referral TGT (an inter-realm TGT encrypted with the trust key), then present it to the remote KDC to get the final service ticket.
+There are only a handful of sources that actually talk about the internals of cross-realm auth flows, such as [It's All About Trust](https://adsecurity.org/?p=1588) and [A Guide To Attacking Domain Trusts](https://specterops.io/blog/2017/10/30/a-guide-to-attacking-domain-trusts/). But all sources that talk about requesting a cross-realm service ticket always document it as a two-step process: first ask for and obtain a referral TGT (an inter-realm TGT encrypted with the trust key), then present it to the remote KDC to get the final service ticket.
 
 The main issue here that some don't seem to be aware of is that, to proceed with the flow, you (as the tool) often need to first receive a referral pointing to the target domain. But the feature that actually controls whether the DC returns a referral or not for TGS-REQ requests is called **Name suffix routing** (NSR), a list that exists in the properties of each **forest trust** and specifies which name suffixes (domains) are to be routed through that forest trust. This list gets populated when you set up the forest trust:
 
