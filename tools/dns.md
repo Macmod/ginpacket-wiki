@@ -4,6 +4,10 @@
 
 The DNS Server Management Protocol (MS-DNSP) allows remote administration of a Windows DNS server via RPC. It provides full control over DNS zones and records - including querying, adding, modifying, and deleting entries.
 
+{% hint style="info" %}
+These calls can be invoked from users that belong to the **DnsAdmins** group (or **Administrators**).
+{% endhint %}
+
 ## Usage
 
 ### General

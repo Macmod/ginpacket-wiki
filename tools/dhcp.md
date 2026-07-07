@@ -4,6 +4,10 @@
 
 The DHCP Server Management Protocol (MS-DHCPM) exposes the Windows DHCP Server for remote administration. It allows enumerating and modifying DHCP scopes, leases, reservations, and server options - useful for network reconnaissance, understanding IP allocation within an Active Directory environment, and modifying sensitive network configurations like default gateways or DNS servers.
 
+{% hint style="info" %}
+These calls can be invoked from users that belong to the **DHCP Users** group (read), or either **DHCP Admins** / **Administrators** (write).
+{% endhint %}
+
 ## Usage
 
 ### server-version

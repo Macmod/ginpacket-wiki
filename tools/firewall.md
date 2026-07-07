@@ -4,6 +4,10 @@
 
 The Firewall and Advanced Security Protocol (MS-FASP) exposes the Windows Firewall service for remote management via RPC. It allows enumerating, creating, and modifying firewall rules and profiles - accessible to network operators and local admins.
 
+{% hint style="info" %}
+These calls can be invoked from users that belong to the **Network Configuration Operators** group (or **Administrators**).
+{% endhint %}
+
 ## Usage
 
 ### profile
