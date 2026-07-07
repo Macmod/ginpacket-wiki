@@ -4,6 +4,10 @@
 
 The Print System Remote Protocol (MS-RPRN) allows remote management of the Windows Print Spooler service. It provides capabilities to enumerate, monitor, and manage printers, print jobs, and print servers across the network.
 
+{% hint style="info" %}
+These calls can be invoked from users that belong to the **Print Operators** group (or **Administrators**).
+{% endhint %}
+
 ## Usage
 
 ### printers
