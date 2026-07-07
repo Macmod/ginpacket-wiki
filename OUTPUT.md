@@ -110,6 +110,7 @@ cert request-meta
 tasks list-folders
 tasks list
 tasks dump
+tasks get-sddl
 dhcp stats
 dhcp stats-v6
 dhcp scopes
@@ -213,6 +214,7 @@ wmi methods
 dfs namespaces
 dfs dump
 dfs links
+dfs get-sd
 efs users
 efs recovery
 efs file-key
@@ -230,6 +232,7 @@ time provider-status
 time provider-config
 reg query
 reg info
+reg get-sd
 authz info
 authz check sd
 authz check registry
