@@ -107,8 +107,8 @@ cert restore-paths
 cert request-attrs
 cert request-exts
 cert request-meta
-tasks list-folders
-tasks list
+tasks folders
+tasks query
 tasks dump
 tasks get-sddl
 dhcp stats
