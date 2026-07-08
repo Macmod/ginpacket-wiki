@@ -109,8 +109,10 @@ cert request-exts
 cert request-meta
 tasks folders
 tasks query
-tasks dump
+tasks task
+tasks instances
 tasks get-sddl
+tasks dump
 dhcp stats
 dhcp stats-v6
 dhcp scopes
