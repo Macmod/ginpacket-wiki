@@ -86,20 +86,22 @@ Since password operations in LDAP can only be performed via LDAPS on 636, you mu
 
 TODO
 
+### Other write actions
+
+Although a bit more niche, it's also possible that a server's computer account (or `NETWORK SERVICE`) has rights to create objects in OUs, containers, or even the root of the domain. In that case, the `repldap` tool can also be used to **create** or **modify** users / computers / containers / OUs, or any other kind of AD object by using `repldap create` and `repldap modify`.
+
+One thing to note, though, is that the `_AdAttributeData` structure, used to pass a list of arguments to the ADProxy methods, carries exactly **one value field** (not a **list of values** as is the usual LDAP interface for creations and modifications). On top of that, the `DfsrHelper.dll` only forwards that value field through the LDAP operation for `Modify(add)` and `Modify(replace)` calls (not for `Modify(delete)`). The practical consequences are:
+
+1. For **attribute modifications** (`repldap modify`): **replacements** (`--replace`) clear all existing values of the attribute and set the single supplied value - there is no way to replace a multi-valued attribute with multiple new values in one call;
+2. Also for **attribute modifications** (`repldap modify`): **deletes** (`--delete`) always remove all values of the attribute regardless of what value is supplied - value-specific deletes are not supported.
+3. Finally, for **object creation** (`repldap create`), **multi-valued attributes cannot be set** - passing the same attribute name twice issues two separate LDAP Add operations on the same attribute (**non-atomically**), which AD may reject sometimes. The typed `repldap create [XXX]` subcommands already handle these constraints. For **custom creations** (`repldap create custom`) more testing is needed to verify the scope of this limitation.
+
 ## Internals
+
+The DFSRHelper is a DCOM interface registered by the native `C:\Windows\System32\DFSRHelper.dll`:
 
 TODO
 
-## Limitations
+## Conclusions
 
-{% hint style="info" %}
 This primitive doesn't seem to cross any security boundaries, as admin privileges are required from the start and with privileges there are other ways of taking over the machine account, but it's definitely an esoteric approach to the problem 🙂
-{% endhint %}
-
-{% hint style="warning" %}
-The `_AdAttributeData` structure, used to pass a list of arguments to the ADProxy methods, carries exactly **one value field** (not a **list of values** as is the usual behavior), and the `DfsrHelper.dll` only forwards that value field through the LDAP operation for `Modify/add` and `Modify/replace` calls (not for `Modify/delete`). The practical consequences:
-
-1. For attribute modifications (`repldap modify`), **replacements** (`--replace`) clear all existing values of the attribute and set the single supplied value - there is no way to replace a multi-valued attribute with multiple new values in one call;
-2. For attribute modifications (`repldap modify`), **deletes** (`--delete`) always remove all values of the attribute regardless of what value is supplied - value-specific deletes are not supported.
-3. For object creation (`repldap create`), **multi-valued attributes cannot be set** - passing the same attribute name twice issues two separate LDAP Add operations on the same attribute, which AD rejects sometimes (e.g. `objectClass` may return an Object Class Violation). The typed `repldap create [XXX]` subcommands already handle these constraints. For **custom creations** (`repldap create custom`) more testing is needed to verify the scope of this limitation.
-{% endhint %}
