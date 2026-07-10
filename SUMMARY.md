@@ -47,4 +47,4 @@
 * [🔁 Helping a Little Too Much: The DFS Replication Helper](articles/helping-a-little-too-much.md)
 * [🧾 Leveraging MS-RAA as a Remote Authorization Oracle](articles/remote-authorization-oracle.md)
 * [🌉 Active Directory Web Services: The SOAP Bridge](articles/adws-the-soap-bridge.md)
-* [🌉 Cross-realm quirks: the strange case of NSR & referral tickets](articles/cross-realm-quirks.md)
+* [🎟️ Cross-realm quirks: the strange case of NSR & referral tickets](articles/cross-realm-quirks.md)

@@ -18,7 +18,7 @@ layout:
     visible: true
 ---
 
-# 🌉 Cross-realm quirks: the strange case of NSR & referral tickets
+# 🎟️ Cross-realm quirks: the strange case of NSR & referral tickets
 
 Cross-realm trusts in Active Directory come in two flavors:
 
