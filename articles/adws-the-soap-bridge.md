@@ -499,11 +499,9 @@ sequenceDiagram
 
 Each **Sized Envelope** record (`0x06`) is the record-type byte, a length prefix, then the NBFSE-encoded payload. The length uses MC-NMF's variable-length integer (7 bits per byte, high bit = "more bytes follow"), so a small message spends only one or two bytes describing its size.
 
-Because the `Via` record pins exactly one endpoint per connection, a single NMF session can only talk to one of `Windows/Enumeration`, `Windows/Resource`, or `Windows/ResourceFactory` - which is precisely why the bridge opens up to three separate NMF sessions (each its own record stream with its own `Via`), as described later.
-
 ### Lazy initialization for complete flexibility
 
-Separate NMF sessions are needed to cover all endpoints a client may need - one for each:
+Because the `Via` record pins exactly one endpoint per connection, a single NMF session can only talk to one of `Windows/Enumeration`, `Windows/Resource`, or `Windows/ResourceFactory` - which is precisely why the bridge opens up to three separate NMF sessions (each its own record stream with its own `Via`):
 
 * **Enumeration** (`Windows/Enumeration`) - for WS-Enumeration Search operations
 * **Resource** (`Windows/Resource`) - for WS-Transfer Get, Put, Delete
@@ -703,6 +701,67 @@ Only the `--no-rootdse` path *computes* the DN offline, via `domainToDN()`, whic
 That base-scope, empty-base rootDSE read is precisely the query that surfaced the WS-Enumeration quirk mentioned earlier: ADWS returns the lone rootDSE object *without* a `wsen:EndOfSequence` marker, so the `Pull` loop has to treat a short page (`len(Items) < MaxElements`) as the end. Without that, simply resolving the base DN would spin forever.
 {% endhint %}
 
+## Connecting the dots
+
+The [go-adws](https://github.com/Macmod/go-adws) library started as a low-level implementation of the ADWS protocol stack: the NNS handshake (SPNEGO wrapping Kerberos or NTLM), the NMF record framing, and the SOAP XML builders for WS-Enumeration and WS-Transfer operations. On top of that, the [sopa](https://github.com/Macmod/sopa) client wraps it all in a high-level `WSClient` that provides `Connect()`, `Query()`, `Get()`, `Put()`, `Delete()`, `Create()` - a fairly complete ADWS client in Go. But it had its own API surface and its own patterns, separate from the LDAP operations that the rest of this project was already doing through `github.com/go-ldap/ldap/v3`.
+
+The bridge implemented in ginpacket connects these two worlds: instead of exposing ADWS as a standalone tool with its own client interface, we introduced a unified `ldapClient` interface that both LDAP and ADWS satisfy, and added a single `--adws` flag to the `ldap` commands to flip between them. Behind the flag, the code calls `connect(useADWS, scheme, startTLS, baseDN, noRootDSE)` which routes either to a standard LDAP dial or to the ADWS connection setup (the extra `baseDN`/`noRootDSE` arguments drive the rootDSE strategy described earlier).
+
+```go
+// internal/ldapclient/client.go
+type Client interface {
+    Search(req *ldap.SearchRequest) (*ldap.SearchResult, error)
+    Modify(req *ldap.ModifyRequest) error
+    Add(req *ldap.AddRequest) error
+    Delete(req *ldap.DelRequest) error
+    RootDN() (string, error)
+    RootAttribute(attribute string) (string, error)
+    Close()
+}
+```
+
+```go
+// cmd/ldap/adws.go
+func connect(useADWS bool, scheme string, startTLS bool, baseDN string, noRootDSE bool) (ldapClient, error) {
+    targetHost, err := cfg.ResolveTargetHost("")
+    if err != nil {
+        return nil, err
+    }
+    ctx := cfg.NewContext()
+    if useADWS {
+        // ADWS brings its own transport, so the LDAP-only TLS knobs don't apply
+        // (plain "ldap" is fine; ldaps / StartTLS are rejected).
+        if scheme != "" && scheme != "ldap" {
+            return nil, fmt.Errorf("--scheme is not supported with --adws; ADWS always uses its own transport")
+        }
+        if startTLS {
+            return nil, fmt.Errorf("--starttls is not supported with --adws; ADWS always uses its own transport")
+        }
+        conn, err := connectADWS(ctx, targetHost)
+        if err != nil {
+            return nil, err
+        }
+        conn.baseDN, conn.baseDNExplicit, conn.noRootDSE = baseDN, ldapBaseDNExplicit, noRootDSE
+        return conn, nil
+    }
+    conn, err := connectLDAP(ctx, targetHost, scheme, startTLS)
+    if err != nil {
+        return nil, err
+    }
+    return &ldapConnClient{conn: conn, baseDN: baseDN, baseDNExplicit: ldapBaseDNExplicit, noRootDSE: noRootDSE}, nil
+}
+```
+
+The two dialers behave quite differently under the hood:
+
+- **`connectLDAP`** (`cmd/ldap/dial.go`) is a thin wrapper over [`adauth`](https://github.com/RedTeamPentesting/adauth): it resolves credentials for the target, builds `ldapauth.Options` (scheme, StartTLS, and SOCKS-aware Kerberos/LDAP dialers), and calls `ldapauth.ConnectTo`, which dials and binds. One TCP connection, one bind - it returns a ready `*ldap.Conn`.
+
+- **`connectADWS`** (`cmd/ldap/adws.go`) does **no** network I/O. It only resolves the target's FQDN - a reverse-PTR lookup when you passed an IP, since NNS needs a `host/<fqdn>` Kerberos SPN - and returns the `adwsConn` struct. The real dialing is deferred to the `ensureEnum` / `ensureXfer` / `ensureFact` accessors, each of which opens a TCP socket to `:9389`, wraps it in an `NNSConnection` (the constructor is picked by credential type - password, NT hash, ccache, AES key, or PKINIT cert - all pinned to `ProtectionEncryptAndSign`), runs the NNS/SPNEGO handshake, and layers an `NMFConnection` on top bound to that endpoint's `Via`.
+
+So a single LDAP call maps to one connection and one bind, whereas an ADWS command that touches multiple endpoints (say, a search that first resolves the base DN, then a modify) fans out into as many authenticated NMF sessions as endpoints it actually uses - each dialed lazily, so you never pay for the ones you don't touch.
+
+Once any call is made, the caller doesn't know - and doesn't care - whether the bytes flew over LDAP/BER or SOAP/NBFSE. The regular [go-ldap/ldap](https://github.com/go-ldap/ldap) types are used for parameters and responses: the calls receive `*ldap.XxxRequest` and return an optional error. Searches return a constructed `*ldap.Entry` whose fields are filled as to allow calling the same `GetAttributeValue()` and `GetRawAttributeValue()` helpers as we would normally use.
+
 ## What you can do with it
 
 As a result of this bridge, all of the `ldap` subcommands below accept the `--adws` flag to use ADWS instead of plain LDAP/LDAPS (it's a shared flag across the whole `ldap` group; a few branches in the tree omit it just to keep the diagram readable).
@@ -825,66 +884,7 @@ For custom creations and modifications, whenever a `unicodePwd` is present witho
 
 Deletion just maps to WS-Transfer `Delete`.
 
-## Connecting the dots
-
-The [go-adws](https://github.com/Macmod/go-adws) library started as a low-level implementation of the ADWS protocol stack: the NNS handshake (SPNEGO wrapping Kerberos or NTLM), the NMF record framing, and the SOAP XML builders for WS-Enumeration and WS-Transfer operations. On top of that, the [sopa](https://github.com/Macmod/sopa) client wraps it all in a high-level `WSClient` that provides `Connect()`, `Query()`, `Get()`, `Put()`, `Delete()`, `Create()` - a fairly complete ADWS client in Go. But it had its own API surface and its own patterns, separate from the LDAP operations that the rest of this project was already doing through `github.com/go-ldap/ldap/v3`.
-
-The bridge implemented in ginpacket connects these two worlds: instead of exposing ADWS as a standalone tool with its own client interface, we introduced a unified `ldapClient` interface that both LDAP and ADWS satisfy, and added a single `--adws` flag to the `ldap` commands to flip between them. Behind the flag, the code calls `connect(useADWS, scheme, startTLS, baseDN, noRootDSE)` which routes either to a standard LDAP dial or to the ADWS connection setup (the extra `baseDN`/`noRootDSE` arguments drive the rootDSE strategy described earlier).
-
-```go
-// internal/ldapclient/client.go
-type Client interface {
-    Search(req *ldap.SearchRequest) (*ldap.SearchResult, error)
-    Modify(req *ldap.ModifyRequest) error
-    Add(req *ldap.AddRequest) error
-    Delete(req *ldap.DelRequest) error
-    RootDN() (string, error)
-    RootAttribute(attribute string) (string, error)
-    Close()
-}
-```
-
-```go
-// cmd/ldap/adws.go
-func connect(useADWS bool, scheme string, startTLS bool, baseDN string, noRootDSE bool) (ldapClient, error) {
-    targetHost, err := cfg.ResolveTargetHost("")
-    if err != nil {
-        return nil, err
-    }
-    ctx := cfg.NewContext()
-    if useADWS {
-        // ADWS brings its own transport, so the LDAP-only TLS knobs don't apply
-        // (plain "ldap" is fine; ldaps / StartTLS are rejected).
-        if scheme != "" && scheme != "ldap" {
-            return nil, fmt.Errorf("--scheme is not supported with --adws; ADWS always uses its own transport")
-        }
-        if startTLS {
-            return nil, fmt.Errorf("--starttls is not supported with --adws; ADWS always uses its own transport")
-        }
-        conn, err := connectADWS(ctx, targetHost)
-        if err != nil {
-            return nil, err
-        }
-        conn.baseDN, conn.baseDNExplicit, conn.noRootDSE = baseDN, ldapBaseDNExplicit, noRootDSE
-        return conn, nil
-    }
-    conn, err := connectLDAP(ctx, targetHost, scheme, startTLS)
-    if err != nil {
-        return nil, err
-    }
-    return &ldapConnClient{conn: conn, baseDN: baseDN, baseDNExplicit: ldapBaseDNExplicit, noRootDSE: noRootDSE}, nil
-}
-```
-
-The two dialers behave quite differently under the hood:
-
-- **`connectLDAP`** (`cmd/ldap/dial.go`) is a thin wrapper over [`adauth`](https://github.com/RedTeamPentesting/adauth): it resolves credentials for the target, builds `ldapauth.Options` (scheme, StartTLS, and SOCKS-aware Kerberos/LDAP dialers), and calls `ldapauth.ConnectTo`, which dials and binds. One TCP connection, one bind - it returns a ready `*ldap.Conn`.
-
-- **`connectADWS`** (`cmd/ldap/adws.go`) does **no** network I/O. It only resolves the target's FQDN - a reverse-PTR lookup when you passed an IP, since NNS needs a `host/<fqdn>` Kerberos SPN - and returns the `adwsConn` struct. The real dialing is deferred to the `ensureEnum` / `ensureXfer` / `ensureFact` accessors, each of which opens a TCP socket to `:9389`, wraps it in an `NNSConnection` (the constructor is picked by credential type - password, NT hash, ccache, AES key, or PKINIT cert - all pinned to `ProtectionEncryptAndSign`), runs the NNS/SPNEGO handshake, and layers an `NMFConnection` on top bound to that endpoint's `Via`.
-
-So a single LDAP call maps to one connection and one bind, whereas an ADWS command that touches multiple endpoints (say, a search that first resolves the base DN, then a modify) fans out into as many authenticated NMF sessions as endpoints it actually uses - each dialed lazily, so you never pay for the ones you don't touch.
-
-Once any call is made, the caller doesn't know - and doesn't care - whether the bytes flew over LDAP/BER or SOAP/NBFSE. The regular [go-ldap/ldap](https://github.com/go-ldap/ldap) types are used for parameters and responses: the calls receive `*ldap.XxxRequest` and return an optional error. Searches return a constructed `*ldap.Entry` whose fields are filled as to allow calling the same `GetAttributeValue()` and `GetRawAttributeValue()` helpers as we would normally use.
+## Conclusions
 
 The ADWS bridge is one of those things that doesn't change the game on its own - you could do everything it does through LDAP - but it's a worthy alternative for evasion purposes or if a DC for whatever reason doesn't have LDAP exposed on the network, the `--adws` flag may be the difference between being able to query and modify the directory and being completely blind.
 
