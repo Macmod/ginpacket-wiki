@@ -26,14 +26,14 @@ The ADWS endpoint is actually split across several Microsoft Open Specifications
 
 | Specification | Title | Description |
 |---------------|-------|-------------|
-| [MS-ADDM](https://winprotocoldoc.z19.web.core.windows.net/MS-ADDM/[MS-ADDM].pdf) | AD Data Model and Common Elements | Defines the core data model, common elements, and base types used across ADWS operations |
-| [MS-WSDS](https://winprotocoldoc.z19.web.core.windows.net/MS-WSDS/[MS-WSDS].pdf) | WS-Enumeration Directory Services Extensions | Defines WS-Enumeration operations for AD searches: `Enumerate` and `Pull` |
-| [MS-WSTIM](https://winprotocoldoc.z19.web.core.windows.net/MS-WSTIM/%5bMS-WSTIM%5d.pdf) | WS-Transfer Identity Management Operations for Directory Access | Defines WS-Transfer operations for AD object access: `Get`, `Put`, `Create`, `Delete` |
-| [MS-ADCAP](https://winprotocoldoc.z19.web.core.windows.net/MS-ADCAP/%5bMS-ADCAP%5d.pdf) | AD Custom Action Protocol | Custom actions for extended directory functionality - account management (`ChangePassword`, `SetPassword`, `TranslateName`, `GetADGroupMember`, `GetADPrincipalAuthorizationGroup`, `GetADPrincipalGroupMembership`) and topology management (`GetADDomain`, `GetADDomainController`, `GetADForest`, `ChangeOptionalFeature`, `GetVersion`) |
+| [MS-ADDM](https://winprotocoldoc.z19.web.core.windows.net/MS-ADDM/[MS-ADDM].pdf) | AD Data Model and Common Elements | Defines the core data model and base types shared across ADWS operations |
+| [MS-WSDS](https://winprotocoldoc.z19.web.core.windows.net/MS-WSDS/[MS-WSDS].pdf) | WS-Enumeration Directory Services Extensions | Defines the WS-Enumeration operations used for AD searches |
+| [MS-WSTIM](https://winprotocoldoc.z19.web.core.windows.net/MS-WSTIM/%5bMS-WSTIM%5d.pdf) | WS-Transfer Identity Management Operations for Directory Access | Defines the WS-Transfer operations used for AD object access |
+| [MS-ADCAP](https://winprotocoldoc.z19.web.core.windows.net/MS-ADCAP/%5bMS-ADCAP%5d.pdf) | AD Custom Action Protocol | Defines custom actions for account and topology management |
 | [MC-NMF](https://winprotocoldoc.z19.web.core.windows.net/MC-NMF/%5bMC-NMF%5d.pdf) | .NET Message Framing Protocol | Defines the record-framing protocol used to delimit messages over the TCP stream |
 | [MS-NNS](https://winprotocoldoc.z19.web.core.windows.net/MS-NNS/[MS-NNS].pdf) | .NET NegotiateStream Protocol | Provides SPNEGO-based authentication wrapping Kerberos or NTLM over the transport stream |
-| [MS-WSPELD](https://winprotocoldoc.z19.web.core.windows.net/MS-WSPELD/%5bMS-WSPELD%5d.pdf) | WS-Transfer and WS-Enumeration Protocol Extension for LDAP v3 Controls | Defines how LDAP v3 controls (SDFlagsRequest, ShowDeleted, PermissiveModify, etc.) are carried inside ADWS SOAP messages via `<ad:controls>` headers |
-| [WS-MEX](https://www.w3.org/Submission/WS-MetadataExchange/) | WS-MetadataExchange | The one non-Microsoft spec in the stack - exposes service metadata over an unauthenticated `mex` endpoint (`Get`); its ADWS behavior is described in [MS-ADDM](https://winprotocoldoc.z19.web.core.windows.net/MS-ADDM/[MS-ADDM].pdf) §2.1 |
+| [MS-WSPELD](https://winprotocoldoc.z19.web.core.windows.net/MS-WSPELD/%5bMS-WSPELD%5d.pdf) | WS-Transfer and WS-Enumeration Protocol Extension for LDAP v3 Controls | Defines how LDAP v3 controls are carried inside ADWS SOAP messages |
+| [WS-MEX](https://www.w3.org/Submission/WS-MetadataExchange/) | WS-MetadataExchange | The one non-Microsoft spec in the stack - exposes service metadata over an unauthenticated endpoint |
 
 Together they describe how Active Directory domain controllers expose a SOAP endpoint on TCP/9389, with:
 
@@ -92,7 +92,7 @@ ADWS Specifications
         └─ Get          - Retrieve service metadata (unauthenticated)
 ```
 
-Most sources only explore the MS-WSDS `Enumerate`+`Pull` loop, which can be used as a parallel to a regular `LDAP Search` operation, but as you can see there are many other actions that can be performed. The main problem that implementors need to tackle when designing ADWS integrations is the NMF, NNS and NBFSE implementations, which are not available in an "authoritative implementation" in languages other than C# - a fact that is very annoying, as tool devs have to reverse engineer these protocols to be able to issue any ADWS messages to a DC.
+Most sources only explore the MS-WSDS `Enumerate+Pull` loop, which can be used as a parallel to a regular `LDAP Search` operation, but as you can see there are many other actions that can be performed. The main problem that implementors need to tackle when designing ADWS integrations is the NMF, NNS and NBFSE implementations, which are not available in an "authoritative implementation" in languages other than C# - a fact that is very annoying, as tool devs have to reverse engineer these protocols to be able to issue any ADWS messages to a DC.
 
 In LDAP there aren't many of these "complexities" - it's usually one port, one bind, one encoding, and then the actual LDAP operations to perform. LDAP operations are relatively simple:
 
@@ -280,7 +280,7 @@ flowchart TB
   linkStyle 2 stroke:#a855f7,stroke-width:2px
 
   classDef ldap fill:#1a3a5c,stroke:#4a8bc2,stroke-width:2px,color:#fff
-  classDef adws fill:#3d2e1e,stroke:#d4a74d,stroke-width:2px,color:#fff
+  classDef adws fill:#1e3a2e,stroke:#4ade80,stroke-width:2px,color:#fff
   classDef mech fill:#4a4a4a,stroke:#6a6a6a,stroke-width:1px,color:#fff,font-size:10px
   class L1,L5,L2a,L2b,L2c,L3 ldap
   class A1,A2,F1,A3 adws
@@ -617,17 +617,17 @@ func (a *adwsConn) Search(req *ldap.SearchRequest) (*ldap.SearchResult, error) {
 
 When building a bridge between protocols we have to check, of course, if the target protocol (ADWS) always **receives arguments** and **returns responses** in the same formats as the source protocol (LDAP). By reading the specs we can notice a few differences:
 
-**Replacing `*` in attribute lists for `ad:all`**
+#### Replacing `*` in attribute lists for `ad:all`
 
 When a caller requests `"*"` as an attribute, it is [mapped by the library](https://github.com/Macmod/go-adws/blob/main/soap/build_enumeration.go#L48) to a `<ad:SelectionProperty>ad:all</ad:SelectionProperty>` selection property inside the `<ad:Selection>` tag (the ADWS equivalent of the "attributes" field of the Search). Operational attributes (`"+"`) are not supported - MS-WSDS doesn't define an equivalent. According to the MS-WSDS not including an `<ad:Selection>` at all should have the same result, but I used this approach to be semantically correct.
 
-**Attributes belonging to specific syntaxes use Base64 encoding (on both reads and writes)**
+#### Attributes belonging to specific syntaxes use Base64 encoding
 
 ADWS defines that attributes having the syntaxes of **OctetString**, **SidString**, **NTSecurityDescriptor**, or **ReplicaLink** (per MS-ADDM §2.3.4) are always formatted in Base64 and must have the `xsi:type="xsd:base64Binary"` attribute in the XML element to be sent (for writes) or in the returned XML (for reads). Everything else (`Boolean`, `Integer`, `LargeInteger`, DN types, timestamps, etc) is sent/received as `xsi:type="xsd:string"` and handled as usual.
 
 For that purpose, the [go-adws](https://github.com/Macmod/go-adws) library carries a [generated map of attribute names](https://github.com/Macmod/go-adws/blob/main/soap/attr_types.go) (like `objectSid`, `nTSecurityDescriptor`, `objectGUID` etc) to their `xsi:type` - produced from all major published AD schema LDF files by a generator script rather than hand-curated, so it doesn't drift. Unknown attributes default to `xsd:string`.
 
-Whenever performing `Enumerate`+`Pull` or `Get` operations ("LDAP Search"), the library detects which attributes fall into these four syntaxes and automatically decodes their values from base64 back to raw bytes. 
+Whenever performing `Enumerate+Pull` or `Get` operations ("LDAP Search"), the library detects which attributes fall into these four syntaxes and automatically decodes their values from base64 back to raw bytes. 
 
 Whenever we are performing a `Create` ("LDAP Add") or `Put` ("LDAP Modify") operation and we include an LDAP attribute that belongs to these syntaxes, we must **base64-encode the value** and **set `xsi:type="xsd:base64Binary"`** on the `<ad:value>` element in the request - otherwise ADWS will reject it or misinterpret the binary data.
 
@@ -637,9 +637,12 @@ From the caller's perspective, all of this is invisible: you pass the same strin
 
 ### Deriving the root BaseDN via rootDSE
 
-Many `ldap` operations take an empty base DN and expect the bridge to fill in a naming context - for example, `ldap search` with no `--base-dn` defaults to the domain's `defaultNamingContext`. Contrary to what you might expect, **ADWS does expose the rootDSE**: a base-scope enumeration with an empty base object returns the rootDSE as a single result, exactly like an anonymous base-scope `Search` for `""` over LDAP. So the bridge *queries* it rather than guessing.
+Many `ldap` operations require a BaseDN for searches, be these searches the final goal or an intermediary need, but the user could not always want (or know how) to provide the BaseDN explicitly. The default baseDN for a domain can in most cases looked up from the `rootDSE`, a special entry that we can fetch by performing an LDAP Search with `scope=base` and the empty BaseDN. 
 
-The lookup is transport-agnostic. `getRootDSEAttribute` issues a base-scope `(objectClass=*)` search against an empty DN and reads one attribute off the single entry that comes back. Because it takes the shared `ldapSearcher` interface, the identical helper runs over LDAP or over ADWS (where `Search` turns it into an `Enumerate`+`Pull`):
+[REVIEWING]
+`ldap search` with no `--base-dn` defaults to the domain's `defaultNamingContext`. Contrary to what you might expect, **ADWS does expose the rootDSE**: a base-scope enumeration with an empty base object returns the rootDSE as a single result, exactly like an anonymous base-scope `Search` for `""` over LDAP. So the bridge *queries* it rather than guessing.
+
+The lookup is transport-agnostic. `getRootDSEAttribute` issues a base-scope `(objectClass=*)` search against an empty DN and reads one attribute off the single entry that comes back. Because it takes the shared `ldapSearcher` interface, the identical helper runs over LDAP or over ADWS (where `Search` turns it into an `Enumerate+Pull`):
 
 ```go
 // getRootDSEAttribute queries one rootDSE attribute (defaultNamingContext,
