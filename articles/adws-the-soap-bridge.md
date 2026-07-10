@@ -92,7 +92,7 @@ ADWS Specifications
         └─ Get          - Retrieve service metadata (unauthenticated)
 ```
 
-Most sources only explore the MS-WSDS `Enumerate+Pull` loop, which can be used as a parallel to a regular `LDAP Search` operation, but as you can see there are many other actions that can be performed. The main problem that implementors need to tackle when designing ADWS integrations is the NMF, NNS and NBFSE implementations, which are not available in an "authoritative implementation" in languages other than C# - a fact that is very annoying, as tool devs have to reverse engineer these protocols to be able to issue any ADWS messages to a DC.
+Most sources only explore the MS-WSDS `Enumerate+Pull` loop, which can be used as a parallel to a regular `LDAP Search` operation, but as you can see there are many other actions that can be performed. The main problem that implementors need to tackle when designing ADWS integrations is the [NMF](), NNS and [NBFSE](https://winprotocoldoc.z19.web.core.windows.net/MC-NBFSE/%5bMC-NBFSE%5d.pdf) implementations, which are not available in an "authoritative implementation" in languages other than C# - a fact that is very annoying, as tool devs have to reverse engineer these protocols to be able to issue any ADWS messages to a DC.
 
 In LDAP there aren't many of these "complexities" - it's usually one port, one bind, one encoding, and then the actual LDAP operations to perform. LDAP operations are relatively simple:
 
@@ -214,11 +214,11 @@ ADWS sends the same logical operation through SOAP over WS-Enumeration. The same
 </s:Envelope>
 ```
 
-But this XML isn't sent as plain text - it's encoded with NBFSE (`.NET Binary Format: SOAP Extension`), which uses a stateful string dictionary to compress element and attribute names into short integer tokens. So what hits the wire is a binary stream of tokens, not text. The dictionary starts with preloaded entries (`Envelope`, `Body`, `Header`, `Action`, `To`, etc.) and is extended with application-specific strings as they appear.
+But this XML isn't sent as plain text - it's encoded with [NBFSE](https://winprotocoldoc.z19.web.core.windows.net/MC-NBFSE/%5bMC-NBFSE%5d.pdf) (`.NET Binary Format: SOAP Extension`), which uses a stateful string dictionary to compress element and attribute names into **short integer tokens**. So what hits the wire is a binary stream of tokens, not text. The dictionary starts with preloaded entries (`Envelope`, `Body`, `Header`, `Action`, `To`, etc.) and is extended with application-specific strings as they appear.
 
-The go-adws library builds the XML programmatically using the `soap` package's builder functions (`buildEnumerateEnvelope`, `buildPullEnvelope`, `buildModifyRequestEnvelope`, etc.) and encodes them via the NBFSE codec, which is implemented in the `transport` package.
+The [go-adws](https://github.com/Macmod/go-adws) library builds the XML programmatically using the [soap package](https://github.com/Macmod/go-adws/tree/main/soap)'s builder functions (`BuildEnumerateRequest`, `BuildModifyRequest`, etc) and encodes them via the [NBFSE codec](https://github.com/Macmod/go-adws/blob/main/transport/nbfse_codec.go), implemented in the `transport` package.
 
-The practical upshot of NBFSE is that the wire traffic is significantly more compact than plaintext SOAP/XML, but still not as concise as LDAP over BER. A small *search* that fits in a single LDAP page takes one round-trip, whereas over ADWS a search always needs at least two (`Enumerate` + `Pull`) because opening the query and retrieving results are split across separate operations - the exception being a base-scope, single-object read, which maps to a one-shot WS-Transfer `Get`. For large result sets, both protocols page - LDAP via the Paged Results control (default page size is 1000 entries in AD), ADWS via repeated `Pull` calls - so the round-trip gap narrows, but ADWS still requires the initial `Enumerate` before the first `Pull`, and the overhead in traffic is significantly larger.
+The practical upshot of NBFSE is that the wire traffic is significantly more compact than plaintext SOAP/XML, but still not as concise as LDAP over BER. A small *search* that fits in a single LDAP page takes one round-trip, whereas over ADWS a search usually needs at least two (`Enumerate` + `Pull`) because opening the query and retrieving results are split across separate operations - the exception being a base-scope read, which can map to a one-shot `Get` from MS-WSTIM. For large result sets, both protocols page - LDAP via the Paged Results control (default page size is 1000 entries in AD), ADWS via repeated `Pull` calls - so the round-trip gap narrows, but ADWS still requires the initial `Enumerate` before the first `Pull`, and the overhead in traffic is significantly larger.
 
 ## A Bit of Protocol Internals
 
@@ -499,13 +499,13 @@ sequenceDiagram
 
 Each **Sized Envelope** record (`0x06`) is the record-type byte, a length prefix, then the NBFSE-encoded payload. The length uses MC-NMF's variable-length integer (7 bits per byte, high bit = "more bytes follow"), so a small message spends only one or two bytes describing its size.
 
-### Lazy initialization for complete flexibility
+### Lazy Connections
 
 Because the `Via` record pins exactly one endpoint per connection, a single NMF session can only talk to one of `Windows/Enumeration`, `Windows/Resource`, or `Windows/ResourceFactory` - which is precisely why the bridge opens up to three separate NMF sessions (each its own record stream with its own `Via`):
 
-* **Enumeration** (`Windows/Enumeration`) - for WS-Enumeration Search operations
-* **Resource** (`Windows/Resource`) - for WS-Transfer Get, Put, Delete
-* **ResourceFactory** (`Windows/ResourceFactory`) - for WS-Transfer Create
+* **Enumeration** (`Windows/Enumeration`) - for MS-WSDS search operations (`Enumerate+Pull`)
+* **Resource** (`Windows/Resource`) - for MS-WSTIM `Get`, `Put`, `Delete`
+* **ResourceFactory** (`Windows/ResourceFactory`) - for MS-WSTIM `Create`
 
 Each of these requires its own NNS authentication handshake. That means up to three SPNEGO token exchanges per ADWS connection. The credential is reused across all three, but from the protocol's perspective each session is independently authenticated.
 
