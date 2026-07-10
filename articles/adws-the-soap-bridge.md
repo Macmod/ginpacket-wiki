@@ -37,9 +37,9 @@ The ADWS endpoint is actually split across several Microsoft Open Specifications
 
 Together they describe how Active Directory domain controllers expose a SOAP endpoint on TCP/9389, with:
 
-* NNS and NMF providing the broad "transport" layer
-* ADDM/WSDS/WSTIM/ADCAP defining the SOAP operations 
-* WSPELD specifying how LDAP controls are forwarded through the SOAP layer
+* [NNS](https://winprotocoldoc.z19.web.core.windows.net/MS-NNS/[MS-NNS].pdf) and [NMF](https://winprotocoldoc.z19.web.core.windows.net/MC-NMF/%5bMC-NMF%5d.pdf) providing the broad "transport" layer
+* [ADDM](https://winprotocoldoc.z19.web.core.windows.net/MS-ADDM/[MS-ADDM].pdf), [WSDS](https://winprotocoldoc.z19.web.core.windows.net/MS-WSDS/[MS-WSDS].pdf), [WSTIM](https://winprotocoldoc.z19.web.core.windows.net/MS-WSTIM/%5bMS-WSTIM%5d.pdf) & [ADCAP](https://winprotocoldoc.z19.web.core.windows.net/MS-ADCAP/%5bMS-ADCAP%5d.pdf) defining the SOAP operations 
+* [WSPELD](https://github.com/Macmod/go-adws/blob/main/transport/nbfse_codec.go) specifying how LDAP controls are forwarded through the SOAP layer
 
 {% hint style="success" %}
 According to [Microsoft](https://learn.microsoft.com/en-us/services-hub/unified/health/remediation-steps-ad/configure-the-active-directory-web-services-adws-to-start-automatically-on-all-servers), ADWS is automatically installed since Windows Server 2008 R2 as soon as you install the **AD DS** or **AD LDS** roles to the server.
@@ -92,7 +92,12 @@ ADWS Specifications
         └─ Get          - Retrieve service metadata (unauthenticated)
 ```
 
-Most sources only explore the MS-WSDS `Enumerate+Pull` loop, which can be used as a parallel to a regular `LDAP Search` operation, but as you can see there are many other actions that can be performed. The main problem that implementors need to tackle when designing ADWS integrations is the [NMF](), NNS and [NBFSE](https://winprotocoldoc.z19.web.core.windows.net/MC-NBFSE/%5bMC-NBFSE%5d.pdf) implementations, which are not available in an "authoritative implementation" in languages other than C# - a fact that is very annoying, as tool devs have to reverse engineer these protocols to be able to issue any ADWS messages to a DC.
+Most sources only explore the MS-WSDS **Enumerate+Pull loop**, which can be used as a parallel to a regular **LDAP Search** operation, but as you can see there are **many other actions that can be performed**, including writes. The main problem that implementors need to tackle when designing ADWS integrations is the [NMF](), NNS and [NBFSE](https://winprotocoldoc.z19.web.core.windows.net/MC-NBFSE/%5bMC-NBFSE%5d.pdf) implementations, which are not available in an "authoritative implementation" in languages other than C# - a fact that is very annoying, as tool devs have to reverse engineer these protocols to be able to issue any ADWS messages to a DC. But once that's sorted out, all of these methods can be called remotely without much complication.
+
+{% hint style="success" %}
+The [sopa](https://github.com/Macmod/sopa) tool, for instance, implements a client capable of calling all of these methods using the [go-adws](https://github.com/Macmod/go-adws) library.
+{% endhint %}
+
 
 In LDAP there aren't many of these "complexities" - it's usually one port, one bind, one encoding, and then the actual LDAP operations to perform. LDAP operations are relatively simple:
 
