@@ -285,6 +285,14 @@ flowchart TB
   class L1,L5,L2a,L2b,L2c,L3 ldap
   class A1,A2,F1,A3 adws
   class M1,M2,M3,M4,M5,M6 mech
+
+  style Transport fill:#f4f4f5,stroke:#a1a1aa,color:#18181b
+  style Auth fill:#f4f4f5,stroke:#a1a1aa,color:#18181b
+  style LdapAuth fill:#e5e7eb,stroke:#9ca3af,color:#18181b
+  style SaslMechs fill:#e5e7eb,stroke:#9ca3af,color:#18181b
+  style NnsMechs fill:#e5e7eb,stroke:#9ca3af,color:#18181b
+  style Framing fill:#f4f4f5,stroke:#a1a1aa,color:#18181b
+  style Encoding fill:#f4f4f5,stroke:#a1a1aa,color:#18181b
 ```
 
 This may look like a lot for just the "broad" transport layer, but keep in mind that this is actually just "syntax sugar" architected by protocol nerds for simpler operations:
@@ -375,6 +383,14 @@ flowchart TB
   class L4a,L4b_gen,L4b_pwd,L4c,L4d ldap
   class A4a,A4e,A4a2,A4b,A4c,A4d,A4f,A4g adws
   class A4n,A4h other
+
+  style LDAP fill:#f4f4f5,stroke:#a1a1aa,color:#18181b
+  style ADWS fill:#f4f4f5,stroke:#a1a1aa,color:#18181b
+  style WSTransfer fill:#e5e7eb,stroke:#9ca3af,color:#18181b
+  style WSEnum fill:#e5e7eb,stroke:#9ca3af,color:#18181b
+  style ADCAP fill:#e5e7eb,stroke:#9ca3af,color:#18181b
+  style AcctMgmt fill:#d4d4d8,stroke:#71717a,color:#18181b
+  style TopoMgmt fill:#d4d4d8,stroke:#71717a,color:#18181b
 ```
 
 ## The "broad transport layer"
