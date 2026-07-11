@@ -24,13 +24,13 @@ The Windows authorization model has a neat property that's easy to overlook: the
 
 The `authz` tool provides access to the two most useful calls of this protocol:
 
-## AuthzrGetInformationFromContext (`info` subcommand)
+## AuthzrGetInformationFromContext
 
 The `info` subcommand uses the `AuthzrGetInformationFromContext` call to create a transient authorization context from any SID and return what the remote machine thinks that principal's token looks like - their groups, restricted SIDs, user claims, and device claims. This is a clean way to inspect how a user would be seen by the authorization engine on a given host, without having to pull apart a PAC, issue a Kerberos ticket or perform LDAP queries (which would only tell us part of the story). It also reveals claims that would be populated from Active Directory's claims transformation pipeline:
 
 **TODO: Example**
 
-## AuthzrAccessCheck (`check` subcommand)
+## AuthzrAccessCheck
 
 The `check` subcommand takes it further: given a **SID** and a **security descriptor** (hex or inline SDDL), it asks the remote machine whether that principal would be granted the requested access mask using `AuthzrAccessCheck`. Additionally, you can provide a **specific target objects** to `authz`, and the tool will automatically fetch its SD for you using the corresponding protocol, and then feed it to MS-RAA for the check itself. This works with any securable object as long as there is (1) a remoote way to fetch its descriptor, (2) the caller user has appropriate permissions to obtain it, and (3) the caller has appropriate permissions to call `AuthzrAccessCheck`. In `authz` the following securable objects are supported by default:
 
