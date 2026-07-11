@@ -244,8 +244,8 @@ flowchart TB
   subgraph Auth["Authentication"]
     subgraph LdapAuth["Auth Method"]
       L2a["SASL"]
-      L2b["Simple Bind"]
-      L2c["Sicily"]
+      L2b["Simple Bind\n(password)"]
+      L2c["Sicily\n(NTLM)"]
     end
     A2["NNS"]
     subgraph SaslMechs["SASL Mechanism"]
