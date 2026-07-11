@@ -115,15 +115,15 @@ LDAP Operations
 │   ├─ entry             - DN of the new entry
 │   └─ attributes        - Initial attribute values for the entry
 │
-├─ Delete    - Remove an entry from the directory
-│   └─ entry             - DN of the entry to delete
-│
 ├─ Modify    - Modify attributes of an existing entry
 │   ├─ entry             - DN of the entry to modify
 │   └─ changes           - Sequence of add / replace / delete operations
 │       ├─ add           - Add values to an attribute
 │       ├─ replace       - Replace all values of an attribute
 │       └─ delete        - Remove specific values or entire attribute
+│
+├─ Delete    - Remove an entry from the directory
+│   └─ entry             - DN of the entry to delete
 │
 └─ ModifyDN  - Rename or move an entry within the directory
     ├─ entry             - Current DN of the entry
@@ -140,11 +140,11 @@ From the trees above I imagine you can guess the parallels already:
 
 | LDAP Operation | ADWS Equivalent | Notes |
 |----------------|-----------------|-------|
-| `Search` | MS-WSDS `Enumerate` + `Pull` loop | If `scope=baseObject` (single entry), MS-WSTIM `Get` suffices |
-| `Add` | MS-WSTIM `Create` |  |
-| `Modify` | MS-WSTIM `Put` | All changes are batched into a single `Put` (one `<da:ModifyRequest>` with multiple `<da:Change>` elements); password changes can also be performed via MS-ADCAP `ChangePassword` / `SetPassword` |
-| `Delete` | MS-WSTIM `Delete` |  |
-| `ModifyDN` | - | No ADWS equivalent: renaming/moving entries is LDAP-only (unless done in the dirty way via `Delete`/`Create`) |
+| `Search` | MS-WSDS `Enumerate` + `Pull` loop | If `scope=baseObject` (single entry), MS-WSTIM `Get` can be used instead |
+| `Add` | MS-WSTIM `Create` | - |
+| `Modify` | MS-WSTIM `Put` | Password changes can be performed via manual `Put`s or via MS-ADCAP `ChangePassword` / `SetPassword` |
+| `Delete` | MS-WSTIM `Delete` | - |
+| `ModifyDN` | - | No ADWS equivalent (unless done in the dirty way via `Delete`/`Create`) |
 
 ## Wire format differences
 
@@ -843,7 +843,7 @@ ldap
 {% endhint %}
 
 {% hint style="info" %}
-If you specify `--debug` along with `--adws`, `ginpacket` will dump **all ADWS SOAPs** from requests and responses into standard error for troubleshooting.
+If you specify `--debug` along with `--adws`, ginpacket will dump **all ADWS SOAPs** from requests and responses into standard error for troubleshooting.
 {% endhint %}
 
 ### Example: Reads - Search and Info
@@ -856,7 +856,7 @@ The `ldap search` and `ldap info` subcommands are the most straightforward users
 
 ...gets translated into a WS-Enumeration `Enumerate` call, followed by one or more `Pull` calls. Each returned `ADWSItem` is converted into a `*ldap.Entry` with `adwsItemToEntry()` - the base64Binary attribute values (octet strings, SIDs, nTSecurityDescriptors, replica link data) get decoded to raw bytes, so `GetRawAttributeValue()` still works.
 
-For single-object fetches, `ldap info` uses `ldap.ScopeBaseObject`, which maps to a WS-Transfer `Get` request on the Resource endpoint - no enumeration needed.
+For single-object fetches, `ldap info` uses `ldap.ScopeBaseObject`, which maps to a WS-Transfer `Get` request on the Resource endpoint - no enumeration needed. **(does it really?)**
 
 ### Example: Writes - Modify, Create, Delete
 
