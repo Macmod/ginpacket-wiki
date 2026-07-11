@@ -233,6 +233,8 @@ The stack below shows the transport, authentication, and encoding layers used by
 
 ```mermaid
 flowchart TB
+  linkStyle default stroke:#111,stroke-width:6px
+
   subgraph Transport["Network Transport"]
     direction LR
     L1["TCP :389"]
@@ -240,51 +242,46 @@ flowchart TB
     A1["TCP :9389"]
   end
   subgraph Auth["Authentication"]
-    direction LR
     subgraph LdapAuth["Auth Method"]
-      direction LR
       L2a["SASL"]
       L2b["Simple Bind"]
       L2c["Sicily"]
     end
     A2["NNS"]
     subgraph SaslMechs["SASL Mechanism"]
-      direction LR
+      direction TB
       M1["GSSAPI"]
       M2["GSS-SPNEGO"]
       M3["EXTERNAL"]
       M4["DIGEST-MD5"]
     end
     subgraph NnsMechs["NNS Mechanism"]
-      direction LR
+      direction TB
       M5["SPNEGO"]
       M6["NTLM"]
     end
   end
   subgraph Framing["Framing"]
-    direction LR
     F1["NMF (Message Framing)"]
   end
   subgraph Encoding["Wire Format"]
-    direction LR
     L3["ASN.1 / BER"]
     A3["NBFSE (Binary XML)"]
   end
 
-  L1 -->|Plaintext| LdapAuth
+  L1 -.->|Plaintext| LdapAuth
   L1 -->|StartTLS| LdapAuth
   L5 -->|TLS| LdapAuth
-  L2b --> L3
+  L2b -.-> L3
+  L2c -.-> L3
   SaslMechs --> L3
   A1 --> A2
   NnsMechs --> F1
   F1 --> A3
 
-  L2a -.-> SaslMechs
-  A2 -.-> NnsMechs
+  L2a --> SaslMechs
+  A2 --> NnsMechs
 
-  linkStyle 1 stroke:#a855f7,stroke-width:2px
-  linkStyle 2 stroke:#a855f7,stroke-width:2px
 
   classDef ldap fill:#1a3a5c,stroke:#4a8bc2,stroke-width:2px,color:#fff
   classDef adws fill:#1e3a2e,stroke:#4ade80,stroke-width:2px,color:#fff
@@ -303,6 +300,7 @@ flowchart TB
 ```
 
 **TODO: Improve paragraphs below**
+
 **TODO: Simple example of GSSAPI token/wrapping/unwrapping/signing/sealing?**
 
 This may look like a lot for just the "broad" transport layer, but keep in mind that this is actually just "syntax sugar" architected by protocol nerds for simpler operations:
