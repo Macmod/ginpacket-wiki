@@ -96,7 +96,7 @@ One thing to note, though, is that the `_AdAttributeData` structure, used to pas
 
 <figure><img src="../.gitbook/assets/615392596-7369e8db-0a4c-46d8-9e3c-282ecf54ec83.png" alt=""><figcaption></figcaption></figure>
 
-On top of that, the `DfsrHelper.dll` only forwards that value field through the LDAP operation for `Modify(add)` and `Modify(replace)` calls (not for `Modify(delete)`). The practical consequences are:
+On top of that, the `DfsrHelper.dll` only forwards that value field through the LDAP operation for `Modify(add)` and `Modify(replace)` calls, but **not for `Modify(delete)`**. The practical consequences are:
 
 1. For **attribute modifications** (`repldap modify`): **replacements** (`--replace`) clear all existing values of the attribute and set the single supplied value - there is no way to replace a multi-valued attribute with multiple new values in one call;
 2. Also for **attribute modifications** (`repldap modify`): **deletes** (`--delete`) always remove all values of the attribute regardless of what value is supplied - value-specific deletes are not supported.

@@ -41,7 +41,11 @@ The `check` subcommand takes it further: given a **SID** and a **security descri
 * Services
 * WMI namespaces
 
-**TODO: Examples for multiple securable objects**
+<figure><img src="../.gitbook/assets/615392597-7369e8db-0a4c-46d8-9e3c-282ecf54ec83.png" alt=""><figcaption>Checking access to a registry key</figcaption></figure>
+
+<figure><img src="../.gitbook/assets/615392598-7369e8db-0a4c-46d8-9e3c-282ecf54ec83.png" alt=""><figcaption>Checking access to an SMB share</figcaption></figure>
+
+<figure><img src="../.gitbook/assets/615392599-7369e8db-0a4c-46d8-9e3c-282ecf54ec83.png" alt=""><figcaption>Checking access to a service</figcaption></figure>
 
 You can also inject extra group SIDs (--add-groups), user claims, or even build a compound context (the mechanism Windows uses to evaluate Kerberos FAST and dynamic access control policies) with device SID and device claims.
 
