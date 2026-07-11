@@ -92,7 +92,11 @@ Since password operations in LDAP can only be performed via LDAPS on 636, you mu
 
 Although a bit more niche, it's also possible that a server's computer account (or `NETWORK SERVICE`) has rights to create objects in OUs, containers, or even the root of the domain. In that case, the [repldap](https://ginpacket.gitbook.io/docs/tools/repldap) tool can also be used to **create** or **modify** users / computers / containers / OUs, or any other kind of AD object by using `repldap create` and `repldap modify`.
 
-One thing to note, though, is that the `_AdAttributeData` structure, used to pass a list of arguments to the ADProxy methods, carries exactly **one value field** (not a **list of values** as is the usual LDAP interface for creations and modifications). On top of that, the `DfsrHelper.dll` only forwards that value field through the LDAP operation for `Modify(add)` and `Modify(replace)` calls (not for `Modify(delete)`). The practical consequences are:
+One thing to note, though, is that the `_AdAttributeData` structure, used to pass a list of arguments to the ADProxy methods, carries exactly **one value field** (not a **list of values** as is the usual LDAP interface for creations and modifications):
+
+<figure><img src="../.gitbook/assets/615392596-7369e8db-0a4c-46d8-9e3c-282ecf54ec83.png" alt=""><figcaption></figcaption></figure>
+
+On top of that, the `DfsrHelper.dll` only forwards that value field through the LDAP operation for `Modify(add)` and `Modify(replace)` calls (not for `Modify(delete)`). The practical consequences are:
 
 1. For **attribute modifications** (`repldap modify`): **replacements** (`--replace`) clear all existing values of the attribute and set the single supplied value - there is no way to replace a multi-valued attribute with multiple new values in one call;
 2. Also for **attribute modifications** (`repldap modify`): **deletes** (`--delete`) always remove all values of the attribute regardless of what value is supplied - value-specific deletes are not supported.
