@@ -45,7 +45,7 @@ Together they describe how Active Directory domain controllers expose a SOAP end
 According to [Microsoft](https://learn.microsoft.com/en-us/services-hub/unified/health/remediation-steps-ad/configure-the-active-directory-web-services-adws-to-start-automatically-on-all-servers), ADWS is automatically installed since Windows Server 2008 R2 as soon as you install the **AD DS** or **AD LDS** roles to the server.
 {% endhint %}
 
-What this means is that in any modern Active Directory environment today, there should be a fully featured ADWS endpoint running on port 9389 of every DC, alongside the familiar LDAP port 389. The other aspect of it that many find interesting is that it executes queries under the DC's machine account, possibly evading legacy detection logic that does not account for this sort of alternative protocol. That's why many cybersecurity folks have created tools that use ADWS instead of LDAP to perform queries, such as [powerview.py](https://github.com/aniqfakhrul/powerview.py), [SOAPy](https://github.com/logangoins/SOAPy), [adwsdomaindump](https://github.com/mverschu/adwsdomaindump), [SOAPHound](https://github.com/FalconForceTeam/SOAPHound), etc.
+What this means is that in any modern Active Directory environment today, there should be a fully featured ADWS endpoint running on port 9389 of every DC, alongside the familiar LDAP port 389. The other aspect of it that many find interesting is that the operations performed via ADWS are logged with the loopback address instead of the real source, possibly also evading legacy detection logic. That's why many cybersecurity folks have created tools that use ADWS instead of LDAP to perform queries, such as [powerview.py](https://github.com/aniqfakhrul/powerview.py), [SOAPy](https://github.com/logangoins/SOAPy), [adwsdomaindump](https://github.com/mverschu/adwsdomaindump), [SOAPHound](https://github.com/FalconForceTeam/SOAPHound), etc.
 
 ## What can be done with ADWS vs LDAP in AD
 
@@ -92,7 +92,7 @@ ADWS Specifications
         └─ Get          - Retrieve service metadata (unauthenticated)
 ```
 
-Most sources only explore the MS-WSDS **Enumerate+Pull loop**, which can be used as a parallel to a regular **LDAP Search** operation, but as you can see there are **many other actions that can be performed**, including writes. The main problem that implementors need to tackle when designing ADWS integrations is the [NMF](), NNS and [NBFSE](https://winprotocoldoc.z19.web.core.windows.net/MC-NBFSE/%5bMC-NBFSE%5d.pdf) implementations, which are not available in an "authoritative implementation" in languages other than C# - a fact that is very annoying, as tool devs have to reverse engineer these protocols to be able to issue any ADWS messages to a DC. But once that's sorted out, all of these methods can be called remotely without much complication.
+Most sources only explore the MS-WSDS **Enumerate+Pull loop**, which can be used as a parallel to a regular **LDAP Search** operation, but as you can see there are **many other actions that can be performed**, including writes. The main problem that implementors need to tackle when designing ADWS integrations is the [NMF](https://winprotocoldoc.z19.web.core.windows.net/MC-NMF/%5bMC-NMF%5d.pdf), [NNS](https://winprotocoldoc.z19.web.core.windows.net/MS-NNS/[MS-NNS].pdf) and [NBFSE](https://winprotocoldoc.z19.web.core.windows.net/MC-NBFSE/%5bMC-NBFSE%5d.pdf) implementations, which are not available in an "authoritative implementation" in languages other than C# - a fact that is very annoying, as tool devs have to reverse engineer these protocols to be able to issue any ADWS messages to a DC. But once that's sorted out, all of these methods can be called remotely without much complication.
 
 {% hint style="success" %}
 The [sopa](https://github.com/Macmod/sopa) tool, for instance, implements a client capable of calling all of these methods using the [go-adws](https://github.com/Macmod/go-adws) library.
@@ -150,7 +150,7 @@ From the trees above I imagine you can guess the parallels already:
 
 ### LDAP: ASN.1/BER on the wire
 
-LDAP natively uses ASN.1 encoded with Basic Encoding Rules (BER). A search request, for example, is a `LDAPMessage` SEQUENCE wrapping a `SearchRequest` — integer constants for scope, deref policy, and size limit, octet strings for the base DN and filter, and a SEQUENCE OF attribute descriptions. Here's a real LDAP search request for `(objectClass=computer)` under `DC=CRETA,DC=LOCAL` (68 bytes on the wire):
+In the application layer, LDAP natively uses ASN.1 encoded with Basic Encoding Rules (BER). A search request, for example, is a `LDAPMessage` SEQUENCE wrapping a `SearchRequest` - integer constants for scope, deref policy, and size limit, octet strings for the base DN and filter, and a SEQUENCE OF attribute descriptions. Here's a real LDAP search request for `(objectClass=computer)` under `DC=CRETA,DC=LOCAL` (68 bytes on the wire):
 
 ```
 0000  30 42 02 01 04 63 3d 04  11 44 43 3d 43 52 45 54   0B···c=· ·DC=CRET
@@ -160,7 +160,7 @@ LDAP natively uses ASN.1 encoded with Basic Encoding Rules (BER). A search reque
 0040  65 72 30 00                                        er0·
 ```
 
-Dissected:
+Dissected as ASN.1/BER it looks like this:
 
 ```
 30 42                     -- SEQUENCE (LDAPMessage), length 0x42 = 66 bytes
@@ -220,6 +220,8 @@ ADWS sends the same logical operation through SOAP over WS-Enumeration. The same
 ```
 
 But this XML isn't sent as plain text - it's encoded with [NBFSE](https://winprotocoldoc.z19.web.core.windows.net/MC-NBFSE/%5bMC-NBFSE%5d.pdf) (`.NET Binary Format: SOAP Extension`), which uses a stateful string dictionary to compress element and attribute names into **short integer tokens**. So what hits the wire is a binary stream of tokens, not text. The dictionary starts with preloaded entries (`Envelope`, `Body`, `Header`, `Action`, `To`, etc.) and is extended with application-specific strings as they appear.
+
+**TODO: An example would work well here**
 
 The [go-adws](https://github.com/Macmod/go-adws) library builds the XML programmatically using the [soap package](https://github.com/Macmod/go-adws/tree/main/soap)'s builder functions (`BuildEnumerateRequest`, `BuildModifyRequest`, etc) and encodes them via the [NBFSE codec](https://github.com/Macmod/go-adws/blob/main/transport/nbfse_codec.go), implemented in the `transport` package.
 
@@ -300,6 +302,9 @@ flowchart TB
   style Encoding fill:#f4f4f5,stroke:#a1a1aa,color:#18181b
 ```
 
+**TODO: Improve paragraphs below**
+**TODO: Simple example of GSSAPI token/wrapping/unwrapping/signing/sealing?**
+
 This may look like a lot for just the "broad" transport layer, but keep in mind that this is actually just "syntax sugar" architected by protocol nerds for simpler operations:
 
 1) **GSSAPI** is just a standardized way of passing necessary credential material to the server to allow for authentication/signing/encryption using either NTLM or Kerberos (one or the other, with no negotiation involved);
@@ -309,7 +314,7 @@ This may look like a lot for just the "broad" transport layer, but keep in mind 
 * **GSS-SPNEGO** (SPNEGO negotiation to decide between NTLM or Kerberos, then GSSAPI with the chosen mechanism)
 * **EXTERNAL** (what is currently known as "Pass The Cert" for LDAP is just passing a valid client certificate during the `ClientHello` of the TLS handshake, then specifying EXTERNAL as the SASL mechanism, basically telling the server - `"hey, I wish to bind using credentials that I specified previously in the TLS handshake, so check it instead of waiting for me to pass additional material!"`.
 * **DIGEST-MD5** (legacy, not used anymore). 
-4) **Sicily** is an alternative method to authenticate and negotiate signing/sealing that, in Microsoft's LDAP implementation, supports **NTLM only**.
+4) **Sicily** is an alternative method to authenticate, in Microsoft's LDAP implementation, supports **NTLM only**.
 
 {% hint style="info" %}
 GSSAPI is initially designed to work with either NTLM or Kerberos, but in Microsoft's implementation of the LDAP flow (with SASL) the "**GSSAPI**" mechanism is a wrapper for **Kerberos only**, contrary to the "**GSS-SPNEGO**" mechanism which works with both (and also includes negotiation). NTLM hashes can be used to authenticate when using either **SASL(GSS-SPNEGO)** or **Sicily** negotiation. I know this sort of deviation looks ugly - don't blame me. Sometimes protocol architects do things for backwards compatibility or interoperability reasons that us regular humans can only dream of understanding some day.
@@ -835,11 +840,11 @@ ldap
 ```
 
 {% hint style="info" %}
-**ModifyDN** does not exist in ADWS and cannot be replicated precisely - instead one would have to do `Delete` + `Create`, which does not have the same atomicity semantics and may cause problems. The WhoAmI operation is also LDAP-specific. 
+**ModifyDN** does not exist in ADWS and cannot be replicated precisely - instead one would have to do `Delete` + `Create`, which does not have the same atomicity semantics and may cause problems. The **WhoAmI** operation is also LDAP-specific. 
 {% endhint %}
 
 {% hint style="info" %}
-If you specify `--debug` along with `--adws`, `ginpacket` will dump **all** ADWS SOAPs from requests and responses into standard error for troubleshooting.
+If you specify `--debug` along with `--adws`, `ginpacket` will dump **all ADWS SOAPs** from requests and responses into standard error for troubleshooting.
 {% endhint %}
 
 ### Example: Reads - Search and Info
