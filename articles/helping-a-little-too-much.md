@@ -100,7 +100,7 @@ One thing to note, though, is that the `_AdAttributeData` structure, used to pas
 
 ## Internals
 
-To analyze the code responsible for this behavior, the first step is to look for information on the DCOM **interfaces** involved (`IADProxy` / `IADProxy2`). In this case, the spec itself, in footnote `<15>`, spoils that the DCOM class responsible for these interfaces is defined in `C:\Windows\System32\DFSRHelper.dll`.  But even if it wasn't mentioned, we could trace the interfaces defined in the spec - in sections 3.1.5.2 and 3.1.5.3 it declares the IIDs of these interfaces as `{4BB8AB1D-9EF9-4100-8EB6-DD4B4E418B72}` and `{C4B0C7D9-ABE0-4733-A1E1-9FDEDF260C7A}`. If we look up the interfaces with i.e. `OleViewDotNet` and open up their properties, we can see their type libraries point to the same DLL:
+To analyze the code responsible for this behavior, the first step is to look for information on the DCOM **interfaces** involved (`IADProxy` / `IADProxy2`). In this case, the spec itself, in footnote `<15>`, spoils that the DCOM class responsible for these interfaces is defined in `C:\Windows\System32\DFSRHelper.dll`. But even if it wasn't mentioned, we could trace the interfaces defined in the spec - in sections 3.1.5.2 and 3.1.5.3 it declares the IIDs of these interfaces as `{4BB8AB1D-9EF9-4100-8EB6-DD4B4E418B72}` and `{C4B0C7D9-ABE0-4733-A1E1-9FDEDF260C7A}`. If we look up the interfaces with i.e. [OleViewDotNet](https://github.com/tyranid/oleviewdotnet) and open up their properties, we can see their type libraries point to the same DLL:
 
 <figure><img src="../.gitbook/assets/615392594-72a019f2-c4dc-4f89-8c1b-b0e44b56a399.png" alt=""><figcaption></figcaption></figure>
 
