@@ -332,13 +332,13 @@ From a tool developer perspective, all of this complexity / flexibility may seem
 As much as these questions are interesting to think about (I won't tell you all the answers 🙂), mostly they only teach us one lesson - different tools may authenticate in different ways under the wire, **even when provided the same authentication material**. For me the rule of thumb seems to be to try to play nice: always prefer to use **SPNEGO** instead of plain GSSAPI, and always encrypt and sign properly (either through a TLS channel or using GSSAPI over an unprotected channel). If we already have a secure connection through TLS (the "shared secret" being the trusted certificate authority), it would make little sense to also wrap payloads into an additional cryptographic layer.
 
 {% hint style="info" %}
-A fun challenge for readers: pick a tool or library that does LDAP auth and study what it does under the wire when given different sets of credentials - either through packet capturing or source code inspection.
+**Fun challenge for readers**. Pick a **tool** or **library** that does LDAP auth and study what it does under the wire when given **different sets of credentials** - either through packet capturing or source code inspection.
 {% endhint %}
 
-Now back to our use cases. Now that we know how to set up the transport and how to authenticate in both LDAP and ADWS, here is a sketch of how to map LDAP operations into their ADWS counterparts:
+Back to our use cases - now that we know how to set up the transport and how to authenticate in both LDAP and ADWS, here is a sketch of how to map LDAP operations into their ADWS counterparts:
 
 ```mermaid
-flowchart TB
+flowchart LR
   subgraph LDAP["LDAP"]
     direction TB
     L4a["SearchRequest"]
