@@ -53,7 +53,7 @@ What this means is that:
 
 One relevant example of what can be accomplished here is using [repldap](https://ginpacket.gitbook.io/docs/tools/repldap) to manage the `msDS-KeyCredentialLink` value on the target computer object pointing to a keypair you control (aka "shadow credentials"), giving you the ability to use the matching private key to request a TGT as that computer account via PKINIT, effectively giving persistent Kerberos access to the account without touching LSASS or modifying passwords:
 
-**TODO: Get definitive example with two DCs or with a member server+a DC**
+**TODO**: Get definitive example with two DCs or with a member server+a DC
 
 ```bash
 ./repldap [auth_flags] --target-dc WIN-6BKCP1FPPCI keycred add 'CN=WIN-6BKCP1FPPCI,OU=Domain Controllers,DC=creta,DC=local'
@@ -86,7 +86,7 @@ Since password operations in LDAP can only be performed via LDAPS on 636, you mu
 
 ### Self password changes
 
-TODO
+**TODO**: Finish this
 
 ### Other write actions
 
@@ -100,9 +100,23 @@ One thing to note, though, is that the `_AdAttributeData` structure, used to pas
 
 ## Internals
 
-The DFSRHelper is a DCOM interface registered by the native `C:\Windows\System32\DFSRHelper.dll`:
+To analyze the code responsible for this behavior, the first step is to look for information on the DCOM **interfaces** involved (`IADProxy` / `IADProxy2`). In this case, the spec itself, in footnote `<15>`, spoils that the DCOM class responsible for these interfaces is defined in `C:\Windows\System32\DFSRHelper.dll`.  But even if it wasn't mentioned, we could trace the interfaces defined in the spec - in sections 3.1.5.2 and 3.1.5.3 it declares the IIDs of these interfaces as `{4BB8AB1D-9EF9-4100-8EB6-DD4B4E418B72}` and `{C4B0C7D9-ABE0-4733-A1E1-9FDEDF260C7A}`. If we look up the interfaces with i.e. `OleViewDotNet` and open up their properties, we can see their type libraries point to the same DLL:
 
-TODO
+<figure><img src="../.gitbook/assets/615392594-72a019f2-c4dc-4f89-8c1b-b0e44b56a399.png" alt=""><figcaption></figcaption></figure>
+
+We could also somehow find the CLSID of the **DFSRHelper** class by name and then find the DLL at `HKEY_CLASSES_ROOT\CLSID\{CEFE3B33-B60F-44fc-BFE4-D354A1CE39EE}\InprocServer32`.
+
+{% hint style="info" %}
+Mapping between CLSIDs and interfaces they implement can be annoying - it's possible to enumerate interfaces via `HKCR\Interfaces` and classes via `HKCR\CLSID`, but the link between them is not trivial to find without analyzing type libraries, using a pre-computed mapping or probing all interfaces on all classes via `IUnknown:QueryInterface`.
+{% endhint %}
+
+Opening this DLL in Ghidra for analysis we can quickly see that it imports the relevant functions for `Add`, `Modify` and `Delete` operations from `wldap32.dll`:
+
+<figure><img src="../.gitbook/assets/615392595-1411f83b-09be-43b7-a2ab-71de4a332eca.png" alt=""><figcaption></figcaption></figure>
+
+We arrive at our destination by checking the references to each of these functions with `Ctrl+Shift+F`, then going to the first result and decompiling with `Ctrl+E`. For **ldap_modify_ext_sW**, for instance:
+
+**TODO**: Finish this
 
 ## Conclusions
 
