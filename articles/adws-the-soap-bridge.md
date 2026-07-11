@@ -255,7 +255,7 @@ flowchart TB
       M3["EXTERNAL"]
       M4["DIGEST-MD5"]
     end
-    subgraph NnsMechs["NNS Mechanisms"]
+    subgraph NnsMechs["NNS Mechanism"]
       direction LR
       M5["SPNEGO"]
       M6["NTLM"]
@@ -473,7 +473,7 @@ sequenceDiagram
     Note over C,S: NNS payload follows (e.g. NMF records)
 ```
 
-### NMF connection setup
+### NMF setup
 
 ```mermaid
 sequenceDiagram
@@ -509,7 +509,7 @@ sequenceDiagram
 
 Each **Sized Envelope** record (`0x06`) is the record-type byte, a length prefix, then the NBFSE-encoded payload. The length uses MC-NMF's variable-length integer (7 bits per byte, high bit = "more bytes follow"), so a small message spends only one or two bytes describing its size.
 
-### Lazy Connections
+## Lazy Connections
 
 Because the `Via` record pins exactly one endpoint per connection, a single NMF session can only talk to one of `Windows/Enumeration`, `Windows/Resource`, or `Windows/ResourceFactory` - which is precisely why the bridge opens up to three separate NMF sessions (each its own record stream with its own `Via`):
 
@@ -647,10 +647,11 @@ From the caller's perspective, all of this is invisible: you pass the same strin
 
 ### Deriving the root BaseDN via rootDSE
 
-Many `ldap` operations require a BaseDN for searches, be these searches the final goal or an intermediary need, but the user could not always want (or know how) to provide the BaseDN explicitly. The default baseDN for a domain can in most cases looked up from the `rootDSE`, a special entry that we can fetch by performing an LDAP Search with `scope=base` and the empty BaseDN. 
+**TODO: Goal of this section should be to just mention the purpose of RootDN and GetRootAttribute in the interface definition**
 
-[REVIEWING]
-`ldap search` with no `--base-dn` defaults to the domain's `defaultNamingContext`. Contrary to what you might expect, **ADWS does expose the rootDSE**: a base-scope enumeration with an empty base object returns the rootDSE as a single result, exactly like an anonymous base-scope `Search` for `""` over LDAP. So the bridge *queries* it rather than guessing.
+Many `ldap` operations require a BaseDN for searches, be these searches the final goal or an intermediary need, but the user could not always want (or know how) to provide the BaseDN explicitly. The default baseDN for a domain can in most cases looked up from the `rootDSE`, a special entry that we can fetch by performing an LDAP Search with `scope=base` and the empty BaseDN. This works the same in ADWS.
+
+`ldap search` with no `--base-dn` defaults to the domain's `defaultNamingContext`.
 
 The lookup is transport-agnostic. `getRootDSEAttribute` issues a base-scope `(objectClass=*)` search against an empty DN and reads one attribute off the single entry that comes back. Because it takes the shared `ldapSearcher` interface, the identical helper runs over LDAP or over ADWS (where `Search` turns it into an `Enumerate+Pull`):
 
@@ -716,9 +717,7 @@ That base-scope, empty-base rootDSE read is precisely the query that surfaced th
 
 ## Connecting the dots
 
-The [go-adws](https://github.com/Macmod/go-adws) library started as a low-level implementation of the ADWS protocol stack: the NNS handshake (SPNEGO wrapping Kerberos or NTLM), the NMF record framing, and the SOAP XML builders for WS-Enumeration and WS-Transfer operations. On top of that, the [sopa](https://github.com/Macmod/sopa) client wraps it all in a high-level `WSClient` that provides `Connect()`, `Query()`, `Get()`, `Put()`, `Delete()`, `Create()` - a fairly complete ADWS client in Go. But it had its own API surface and its own patterns, separate from the LDAP operations that the rest of this project was already doing through `github.com/go-ldap/ldap/v3`.
-
-The bridge implemented in ginpacket connects these two worlds: instead of exposing ADWS as a standalone tool with its own client interface, we introduced a unified `ldapClient` interface that both LDAP and ADWS satisfy, and added a single `--adws` flag to the `ldap` commands to flip between them. Behind the flag, the code calls `connect(useADWS, scheme, startTLS, baseDN, noRootDSE)` which routes either to a standard LDAP dial or to the ADWS connection setup (the extra `baseDN`/`noRootDSE` arguments drive the rootDSE strategy described earlier).
+The [go-adws](https://github.com/Macmod/go-adws) library started as a low-level implementation of the ADWS protocol stack: the NNS handshake, the NMF record framing, and the SOAP XML builders for all supported operations. The bridge implemented in ginpacket is just a different take on the problem of providing **easy access to ADWS ops** - instead of exposing ADWS as a standalone tool with its own cmdline (such as [sopa](https://github.com/Macmod/sopa)), I introduced a unified `ldapClient` interface that both LDAP and ADWS satisfy, and added a single `--adws` flag to the `ldap` commands to flip between them. Behind the flag, the code calls `connect(useADWS, scheme, startTLS, baseDN, noRootDSE)` which routes either to a standard LDAP dial or to the ADWS connection setup (the extra `baseDN`/`noRootDSE` arguments drive the rootDSE strategy described earlier). This way, if we ever want to implement other subcommands for our `ldap` tool using the "interoperable" subset of LDAP operations, they would instantly be also available over ADWS:
 
 ```go
 // internal/ldapclient/client.go
