@@ -51,7 +51,9 @@ What this means is that:
 
 ## Shadow Credentials
 
-One relevant example of what can be accomplished here is using `repldap` to manage the `msDS-KeyCredentialLink` value on the target computer object pointing to a keypair you control (aka "shadow credentials"), giving you the ability to use the matching private key to request a TGT as that computer account via PKINIT, effectively giving persistent Kerberos access to the account without touching LSASS or modifying passwords:
+One relevant example of what can be accomplished here is using [repldap](https://ginpacket.gitbook.io/docs/tools/repldap) to manage the `msDS-KeyCredentialLink` value on the target computer object pointing to a keypair you control (aka "shadow credentials"), giving you the ability to use the matching private key to request a TGT as that computer account via PKINIT, effectively giving persistent Kerberos access to the account without touching LSASS or modifying passwords:
+
+**TODO: Get definitive example with two DCs or with a member server+a DC**
 
 ```bash
 ./repldap [auth_flags] --target-dc WIN-6BKCP1FPPCI keycred add 'CN=WIN-6BKCP1FPPCI,OU=Domain Controllers,DC=creta,DC=local'
@@ -59,7 +61,7 @@ One relevant example of what can be accomplished here is using `repldap` to mana
 
 <figure><img src="../.gitbook/assets/617124036-808d808e-a407-4702-854a-bc00dd55eda5.png" alt=""><figcaption></figcaption></figure>
 
-What makes the DFSRHelper path interesting here is that the write goes through the target's own machine account, so if the machine account has write access to its own msDS-KeyCredentialLink (which is the default), you can do this with a single ./repldap modify call (as long as the target is different from the supplied DC).
+What makes the DFSRHelper path interesting here is that the write goes through the target's own machine account, so if the machine account has write access to its own msDS-KeyCredentialLink (which is the default), you can do this with a single `repldap modify` call (as long as the target is different from the supplied DC).
 
 ## Changing Passwords
 
@@ -73,7 +75,7 @@ $ ./changepwd dfsrh [auth_flags] \
   --target-dc DCHOSTNAME
 
 # Alternative
-$ ./bin/repldap [auth_flags] modify DN_FOR_TARGETOBJECT --replace unicodePwd=Banana@1338 --target-dc DCHOSTNAME
+$ ./repldap [auth_flags] modify DN_FOR_TARGETOBJECT --replace unicodePwd=Banana@1338 --target-dc DCHOSTNAME
 ```
 
 <figure><img src="../.gitbook/assets/615908939-d0164dac-1707-4b83-a18f-93b66112308e.png" alt=""><figcaption></figcaption></figure>
@@ -88,7 +90,7 @@ TODO
 
 ### Other write actions
 
-Although a bit more niche, it's also possible that a server's computer account (or `NETWORK SERVICE`) has rights to create objects in OUs, containers, or even the root of the domain. In that case, the `repldap` tool can also be used to **create** or **modify** users / computers / containers / OUs, or any other kind of AD object by using `repldap create` and `repldap modify`.
+Although a bit more niche, it's also possible that a server's computer account (or `NETWORK SERVICE`) has rights to create objects in OUs, containers, or even the root of the domain. In that case, the [repldap](https://ginpacket.gitbook.io/docs/tools/repldap) tool can also be used to **create** or **modify** users / computers / containers / OUs, or any other kind of AD object by using `repldap create` and `repldap modify`.
 
 One thing to note, though, is that the `_AdAttributeData` structure, used to pass a list of arguments to the ADProxy methods, carries exactly **one value field** (not a **list of values** as is the usual LDAP interface for creations and modifications). On top of that, the `DfsrHelper.dll` only forwards that value field through the LDAP operation for `Modify(add)` and `Modify(replace)` calls (not for `Modify(delete)`). The practical consequences are:
 
