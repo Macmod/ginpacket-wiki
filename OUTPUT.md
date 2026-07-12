@@ -17,6 +17,8 @@ Headers and footers are enabled by default. To remove the header (banner/version
 ./tool.exe -t <target> -u <user>@<domain> -p Password [subcommand] 2>$null
 ```
 
+If you want to see some diagnostic info printed to stderr but still want to supress the header, you may also hide it explicitly with `--no-header`.
+
 ## Colors
 
 Colors are enabled by default. To remove colors just include the `-Z` / `--no-colors` flag:
