@@ -118,7 +118,11 @@ Opening this DLL in Ghidra for analysis we can quickly see that it imports the r
 
 <figure><img src="../.gitbook/assets/615392595-1411f83b-09be-43b7-a2ab-71de4a332eca.png" alt=""><figcaption></figcaption></figure>
 
-We arrive at our destination by checking the references to each of these functions with `Ctrl+Shift+F`, then going to the first result and decompiling with `Ctrl+E`. For **ldap_modify_ext_sW**, for instance:
+We arrive at our destination by checking the references to each of these functions with `Ctrl+Shift+F`, then going to the first result and decompiling with `Ctrl+E`. For **ldap_modify_ext_sW**, for instance, we find that the `CADProxy::AddModifyImpl` function is actually responsible for forwarding both Add and Modify:
+
+<figure><img src="../.gitbook/assets/TODO" alt=""><figcaption></figcaption></figure>
+
+<figure><img src="../.gitbook/assets/TODO" alt=""><figcaption></figcaption></figure>
 
 **TODO**: Finish this
 
