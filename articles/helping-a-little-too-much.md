@@ -124,7 +124,13 @@ We arrive at our destination by checking the references to each of these functio
 
 <figure><img src="../.gitbook/assets/TODO" alt=""><figcaption></figcaption></figure>
 
-**TODO**: Finish this
+After defining a few types to what the structures should look like and renaming some variables (although not perfectly as the decompiler if often not very friendly), we can see that there is a loop that iterates on the SafeArray passed to the original call (the `attributes` parameter), extracts each element of it (an `_AdAttributeData`), and starts filling up `modToForward` with the values for the definitive operation to forward to the LDAP calls:
+
+<figure><img src="../.gitbook/assets/615392601-7369e8db-0a4c-46d8-9e3c-282ecf54ec83.png" alt=""><figcaption></figcaption></figure>
+
+But then right below that line it branches on `operationId != 0x1`, where 0x1 is the constant for `LDAP_MOD_DELETE`, **not filling** the values array at all for **Modify(delete)** operations - that's why we cannot delete attribute values selectively using this primitive, as mentioned in the previous section:
+
+<figure><img src="../.gitbook/assets/615392602-7369e8db-0a4c-46d8-9e3c-282ecf54ec83.png" alt=""><figcaption></figcaption></figure>
 
 ## Conclusions
 
