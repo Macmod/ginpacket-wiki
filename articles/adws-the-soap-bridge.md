@@ -324,12 +324,14 @@ As you can see, these mechanisms sometimes mix up the concepts of **authenticati
 
 From a tool developer perspective, all of this complexity / flexibility may seem useless and raise a bunch of questions, which are all valid:
 
-* Is it possible to do everything that we would do under LDAPS or LDAP+StartTLS using plain LDAP+SPNEGO instead? (i.e. changing passwords requires a secure connection)
-* Do we even need SPNEGO at all if we can just specify GSSAPI and use whatever credentials the user provided (either an NTLM hash or Kerberos ticket)?
+* Is it possible to do everything that we would do under LDAPS/LDAP+StartTLS (with SASL/EXTERNAL as the mechanism) using plain LDAP+SASL/GSS-SPNEGO or LDAP+SASL/GSSAPI instead? (i.e. changing passwords requires a secure connection)
+* Do we even need LDAP+SASL/GSS-SPNEGO at all if we can just use straight LDAP+SASL/GSSAPI for Kerberos and the Sicily path for NTLM?
 * Is it possible to connect using LDAPS and then use GSSAPI (either straight or negotiated via SPNEGO) to also secure (encrypt/sign) the connection twice? (I know this setup **doesn't make sense at all**, but it's still a valid question!)
 * Will legitimate servers accept packets that are not signed nor encrypted (sealed) **after** negotiating the usage of GSSAPI?
 
-As much as these questions are interesting to think about (I won't tell you all the answers 🙂), mostly they only teach us one lesson - different tools may authenticate in different ways under the wire, **even when provided the same authentication material**. For me the rule of thumb seems to be to try to play nice: always prefer to use **SPNEGO** instead of plain GSSAPI, and always encrypt and sign properly (either through a TLS channel or using GSSAPI over an unprotected channel). If we already have a secure connection through TLS (the "shared secret" being the trusted certificate authority), it would make little sense to also wrap payloads into an additional cryptographic layer.
+As much as these questions are interesting to think about (I won't tell you all the answers 🙂), mostly they only teach us one lesson - different tools may authenticate in different ways under the wire, **even when provided the same authentication material**.
+
+For me the rule of thumb as a tool developer seems to be to try to play nice: always prefer to use **SPNEGO** instead of plain GSSAPI or other specific methods (e.g. Sicily), and always encrypt and sign properly: either through a TLS channel or using SPNEGO, when over an unprotected channel. In ADWS, this means preferring the SPNEGO NNS mechanism; in LDAP this means preferring SASL/GSS-SPNEGO or TLS+SASL/EXTERNAL. If we already have a secure connection through TLS (the "shared secret" being the trusted certificate authority), it would make little sense to also wrap payloads into an additional cryptographic layer.
 
 {% hint style="info" %}
 **Fun challenge for readers**. Pick a **tool** or **library** that does LDAP auth and study what it does under the wire when given **different sets of credentials** - either through packet capturing or source code inspection.
