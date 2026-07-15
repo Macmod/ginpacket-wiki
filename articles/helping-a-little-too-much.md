@@ -95,7 +95,7 @@ Although we can image that this primitive would also work for the **self passwor
 
 ## Other write actions
 
-Although a bit more niche, it's also possible that a server's computer account (or `NETWORK SERVICE`) has rights to create objects in OUs, containers, or even the root of the domain. In that case, the [repldap](https://ginpacket.gitbook.io/docs/tools/repldap) tool can also be used to **create** or **modify** users / computers / containers / OUs, or any other kind of AD object by using `repldap create` and `repldap modify`.
+Although a bit more niche, it's also possible that a server's computer account (or `NETWORK SERVICE`) has rights to modify existing objects or create objects in OUs, containers, or even the root of the domain. In that case, the [repldap](https://ginpacket.gitbook.io/docs/tools/repldap) tool can also be used to **create** or **modify** users / computers / containers / OUs, or any other kind of AD object by using `repldap create` and `repldap modify`.
 
 One thing to note, though, is that the `_AdAttributeData` structure, used to pass the value of each attribute to be either created or changed to the ADProxy `Create` and `Modify` methods, carries exactly **one value field** (not a **list of values** as is the usual LDAP interface for creations and modifications):
 
