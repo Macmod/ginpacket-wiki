@@ -124,7 +124,7 @@ We arrive at our destination by checking the references to each of these functio
 
 <figure><img src="../.gitbook/assets/TODO" alt=""><figcaption></figcaption></figure>
 
-After defining a few types to what the structures should look like and renaming some variables (although not perfectly as the decompiler if often not very friendly), we can see that there is a loop that iterates on the SafeArray passed to the original call (the `attributes` parameter), extracts each element of it (an `_AdAttributeData`), and starts filling up `modToForward` with the values for the definitive operation to forward to the LDAP calls:
+After renaming some variables and defining a few types to what the structures should look like (although not perfectly as the decompiler is often not very friendly), we can see that there is a loop that iterates on the SafeArray passed to the original call (the `attributes` parameter), extracts each element of it (an `_AdAttributeData`), and starts filling up `modToForward` with the values for the definitive operation to forward to the LDAP calls:
 
 <figure><img src="../.gitbook/assets/615392601-7369e8db-0a4c-46d8-9e3c-282ecf54ec83.png" alt=""><figcaption></figcaption></figure>
 
