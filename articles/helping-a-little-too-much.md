@@ -51,7 +51,14 @@ What this means is that:
 
 ## Shadow Credentials
 
-One relevant example of what can be accomplished here is using [repldap](https://ginpacket.gitbook.io/docs/tools/repldap) to manage the `msDS-KeyCredentialLink` value on the target computer object pointing to a keypair you control (aka "shadow credentials"), giving you the ability to use the matching private key to request a TGT as that computer account via PKINIT, effectively giving persistent Kerberos access to the account without touching LSASS or modifying passwords:
+One relevant example of what can be accomplished here is using [repldap](https://ginpacket.gitbook.io/docs/tools/repldap) to manage the `msDS-KeyCredentialLink` value on the target computer object pointing to a keypair you control (aka "shadow credentials"), giving you the ability to use the matching private key to request a TGT as that computer account via PKINIT, effectively giving persistent Kerberos access to the account without touching LSASS or modifying passwords. This would work as long as:
+
+1. The target server has the DFS Replication feature
+2. The target server has the necessary rights to add values to this attribute on the object
+
+For (2), if an explicit ACE grants the target server **GenericAll**, **GenericWrite** or **WriteAccountRestrictions** over that attribute of an object, it would automatically have rights to add "shadow credentials" to that object. These rights would automatically be present in every computer object if the target server is a member of **Key Admins**, **Enterprise Key Admins** or **Domain Admins**.
+
+Otherwise, every computer of a domain **should** have the right to write to its own `msDS-KeyCredentialLink`, as long as the attribute is **not set** (which is usually also not a problem if we don't care about breaking existing auth flows, as every computer should also have the right to delete its own attribute).
 
 **TODO**: Get definitive example with two DCs or with a member server+a DC
 
@@ -65,7 +72,9 @@ What makes the DFSRHelper path interesting here is that the write goes through t
 
 ## Changing Passwords
 
-### Admin Resets
+{% hint style="warning" %}
+Since password operations in LDAP can only be performed via LDAPS on 636, you must always use the proper DC hostname instead of its IP in `--target-dc` to avoid certificate validation issues between the `target` and the `targetDC`.
+{% endhint %}
 
 Both the `changepwd dfsrh` or `repldap modify` subcommands can be used to issue admin password resets via this primitive to computer or user accounts - they are just regular `Modify(Replace)` operations on the corresponding `unicodePwd` attribute. Of course, as usual, the principal that will perform the action (either `NETWORK SERVICE` when `target==targetDC` or `TARGET$` otherwise) has to have the necessary rights on the object whose password is going to be reset:
 
@@ -80,15 +89,11 @@ $ ./repldap [auth_flags] modify DN_FOR_TARGETOBJECT --replace unicodePwd=Banana@
 
 <figure><img src="../.gitbook/assets/615908939-d0164dac-1707-4b83-a18f-93b66112308e.png" alt=""><figcaption></figcaption></figure>
 
-{% hint style="warning" %}
-Since password operations in LDAP can only be performed via LDAPS on 636, you must always use the proper DC hostname instead of its IP in `--target-dc` to avoid certificate validation issues between the `target` and the `targetDC`.
+{% hint style="info" %}
+Although we can image that this primitive would also work for the **self password change** operation (which issues a selective `Modify(delete)` on the old password + a `Modify(add)` with the new password) as well as the **admin reset** operation, it is *not* implemented in the tool, as (1) it would probably not work, as selective deletes are unsupported by this primitive (read sections below for details). Even if it worked, it would require knowing the current password for the computer (kind of a chicken-and-egg problem).
 {% endhint %}
 
-### Self password changes
-
-**TODO**: Finish this
-
-### Other write actions
+## Other write actions
 
 Although a bit more niche, it's also possible that a server's computer account (or `NETWORK SERVICE`) has rights to create objects in OUs, containers, or even the root of the domain. In that case, the [repldap](https://ginpacket.gitbook.io/docs/tools/repldap) tool can also be used to **create** or **modify** users / computers / containers / OUs, or any other kind of AD object by using `repldap create` and `repldap modify`.
 
