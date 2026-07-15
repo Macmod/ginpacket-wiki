@@ -37,7 +37,7 @@ The ADWS endpoint is actually split across several Microsoft Open Specifications
 
 Together they describe how Active Directory domain controllers expose a SOAP endpoint on TCP/9389, with:
 
-* [NNS](https://winprotocoldoc.z19.web.core.windows.net/MS-NNS/[MS-NNS].pdf) and [NMF](https://winprotocoldoc.z19.web.core.windows.net/MC-NMF/%5bMC-NMF%5d.pdf) providing the broad "transport" layer
+* [NNS](https://winprotocoldoc.z19.web.core.windows.net/MS-NNS/[MS-NNS].pdf) and [NMF](https://winprotocoldoc.z19.web.core.windows.net/MC-NMF/%5bMC-NMF%5d.pdf) providing the "broad transport layer"
 * [ADDM](https://winprotocoldoc.z19.web.core.windows.net/MS-ADDM/[MS-ADDM].pdf), [WSDS](https://winprotocoldoc.z19.web.core.windows.net/MS-WSDS/[MS-WSDS].pdf), [WSTIM](https://winprotocoldoc.z19.web.core.windows.net/MS-WSTIM/%5bMS-WSTIM%5d.pdf) & [ADCAP](https://winprotocoldoc.z19.web.core.windows.net/MS-ADCAP/%5bMS-ADCAP%5d.pdf) defining the SOAP operations 
 * [WSPELD](https://github.com/Macmod/go-adws/blob/main/transport/nbfse_codec.go) specifying how LDAP controls are forwarded through the SOAP layer
 
@@ -140,7 +140,7 @@ From the trees above I imagine you can guess the parallels already:
 
 | LDAP Operation | ADWS Equivalent | Notes |
 |----------------|-----------------|-------|
-| `Search` | MS-WSDS `Enumerate` + `Pull` loop | If `scope=baseObject` (single entry), MS-WSTIM `Get` can be used instead |
+| `Search` | MS-WSDS `Enumerate+Pull` loop | If `scope=baseObject` (single entry), MS-WSTIM `Get` can be used instead |
 | `Add` | MS-WSTIM `Create` | - |
 | `Modify` | MS-WSTIM `Put` | Password changes can be performed via manual `Put`s or via MS-ADCAP `ChangePassword` / `SetPassword` |
 | `Delete` | MS-WSTIM `Delete` | - |
@@ -225,7 +225,7 @@ But this XML isn't sent as plain text - it's encoded with [NBFSE](https://winpro
 
 The [go-adws](https://github.com/Macmod/go-adws) library builds the XML programmatically using the [soap package](https://github.com/Macmod/go-adws/tree/main/soap)'s builder functions (`BuildEnumerateRequest`, `BuildModifyRequest`, etc) and encodes them via the [NBFSE codec](https://github.com/Macmod/go-adws/blob/main/transport/nbfse_codec.go), implemented in the `transport` package.
 
-The practical upshot of NBFSE is that the wire traffic is significantly more compact than plaintext SOAP/XML, but still not as concise as LDAP over BER. A small *search* that fits in a single LDAP page takes one round-trip, whereas over ADWS a search usually needs at least two (`Enumerate` + `Pull`) because opening the query and retrieving results are split across separate operations - the exception being a base-scope read, which can map to a one-shot `Get` from MS-WSTIM. For large result sets, both protocols page - LDAP via the Paged Results control (default page size is 1000 entries in AD), ADWS via repeated `Pull` calls - so the round-trip gap narrows, but ADWS still requires the initial `Enumerate` before the first `Pull`, and the overhead in traffic is significantly larger.
+The practical upshot of NBFSE is that the wire traffic is significantly more compact than plaintext SOAP/XML, but still not as concise as LDAP over BER. A small *search* that fits in a single LDAP page takes one round-trip, whereas over ADWS a search usually needs at least two (`Enumerate+Pull`) because opening the query and retrieving results are split across separate operations - the exception being a base-scope read, which can map to a one-shot `Get` from MS-WSTIM. For large result sets, both protocols page - LDAP via the Paged Results control (default page size is 1000 entries in AD), ADWS via repeated `Pull` calls - so the round-trip gap narrows, but ADWS still requires the initial `Enumerate` before the first `Pull`, and the overhead in traffic is significantly larger.
 
 ## A Bit of Protocol Internals
 
@@ -299,26 +299,26 @@ flowchart TB
   style Encoding fill:#f4f4f5,stroke:#a1a1aa,color:#18181b
 ```
 
-**TODO: Improve paragraphs below**
-
 **TODO: Simple example of GSSAPI token/wrapping/unwrapping/signing/sealing?**
 
-This may look like a lot for just the "broad" transport layer, but keep in mind that this is actually just "syntax sugar" architected by protocol nerds for simpler operations:
+This may look like a lot for just the "broad" transport layer, but keep in mind it's basically "syntax sugar" cooked up by protocol nerds for otherwise simple operations:
 
-1) **GSSAPI** is just a standardized way of passing necessary credential material to the server to allow for authentication/signing/encryption using either NTLM or Kerberos (one or the other, with no negotiation involved);
-2) **SPNEGO** is a wrapper on top of GSSAPI defining a way for the client to negotiate with the server which GSSAPI algorithm to use;
-3) **SASL** is just the protocol-specific wrapper format that the LDAP client uses to specify to the server what it will use for authentication:
-* **GSSAPI** (straight without any negotiation, fixing Kerberos as the mechanism*)
-* **GSS-SPNEGO** (SPNEGO negotiation to decide between NTLM or Kerberos, then GSSAPI with the chosen mechanism)
-* **EXTERNAL** (what is currently known as "Pass The Cert" for LDAP is just passing a valid client certificate during the `ClientHello` of the TLS handshake, then specifying EXTERNAL as the SASL mechanism, basically telling the server - `"hey, I wish to bind using credentials that I specified previously in the TLS handshake, so check it instead of waiting for me to pass additional material!"`.
-* **DIGEST-MD5** (legacy, not used anymore). 
-4) **Sicily** is an alternative method to authenticate, in Microsoft's LDAP implementation, supports **NTLM only**.
+1. **GSSAPI** is a standardized *interface* ([RFC 2743](https://datatracker.ietf.org/doc/html/rfc2743)) that hands back opaque tokens for purposes of authentication/signing/sealing. It's **mechanism-agnostic** - the caller picks the mechanism (Kerberos, NTLM, ...) by OID and GSSAPI itself does *no* negotiation. On Windows processes the concrete implementation you're actually talking to is called **SSPI**, with Kerberos and NTLM plugged in as security packages (SSPs);
+2. **SPNEGO** ([RFC 4178](https://datatracker.ietf.org/doc/html/rfc4178)) is itself a GSSAPI *pseudo-mechanism* whose whole job is to let client and server negotiate which *real* mechanism (e.g. NTLM vs Kerberos) runs underneath;
+3. **SASL** ([RFC 4422](https://datatracker.ietf.org/doc/html/rfc4422)) is the protocol-specific wrapper the LDAP client uses to tell the server what it'll authenticate with:
+
+   * **GSSAPI** - despite the name, this SASL mechanism is **Kerberos only** (RFC 4752), no negotiation;
+   * **GSS-SPNEGO** - Microsoft's SASL mechanism (MS-ADTS) that runs SPNEGO, so it negotiates NTLM *or* Kerberos, then does GSSAPI with the winner;
+   * **EXTERNAL** - what's now called "Pass The Cert" for LDAP: you present a valid client cert during the `ClientHello` of the TLS handshake, then name EXTERNAL as the SASL mechanism, basically telling the server - `"hey, bind me with the credentials I already handed you in the TLS handshake, go check those instead of waiting for more material!"`;
+   * **DIGEST-MD5** - legacy mechanism, dead in modern Windows.
+
+4. **Sicily** is Microsoft's proprietary non-SASL bind path - a sibling of sasl [3] in the LDAP BindRequest's AuthenticationChoice, bolted on for legacy compatbility to NTLM only.
 
 {% hint style="info" %}
-GSSAPI is initially designed to be compatible with **any mechanism** capable of providing **authentication**, **signing** or **sealing** (such as NTLM and Kerberos), but in Microsoft's implementation (the "SASL" layer), the "**GSSAPI**" mechanism is defined as a wrapper for **Kerberos only**, contrary to the "**GSS-SPNEGO**" mechanism which works with both (and also includes negotiation). On the other hand, **NTLM** can be used to authenticate when using either SASL with the **GSS-SPNEGO** mechanism *or* the **Sicily** method. I know this sort of deviation looks ugly - don't blame me. Sometimes protocol architects do things for backwards compatibility or interoperability reasons that us regular humans can only dream of understanding some day.
+**The naming trap**: the fact that the SASL "GSSAPI" mechanism means Kerberos isn't a Microsoft deviation - it's in the spec itself ([RFC 4752](https://datatracker.ietf.org/doc/html/rfc4752)). Back when that mechanism got named **in the context of SASL**, Kerberos was likely the only GSSAPI mechanism anyone would want to deploy, so "GSSAPI" kind of became shorthand for "Kerberos" and the name stuck. The one that actually negotiates (and can therefore carry NTLM) is the **GSS-SPNEGO** mechanism. NTLM for LDAP, on the other hand, reaches a DC either via SASL with the GSS-SPNEGO mechanism or via the Sicily path. I know it looks ugly - don't blame me. Sometimes protocol architects make backwards-compat/interop calls that us regular humans can only dream of understanding some day.
 {% endhint %}
 
-On the ADWS side things are more complex in terms of the packet structures, but simpler in terms of the flow possibilities: you can either use NTLM as the mechanism directly, or use SPNEGO to negotiate the algorithm for GSSAPI (which in turn supports NTLM or Kerberos).
+On the ADWS side things are hairier in packet structure but simpler in flow: you either use NTLM directly, or SPNEGO to negotiate the mechanism for GSSAPI (NTLM or Kerberos).
 
 As you can see, these mechanisms sometimes mix up the concepts of **authentication** (providing valid credentials and having the server validate them) and **connection security** (integrity and confidentiality, also called **signing** and **sealing**). That's by design, as signing and sealing depend on a shared secret, and if the underlying system already involves credential material, it's wise to use it for both when possible. After all, we may desire signing to prevent a "man in the middle" from messing with our messages, or additionally sealing to avoid them seeing our credential material.
 
@@ -401,7 +401,7 @@ flowchart LR
   style TopoMgmt fill:#d4d4d8,stroke:#71717a,color:#18181b
 ```
 
-## The "broad transport layer"
+## The "broad transport layer" for ADWS
 
 The SPNEGO handshake negotiates the strongest common mechanism between client and server. In NNS the client also declares a **Required Protection Level** - `None`, `Sign` (integrity), or `EncryptAndSign` (integrity + confidentiality) - which is enforced during the GSSAPI exchange: if the level the server negotiates comes back *lower* than what the client required, the client aborts (MS-NNS §3.1.1.3). The bridge always requests `EncryptAndSign` - i.e. sign **and** seal - by passing `transport.ProtectionEncryptAndSign` to the NNS constructor; go-adws also supports `Sign` and `None`, but the bridge doesn't expose a knob to lower it.
 
@@ -517,7 +517,7 @@ Because the `Via` record pins exactly one endpoint per connection, a single NMF 
 
 Each of these requires its own NNS authentication handshake. That means up to three SPNEGO token exchanges per ADWS connection. The credential is reused across all three, but from the protocol's perspective each session is independently authenticated.
 
-The bridge takes advantage of lazy initialization so that `connectADWS()` performs **no network I/O** - it only resolves the FQDN and returns the struct. Each session is dialed on first use via a `sync.Once` guard:
+Our bridge takes advantage of lazy initialization so that `connectADWS()` performs **no network I/O** - it only resolves the FQDN and returns the struct. Each session is dialed on first use via a `sync.Once` guard:
 
 ```go
 func connectADWS(ctx context.Context, targetHost string) (*adwsConn, error) {
