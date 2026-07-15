@@ -76,7 +76,7 @@ What makes the DFSRHelper path interesting here is that the write goes through t
 Since password operations in LDAP can only be performed via LDAPS on 636, you must always use the proper DC hostname instead of its IP in `--target-dc` to avoid certificate validation issues between the `target` and the `targetDC`.
 {% endhint %}
 
-Both the `changepwd dfsrh` or `repldap modify` subcommands can be used to issue admin password resets via this primitive to computer or user accounts - they are just regular `Modify(Replace)` operations on the corresponding `unicodePwd` attribute. Of course, as usual, the principal that will perform the action (either `NETWORK SERVICE` when `target==targetDC` or `TARGET$` otherwise) has to have the necessary rights on the object whose password is going to be reset:
+Both the `changepwd dfsrh` or `repldap modify` subcommands can be used to issue admin password resets via this primitive to computer or user accounts - they are just regular `Modify(Replace)` operations on the corresponding `unicodePwd` attribute. Of course, as usual, the principal that will perform the action (either `NETWORK SERVICE` when `target==targetDC` or `TARGET$` otherwise) has to have the necessary rights on the object whose password is going to be reset (`User-Force-Change-Password`), which is obviously **not usual** for a computer account to have, either on itself or on other objects.
 
 ```bash
 $ ./changepwd dfsrh [auth_flags] \
