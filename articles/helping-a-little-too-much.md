@@ -90,7 +90,7 @@ $ ./repldap [auth_flags] modify DN_FOR_TARGETOBJECT --replace unicodePwd=Banana@
 <figure><img src="../.gitbook/assets/615908939-d0164dac-1707-4b83-a18f-93b66112308e.png" alt=""><figcaption></figcaption></figure>
 
 {% hint style="info" %}
-Although we can image that this primitive would also work for the **self password change** operation (which issues a `Modify(delete+add)`, where the delete operation is selective by passing the old password and the add operation includes the new password) as well as the **admin reset** operation, it was **not** implemented in the tool: it would probably not work, since selective deletes are unsupported by this primitive (read sections below for details). Even if it worked, it would require knowing the current password for the computer (kind of a chicken-and-egg problem).
+We could theorize that this primitive would also work for the **self password change** operation - this operation is performed by issuing a `Modify(delete+add)`, where the delete operation is selective by passing the old password and the add operation includes the new password itself, differently from the **admin reset** operation which is just a `Modify(replace)` with the new password. This path was **not** implemented in ginpacket because it would probably not work, since selective **Modify(delete)** ops are unsupported by this primitive (read sections below for details).
 {% endhint %}
 
 ## Other write actions
