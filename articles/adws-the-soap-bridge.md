@@ -305,10 +305,10 @@ This may look like a lot for just the "broad" transport layer, but keep in mind 
 
 1. **GSSAPI** is a standardized *interface* ([RFC 2743](https://datatracker.ietf.org/doc/html/rfc2743)) that hands back opaque tokens for purposes of authentication/signing/sealing. It's **mechanism-agnostic** - the caller picks the mechanism (Kerberos, NTLM, ...) by OID and GSSAPI itself does *no* negotiation. On Windows processes the concrete implementation you're actually talking to is called **SSPI**, with Kerberos and NTLM plugged in as security packages (SSPs);
 2. **SPNEGO** ([RFC 4178](https://datatracker.ietf.org/doc/html/rfc4178)) is itself a GSSAPI *pseudo-mechanism* whose whole job is to let client and server negotiate which *real* mechanism (e.g. NTLM vs Kerberos) runs underneath;
-3. **SASL** ([RFC 4422](https://datatracker.ietf.org/doc/html/rfc4422)) is the protocol-specific wrapper the LDAP client uses to tell the server what it'll authenticate with:
+3. **SASL** ([RFC 4422](https://datatracker.ietf.org/doc/html/rfc4422) / [MS-ADTS](https://winprotocoldoc.z19.web.core.windows.net/MS-ADTS/[MS-ADTS].pdf)) is the protocol-specific wrapper the LDAP client uses to tell the server what it'll authenticate with:
 
-   * **GSSAPI** - despite the name, this SASL mechanism is **Kerberos only** (RFC 4752), no negotiation;
-   * **GSS-SPNEGO** - Microsoft's SASL mechanism (MS-ADTS) that runs SPNEGO, so it negotiates NTLM *or* Kerberos, then does GSSAPI with the winner;
+   * **GSSAPI** - despite the name, this SASL mechanism supports **Kerberos only** ([RFC 4752](https://datatracker.ietf.org/doc/html/rfc4752));
+   * **GSS-SPNEGO** - Microsoft's SASL mechanism that runs SPNEGO, so it negotiates NTLM *or* Kerberos, then does the GSSAPI flow with the winner;
    * **EXTERNAL** - what's now called "Pass The Cert" for LDAP: you present a valid client cert during the `ClientHello` of the TLS handshake, then name EXTERNAL as the SASL mechanism, basically telling the server - `"hey, bind me with the credentials I already handed you in the TLS handshake, go check those instead of waiting for more material!"`;
    * **DIGEST-MD5** - legacy mechanism, dead in modern Windows.
 
