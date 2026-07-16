@@ -34,17 +34,23 @@ Let's look at the `Create` call, as `Modify` and `Delete` aren't much different:
 
 Two things are interesting here: the first is that the actions are performed with the target's computer account. This is often a "feature", as many organizations still grant sensitive Allow ACEs (Full Control, Generic Write, etc) on critical objects to the `Domain Computers` group or to specific computer objects.
 
-The second is that you can specify the domain controller to receive the operation in the call arguments. Can it be any address, I wondered? The answer is yes: you could even run `Responder` on a VPS, issue one of these calls to a target, and capture NetNTLM hashes for the target's computer account from the LDAP bind, or maybe run ntlmrelayx on a pivot host and relay the credentials into the real DC for a full LDAP shell:
+The second is that you can specify the domain controller to receive the operation in the call arguments. Can it be any address, I wondered? The answer is yes: you could even run `Responder` on a VPS, issue one of these calls to a target, and capture NetNTLM hashes for the target's computer account from the LDAP bind, or maybe run `ntlmrelayx` on a pivot host and relay the credentials into the DC for a full LDAP shell:
 
 <figure><img src="../.gitbook/assets/615399073-d8c8afba-2000-49c9-a41f-32ac626f5cc9.png" alt=""><figcaption>Coercing TARGET$ to perform LDAP auth on a VPS via DFSRH IADProxy2</figcaption></figure>
 
 <figure><img src="../.gitbook/assets/615397616-31c8ed06-e07d-4237-a7e0-2424b6ad8f7a.png" alt=""><figcaption>Receiving NTLMv2-SSP for TARGET$ on a VPS</figcaption></figure>
 
-If the DC itself has the **DFS Replication** feature, you can also ask it to **connect to itself**, but then the security context would be tied to the `NETWORK SERVICE` user instead of the computer account, changing the scope of actions that can actually be performed. Whenever the DC passed in the call is different from the host receiving it, the call must go through the network, so the `TARGET$` computer account is used instead of the `NETWORK SERVICE` principal. This is standard behavior of virtual accounts such as `NETWORK SERVICE`, as described in [Becoming the Machine, A Virtual Account's Guide To Total Control](https://www.abdulmhsblog.com/posts/iammachine/) by Abdul Mhanni.
+As for the relaying part, to get a full ldap shell with the computer account, impacket's `ntlmrelayx` doesn't currently implement an LDAP relay server, but we can use [PR#2026](https://github.com/fortra/impacket/pull/2026) for that purpose:
+
+**TODO:** Get screenshot to showcase this method
+
+<figure><img src="../.gitbook/assets/TODO" alt=""><figcaption></figcaption></figure>
+
+If the DC itself has the **DFS Replication** feature, you can also ask it to **connect to itself** directly, but then the security context would be tied to the `NETWORK SERVICE` user instead of the computer account, changing the scope of actions that can actually be performed. Whenever the DC passed in the call is different from the host receiving it, the call must go through the network, so the `TARGET$` computer account is used instead of the `NETWORK SERVICE` principal. This is standard behavior of virtual accounts such as `NETWORK SERVICE`, as described in [Becoming the Machine, A Virtual Account's Guide To Total Control](https://www.abdulmhsblog.com/posts/iammachine/) by Abdul Mhanni.
 
 What this means is that:
 
-1. If you have admin privileges on an arbitrary server with DFS Replication, you can take control of its computer account with these calls instead of other well known coercion methods;
+1. If you have admin privileges on an arbitrary server with DFS Replication, you can take control of its computer account by relaying with these calls instead of other well known coercion methods;
 2. Instead of capturing hashes or relaying them, you could just use the `Create` / `Modify` / `Delete` calls directly to tell DFSRHelper to perform the action for you;
 3. If there are **two DCs** and one has DFS Replication, you could ask it to perform actions on the other DC's LDAP using its own computer account;
 4. If there is only **one DC** and it has DFS Replication, you could ask it to perform actions on itself on behalf of `NETWORK SERVICE` (if any object allows this principal explicitly in its DACL).
@@ -54,11 +60,12 @@ What this means is that:
 One relevant example of what can be accomplished here is using [repldap](https://ginpacket.gitbook.io/docs/tools/repldap) to manage the `msDS-KeyCredentialLink` value on the target computer object pointing to a keypair you control (aka "shadow credentials"), giving you the ability to use the matching private key to request a TGT as that computer account via PKINIT, effectively giving persistent Kerberos access to the account without touching LSASS or modifying passwords. This would work as long as:
 
 1. The target server has the DFS Replication feature
-2. The target server has the necessary rights to add values to this attribute on the object
+2. The supplied credentials have local admin rights on the target server
+3. The target server has the necessary rights to add values to this attribute on the target object
 
 For (2), if an explicit ACE grants the target server **GenericAll**, **GenericWrite** or **WriteAccountRestrictions** over that attribute of an object, it would automatically have rights to add "shadow credentials" to that object. These rights would automatically be present in every computer object if the target server is a member of **Key Admins**, **Enterprise Key Admins** or **Domain Admins**.
 
-Otherwise, every computer of a domain **should** have the right to write to its own `msDS-KeyCredentialLink`, as long as the attribute is **not set** (which is usually also not a problem if we don't care about breaking existing auth flows, as every computer should also have the right to delete its own attribute).
+Otherwise, **every computer of a domain** should have the right to **write to its own `msDS-KeyCredentialLink`**, as long as the attribute is **not set** (which is usually also not a problem if we don't care about breaking existing auth flows, as every computer should also have the right to delete its own attribute).
 
 ```bash
 ./repldap [auth_flags] --target-dc WIN-6BKCP1FPPCI keycred add 'CN=WIN-KGMRV4B9JSI,OU=Domain Controllers,DC=creta,DC=local'
@@ -124,8 +131,6 @@ Opening this DLL in Ghidra for analysis we can quickly see that it imports the r
 We arrive at our destination by checking the references to each of these functions with `Ctrl+Shift+F`, then going to the first result and decompiling with `Ctrl+E`. For **ldap_modify_ext_sW**, for instance, we find that the `CADProxy::AddModifyImpl` function is actually responsible for forwarding both Add and Modify:
 
 <figure><img src="../.gitbook/assets/615392600-7369e8db-0a4c-46d8-9e3c-282ecf54ec83.png" alt=""><figcaption></figcaption></figure>
-
-<figure><img src="../.gitbook/assets/TODO" alt=""><figcaption></figcaption></figure>
 
 After renaming some variables and defining a few types to what the structures should look like (although not perfectly as the decompiler is often not very friendly), we can see that there is a loop that iterates on the SafeArray passed to the original call (the `attributes` parameter), extracts each element of it (an `_AdAttributeData`), and starts filling up `modToForward` with the values for the definitive operation to forward to the LDAP calls:
 
