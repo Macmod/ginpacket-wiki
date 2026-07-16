@@ -423,11 +423,7 @@ flowchart LR
 
 ## The "broad transport layer" for ADWS
 
-The SPNEGO handshake negotiates the strongest common mechanism between client and server. In NNS the client also declares a **Required Protection Level** - `None`, `Sign` (integrity), or `EncryptAndSign` (integrity + confidentiality) - which is enforced during the GSSAPI exchange: if the level the server negotiates comes back *lower* than what the client required, the client aborts (MS-NNS §3.1.1.3). The bridge always requests `EncryptAndSign` - i.e. sign **and** seal - by passing `transport.ProtectionEncryptAndSign` to the NNS constructor; go-adws also supports `Sign` and `None`, but the bridge doesn't expose a knob to lower it.
-
-{% hint style="info" %}
-"Required" here is a *client-side* minimum, not a server mandate. MS-NNS leaves the protection level entirely to the client, and MS-WSDS only *encourages* (SHOULD, not MUST) using a transport that provides encryption and integrity - no ADWS spec makes sealing a hard requirement. In practice, though, a DC's ADWS endpoint is a WCF `net.tcp` binding configured for Windows message security, so it rejects connections that don't sign+seal. The upshot: always use `EncryptAndSign`, even though it's the server's binding - not the spec - that forces your hand.
-{% endhint %}
+The SPNEGO handshake negotiates the strongest common mechanism between client and server. In NNS the client also declares a **Required Protection Level** - `None`, `Sign` (integrity), or `EncryptAndSign` (confidentiality + integrity): if the level the server negotiates comes back *lower* than what the client required, the client is the one that should abort (MS-NNS §3.1.1.3). Even though in theory we could use `Sign` and `None`, we always use `EncryptAndSign` because the default behavior of Windows servers [seems to be to require it](https://learn.microsoft.com/en-us/dotnet/framework/configure-apps/file-schema/wcf/transport-of-nettcpbinding).
 
 ### Putting it together: the full `Connect()` sequence
 
