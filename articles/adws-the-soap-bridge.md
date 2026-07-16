@@ -411,7 +411,7 @@ The SPNEGO handshake negotiates the strongest common mechanism between client an
 "Required" here is a *client-side* minimum, not a server mandate. MS-NNS leaves the protection level entirely to the client, and MS-WSDS only *encourages* (SHOULD, not MUST) using a transport that provides encryption and integrity - no ADWS spec makes sealing a hard requirement. In practice, though, a DC's ADWS endpoint is a WCF `net.tcp` binding configured for Windows message security, so it rejects connections that don't sign+seal. The upshot: always use `EncryptAndSign`, even though it's the server's binding - not the spec - that forces your hand.
 {% endhint %}
 
-### NNS handshake at the byte level
+### NNS handshake
 
 The NNS handshake frame is simple - a 5-byte header (`MessageId` (1 byte), `MajorVersion` (1, `0x01`), `MinorVersion` (1, `0x00`), then a 2-byte **big-endian** `PayloadSize`) followed by the GSS token. (Once authenticated, application data uses a *different* frame: a 4-byte little-endian size prefix in front of the GSS-wrapped payload - no MessageId byte.) The handshake exchanges GSSAPI tokens:
 
@@ -457,8 +457,6 @@ NMF is **record-oriented**: every record is a 1-byte *record type* followed by a
 
 Here are sequence diagrams for both protocol flows described above:
 
-### NNS handshake
-
 ```mermaid
 sequenceDiagram
     participant C as Client
@@ -475,26 +473,39 @@ sequenceDiagram
 
 ### NMF setup
 
+Where the previous section walked the same ground from the NNS/GSSAPI side, this one walks it from MC-NMF's side - the outer framing protocol that actually drives the whole `Connect()` sequence and decides when each of those records goes out.
+
+The **Preamble** isn't a single record - it's four separate ones, written back-to-back on the bare (unauthenticated) socket, in this fixed order (MC-NMF §2.2.3.1-§2.2.3.4):
+
+1. **Version** (`0x00`) - `[RecordType][VersionMajor=1][VersionMinor=0]`, 3 bytes total.
+2. **Mode** (`0x01`) - `[RecordType][Mode]`, where `Mode` is `0x02` (Duplex) for ADWS.
+3. **Via** (`0x02`) - `[RecordType][Length][URI bytes]`, the target endpoint as a `net.tcp://fqdn:9389/ActiveDirectoryWebServices/<resource>` string (`Length` uses the same variable-length encoding as the Sized Envelope records below).
+4. **Known Encoding** (`0x03`) - `[RecordType][Encoding]`, where `Encoding` is `0x08` (SOAP 1.2 Binary with in-band dictionary) for ADWS.
+
+Only *after* all four have gone out does the client send the **Upgrade Request** (`0x09`): `[RecordType][Length][protocol string]`, where the protocol string is the fixed value `application/negotiate`. The server's **Upgrade Response** (`0x0A`) is a bare single-byte record - no payload - just an acknowledgement that it's ready to start the NNS handshake. Only then does the GSS token exchange from the previous section run, still on the raw, unauthenticated socket (per MS-NNS, the handshake frames themselves aren't wrapped).
+
+Once NNS authentication completes, the two remaining preamble records - **Preamble End** (`0x0C`) and **Preamble Ack** (`0x0B`) - are exchanged, but critically these travel *through* the now-authenticated NNS layer (signed + sealed) rather than on the bare socket - they're the first records to do so. Every **Sized Envelope** (`0x06`) carrying an actual SOAP message, and the final **End** (`0x07`) that closes the stream, ride the same protected channel:
+
 ```mermaid
 sequenceDiagram
     participant C as Client
     participant S as Server (ADWS)
 
-    Note over C,S: === TCP connection established ===
-    C->>S: Preamble: "http://schemas.microsoft.com/.../nbfse\r\n"
-    S->>C: Preamble accept: "application/negotiate\r\n"
-    C->>S: UpgradeRequest (0x09)
+    Note over C,S: === TCP connection established (raw, unauthenticated) ===
+    C->>S: Version (0x00): major=1, minor=0
+    C->>S: Mode (0x01): Duplex
+    C->>S: Via (0x02): "net.tcp://dc.fqdn:9389/.../Windows/Enumeration"
+    C->>S: KnownEncoding (0x03): SOAP12BinaryDict
+    C->>S: UpgradeRequest (0x09): "application/negotiate"
+    S->>C: UpgradeResponse (0x0A)
 
-    Note over C,S: === NNS handshake runs inside the upgrade ===
+    Note over C,S: === NNS handshake (still raw, unauthenticated frames) ===
     C->>S: NNS: GSS (SPNEGO) token
     S->>C: NNS: HandshakeInProgress
     C->>S: NNS: next SPNEGO token
     S->>C: NNS: HandshakeDone
 
-    S->>C: UpgradeResponse (0x0A)
-    C->>S: Via (0x01): "Windows/Enumeration"
-    C->>S: Mode (0x02): "Stream"
-    C->>S: KnownEncoding (0x03): "application/soap+xml"
+    Note over C,S: === From here on, everything rides the signed+sealed NNS layer ===
     C->>S: PreambleEnd (0x0C)
     S->>C: PreambleAck (0x0B)
 
@@ -507,7 +518,7 @@ sequenceDiagram
     C->>S: End (0x07)
 ```
 
-Each **Sized Envelope** record (`0x06`) is the record-type byte, a length prefix, then the NBFSE-encoded payload. The length uses MC-NMF's variable-length integer (7 bits per byte, high bit = "more bytes follow"), so a small message spends only one or two bytes describing its size.
+Each **Sized Envelope** record (`0x06`) is the record-type byte, a length prefix, then the NBFSE-encoded payload. The length uses MC-NMF's variable-length integer (7 bits per byte, high bit = "more bytes follow"), so a small message spends only one or two bytes describing its size - the same encoding the Via record's length prefix above uses.
 
 ## Lazy Connections
 
