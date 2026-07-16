@@ -44,10 +44,10 @@ If the DC itself has the **DFS Replication** feature, you can also ask it to **c
 
 What this means is that:
 
-1. If you have admin privileges on a host with DFS Replication, you can take control of its computer account with these calls instead of other well known coercion methods;
+1. If you have admin privileges on an arbitrary server with DFS Replication, you can take control of its computer account with these calls instead of other well known coercion methods;
 2. Instead of capturing hashes or relaying them, you could just use the `Create` / `Modify` / `Delete` calls directly to tell DFSRHelper to perform the action for you;
 3. If there are **two DCs** and one has DFS Replication, you could ask it to perform actions on the other DC's LDAP using its own computer account;
-4. If there is only **one DC**, you could ask it to perform actions on itself on behalf of `NETWORK SERVICE` (if any object allows this principal explicitly in its DACL).
+4. If there is only **one DC** and it has DFS Replication, you could ask it to perform actions on itself on behalf of `NETWORK SERVICE` (if any object allows this principal explicitly in its DACL).
 
 ## Shadow Credentials
 
