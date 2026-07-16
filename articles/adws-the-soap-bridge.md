@@ -235,6 +235,7 @@ The stack below shows the transport, authentication, and encoding layers used by
 flowchart TB
   linkStyle default stroke:#111,stroke-width:6px
 
+  subgraph Wrapper[" "]
   subgraph Transport["Network Transport"]
     direction LR
     L1["TCP :389"]
@@ -268,6 +269,7 @@ flowchart TB
     L3["ASN.1 / BER"]
     A3["NBFSE (Binary XML)"]
   end
+  end
 
   L1 -.->|Plaintext| LdapAuth
   L1 -->|StartTLS| LdapAuth
@@ -290,6 +292,7 @@ flowchart TB
   class A1,A2,F1,A3 adws
   class M1,M2,M3,M4,M5,M6 mech
 
+  style Wrapper fill:#ffffff,stroke:#ffffff
   style Transport fill:#f4f4f5,stroke:#a1a1aa,color:#18181b
   style Auth fill:#f4f4f5,stroke:#a1a1aa,color:#18181b
   style LdapAuth fill:#e5e7eb,stroke:#9ca3af,color:#18181b
