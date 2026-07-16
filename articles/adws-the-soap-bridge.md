@@ -475,7 +475,9 @@ Steps 2/3, the **Upgrade**, is a single request/response pair: `Upgrade Request`
 `Upgrade Response` (`0x0A`) is a bare single byte - no payload, no echoed protocol string. It's purely a "go ahead" signal that the server is ready to start the NNS handshake; anything more specific about the negotiation happens inside that handshake itself, not here.
 {% endhint %}
 
-Steps 5/6 happen once that handshake completes: **Preamble End** (`0x0C`) and **Preamble Ack** (`0x0B`) are the first records to travel through the now-authenticated NNS layer rather than the bare socket, and every **Sized Envelope** (`0x06`) carrying a SOAP message - plus the final **End** (`0x07`) that closes the stream - rides that same protected channel from then on:
+Steps 5/6 happen once the NNS handshake (next section) completes: **Preamble End** (`0x0C`) and **Preamble Ack** (`0x0B`) are the first records to travel through the now-authenticated NNS layer rather than the bare socket, and every **Sized Envelope** (`0x06`) carrying a SOAP message - plus the final **End** (`0x07`) that closes the stream - rides that same protected channel from then on. Each **Sized Envelope** record is the record-type byte, a length prefix, then the NBFSE-encoded payload; the length uses the same variable-length integer as the Via record above (7 bits per byte, high bit = "more bytes follow"), so a small message spends only one or two bytes describing its size.
+
+Here's steps 1-3 - everything that happens before the handshake even starts:
 
 ```mermaid
 %%{init: {'theme': 'base', 'themeVariables': {
@@ -506,27 +508,9 @@ sequenceDiagram
     C-->>S: UpgradeRequest (0x09): "application/negotiate"
     S-->>C: UpgradeResponse (0x0A)
 
-    Note over C,S: NNS handshake
-    C-->>S: NNS: GSS (SPNEGO) token
-    S-->>C: NNS: HandshakeInProgress
-    C-->>S: NNS: next SPNEGO token
-    S-->>C: NNS: HandshakeDone
-
-    Note over C,S: From here on, everything rides the signed+sealed NNS layer
-    C->>S: PreambleEnd (0x0C)
-    S->>C: PreambleAck (0x0B)
-
-    Note over C,S: Application data phase
-    C->>S: SizedEnvelope (0x06): SOAP request
-    S->>C: SizedEnvelope (0x06): SOAP response
-    C->>S: SizedEnvelope (0x06): SOAP request
-    S->>C: SizedEnvelope (0x06): SOAP response
-    Note over C,S: ...
-    C->>S: End (0x07)
+    Note over C,S: NNS handshake happens here - zoomed in next
     end
 ```
-
-Each **Sized Envelope** record (`0x06`) is the record-type byte, a length prefix, then the NBFSE-encoded payload. The length uses MC-NMF's variable-length integer (7 bits per byte, high bit = "more bytes follow"), so a small message spends only one or two bytes describing its size - the same encoding the Via record's length prefix above uses.
 
 ### NNS handshake
 
@@ -574,7 +558,18 @@ sequenceDiagram
     Note over C,S: Server may challenge multiple times
     C-->>S: NNS Header + next SPNEGO token
     S-->>C: HandshakeDone (0x14)
-    Note over C,S: NNS payload follows (e.g. NMF records)
+
+    Note over C,S: NMF resumes - its records now ride as the payload inside NNS's own signed+sealed data frames
+    C->>S: PreambleEnd (0x0C)
+    S->>C: PreambleAck (0x0B)
+
+    Note over C,S: Application data phase
+    C->>S: SizedEnvelope (0x06): SOAP request
+    S->>C: SizedEnvelope (0x06): SOAP response
+    C->>S: SizedEnvelope (0x06): SOAP request
+    S->>C: SizedEnvelope (0x06): SOAP response
+    Note over C,S: ...
+    C->>S: End (0x07)
     end
 ```
 
@@ -840,39 +835,39 @@ Once any call is made, the caller doesn't know - and doesn't care - whether the 
 
 ## What you can do with it
 
-As a result of this bridge, all of the `ldap` subcommands below accept the `--adws` flag to use ADWS instead of plain LDAP/LDAPS (it's a shared flag across the whole `ldap` group; a few branches in the tree omit it just to keep the diagram readable).
+As a result of this bridge, all of the [ldap](https://ginpacket.gitbook.io/docs/tools/ldap) subcommands below accept the `--adws` flag to use ADWS instead of plain LDAP/LDAPS.
 
 ```
 ldap
-├── search       --adws   --filter  [--base-dn] [--scope] [--attributes] [--limit]
-├── info         --adws   <target>  [--hex]
-├── modify       --adws   <target>  --add/--replace/--delete <attr=value>
-├── delete       --adws   <DN>
-├── enable       --adws   <target>
-├── disable      --adws   <target>
-├── set-owner    --adws   <target> <new-owner>
-├── uac-modify   --adws   <target> <flag> <set|clear>
-├── get-gmsa     --adws   <target>
-├── get-laps     --adws   <target>
-├── dacl         --adws
-│   ├── show     <target>  [--filter-*]
-│   ├── add      <target> <grantee> <right>
-│   ├── remove   <target> <grantee> <right>  [--all]
-│   ├── add-dcsync      <domain> <grantee>
-│   ├── del-dcsync      <domain> <grantee>  [--all]
-│   ├── add-genericall  <target> <grantee>
-│   ├── del-genericall  <target> <grantee>  [--all]
-│   ├── add-genericwrite <target> <grantee>
-│   └── del-genericwrite <target> <grantee>  [--all]
-├── create        (parent)
-│   ├── user      --name <name>        [--pass] [--parent-dn] [--enabled]
-│   ├── computer  --name <name>        [--pass] [--parent-dn]
-│   ├── group     --name <name>        [--type] [--parent-dn]
-│   ├── ou        --name <name>        [--parent-dn]
-│   ├── container --name <name>        [--parent-dn]
-│   └── custom    [DN]                 [--template] [--attr]
-├── query         --adws
-│   ├── users              [--enabled] [--disabled]
+├── search
+├── info
+├── modify
+├── delete
+├── enable
+├── disable
+├── set-owner
+├── uac-modify
+├── get-gmsa
+├── get-laps
+├── dacl
+│   ├── show
+│   ├── add
+│   ├── remove
+│   ├── add-dcsync
+│   ├── del-dcsync
+│   ├── add-genericall
+│   ├── del-genericall
+│   ├── add-genericwrite
+│   └── del-genericwrite
+├── create
+│   ├── user
+│   ├── computer
+│   ├── group
+│   ├── ou
+│   ├── container
+│   └── custom
+├── query
+│   ├── users
 │   ├── groups
 │   ├── computers
 │   ├── containers
@@ -887,7 +882,7 @@ ldap
 │   ├── pwd-not-required
 │   ├── cert-templates
 │   ├── cert-authorities
-│   ├── trusts              [--transitive]
+│   ├── trusts
 │   ├── passpol
 │   ├── mquota
 │   ├── key-creds
@@ -897,9 +892,9 @@ ldap
 │   ├── sccm
 │   └── wds
 └── keycred
-    ├── list      <target>
-    ├── add       <target>  [--out-pfx] [--out-cert] [--key-size]
-    └── clear     <target>  [--device-id]
+    ├── list
+    ├── add
+    └── clear
 ```
 
 {% hint style="info" %}
@@ -910,21 +905,9 @@ ldap
 If you specify `--debug` along with `--adws`, ginpacket will dump **all ADWS SOAPs** from requests and responses into standard error for troubleshooting.
 {% endhint %}
 
-### Example: Reads - Search and Info
-
-The `ldap search` and `ldap info` subcommands are the most straightforward users. With `--adws`, a simple search like:
-
-```bash
-./ldap [auth_flags] --adws search '(sAMAccountType=805306368)' cn,distinguishedName
-```
-
-...gets translated into a WS-Enumeration `Enumerate` call, followed by one or more `Pull` calls. Each returned `ADWSItem` is converted into a `*ldap.Entry` with `adwsItemToEntry()` - the base64Binary attribute values (octet strings, SIDs, nTSecurityDescriptors, replica link data) get decoded to raw bytes, so `GetRawAttributeValue()` still works.
-
 For single-object fetches, `ldap info` uses `ldap.ScopeBaseObject`, which maps to a WS-Transfer `Get` request on the Resource endpoint - no enumeration needed. **(does it really?)**
 
-### Example: Writes - Modify, Create, Delete
-
-The `ldap modify`, `ldap create`, and `ldap delete` subcommands all accept `--adws`. 
+### Example: Creating and modifying objects
 
 For modifications, all the changes in an LDAP `ModifyRequest` (add/replace/delete) are batched into a **single** WS-Transfer `Put` on the Resource endpoint, expressed as one `<da:ModifyRequest>` with a `<da:Change>` element per change, which the server applies atomically:
 
@@ -957,8 +940,6 @@ The code paths for object creation and object modification also handle the `unic
 {% hint style="success" %}
 For custom creations and modifications, whenever a `unicodePwd` is present without a type hint, we automatically encode it as UTF16LE. For both of these cases, providing a type hint disables the automatic encoding.
 {% endhint %}
-
-Deletion just maps to WS-Transfer `Delete`.
 
 ## Conclusions
 
