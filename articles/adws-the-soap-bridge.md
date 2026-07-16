@@ -432,34 +432,7 @@ So the Preamble and the security Upgrade go out on the bare socket **first**; th
 The unauthenticated `mex` metadata endpoint skips steps 2-4 entirely and sends everything - Preamble, `Sized Envelope`s, `End` - straight over the raw socket. No Upgrade, no NNS, no signing.
 {% endhint %}
 
-The next two sections zoom into the byte-level detail behind each half of that sequence: NNS's own authentication frame (step 4), then MC-NMF's framing records (steps 1-3 and 5-6).
-
-### NNS handshake
-
-Step 4, zoomed in. The NNS handshake frame is simple - a 5-byte header (`MessageId` (1 byte), `MajorVersion` (1, `0x01`), `MinorVersion` (1, `0x00`), then a 2-byte **big-endian** `PayloadSize`) followed by the GSS token. (Once authenticated, application data uses a *different* frame: a 4-byte little-endian size prefix in front of the GSS-wrapped payload - no MessageId byte.) The handshake exchanges GSSAPI tokens:
-
-```
-Client -> Server: HandshakeInProgress (0x16) + GSS token (SPNEGO init)
-Server -> Client: HandshakeInProgress (0x16) + GSS token (SPNEGO challenge)
-Client -> Server: HandshakeInProgress (0x16) + GSS token (SPNEGO response)
-... repeat until ...
-Client -> Server: HandshakeDone (0x14)    [or HandshakeInProgress if more rounds]
-Server -> Client: HandshakeDone (0x14)    [or HandshakeInProgress if more rounds]
-```
-
-```mermaid
-sequenceDiagram
-    participant C as Client
-    participant S as Server (ADWS)
-
-    Note over C,S: 5-byte NNS header: MessageId + MajorVer(1) + MinorVer(1) + PayloadSize
-    C->>S: NNS Header + GSS (SPNEGO) token
-    S->>C: HandshakeInProgress (0x16)
-    Note over C,S: Server may challenge multiple times
-    C->>S: NNS Header + next SPNEGO token
-    S->>C: HandshakeDone (0x14)
-    Note over C,S: NNS payload follows (e.g. NMF records)
-```
+The next two sections zoom into the byte-level detail behind each half of that sequence, in the same outside-in order as the picture above: first MC-NMF's own framing records (steps 1-3 and 5-6) - the shell that's actually driving the whole thing - then, nested inside it, NNS's authentication frame (step 4).
 
 ### NMF framing
 
@@ -497,25 +470,26 @@ sequenceDiagram
     participant C as Client
     participant S as Server (ADWS)
 
-    Note over C,S: === TCP connection established (raw, unauthenticated) ===
-    C->>S: Version (0x00): major=1, minor=0
-    C->>S: Mode (0x01): Duplex
-    C->>S: Via (0x02): "net.tcp://dc.fqdn:9389/.../Windows/Enumeration"
-    C->>S: KnownEncoding (0x03): SOAP12BinaryDict
-    C->>S: UpgradeRequest (0x09): "application/negotiate"
-    S->>C: UpgradeResponse (0x0A)
+    Note over C,S: dashed = plaintext, solid = signed+sealed (NNS-protected)
+    Note over C,S: TCP connection established (raw, unauthenticated)
+    C-->>S: Version (0x00): major=1, minor=0
+    C-->>S: Mode (0x01): Duplex
+    C-->>S: Via (0x02): "net.tcp://dc.fqdn:9389/.../Windows/Enumeration"
+    C-->>S: KnownEncoding (0x03): SOAP12BinaryDict
+    C-->>S: UpgradeRequest (0x09): "application/negotiate"
+    S-->>C: UpgradeResponse (0x0A)
 
-    Note over C,S: === NNS handshake (still raw, unauthenticated frames) ===
-    C->>S: NNS: GSS (SPNEGO) token
-    S->>C: NNS: HandshakeInProgress
-    C->>S: NNS: next SPNEGO token
-    S->>C: NNS: HandshakeDone
+    Note over C,S: NNS handshake (still raw, unauthenticated frames - zoomed in next)
+    C-->>S: NNS: GSS (SPNEGO) token
+    S-->>C: NNS: HandshakeInProgress
+    C-->>S: NNS: next SPNEGO token
+    S-->>C: NNS: HandshakeDone
 
-    Note over C,S: === From here on, everything rides the signed+sealed NNS layer ===
+    Note over C,S: From here on, everything rides the signed+sealed NNS layer
     C->>S: PreambleEnd (0x0C)
     S->>C: PreambleAck (0x0B)
 
-    Note over C,S: === Application data phase ===
+    Note over C,S: Application data phase
     C->>S: SizedEnvelope (0x06): SOAP request
     S->>C: SizedEnvelope (0x06): SOAP response
     C->>S: SizedEnvelope (0x06): SOAP request
@@ -525,6 +499,34 @@ sequenceDiagram
 ```
 
 Each **Sized Envelope** record (`0x06`) is the record-type byte, a length prefix, then the NBFSE-encoded payload. The length uses MC-NMF's variable-length integer (7 bits per byte, high bit = "more bytes follow"), so a small message spends only one or two bytes describing its size - the same encoding the Via record's length prefix above uses.
+
+### NNS handshake
+
+Now the piece nested inside step 4. The NNS handshake frame is simple - a 5-byte header (`MessageId` (1 byte), `MajorVersion` (1, `0x01`), `MinorVersion` (1, `0x00`), then a 2-byte **big-endian** `PayloadSize`) followed by the GSS token. (Once authenticated, application data uses a *different* frame: a 4-byte little-endian size prefix in front of the GSS-wrapped payload - no MessageId byte.) The handshake exchanges GSSAPI tokens:
+
+```
+Client -> Server: HandshakeInProgress (0x16) + GSS token (SPNEGO init)
+Server -> Client: HandshakeInProgress (0x16) + GSS token (SPNEGO challenge)
+Client -> Server: HandshakeInProgress (0x16) + GSS token (SPNEGO response)
+... repeat until ...
+Client -> Server: HandshakeDone (0x14)    [or HandshakeInProgress if more rounds]
+Server -> Client: HandshakeDone (0x14)    [or HandshakeInProgress if more rounds]
+```
+
+```mermaid
+sequenceDiagram
+    participant C as Client
+    participant S as Server (ADWS)
+
+    Note over C,S: dashed = plaintext (unauthenticated)
+    Note over C,S: 5-byte header: MessageId+MajorVer+MinorVer+PayloadSize
+    C-->>S: NNS Header + GSS (SPNEGO) token
+    S-->>C: HandshakeInProgress (0x16)
+    Note over C,S: Server may challenge multiple times
+    C-->>S: NNS Header + next SPNEGO token
+    S-->>C: HandshakeDone (0x14)
+    Note over C,S: NNS payload follows (e.g. NMF records)
+```
 
 ## Lazy Connections
 
