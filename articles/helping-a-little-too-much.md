@@ -40,7 +40,7 @@ The second is that you can specify the domain controller to receive the operatio
 
 <figure><img src="../.gitbook/assets/615397616-31c8ed06-e07d-4237-a7e0-2424b6ad8f7a.png" alt=""><figcaption>Receiving NTLMv2-SSP for TARGET$ on a VPS</figcaption></figure>
 
-As for the relaying part, to get a full ldap shell with the computer account, impacket's `ntlmrelayx` doesn't currently implement an LDAP relay server, but we can use [PR#2026](https://github.com/fortra/impacket/pull/2026) for that purpose:
+As for the relaying part, to get a full ldap shell with the computer account, impacket's `ntlmrelayx` **doesn't currently implement an LDAP relay server**, but we can use [PR#2026](https://github.com/fortra/impacket/pull/2026) for that purpose:
 
 **TODO:** Get screenshot to showcase this method
 
