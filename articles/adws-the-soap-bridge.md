@@ -498,7 +498,7 @@ sequenceDiagram
     participant S as Server (ADWS)
 
     rect rgb(255, 255, 255)
-    Note over C,S: TCP connection established (raw, unauthenticated)
+    Note over C,S: TCP connection established
     C-->>S: Version (0x00): major=1, minor=0
     C-->>S: Mode (0x01): Duplex
     C-->>S: Via (0x02): "net.tcp://dc.fqdn:9389/.../Windows/Enumeration"
@@ -506,7 +506,7 @@ sequenceDiagram
     C-->>S: UpgradeRequest (0x09): "application/negotiate"
     S-->>C: UpgradeResponse (0x0A)
 
-    Note over C,S: NNS handshake (still raw, unauthenticated frames - zoomed in next)
+    Note over C,S: NNS handshake
     C-->>S: NNS: GSS (SPNEGO) token
     S-->>C: NNS: HandshakeInProgress
     C-->>S: NNS: next SPNEGO token
@@ -568,7 +568,6 @@ sequenceDiagram
     participant S as Server (ADWS)
 
     rect rgb(255, 255, 255)
-    Note over C,S: dashed = plaintext (unauthenticated)
     Note over C,S: "MessageId+MajorVer+MinorVer+PayloadSize"
     C-->>S: NNS Header + GSS (SPNEGO) token
     S-->>C: HandshakeInProgress (0x16)
