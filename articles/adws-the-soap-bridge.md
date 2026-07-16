@@ -344,6 +344,7 @@ Back to our use cases - now that we know how to set up the transport and how to 
 
 ```mermaid
 flowchart LR
+  subgraph Wrapper[" "]
   subgraph LDAP["LDAP"]
     direction TB
     L4a["SearchRequest"]
@@ -381,6 +382,7 @@ flowchart LR
       end
     end
   end
+  end
 
   L4a -.->|scope=any| A4a
   L4a -.->|scope=baseObject| A4a2
@@ -397,6 +399,7 @@ flowchart LR
   class A4a,A4e,A4a2,A4b,A4c,A4d,A4f,A4g adws
   class A4n,A4h other
 
+  style Wrapper fill:#ffffff,stroke:#ffffff
   style LDAP fill:#f4f4f5,stroke:#a1a1aa,color:#18181b
   style ADWS fill:#f4f4f5,stroke:#a1a1aa,color:#18181b
   style WSTransfer fill:#e5e7eb,stroke:#9ca3af,color:#18181b
