@@ -65,7 +65,7 @@ One relevant example of what can be accomplished here is using [repldap](https:/
 
 For (2), if an explicit ACE grants the target server **GenericAll**, **GenericWrite** or **WriteAccountRestrictions** over that attribute of an object, it would automatically have rights to add "shadow credentials" to that object. These rights would automatically be present in every computer object if the target server is a member of **Key Admins**, **Enterprise Key Admins** or **Domain Admins**.
 
-Otherwise, **every computer of a domain** should have the right to **write to its own `msDS-KeyCredentialLink`**, as long as the attribute is **not set** (which is usually also not a problem if we don't care about breaking existing auth flows, as every computer should also have the right to delete its own attribute).
+In general, though, **every computer of a domain** should have the right to **write to its own `msDS-KeyCredentialLink`**, as long as the attribute is **not set** (which is usually also not a problem if we don't care about breaking existing auth flows, as every computer should also have the right to delete its own attribute).
 
 ```bash
 ./repldap [auth_flags] --target-dc WIN-6BKCP1FPPCI keycred add 'CN=WIN-KGMRV4B9JSI,OU=Domain Controllers,DC=creta,DC=local'
