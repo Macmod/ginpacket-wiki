@@ -22,7 +22,7 @@ layout:
 
 The Windows authorization model has a neat property that's easy to overlook: the kernel's AuthzAccessCheck routine is entirely self-contained - given a **security descriptor** and a **token** (a SID plus a set of **group SIDs**, **restricted SIDs**, **user claims**, and **device claims**), it deterministically answers whether access **would be granted** - no actual object access involved. Microsoft exposed this as a remotely callable protocol: [MS-RAA](https://winprotocoldoc.z19.web.core.windows.net/MS-RAA/%5bMS-RAA%5d.pdf) (the **Remote Authorization API**).
 
-The `authz` tool provides access to the two most useful calls of this protocol:
+The [authz](https://ginpacket.gitbook.io/docs/tools/authz) tool provides access to the two most useful calls of this protocol:
 
 ## AuthzrGetInformationFromContext
 
