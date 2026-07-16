@@ -328,7 +328,7 @@ On the ADWS side things are hairier in packet structure but simpler in flow: you
 As you can see, these mechanisms sometimes mix up the concepts of **authentication** (providing valid credentials and having the server validate them) and **connection security** (integrity and confidentiality). That's by design, as signing and sealing depend on a shared secret, and if the underlying system already involves credential material, it's wise to use it for both when possible. After all, we may desire signing to prevent a "man in the middle" from messing with our messages, or additionally sealing to avoid them seeing our credential material.
 
 {% hint style="info" %}
-Integrity and confidentiality are properties provided by the usage of **signing** ("using a signature for integrity verification") and **sealing** ("encrypting payloads to prevent snooping")
+Integrity and confidentiality are properties provided by the usage of **signing** ("using a signature for to make sure payloads were not tampered with") and **sealing** ("encrypting payloads to prevent snooping")
 {% endhint %}
 
 From a tool developer perspective, all of this complexity / flexibility may seem useless and raise a bunch of questions, which are all valid:
