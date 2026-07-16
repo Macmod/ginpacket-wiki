@@ -633,12 +633,7 @@ The `adwsConn` struct holds three lazily-initialized WS-* clients, each guarded 
 
 ```go
 type adwsConn struct {
-    host     string
-    fqdn     string
-    rootDN   string
-    ctx      context.Context
-    debugXML func(label, payload string)
-
+    [...other fields]
     enumOnce   sync.Once
     enumErr    error
     enumNNS    *transport.NNSConnection
