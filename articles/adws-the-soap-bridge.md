@@ -411,51 +411,41 @@ The SPNEGO handshake negotiates the strongest common mechanism between client an
 "Required" here is a *client-side* minimum, not a server mandate. MS-NNS leaves the protection level entirely to the client, and MS-WSDS only *encourages* (SHOULD, not MUST) using a transport that provides encryption and integrity - no ADWS spec makes sealing a hard requirement. In practice, though, a DC's ADWS endpoint is a WCF `net.tcp` binding configured for Windows message security, so it rejects connections that don't sign+seal. The upshot: always use `EncryptAndSign`, even though it's the server's binding - not the spec - that forces your hand.
 {% endhint %}
 
-### NNS handshake
+### Putting it together: the full `Connect()` sequence
 
-The NNS handshake frame is simple - a 5-byte header (`MessageId` (1 byte), `MajorVersion` (1, `0x01`), `MinorVersion` (1, `0x00`), then a 2-byte **big-endian** `PayloadSize`) followed by the GSS token. (Once authenticated, application data uses a *different* frame: a 4-byte little-endian size prefix in front of the GSS-wrapped payload - no MessageId byte.) The handshake exchanges GSSAPI tokens:
-
-```
-Client → Server: HandshakeInProgress (0x16) + GSS token (SPNEGO init)
-Server → Client: HandshakeInProgress (0x16) + GSS token (SPNEGO challenge)
-Client → Server: HandshakeInProgress (0x16) + GSS token (SPNEGO response)
-... repeat until ...
-Client → Server: HandshakeDone (0x14)    [or HandshakeInProgress if more rounds]
-Server → Client: HandshakeDone (0x14)    [or HandshakeInProgress if more rounds]
-// NNS auth complete - this is NMF step 4, triggered by the Upgrade Request (see below);
-// the Preamble + Upgrade already went out on the raw socket before this exchange
-```
-
-The subtlety is *when* that handshake happens. NMF drives the whole exchange, and the NNS authentication above is actually the **middle** step of it - not something that finishes before framing begins. The full per-endpoint `Connect` sequence is:
+NMF drives the whole exchange, and NNS authentication is just the **middle** step of it - not something that finishes before framing begins. Here's the shape of a full per-endpoint `Connect()`, combining both protocols, before we zoom into either side's byte-level detail:
 
 ```
 --- on the raw TCP socket, before authentication (unprotected) ---
 1. Preamble records:  Version + Mode (Duplex, 0x02) + Via (endpoint URI) + Encoding (SOAP 1.2 Binary+Dict, 0x08)
 2. Upgrade Request (0x09):  protocol string "application/negotiate"
 3. Upgrade Response (0x0A)
-4. NNS / SPNEGO auth handshake  (the GSS token exchange shown above; per MS-NNS the handshake frames are themselves unprotected)
+4. NNS / SPNEGO auth handshake  (the GSS token exchange; per MS-NNS the handshake frames are themselves unprotected)
 --- from here on records ride through the authenticated NNS layer (signed + sealed) ---
-5. Preamble End (0x0C)  →  Preamble Ack (0x0B)
+5. Preamble End (0x0C) -> Preamble Ack (0x0B)
 6. Sized Envelope records (0x06) carry the SOAP messages;  End (0x07) closes the stream
 ```
 
-So the Preamble and the security Upgrade go out on the bare socket **first**; the `Upgrade Request` (`application/negotiate`) is what triggers the NegotiateStream handshake that turns the plain TCP connection into a signed/sealed one. Only *after* that upgrade do `Preamble End`/`Ack` and the actual SOAP `Sized Envelope` records travel protected. (The unauthenticated `mex` metadata endpoint skips steps 2-4 and sends everything on the raw socket.)
+So the Preamble and the security Upgrade go out on the bare socket **first**; the `Upgrade Request` (`application/negotiate`) is what triggers the NegotiateStream handshake that turns the plain TCP connection into a signed/sealed one. Only *after* that upgrade do `Preamble End`/`Ack` and the actual SOAP `Sized Envelope` records travel protected.
 
-NMF is **record-oriented**: every record is a 1-byte *record type* followed by a type-specific body. The record types the bridge uses (MC-NMF §2.2.1):
+{% hint style="info" %}
+The unauthenticated `mex` metadata endpoint skips steps 2-4 entirely and sends everything - Preamble, `Sized Envelope`s, `End` - straight over the raw socket. No Upgrade, no NNS, no signing.
+{% endhint %}
 
-| Record | Type byte | Purpose |
-|--------|-----------|---------|
-| Version | `0x00` | Framing version (1.0) |
-| Mode | `0x01` | Connection mode - `Duplex` (`0x02`) for ADWS |
-| Via | `0x02` | Target endpoint URI (e.g. `.../Windows/Enumeration`) |
-| Known Encoding | `0x03` | Wire encoding - SOAP 1.2 Binary with in-band dictionary (`0x08`) for ADWS |
-| Upgrade Request / Response | `0x09` / `0x0A` | Negotiate the security (NegotiateStream) upgrade |
-| Preamble End / Preamble Ack | `0x0C` / `0x0B` | Close out the preamble negotiation |
-| Sized Envelope | `0x06` | Carries one SOAP message |
-| End | `0x07` | Graceful stream close |
-| Fault | `0x08` | Framing-level error |
+The next two sections zoom into the byte-level detail behind each half of that sequence: NNS's own authentication frame (step 4), then MC-NMF's framing records (steps 1-3 and 5-6).
 
-Here are sequence diagrams for both protocol flows described above:
+### NNS handshake
+
+Step 4, zoomed in. The NNS handshake frame is simple - a 5-byte header (`MessageId` (1 byte), `MajorVersion` (1, `0x01`), `MinorVersion` (1, `0x00`), then a 2-byte **big-endian** `PayloadSize`) followed by the GSS token. (Once authenticated, application data uses a *different* frame: a 4-byte little-endian size prefix in front of the GSS-wrapped payload - no MessageId byte.) The handshake exchanges GSSAPI tokens:
+
+```
+Client -> Server: HandshakeInProgress (0x16) + GSS token (SPNEGO init)
+Server -> Client: HandshakeInProgress (0x16) + GSS token (SPNEGO challenge)
+Client -> Server: HandshakeInProgress (0x16) + GSS token (SPNEGO response)
+... repeat until ...
+Client -> Server: HandshakeDone (0x14)    [or HandshakeInProgress if more rounds]
+Server -> Client: HandshakeDone (0x14)    [or HandshakeInProgress if more rounds]
+```
 
 ```mermaid
 sequenceDiagram
@@ -471,20 +461,36 @@ sequenceDiagram
     Note over C,S: NNS payload follows (e.g. NMF records)
 ```
 
-### NMF setup
+### NMF framing
 
-Where the previous section walked the same ground from the NNS/GSSAPI side, this one walks it from MC-NMF's side - the outer framing protocol that actually drives the whole `Connect()` sequence and decides when each of those records goes out.
+Steps 1-3 and 5-6, zoomed in - these belong to MC-NMF, the outer framing protocol that actually drives the whole `Connect()` sequence and decides when each record goes out. NMF is **record-oriented**: every record is a 1-byte *record type* followed by a type-specific body. The record types the bridge uses (MC-NMF §2.2.1):
 
-The **Preamble** isn't a single record - it's four separate ones, written back-to-back on the bare (unauthenticated) socket, in this fixed order (MC-NMF §2.2.3.1-§2.2.3.4):
+| Record | Type byte | Purpose |
+|--------|-----------|---------|
+| Version | `0x00` | Framing version (1.0) |
+| Mode | `0x01` | Connection mode - `Duplex` (`0x02`) for ADWS |
+| Via | `0x02` | Target endpoint URI (e.g. `.../Windows/Enumeration`) |
+| Known Encoding | `0x03` | Wire encoding - SOAP 1.2 Binary with in-band dictionary (`0x08`) for ADWS |
+| Upgrade Request / Response | `0x09` / `0x0A` | Negotiate the security (NegotiateStream) upgrade |
+| Preamble End / Preamble Ack | `0x0C` / `0x0B` | Close out the preamble negotiation |
+| Sized Envelope | `0x06` | Carries one SOAP message |
+| End | `0x07` | Graceful stream close |
+| Fault | `0x08` | Framing-level error |
+
+Step 1, the **Preamble**, isn't a single record - it's four separate ones, written back-to-back on the bare socket, in this fixed order (MC-NMF §2.2.3.1-§2.2.3.4):
 
 1. **Version** (`0x00`) - `[RecordType][VersionMajor=1][VersionMinor=0]`, 3 bytes total.
 2. **Mode** (`0x01`) - `[RecordType][Mode]`, where `Mode` is `0x02` (Duplex) for ADWS.
 3. **Via** (`0x02`) - `[RecordType][Length][URI bytes]`, the target endpoint as a `net.tcp://fqdn:9389/ActiveDirectoryWebServices/<resource>` string (`Length` uses the same variable-length encoding as the Sized Envelope records below).
 4. **Known Encoding** (`0x03`) - `[RecordType][Encoding]`, where `Encoding` is `0x08` (SOAP 1.2 Binary with in-band dictionary) for ADWS.
 
-Only *after* all four have gone out does the client send the **Upgrade Request** (`0x09`): `[RecordType][Length][protocol string]`, where the protocol string is the fixed value `application/negotiate`. The server's **Upgrade Response** (`0x0A`) is a bare single-byte record - no payload - just an acknowledgement that it's ready to start the NNS handshake. Only then does the GSS token exchange from the previous section run, still on the raw, unauthenticated socket (per MS-NNS, the handshake frames themselves aren't wrapped).
+Steps 2/3, the **Upgrade**, is a single request/response pair: `Upgrade Request` (`0x09`) is `[RecordType][Length][protocol string]`, the protocol string being the fixed value `application/negotiate`.
 
-Once NNS authentication completes, the two remaining preamble records - **Preamble End** (`0x0C`) and **Preamble Ack** (`0x0B`) - are exchanged, but critically these travel *through* the now-authenticated NNS layer (signed + sealed) rather than on the bare socket - they're the first records to do so. Every **Sized Envelope** (`0x06`) carrying an actual SOAP message, and the final **End** (`0x07`) that closes the stream, ride the same protected channel:
+{% hint style="info" %}
+`Upgrade Response` (`0x0A`) is a bare single byte - no payload, no echoed protocol string. It's purely a "go ahead" signal that the server is ready to start the NNS handshake; anything more specific about the negotiation happens inside that handshake itself, not here.
+{% endhint %}
+
+Steps 5/6 happen once that handshake completes: **Preamble End** (`0x0C`) and **Preamble Ack** (`0x0B`) are the first records to travel through the now-authenticated NNS layer rather than the bare socket, and every **Sized Envelope** (`0x06`) carrying a SOAP message - plus the final **End** (`0x07`) that closes the stream - rides that same protected channel from then on:
 
 ```mermaid
 sequenceDiagram
@@ -632,7 +638,7 @@ func (a *adwsConn) Search(req *ldap.SearchRequest) (*ldap.SearchResult, error) {
 }
 ```
 
-`ExecuteQueryWithControls` runs the `Enumerate` → `Pull` loop, paging until the server signals the end - either a `wsen:EndOfSequence` marker or a short page (fewer items than requested), the latter being necessary because ADWS omits `EndOfSequence` for some result sets such as a base-scope rootDSE read (see the rootDSE section below). Any LDAP controls on the request (e.g. an SDFlags control) ride along on every `Pull`.
+`ExecuteQueryWithControls` runs the `Enumerate` -> `Pull` loop, paging until the server signals the end - either a `wsen:EndOfSequence` marker or a short page (fewer items than requested), the latter being necessary because ADWS omits `EndOfSequence` for some result sets such as a base-scope rootDSE read (see the rootDSE section below). Any LDAP controls on the request (e.g. an SDFlags control) ride along on every `Pull`.
 
 ### Format differences in input & output
 
@@ -720,7 +726,7 @@ func (a *adwsConn) RootDN() (string, error) {
 }
 ```
 
-Only the `--no-rootdse` path *computes* the DN offline, via `domainToDN()`, which splits the domain on dots and wraps each label in `DC=` (`creta.local` → `DC=creta,DC=local`). It's a handy fallback when you'd rather not pay for the rootDSE read (an extra round-trip, or a server that's touchy about it), but it assumes the domain equals the default naming context - so it won't give you the configuration/schema partitions or any non-default NC. When you actually need those, `RootAttribute("configurationNamingContext")` / `"schemaNamingContext"` read them straight off the rootDSE.
+Only the `--no-rootdse` path *computes* the DN offline, via `domainToDN()`, which splits the domain on dots and wraps each label in `DC=` (`creta.local` -> `DC=creta,DC=local`). It's a handy fallback when you'd rather not pay for the rootDSE read (an extra round-trip, or a server that's touchy about it), but it assumes the domain equals the default naming context - so it won't give you the configuration/schema partitions or any non-default NC. When you actually need those, `RootAttribute("configurationNamingContext")` / `"schemaNamingContext"` read them straight off the rootDSE.
 
 {% hint style="info" %}
 That base-scope, empty-base rootDSE read is precisely the query that surfaced the WS-Enumeration quirk mentioned earlier: ADWS returns the lone rootDSE object *without* a `wsen:EndOfSequence` marker, so the `Pull` loop has to treat a short page (`len(Items) < MaxElements`) as the end. Without that, simply resolving the base DN would spin forever.
