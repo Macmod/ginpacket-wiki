@@ -466,26 +466,11 @@ Steps 2/3, the **Upgrade**, is a single request/response pair: `Upgrade Request`
 Steps 5/6 happen once that handshake completes: **Preamble End** (`0x0C`) and **Preamble Ack** (`0x0B`) are the first records to travel through the now-authenticated NNS layer rather than the bare socket, and every **Sized Envelope** (`0x06`) carrying a SOAP message - plus the final **End** (`0x07`) that closes the stream - rides that same protected channel from then on:
 
 ```mermaid
-%%{init: {'theme': 'base', 'themeCSS': 'svg { background: #ffffff; border-radius: 6px; }', 'themeVariables': {
-  'background': '#ffffff',
-  'actorBkg': '#e5e7eb',
-  'actorBorder': '#9ca3af',
-  'actorTextColor': '#18181b',
-  'actorLineColor': '#9ca3af',
-  'signalColor': '#18181b',
-  'signalTextColor': '#18181b',
-  'labelBoxBkgColor': '#e5e7eb',
-  'labelBoxBorderColor': '#9ca3af',
-  'labelTextColor': '#18181b',
-  'loopTextColor': '#18181b',
-  'noteBkgColor': '#d4d4d8',
-  'noteBorderColor': '#71717a',
-  'noteTextColor': '#18181b'
-}}}%%
 sequenceDiagram
     participant C as Client
     participant S as Server (ADWS)
 
+    rect rgb(255, 255, 255)
     Note over C,S: dashed = plaintext, solid = signed+sealed (NNS-protected)
     Note over C,S: TCP connection established (raw, unauthenticated)
     C-->>S: Version (0x00): major=1, minor=0
@@ -512,6 +497,7 @@ sequenceDiagram
     S->>C: SizedEnvelope (0x06): SOAP response
     Note over C,S: ...
     C->>S: End (0x07)
+    end
 ```
 
 Each **Sized Envelope** record (`0x06`) is the record-type byte, a length prefix, then the NBFSE-encoded payload. The length uses MC-NMF's variable-length integer (7 bits per byte, high bit = "more bytes follow"), so a small message spends only one or two bytes describing its size - the same encoding the Via record's length prefix above uses.
@@ -530,26 +516,11 @@ Server -> Client: HandshakeDone (0x14)    [or HandshakeInProgress if more rounds
 ```
 
 ```mermaid
-%%{init: {'theme': 'base', 'themeCSS': 'svg { background: #ffffff; border-radius: 6px; }', 'themeVariables': {
-  'background': '#ffffff',
-  'actorBkg': '#e5e7eb',
-  'actorBorder': '#9ca3af',
-  'actorTextColor': '#18181b',
-  'actorLineColor': '#9ca3af',
-  'signalColor': '#18181b',
-  'signalTextColor': '#18181b',
-  'labelBoxBkgColor': '#e5e7eb',
-  'labelBoxBorderColor': '#9ca3af',
-  'labelTextColor': '#18181b',
-  'loopTextColor': '#18181b',
-  'noteBkgColor': '#d4d4d8',
-  'noteBorderColor': '#71717a',
-  'noteTextColor': '#18181b'
-}}}%%
 sequenceDiagram
     participant C as Client
     participant S as Server (ADWS)
 
+    rect rgb(255, 255, 255)
     Note over C,S: dashed = plaintext (unauthenticated)
     Note over C,S: 5-byte header: MessageId+MajorVer+MinorVer+PayloadSize
     C-->>S: NNS Header + GSS (SPNEGO) token
@@ -558,6 +529,7 @@ sequenceDiagram
     C-->>S: NNS Header + next SPNEGO token
     S-->>C: HandshakeDone (0x14)
     Note over C,S: NNS payload follows (e.g. NMF records)
+    end
 ```
 
 ## Lazy Connections
