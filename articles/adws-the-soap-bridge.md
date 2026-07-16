@@ -273,9 +273,9 @@ flowchart TB
   end
   end
 
-  L1 -.->|Plaintext| LdapAuth
-  L1 -->|StartTLS| LdapAuth
-  L5 -->|TLS| LdapAuth
+  L1 -.->|"  Plaintext  "| LdapAuth
+  L1 -->|"  StartTLS  "| LdapAuth
+  L5 -->|"  TLS  "| LdapAuth
   L2b -.-> L3
   L2c -.-> L3
   SaslMechs --> L3
@@ -347,6 +347,8 @@ Back to our use cases - now that we know how to set up the transport and how to 
 ```mermaid
 %%{init: {'themeVariables': {'edgeLabelBackground': '#000000', 'textColor': '#ffffff'}}}%%
 flowchart LR
+  linkStyle default stroke:#111,stroke-width:4px
+
   subgraph Wrapper[" "]
   direction LR
   subgraph LDAP["LDAP"]
@@ -388,13 +390,13 @@ flowchart LR
   end
   end
 
-  L4a -.->|scope=any| A4a
-  L4a -.->|scope=baseObject| A4a2
-  L4b_gen -.->|Object modification| A4b
-  L4b_pwd -.->|Self password change| A4f
-  L4b_pwd -.->|Admin password reset| A4g
-  L4c -.->|Object creation| A4c
-  L4d -.->|Object deletion| A4d
+  L4a -.->|"  scope=any  "| A4a
+  L4a -.->|"  scope=baseObject  "| A4a2
+  L4b_gen -.->|"  Object modification  "| A4b
+  L4b_pwd -.->|"  Self password change  "| A4f
+  L4b_pwd -.->|"  Admin password reset  "| A4g
+  L4c -.->|"  Object creation  "| A4c
+  L4d -.->|"  Object deletion  "| A4d
 
   classDef ldap fill:#1a3a5c,stroke:#4a8bc2,stroke-width:2px,color:#fff
   classDef adws fill:#1e3a2e,stroke:#4ade80,stroke-width:2px,color:#fff
