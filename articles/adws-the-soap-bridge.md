@@ -232,6 +232,7 @@ The practical upshot of NBFSE is that the wire traffic is significantly more com
 The stack below shows the transport, authentication, and encoding layers used by each protocol so we can have a deeper understanding of how they compare in terms of their "preambles" (what we'll call "the broad transport layer" - everything that comes before the "relevant" protocol messages):
 
 ```mermaid
+%%{init: {'themeVariables': {'edgeLabelBackground': '#000000', 'textColor': '#ffffff'}}}%%
 flowchart TB
   linkStyle default stroke:#111,stroke-width:6px
 
@@ -344,6 +345,7 @@ For me the rule of thumb as a tool developer seems to be to try to play nice: al
 Back to our use cases - now that we know how to set up the transport and how to authenticate in both LDAP and ADWS, here is a sketch of how to map LDAP operations into their ADWS counterparts:
 
 ```mermaid
+%%{init: {'themeVariables': {'edgeLabelBackground': '#000000', 'textColor': '#ffffff'}}}%%
 flowchart LR
   subgraph Wrapper[" "]
   direction LR
