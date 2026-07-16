@@ -448,7 +448,7 @@ The next two sections zoom into the byte-level detail behind each half of that s
 
 ### NMF framing
 
-Steps 1-3 and 5-6, zoomed in - these belong to MC-NMF, the outer framing protocol that actually drives the whole `Connect()` sequence and decides when each record goes out. NMF is **record-oriented**: every record is a 1-byte *record type* followed by a type-specific body. The record types the bridge uses (MC-NMF §2.2.1):
+Steps 1-3 and 5-6, zoomed in - these belong to MC-NMF, the outer framing protocol that actually drives the whole `Connect()` sequence and decides when each record goes out. NMF is **record-oriented**: every record is a 1-byte *record type* followed by a type-specific body. The main record types (MC-NMF §2.2.1) are:
 
 | Record | Type byte | Purpose |
 |--------|-----------|---------|
@@ -462,20 +462,17 @@ Steps 1-3 and 5-6, zoomed in - these belong to MC-NMF, the outer framing protoco
 | End | `0x07` | Graceful stream close |
 | Fault | `0x08` | Framing-level error |
 
-Step 1, the **Preamble**, isn't a single record - it's four separate ones, written back-to-back on the bare socket, in this fixed order (MC-NMF §2.2.3.1-§2.2.3.4):
+Step 1, the **Preamble**, consists of four separate records, written back-to-back on the bare socket, in this order (MC-NMF §2.2.3.1-§2.2.3.4):
 
 1. **Version** (`0x00`) - `[RecordType][VersionMajor=1][VersionMinor=0]`, 3 bytes total.
 2. **Mode** (`0x01`) - `[RecordType][Mode]`, where `Mode` is `0x02` (Duplex) for ADWS.
 3. **Via** (`0x02`) - `[RecordType][Length][URI bytes]`, the target endpoint as a `net.tcp://fqdn:9389/ActiveDirectoryWebServices/<resource>` string (`Length` uses the same variable-length encoding as the Sized Envelope records below).
 4. **Known Encoding** (`0x03`) - `[RecordType][Encoding]`, where `Encoding` is `0x08` (SOAP 1.2 Binary with in-band dictionary) for ADWS.
 
-Steps 2/3, the **Upgrade**, is a single request/response pair: `Upgrade Request` (`0x09`) is `[RecordType][Length][protocol string]`, the protocol string being the fixed value `application/negotiate`.
+Steps 2/3, the **Upgrade**, is a single request/response pair: `Upgrade Request` (`0x09`) = `[RecordType][Length]application/negotiate`, followed by an 
+`Upgrade Response` (`0x0A`, a bare single byte). It's purely a "go ahead" signal that the server is ready to start the NNS handshake.
 
-{% hint style="info" %}
-`Upgrade Response` (`0x0A`) is a bare single byte - no payload, no echoed protocol string. It's purely a "go ahead" signal that the server is ready to start the NNS handshake; anything more specific about the negotiation happens inside that handshake itself, not here.
-{% endhint %}
-
-Steps 5/6 happen once the NNS handshake (next section) completes: **Preamble End** (`0x0C`) and **Preamble Ack** (`0x0B`) are the first records to travel through the now-authenticated NNS layer rather than the bare socket, and every **Sized Envelope** (`0x06`) carrying a SOAP message - plus the final **End** (`0x07`) that closes the stream - rides that same protected channel from then on. Each **Sized Envelope** record is the record-type byte, a length prefix, then the NBFSE-encoded payload; the length uses the same variable-length integer as the Via record above (7 bits per byte, high bit = "more bytes follow"), so a small message spends only one or two bytes describing its size.
+Steps 5/6 happen once the NNS handshake completes: **Preamble End** (`0x0C`) and **Preamble Ack** (`0x0B`) are the first records to travel through the now-authenticated NNS layer rather than the bare socket, and every **Sized Envelope** (`0x06`) carrying a SOAP message - plus the final **End** (`0x07`) that closes the stream - rides that same protected channel from then on. Each **Sized Envelope** record is the record-type byte, a length prefix, then the NBFSE-encoded payload; the length uses the same variable-length integer as the Via record above (7 bits per byte, high bit = "more bytes follow"), so a small message spends only one or two bytes describing its size.
 
 Here's steps 1-3 - everything that happens before the handshake even starts:
 
