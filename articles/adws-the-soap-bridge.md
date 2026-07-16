@@ -466,6 +466,22 @@ Steps 2/3, the **Upgrade**, is a single request/response pair: `Upgrade Request`
 Steps 5/6 happen once that handshake completes: **Preamble End** (`0x0C`) and **Preamble Ack** (`0x0B`) are the first records to travel through the now-authenticated NNS layer rather than the bare socket, and every **Sized Envelope** (`0x06`) carrying a SOAP message - plus the final **End** (`0x07`) that closes the stream - rides that same protected channel from then on:
 
 ```mermaid
+%%{init: {'theme': 'base', 'themeVariables': {
+  'background': '#f4f4f5',
+  'actorBkg': '#e5e7eb',
+  'actorBorder': '#9ca3af',
+  'actorTextColor': '#18181b',
+  'actorLineColor': '#9ca3af',
+  'signalColor': '#18181b',
+  'signalTextColor': '#18181b',
+  'labelBoxBkgColor': '#e5e7eb',
+  'labelBoxBorderColor': '#9ca3af',
+  'labelTextColor': '#18181b',
+  'loopTextColor': '#18181b',
+  'noteBkgColor': '#d4d4d8',
+  'noteBorderColor': '#71717a',
+  'noteTextColor': '#18181b'
+}}}%%
 sequenceDiagram
     participant C as Client
     participant S as Server (ADWS)
@@ -514,6 +530,22 @@ Server -> Client: HandshakeDone (0x14)    [or HandshakeInProgress if more rounds
 ```
 
 ```mermaid
+%%{init: {'theme': 'base', 'themeVariables': {
+  'background': '#f4f4f5',
+  'actorBkg': '#e5e7eb',
+  'actorBorder': '#9ca3af',
+  'actorTextColor': '#18181b',
+  'actorLineColor': '#9ca3af',
+  'signalColor': '#18181b',
+  'signalTextColor': '#18181b',
+  'labelBoxBkgColor': '#e5e7eb',
+  'labelBoxBorderColor': '#9ca3af',
+  'labelTextColor': '#18181b',
+  'loopTextColor': '#18181b',
+  'noteBkgColor': '#d4d4d8',
+  'noteBorderColor': '#71717a',
+  'noteTextColor': '#18181b'
+}}}%%
 sequenceDiagram
     participant C as Client
     participant S as Server (ADWS)
