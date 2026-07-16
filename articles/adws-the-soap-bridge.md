@@ -560,7 +560,7 @@ sequenceDiagram
     C-->>S: NNS Header + next SPNEGO token
     S-->>C: HandshakeDone (0x14)
 
-    Note over C,S: NMF resumes - its records now ride as the payload inside NNS's own signed+sealed data frames
+    Note over C,S: NMF resumes with signed+sealed data frames
     C->>S: PreambleEnd (0x0C)
     S->>C: PreambleAck (0x0B)
 
