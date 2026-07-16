@@ -279,7 +279,7 @@ flowchart TB
   L2b -.-> L3
   L2c -.-> L3
   SaslMechs --> L3
-  A1 --> A2
+  A1 -.-> A2
   NnsMechs --> F1
   F1 --> A3
 
@@ -425,7 +425,7 @@ The SPNEGO handshake negotiates the strongest common mechanism between client an
 
 ### Putting it together: the full `Connect()` sequence
 
-NMF drives the whole exchange, and NNS authentication is just the **middle** step of it - not something that finishes before framing begins. Here's the shape of a full per-endpoint `Connect()`, combining both protocols, before we zoom into either side's byte-level detail:
+NMF drives the whole exchange, and NNS authentication is one step of it. Here's the shape of a full per-endpoint `Connect()`, combining both protocols, before we zoom into either side's details:
 
 ```
 --- on the raw TCP socket, before authentication (unprotected) ---
@@ -498,7 +498,6 @@ sequenceDiagram
     participant S as Server (ADWS)
 
     rect rgb(255, 255, 255)
-    Note over C,S: dashed = plaintext, solid = signed+sealed (NNS-protected)
     Note over C,S: TCP connection established (raw, unauthenticated)
     C-->>S: Version (0x00): major=1, minor=0
     C-->>S: Mode (0x01): Duplex
@@ -531,7 +530,13 @@ Each **Sized Envelope** record (`0x06`) is the record-type byte, a length prefix
 
 ### NNS handshake
 
-Now the piece nested inside step 4. The NNS handshake frame is simple - a 5-byte header (`MessageId` (1 byte), `MajorVersion` (1, `0x01`), `MinorVersion` (1, `0x00`), then a 2-byte **big-endian** `PayloadSize`) followed by the GSS token. (Once authenticated, application data uses a *different* frame: a 4-byte little-endian size prefix in front of the GSS-wrapped payload - no MessageId byte.) The handshake exchanges GSSAPI tokens:
+Now the piece nested inside step 4. The NNS handshake frame is simple - a 5-byte header (`MessageId` (1 byte), `MajorVersion` (1, `0x01`), `MinorVersion` (1, `0x00`), then a 2-byte `PayloadSize`) followed by the GSS token. 
+
+{% hint style="info" %}
+Once authenticated, application data uses a *different* frame: a 4-byte little-endian size prefix in front of the GSS-wrapped payload - no MessageId byte.
+{% endhint %}
+
+The handshake exchanges GSSAPI tokens:
 
 ```
 Client -> Server: HandshakeInProgress (0x16) + GSS token (SPNEGO init)
@@ -564,7 +569,7 @@ sequenceDiagram
 
     rect rgb(255, 255, 255)
     Note over C,S: dashed = plaintext (unauthenticated)
-    Note over C,S: 5-byte header: MessageId+MajorVer+MinorVer+PayloadSize
+    Note over C,S: "MessageId+MajorVer+MinorVer+PayloadSize"
     C-->>S: NNS Header + GSS (SPNEGO) token
     S-->>C: HandshakeInProgress (0x16)
     Note over C,S: Server may challenge multiple times
