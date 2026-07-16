@@ -60,10 +60,8 @@ For (2), if an explicit ACE grants the target server **GenericAll**, **GenericWr
 
 Otherwise, every computer of a domain **should** have the right to write to its own `msDS-KeyCredentialLink`, as long as the attribute is **not set** (which is usually also not a problem if we don't care about breaking existing auth flows, as every computer should also have the right to delete its own attribute).
 
-**TODO**: Get definitive example with two DCs or with a member server+a DC
-
 ```bash
-./repldap [auth_flags] --target-dc WIN-6BKCP1FPPCI keycred add 'CN=WIN-6BKCP1FPPCI,OU=Domain Controllers,DC=creta,DC=local'
+./repldap [auth_flags] --target-dc WIN-6BKCP1FPPCI keycred add 'CN=WIN-KGMRV4B9JSI,OU=Domain Controllers,DC=creta,DC=local'
 ```
 
 <figure><img src="../.gitbook/assets/617124036-808d808e-a407-4702-854a-bc00dd55eda5.png" alt=""><figcaption></figcaption></figure>
