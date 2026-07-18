@@ -623,9 +623,9 @@ Each WS-* client wraps an NMF connection (which itself wraps an NNS-authenticate
 
 LDAP callers don't see this - they interact with a generic `ldapClient`, which is aliased from `internal/ldapclient.Client`. The `adwsConn` implements the interface by routing each method to the appropriate WS-* client.
 
-### Search: Enumerate + Pull loop
+### Example: Searching objects (the Enumerate + Pull loop)
 
-The `Search` method converts an LDAP `SearchRequest` into an enumeration query:
+The `Search` method of an `adwsConn` converts a regular LDAP `SearchRequest` into an enumeration query for ADWS:
 
 ```go
 func (a *adwsConn) Search(req *ldap.SearchRequest) (*ldap.SearchResult, error) {
