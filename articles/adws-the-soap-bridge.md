@@ -488,10 +488,6 @@ sequenceDiagram
 
 Right where the previous diagram left off, NNS takes over. Its handshake frame is simple - a 5-byte header (`MessageId` (1 byte), `MajorVersion` (1, `0x01`), `MinorVersion` (1, `0x00`), then a 2-byte `PayloadSize`) followed by the GSS token. 
 
-{% hint style="info" %}
-Once authenticated, application data uses a *different* frame: a 4-byte little-endian size prefix in front of the GSS-wrapped payload - no MessageId byte.
-{% endhint %}
-
 The handshake exchanges GSSAPI tokens:
 
 ```
@@ -544,6 +540,10 @@ sequenceDiagram
     C->>S: End (0x07)
     end
 ```
+
+{% hint style="info" %}
+Once authenticated, application data uses a *different* frame: a 4-byte little-endian size prefix in front of the GSS-wrapped payload - no MessageId byte.
+{% endhint %}
 
 Once the handshake completes, NMF resumes - but now its records ride as the *payload* inside NNS's own signed+sealed data frames rather than standalone on the bare socket. **Preamble End** (`0x0C`) and **Preamble Ack** (`0x0B`) go first, then every **Sized Envelope** (`0x06`) carrying a SOAP message, and finally **End** (`0x07`) closes the stream. Each Sized Envelope record is just the record-type byte, a length prefix, then the NBFSE-encoded payload - the length using the same variable-length integer as the Via record above (7 bits per byte, high bit = "more bytes follow").
 
@@ -654,7 +654,7 @@ func (a *adwsConn) Search(req *ldap.SearchRequest) (*ldap.SearchResult, error) {
 }
 ```
 
-`ExecuteQueryWithControls` runs the `Enumerate` -> `Pull` loop, paging until the server signals the end - either a `wsen:EndOfSequence` marker or a short page (fewer items than requested), the latter being necessary because ADWS omits `EndOfSequence` for some result sets such as a base-scope rootDSE read (see the rootDSE section below). Any LDAP controls on the request (e.g. an SDFlags control) ride along on every `Pull`.
+[ExecuteQueryWithControls](https://github.com/Macmod/go-adws/blob/main/wsenum/executor.go#L20) runs the `Enumerate` -> `Pull` loop, paging until the server signals the end - either a `wsen:EndOfSequence` marker or a short page (fewer items than requested), the latter being necessary because ADWS omits `EndOfSequence` for some result sets such as a base-scope rootDSE read (see the rootDSE section below). Any LDAP controls on the request (e.g. an SDFlags control) ride along on every `Pull`.
 
 ### Format differences in input & output
 
