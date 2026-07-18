@@ -430,8 +430,6 @@ flowchart LR
 
 ## The "broad transport layer" for ADWS
 
-The SPNEGO handshake negotiates the strongest common mechanism between client and server. In NNS the client also declares a **Required Protection Level** - `None`, `Sign` (integrity), or `EncryptAndSign` (confidentiality + integrity): if the level the server negotiates comes back *lower* than what the client required, the client is the one that should abort (MS-NNS §3.1.1.3). Even though in theory we could use `Sign` and `None`, we always use `EncryptAndSign` because the default behavior of Windows servers [seems to be to require it](https://learn.microsoft.com/en-us/dotnet/framework/configure-apps/file-schema/wcf/transport-of-nettcpbinding).
-
 ### The `Connect()` sequence
 
 NMF drives the whole exchange end to end; NNS authentication is just one step riding in the middle of it. NMF is **record-oriented** - every record is a 1-byte *record type* followed by a type-specific body. Here are the record types used along the way (MC-NMF §2.2.1), handy as a reference for what follows:
@@ -545,6 +543,8 @@ sequenceDiagram
     C->>S: End (0x07)
     end
 ```
+
+The SPNEGO handshake negotiates the strongest common mechanism between client and server. In NNS the client declares a **Required Protection Level** - `None`, `Sign` (integrity), or `EncryptAndSign` (confidentiality + integrity): if the level the server negotiates comes back *lower* than what the client required, the client is the one that should abort (MS-NNS §3.1.1.3). Even though in theory we could use `Sign` and `None`, we always use `EncryptAndSign` because the default behavior of Windows servers [seems to be to require it](https://learn.microsoft.com/en-us/dotnet/framework/configure-apps/file-schema/wcf/transport-of-nettcpbinding) - otherwise ADWS would be prone to relaying attacks.
 
 {% hint style="info" %}
 Once authenticated, application data uses a *different* frame: a 4-byte little-endian size prefix in front of the GSS-wrapped payload - no MessageId byte.
