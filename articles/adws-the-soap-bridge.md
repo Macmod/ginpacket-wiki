@@ -685,9 +685,65 @@ This is performed by calling `soap.EncodeAttrValue()` for each attribute value o
 
 From the caller's perspective, all of this is invisible: you pass the same strings you would for LDAP, and the bridge handles the encoding.
 
+## Connecting the dots
+
+The [go-adws](https://github.com/Macmod/go-adws) library started as a low-level implementation of the ADWS protocol stack: the NNS handshake, the NMF record framing, and the SOAP XML builders for all supported operations. The bridge implemented in ginpacket is just a different take on the problem of providing **easy access to ADWS ops** - instead of exposing ADWS as a standalone tool with its own cmdline (such as [sopa](https://github.com/Macmod/sopa)), I introduced a unified `ldapClient` interface that both LDAP and ADWS satisfy, and added a single `--adws` flag to the `ldap` commands to flip between them. Behind the flag, the code calls `connect(useADWS, scheme, startTLS, baseDN, noRootDSE)` which routes either to a standard LDAP dial or to the ADWS connection setup (the extra `baseDN`/`noRootDSE` arguments drive the rootDSE strategy described below). This way, if we ever want to implement other subcommands for our `ldap` tool using the "interoperable" subset of LDAP operations, they would instantly be also available over ADWS:
+
+```go
+// internal/ldapclient/client.go
+type Client interface {
+    Search(req *ldap.SearchRequest) (*ldap.SearchResult, error)
+    Modify(req *ldap.ModifyRequest) error
+    Add(req *ldap.AddRequest) error
+    Delete(req *ldap.DelRequest) error
+    RootDN() (string, error)
+    RootAttribute(attribute string) (string, error)
+    Close()
+}
+```
+
+```go
+// cmd/ldap/adws.go
+func connect(useADWS bool, scheme string, startTLS bool, baseDN string, noRootDSE bool) (ldapClient, error) {
+    targetHost, err := cfg.ResolveTargetHost("")
+    if err != nil {
+        return nil, err
+    }
+    ctx := cfg.NewContext()
+    if useADWS {
+        // ADWS brings its own transport, so the LDAP-only TLS knobs don't apply
+        // (plain "ldap" is fine; ldaps / StartTLS are rejected).
+        if scheme != "" && scheme != "ldap" {
+            return nil, fmt.Errorf("--scheme is not supported with --adws; ADWS always uses its own transport")
+        }
+        if startTLS {
+            return nil, fmt.Errorf("--starttls is not supported with --adws; ADWS always uses its own transport")
+        }
+        conn, err := connectADWS(ctx, targetHost)
+        if err != nil {
+            return nil, err
+        }
+        conn.baseDN = baseDN
+        conn.baseDNExplicit = ldapBaseDNExplicit
+        conn.noRootDSE = noRootDSE
+        return conn, nil
+    }
+    conn, err := connectLDAP(ctx, targetHost, scheme, startTLS)
+    if err != nil {
+        return nil, err
+    }
+    lc := &ldapConnClient{conn: conn}
+    lc.searcher = conn // the underlying *ldap.Conn does the actual wire lookups
+    lc.baseDN = baseDN
+    lc.baseDNExplicit = ldapBaseDNExplicit
+    lc.noRootDSE = noRootDSE
+    return lc, nil
+}
+```
+
 ### Querying the rootDSE
 
-Many higher-level searches in LDAP require a baseDN, be these searches the final goal or an intermediary need, but the user could not always want (or know how) to provide the baseDN explicitly. The default root DN for an AD domain can be looked up from the `rootDSE`, a special entry that we can fetch by performing an LDAP Search with `scope=base` and an empty baseDN. The `rootDSE` object contains the root baseDN in its `defaultNamingContext` attribute, and also contains the DN for the **Configuration** and **Schema** partitions in the `configurationNamingContext` and `schemaNamingContext` attributes, which are often needed by LDAP clients that search for objects inside these partitions. This works the same in ADWS, and that's why the interface mentioned earlier includes the methods `RootAttribute` (to fetch an arbitrary attribute from the rootDSE) and `RootDN` (to fetch the `defaultNamingContext` specifically).
+Many higher-level searches in LDAP require a baseDN, be these searches the final goal or an intermediary need, but the user could not always want (or know how) to provide the baseDN explicitly. The default root DN for an AD domain can be looked up from the `rootDSE`, a special entry that we can fetch by performing an LDAP Search with `scope=base` and an empty baseDN. The `rootDSE` object contains the root baseDN in its `defaultNamingContext` attribute, and also contains the DN for the **Configuration** and **Schema** partitions in the `configurationNamingContext` and `schemaNamingContext` attributes, which are often needed by LDAP clients that search for objects inside these partitions. This works the same in ADWS, and that's why the interface above includes the methods `RootAttribute` (to fetch an arbitrary attribute from the rootDSE) and `RootDN` (to fetch the `defaultNamingContext` specifically) - and why `connect()`, right above, always threads `baseDN`/`baseDNExplicit`/`noRootDSE` into whichever client it builds.
 
 {% hint style="info" %}
 The `ldap search` subcommand with no `--base-dn`, for instance, defaults to querying the domain's `defaultNamingContext` from the rootDSE. If provided the `--no-rootdse` flag, it will derive the root baseDN from the domain name specified in the user (`-u`) instead (i.e. `user@domain.local` -> `baseDN = DC=domain,DC=local`. The same behavior applies to other subcommands of the `ldap` tool that perform searches under the hood.
@@ -773,62 +829,6 @@ The cache is keyed by attribute name (`map[string]string`) rather than a single 
 {% hint style="info" %}
 That base-scope, empty-base rootDSE read is precisely the query that surfaced the WSDS quirk mentioned earlier: for unknown reasons, ADWS returns the lone rootDSE object *without* a `wsen:EndOfSequence` marker, so the `Pull` loop has to treat a short page (`len(Items) < MaxElements`) as the end. Without that, simply resolving the base DN would spin forever.
 {% endhint %}
-
-## Connecting the dots
-
-The [go-adws](https://github.com/Macmod/go-adws) library started as a low-level implementation of the ADWS protocol stack: the NNS handshake, the NMF record framing, and the SOAP XML builders for all supported operations. The bridge implemented in ginpacket is just a different take on the problem of providing **easy access to ADWS ops** - instead of exposing ADWS as a standalone tool with its own cmdline (such as [sopa](https://github.com/Macmod/sopa)), I introduced a unified `ldapClient` interface that both LDAP and ADWS satisfy, and added a single `--adws` flag to the `ldap` commands to flip between them. Behind the flag, the code calls `connect(useADWS, scheme, startTLS, baseDN, noRootDSE)` which routes either to a standard LDAP dial or to the ADWS connection setup (the extra `baseDN`/`noRootDSE` arguments drive the rootDSE strategy described earlier). This way, if we ever want to implement other subcommands for our `ldap` tool using the "interoperable" subset of LDAP operations, they would instantly be also available over ADWS:
-
-```go
-// internal/ldapclient/client.go
-type Client interface {
-    Search(req *ldap.SearchRequest) (*ldap.SearchResult, error)
-    Modify(req *ldap.ModifyRequest) error
-    Add(req *ldap.AddRequest) error
-    Delete(req *ldap.DelRequest) error
-    RootDN() (string, error)
-    RootAttribute(attribute string) (string, error)
-    Close()
-}
-```
-
-```go
-// cmd/ldap/adws.go
-func connect(useADWS bool, scheme string, startTLS bool, baseDN string, noRootDSE bool) (ldapClient, error) {
-    targetHost, err := cfg.ResolveTargetHost("")
-    if err != nil {
-        return nil, err
-    }
-    ctx := cfg.NewContext()
-    if useADWS {
-        // ADWS brings its own transport, so the LDAP-only TLS knobs don't apply
-        // (plain "ldap" is fine; ldaps / StartTLS are rejected).
-        if scheme != "" && scheme != "ldap" {
-            return nil, fmt.Errorf("--scheme is not supported with --adws; ADWS always uses its own transport")
-        }
-        if startTLS {
-            return nil, fmt.Errorf("--starttls is not supported with --adws; ADWS always uses its own transport")
-        }
-        conn, err := connectADWS(ctx, targetHost)
-        if err != nil {
-            return nil, err
-        }
-        conn.baseDN = baseDN
-        conn.baseDNExplicit = ldapBaseDNExplicit
-        conn.noRootDSE = noRootDSE
-        return conn, nil
-    }
-    conn, err := connectLDAP(ctx, targetHost, scheme, startTLS)
-    if err != nil {
-        return nil, err
-    }
-    lc := &ldapConnClient{conn: conn}
-    lc.searcher = conn // the underlying *ldap.Conn does the actual wire lookups
-    lc.baseDN = baseDN
-    lc.baseDNExplicit = ldapBaseDNExplicit
-    lc.noRootDSE = noRootDSE
-    return lc, nil
-}
-```
 
 The two dialers behave quite differently under the hood:
 
