@@ -148,6 +148,11 @@ From the trees above I imagine you can guess the parallels already:
 | `Delete` | MS-WSTIM `Delete` | - |
 | `ModifyDN` | - | No ADWS equivalent (unless done in the dirty way via `Delete`/`Create`) |
 
+
+{% hint style="info" %}
+Although `Get` could be used in some cases instead of the `Enumerate+Pull` loop, in ginpacket's implementation we do not use it to preserve semantics. The `adwsConn` does provide a separate `SearchSingle` method that uses `Get` - this method is currently not used anywhere but could be useful in the future.
+{% endhint %}
+
 ## Wire format differences
 
 ### LDAP: ASN.1/BER on the wire
