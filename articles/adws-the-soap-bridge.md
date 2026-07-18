@@ -552,7 +552,7 @@ Once authenticated, application data uses a *different* frame: a 4-byte little-e
 
 Once the handshake completes, NMF resumes - but now its records ride as the *payload* inside NNS's own signed+sealed data frames rather than standalone on the bare socket. **Preamble End** (`0x0C`) and **Preamble Ack** (`0x0B`) go first, then every **Sized Envelope** (`0x06`) carrying a SOAP message, and finally **End** (`0x07`) closes the stream. Each Sized Envelope record is just the record-type byte, a length prefix, then the NBFSE-encoded payload - the length using the same variable-length integer as the Via record above (7 bits per byte, high bit = "more bytes follow").
 
-## Lazy Connections
+## Lazy connections
 
 Because the `Via` record pins exactly one endpoint per connection, a single NMF session can only talk to one of `Windows/Enumeration`, `Windows/Resource`, or `Windows/ResourceFactory` - which is precisely why the bridge opens up to three separate NMF sessions (each its own record stream with its own `Via`):
 
