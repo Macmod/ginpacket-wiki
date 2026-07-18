@@ -659,7 +659,7 @@ func (a *adwsConn) Search(req *ldap.SearchRequest) (*ldap.SearchResult, error) {
 }
 ```
 
-[ExecuteQueryWithControls](https://github.com/Macmod/go-adws/blob/main/wsenum/executor.go#L20) runs the `Enumerate` -> `Pull` loop, paging until the server signals the end - either a `wsen:EndOfSequence` marker or a short page (fewer items than requested), the latter being necessary because ADWS omits `EndOfSequence` for some result sets such as a base-scope rootDSE read (see the rootDSE section below). Any LDAP controls on the request (e.g. an SDFlags control) ride along on every `Pull`.
+[ExecuteQueryWithControls](https://github.com/Macmod/go-adws/blob/main/wsenum/executor.go#L20) runs the `Enumerate` -> `Pull` loop, paging until the server signals the end - either a `wsen:EndOfSequence` marker or a short page (fewer items than requested), the latter being necessary because ADWS omits `EndOfSequence` for some result sets such as a base-scope rootDSE read. Any LDAP controls on the request (e.g. an SDFlags control) ride along on every `Pull`.
 
 ### Format differences in input & output
 
@@ -683,11 +683,13 @@ This is performed by calling `soap.EncodeAttrValue()` for each attribute value o
 
 From the caller's perspective, all of this is invisible: you pass the same strings you would for LDAP, and the bridge handles the encoding.
 
-### Deriving the root BaseDN via rootDSE
+### Querying the rootDSE
 
-Many `ldap` operations require a BaseDN for searches, be these searches the final goal or an intermediary need, but the user could not always want (or know how) to provide the BaseDN explicitly. The default baseDN for a domain can in most cases be looked up from the `rootDSE`, a special entry that we can fetch by performing an LDAP Search with `scope=base` and the empty BaseDN. This entry contains the baseDN in its `defaultNamingContext` attribute, but also contains the DN for the **Configuration** and **Schema** partitions, which are often needed by LDAP clients. This works the same in ADWS, and that's why the interface mentioned earlier includes the methods `RootAttribute` (to fetch an arbitrary attribute from the RootDSE) and `RootDN` (to fetch the `defaultNamingContext` specifically).
+Many higher-level searches in LDAP require a baseDN, be these searches the final goal or an intermediary need, but the user could not always want (or know how) to provide the baseDN explicitly. The default root DN for an AD domain can be looked up from the `rootDSE`, a special entry that we can fetch by performing an LDAP Search with `scope=base` and an empty baseDN. The `rootDSE` object contains the root baseDN in its `defaultNamingContext` attribute, and also contains the DN for the **Configuration** and **Schema** partitions in the `configurationNamingContext` and `schemaNamingContext` attributes, which are often needed by LDAP clients that search for objects inside these partitions. This works the same in ADWS, and that's why the interface mentioned earlier includes the methods `RootAttribute` (to fetch an arbitrary attribute from the rootDSE) and `RootDN` (to fetch the `defaultNamingContext` specifically).
 
-`ldap search` with no `--base-dn` defaults to the domain's `defaultNamingContext`.
+{% hint style="info" %}
+The `ldap search` subcommand with no `--base-dn`, for instance, defaults to querying the domain's `defaultNamingContext` from the rootDSE. If provided the `--no-rootdse` flag, it will derive the root baseDN from the domain name specified in the user (`-u`) instead (i.e. `user@domain.local` -> `baseDN = DC=domain,DC=local`. The same behavior applies to other subcommands of the `ldap` tool that perform searches under the hood.
+{% endhint %}
 
 The lookup is transport-agnostic. `getRootDSEAttribute` issues a base-scope `(objectClass=*)` search against an empty DN and reads one attribute off the single entry that comes back. Because it takes the shared `ldapSearcher` interface, the identical helper runs over LDAP or over ADWS (where `Search` turns it into an `Enumerate+Pull`):
 
@@ -764,11 +766,7 @@ func (r *rootDSEResolver) RootDN() (string, error) {
 }
 ```
 
-Only the `--no-rootdse` path *computes* the DN offline, via `domainToDN()`, which splits the domain on dots and wraps each label in `DC=` (`creta.local` -> `DC=creta,DC=local`). It's a handy fallback when you'd rather not pay for the rootDSE read (an extra round-trip, or a server that's touchy about it), but it assumes the domain equals the default naming context - so it won't give you the configuration/schema partitions or any non-default NC. When you actually need those, `RootAttribute("configurationNamingContext")` / `"schemaNamingContext"` read them straight off the rootDSE.
-
-{% hint style="info" %}
 The cache is keyed by attribute name (`map[string]string`) rather than a single `defaultNamingContext`-only field, so any rootDSE attribute gets the same once-per-connection caching as the base DN, not just the default NC. No current call site actually fetches the same non-default attribute twice within one connection's lifetime to benefit from it today, but the uniformity means a future caller doesn't have to think about it either way.
-{% endhint %}
 
 {% hint style="info" %}
 That base-scope, empty-base rootDSE read is precisely the query that surfaced the WSDS quirk mentioned earlier: for unknown reasons, ADWS returns the lone rootDSE object *without* a `wsen:EndOfSequence` marker, so the `Pull` loop has to treat a short page (`len(Items) < MaxElements`) as the end. Without that, simply resolving the base DN would spin forever.
@@ -939,11 +937,7 @@ For object creation, ADWS exposes a dedicated `ResourceFactory` endpoint. The ty
 ```
 
 {% hint style="success" %}
-The code paths for object creation and object modification also handle the `unicodePwd` attribute encoding automatically - for creation, the typed APIs encode it and pass it directly as the `AddRequest` instead of doing the LDAP two-step (create disabled + modify unicodePwd + enable).
-{% endhint %}
-
-{% hint style="success" %}
-For custom creations and modifications, whenever a `unicodePwd` is present without a type hint, we automatically encode it as UTF16LE. For both of these cases, providing a type hint disables the automatic encoding.
+The code paths for object creation and object modification also handle the `unicodePwd` attribute encoding automatically. Whenever a `unicodePwd` is present without a type hint, we automatically encode it as UTF16LE. For both of these cases, providing a type hint disables the automatic encoding.
 {% endhint %}
 
 ## Conclusions
