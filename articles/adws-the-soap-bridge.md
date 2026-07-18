@@ -663,6 +663,36 @@ func (a *adwsConn) Search(req *ldap.SearchRequest) (*ldap.SearchResult, error) {
 
 [ExecuteQueryWithControls](https://github.com/Macmod/go-adws/blob/main/wsenum/executor.go#L20) runs the `Enumerate` -> `Pull` loop, paging until the server signals the end - either a `wsen:EndOfSequence` marker or a short page (fewer items than requested), the latter being necessary because ADWS omits `EndOfSequence` for some result sets such as a base-scope rootDSE read. Any LDAP controls on the request (e.g. an SDFlags control) ride along on every `Pull`.
 
+### Example: Creating and modifying objects
+
+For modifications, all the changes in an LDAP `ModifyRequest` (add/replace/delete) are batched into a **single** WS-Transfer `Put` on the Resource endpoint, expressed as one `<da:ModifyRequest>` with a `<da:Change>` element per change, which the server applies atomically:
+
+```xml
+<da:ModifyRequest>
+  <da:Change Operation="add">
+    <da:AttributeType>addata:description</da:AttributeType>
+    <da:AttributeValue>
+      <ad:value xsi:type="xsd:string">Updated via ADWS bridge</ad:value>
+    </da:AttributeValue>
+  </da:Change>
+  <da:Change Operation="delete">
+    <da:AttributeType>addata:title</da:AttributeType>
+  </da:Change>
+</da:ModifyRequest>
+```
+
+Bare attribute names are auto-qualified as `addata:<name>`, and `xsi:type` is inferred per attribute - `xsd:base64Binary` for the four binary syntaxes, `xsd:string` for everything else (see the encoding section above). A `<da:Change>` with no `<da:AttributeValue>` (as in the `delete` above) removes the whole attribute. Password changes can additionally be routed through MS-ADCAP `ChangePassword` / `SetPassword` instead of a `Put`.
+
+For object creation, ADWS exposes a dedicated `ResourceFactory` endpoint. The typed helpers - `AddUser`, `AddGroup`, `AddOU`, `AddComputer`, `AddContainer` - bundle the required attributes (objectClass, sAMAccountName, etc.) into an IMDA `AddRequest` and send it through WS-Transfer `Create`:
+
+```bash
+./ldap [auth_flags] --adws create user 'CN=jdoe,OU=Users,DC=creta,DC=local' jdoe 'SomePass@123' --enabled
+```
+
+{% hint style="success" %}
+The code paths for object creation and object modification also handle the `unicodePwd` attribute encoding automatically. Whenever a `unicodePwd` is present without a type hint, we automatically encode it as UTF16LE. For both of these cases, providing a type hint disables the automatic encoding.
+{% endhint %}
+
 ### Format differences in input & output
 
 When building a bridge between protocols we have to check, of course, if the target protocol (ADWS) always **receives arguments** and **returns responses** in the same formats as the source protocol (LDAP). By reading the specs we can notice a few differences:
@@ -687,7 +717,7 @@ From the caller's perspective, all of this is invisible: you pass the same strin
 
 ## Connecting the dots
 
-The [go-adws](https://github.com/Macmod/go-adws) library started as a low-level implementation of the ADWS protocol stack: the NNS handshake, the NMF record framing, and the SOAP XML builders for all supported operations. The bridge implemented in ginpacket is just a different take on the problem of providing **easy access to ADWS ops** - instead of exposing ADWS as a standalone tool with its own cmdline (such as [sopa](https://github.com/Macmod/sopa)), I introduced a unified `ldapClient` interface that both LDAP and ADWS satisfy, and added a single `--adws` flag to the `ldap` commands to flip between them. Behind the flag, the code calls `connect(useADWS, scheme, startTLS, baseDN, noRootDSE)` which routes either to a standard LDAP dial or to the ADWS connection setup (the extra `baseDN`/`noRootDSE` arguments drive the rootDSE strategy described below). This way, if we ever want to implement other subcommands for our `ldap` tool using the "interoperable" subset of LDAP operations, they would instantly be also available over ADWS:
+The [go-adws](https://github.com/Macmod/go-adws) library started as a low-level implementation of the ADWS protocol stack: the NNS handshake, the NMF record framing, and the SOAP XML builders for all supported operations. The bridge implemented in ginpacket is just a different take on the problem of providing **easy access to ADWS ops** - instead of exposing ADWS as a standalone tool with its own cmdline (such as [sopa](https://github.com/Macmod/sopa)), I introduced a unified `ldapClient` interface that both LDAP and ADWS satisfy, and added a single `--adws` flag to the `ldap` commands to flip between them. Behind the flag, the code calls `connect(useADWS, scheme, startTLS, baseDN, noRootDSE)` which routes either to a standard LDAP dial or to the ADWS connection setup. This way, if we ever want to implement other subcommands for our `ldap` tool using the "interoperable" subset of LDAP operations, they would instantly be also available over ADWS:
 
 ```go
 // internal/ldapclient/client.go
@@ -741,7 +771,7 @@ func connect(useADWS bool, scheme string, startTLS bool, baseDN string, noRootDS
 }
 ```
 
-### Querying the rootDSE
+### Resolving the baseDN
 
 Many higher-level searches in LDAP require a baseDN, be these searches the final goal or an intermediary need, but the user could not always want (or know how) to provide the baseDN explicitly. The default root DN for an AD domain can be looked up from the `rootDSE`, a special entry that we can fetch by performing an LDAP Search with `scope=base` and an empty baseDN. The `rootDSE` object contains the root baseDN in its `defaultNamingContext` attribute, and also contains the DN for the **Configuration** and **Schema** partitions in the `configurationNamingContext` and `schemaNamingContext` attributes, which are often needed by LDAP clients that search for objects inside these partitions. This works the same in ADWS, and that's why the interface above includes the methods `RootAttribute` (to fetch an arbitrary attribute from the rootDSE) and `RootDN` (to fetch the `defaultNamingContext` specifically) - and why `connect()`, right above, always threads `baseDN`/`baseDNExplicit`/`noRootDSE` into whichever client it builds.
 
@@ -771,7 +801,7 @@ func getRootDSEAttribute(conn ldapSearcher, attribute string) (string, error) {
 }
 ```
 
-`RootDN()`/`RootAttribute()` themselves aren't implemented separately by `ldapConnClient` and `adwsConn` - both embed one shared `rootDSEResolver` and get the methods for free through Go's struct embedding, so there's exactly one implementation of the strategy below instead of two copies that could drift apart:
+`RootDN()`/`RootAttribute()` themselves aren't implemented separately by `ldapConnClient` and `adwsConn` - both embed one shared `rootDSEResolver` and get the methods for free through Go's struct embedding:
 
 ```go
 // rootDSEResolver implements the base-DN resolution strategy and a cache of
@@ -827,7 +857,7 @@ func (r *rootDSEResolver) RootDN() (string, error) {
 The cache is keyed by attribute name (`map[string]string`) rather than a single `defaultNamingContext`-only field, so any rootDSE attribute gets the same once-per-connection caching as the base DN, not just the default NC. No current call site actually fetches the same non-default attribute twice within one connection's lifetime to benefit from it today, but the uniformity means a future caller doesn't have to think about it either way.
 
 {% hint style="info" %}
-That base-scope, empty-base rootDSE read is precisely the query that surfaced the WSDS quirk mentioned earlier: for unknown reasons, ADWS returns the lone rootDSE object *without* a `wsen:EndOfSequence` marker, so the `Pull` loop has to treat a short page (`len(Items) < MaxElements`) as the end. Without that, simply resolving the base DN would spin forever.
+That base-scope, empty-base rootDSE read is precisely the query that surfaces the WSDS quirk mentioned earlier: for unknown reasons, ADWS returns the lone rootDSE object **without a `wsen:EndOfSequence` marker**, so the `Pull` loop has to treat a short page (`len(Items) < MaxElements`) as the end. Without that, simply resolving the base DN would spin forever.
 {% endhint %}
 
 The two dialers behave quite differently under the hood:
@@ -910,36 +940,6 @@ ldap
 
 {% hint style="info" %}
 If you specify `--debug` along with `--adws`, ginpacket will dump **all ADWS SOAPs** from requests and responses into standard error for troubleshooting.
-{% endhint %}
-
-### Example: Creating and modifying objects
-
-For modifications, all the changes in an LDAP `ModifyRequest` (add/replace/delete) are batched into a **single** WS-Transfer `Put` on the Resource endpoint, expressed as one `<da:ModifyRequest>` with a `<da:Change>` element per change, which the server applies atomically:
-
-```xml
-<da:ModifyRequest>
-  <da:Change Operation="add">
-    <da:AttributeType>addata:description</da:AttributeType>
-    <da:AttributeValue>
-      <ad:value xsi:type="xsd:string">Updated via ADWS bridge</ad:value>
-    </da:AttributeValue>
-  </da:Change>
-  <da:Change Operation="delete">
-    <da:AttributeType>addata:title</da:AttributeType>
-  </da:Change>
-</da:ModifyRequest>
-```
-
-Bare attribute names are auto-qualified as `addata:<name>`, and `xsi:type` is inferred per attribute - `xsd:base64Binary` for the four binary syntaxes, `xsd:string` for everything else (see the encoding section above). A `<da:Change>` with no `<da:AttributeValue>` (as in the `delete` above) removes the whole attribute. Password changes can additionally be routed through MS-ADCAP `ChangePassword` / `SetPassword` instead of a `Put`.
-
-For object creation, ADWS exposes a dedicated `ResourceFactory` endpoint. The typed helpers - `AddUser`, `AddGroup`, `AddOU`, `AddComputer`, `AddContainer` - bundle the required attributes (objectClass, sAMAccountName, etc.) into an IMDA `AddRequest` and send it through WS-Transfer `Create`:
-
-```bash
-./ldap [auth_flags] --adws create user 'CN=jdoe,OU=Users,DC=creta,DC=local' jdoe 'SomePass@123' --enabled
-```
-
-{% hint style="success" %}
-The code paths for object creation and object modification also handle the `unicodePwd` attribute encoding automatically. Whenever a `unicodePwd` is present without a type hint, we automatically encode it as UTF16LE. For both of these cases, providing a type hint disables the automatic encoding.
 {% endhint %}
 
 ## Conclusions
