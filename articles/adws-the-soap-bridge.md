@@ -142,7 +142,7 @@ From the trees above I imagine you can guess the parallels already:
 
 | LDAP Operation | ADWS Equivalent | Notes |
 |----------------|-----------------|-------|
-| `Search` | MS-WSDS `Enumerate+Pull` loop | If `scope=baseObject` (single entry), MS-WSTIM `Get` can be used instead |
+| `Search` | MS-WSDS `Enumerate+Pull` loop | If `scope=baseObject` and `filter` is a "match-all" like `(objectClass=*)` (single entry), MS-WSTIM `Get` could be used instead |
 | `Add` | MS-WSTIM `Create` | - |
 | `Modify` | MS-WSTIM `Put` | Password changes can be performed via manual `Put`s or via MS-ADCAP `ChangePassword` / `SetPassword` |
 | `Delete` | MS-WSTIM `Delete` | - |
@@ -399,7 +399,7 @@ flowchart LR
   end
 
   L4a -.->|"  scope=any  "| A4a
-  L4a -.->|"  scope=baseObject  "| A4a2
+  L4a -.->|"  scope=baseObject & match-all filter  "| A4a2
   L4b_gen -.->|"  Object modification  "| A4b
   L4b_pwd -.->|"  Self password change  "| A4f
   L4b_pwd -.->|"  Admin password reset  "| A4g
