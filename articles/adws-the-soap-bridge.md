@@ -430,6 +430,8 @@ flowchart LR
 
 ## The "broad transport layer" for ADWS
 
+Unlike LDAP - a single-purpose protocol whose ASN.1/BER encoding is self-delimiting, so raw TCP bytes alone are enough to find message boundaries - ADWS rides on WCF's generic `net.tcp` binding, the same wire mechanism any `net.tcp`-based WCF service uses to host arbitrary SOAP services and encodings over a shared port. MC-NMF exists to solve the problem that reuse creates: TCP is just a byte stream with no notion of messages (MC-NMF §1.3), so before any SOAP content can flow, something has to establish which endpoint the connection is for (`Via`), what encoding is in use, and how the stream will be secured (the `Upgrade` -> NNS handshake) - none of which LDAP needs, since being connected to port 389 already tells you everything, and its own authentication is just another self-delimited LDAP message (`BindRequest`) rather than a transport-level concern.
+
 ### The `Connect()` sequence
 
 NMF drives the whole exchange end to end; NNS authentication is just one step riding in the middle of it. NMF is **record-oriented** - every record is a 1-byte *record type* followed by a type-specific body. Here are the record types used along the way (MC-NMF §2.2.1), handy as a reference for what follows:
