@@ -879,8 +879,6 @@ ldap
 If you specify `--debug` along with `--adws`, ginpacket will dump **all ADWS SOAPs** from requests and responses into standard error for troubleshooting.
 {% endhint %}
 
-For single-object fetches, `ldap info` uses `ldap.ScopeBaseObject`, which maps to a WS-Transfer `Get` request on the Resource endpoint - no enumeration needed. **(does it really?)**
-
 ### Example: Creating and modifying objects
 
 For modifications, all the changes in an LDAP `ModifyRequest` (add/replace/delete) are batched into a **single** WS-Transfer `Put` on the Resource endpoint, expressed as one `<da:ModifyRequest>` with a `<da:Change>` element per change, which the server applies atomically:
