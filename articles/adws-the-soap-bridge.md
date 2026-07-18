@@ -97,7 +97,7 @@ ADWS Specifications
 Most sources only explore the MS-WSDS **Enumerate+Pull loop**, which can be used as a parallel to a regular **LDAP Search** operation, but as you can see there are **many other actions that can be performed**, including writes. The main problem that implementors need to tackle when designing ADWS integrations is the [NMF](https://winprotocoldoc.z19.web.core.windows.net/MC-NMF/%5bMC-NMF%5d.pdf), [NNS](https://winprotocoldoc.z19.web.core.windows.net/MS-NNS/[MS-NNS].pdf) and [NBFSE](https://winprotocoldoc.z19.web.core.windows.net/MC-NBFSE/%5bMC-NBFSE%5d.pdf) implementations, which are not available in an "authoritative implementation" in languages other than C# - a fact that is very annoying, as tool devs have to reverse engineer these protocols to be able to issue any ADWS messages to a DC. But once that's sorted out, all of these methods can be called remotely without much complication.
 
 {% hint style="success" %}
-The [sopa](https://github.com/Macmod/sopa) tool, for instance, implements a client capable of calling all of these methods using the [go-adws](https://github.com/Macmod/go-adws) library.
+The [Macmod/sopa](https://github.com/Macmod/sopa) tool, for instance, implements a client capable of calling all of these methods using the [Macmod/go-adws](https://github.com/Macmod/go-adws) library.
 {% endhint %}
 
 
@@ -685,9 +685,7 @@ From the caller's perspective, all of this is invisible: you pass the same strin
 
 ### Deriving the root BaseDN via rootDSE
 
-**TODO: Goal of this section should be to just mention the purpose of RootDN and GetRootAttribute in the interface definition**
-
-Many `ldap` operations require a BaseDN for searches, be these searches the final goal or an intermediary need, but the user could not always want (or know how) to provide the BaseDN explicitly. The default baseDN for a domain can in most cases looked up from the `rootDSE`, a special entry that we can fetch by performing an LDAP Search with `scope=base` and the empty BaseDN. This works the same in ADWS.
+Many `ldap` operations require a BaseDN for searches, be these searches the final goal or an intermediary need, but the user could not always want (or know how) to provide the BaseDN explicitly. The default baseDN for a domain can in most cases be looked up from the `rootDSE`, a special entry that we can fetch by performing an LDAP Search with `scope=base` and the empty BaseDN. This entry contains the baseDN in its `defaultNamingContext` attribute, but also contains the DN for the **Configuration** and **Schema** partitions, which are often needed by LDAP clients. This works the same in ADWS, and that's why the interface mentioned earlier includes the methods `RootAttribute` (to fetch an arbitrary attribute from the RootDSE) and `RootDN` (to fetch the `defaultNamingContext` specifically).
 
 `ldap search` with no `--base-dn` defaults to the domain's `defaultNamingContext`.
 
@@ -711,46 +709,69 @@ func getRootDSEAttribute(conn ldapSearcher, attribute string) (string, error) {
     }
     return sr.Entries[0].GetAttributeValue(attribute), nil
 }
-
-// The ADWS bridge just delegates - no special-casing of the naming contexts.
-func (a *adwsConn) RootAttribute(attribute string) (string, error) {
-    return getRootDSEAttribute(a, attribute)
-}
 ```
 
-`RootDN()` (the `defaultNamingContext`) is resolved once and cached, following a three-step strategy so a caller can skip the rootDSE round-trip when it wants to:
+`RootDN()`/`RootAttribute()` themselves aren't implemented separately by `ldapConnClient` and `adwsConn` - both embed one shared `rootDSEResolver` and get the methods for free through Go's struct embedding, so there's exactly one implementation of the strategy below instead of two copies that could drift apart:
 
 ```go
-func (a *adwsConn) RootDN() (string, error) {
-    // 1. An explicit --base-dn always wins (even if intentionally empty).
-    if a.baseDNExplicit || a.baseDN != "" {
-        return a.baseDN, nil
+// rootDSEResolver implements the base-DN resolution strategy and a cache of
+// rootDSE attributes shared by ldapConnClient and adwsConn.
+type rootDSEResolver struct {
+    searcher       ldapSearcher      // underlying searcher used for wire lookups
+    baseDN         string            // explicit --base-dn override ("" = not set)
+    baseDNExplicit bool              // true when --base-dn was explicitly provided (even if empty)
+    noRootDSE      bool              // --no-rootdse flag
+    cache          map[string]string // rootDSE attributes fetched so far
+}
+
+// RootAttribute returns one rootDSE attribute, querying the wire only once per
+// attribute and caching the result for subsequent calls.
+func (r *rootDSEResolver) RootAttribute(attribute string) (string, error) {
+    if v, ok := r.cache[attribute]; ok {
+        return v, nil
     }
-    // 2. --no-rootdse: derive the DN from the auth domain instead of querying.
-    if a.noRootDSE {
-        domain := domainFromUser(cfg.AuthOptions.User)
+    v, err := getRootDSEAttribute(r.searcher, attribute)
+    if err != nil {
+        return "", err
+    }
+    if r.cache == nil {
+        r.cache = make(map[string]string)
+    }
+    r.cache[attribute] = v
+    return v, nil
+}
+
+// RootDN returns the base DN using one of three strategies:
+//  1. Explicit --base-dn if set (even if empty)
+//  2. --no-rootdse: derive the DN from the auth domain instead of querying.
+//  3. Default: query rootDSE's defaultNamingContext (cached after first call).
+func (r *rootDSEResolver) RootDN() (string, error) {
+    if r.baseDNExplicit || r.baseDN != "" {
+        return r.baseDN, nil
+    }
+    if r.noRootDSE {
+        domain := cfg.AuthOptions.Domain()
         if domain == "" {
             return "", fmt.Errorf("--no-rootdse requires a domain-qualified username (user@domain or domain\\user)")
         }
         return domainToDN(domain), nil
     }
-    // 3. Default: query the rootDSE over the wire, then cache it.
-    if a.rootDN != "" {
-        return a.rootDN, nil
-    }
-    dn, err := getRootDN(a) // getRootDSEAttribute(a, "defaultNamingContext")
+    dn, err := r.RootAttribute("defaultNamingContext")
     if err != nil {
-        return "", err
+        return "", fmt.Errorf("root DN: %w", err)
     }
-    a.rootDN = dn
-    return a.rootDN, nil
+    return dn, nil
 }
 ```
 
 Only the `--no-rootdse` path *computes* the DN offline, via `domainToDN()`, which splits the domain on dots and wraps each label in `DC=` (`creta.local` -> `DC=creta,DC=local`). It's a handy fallback when you'd rather not pay for the rootDSE read (an extra round-trip, or a server that's touchy about it), but it assumes the domain equals the default naming context - so it won't give you the configuration/schema partitions or any non-default NC. When you actually need those, `RootAttribute("configurationNamingContext")` / `"schemaNamingContext"` read them straight off the rootDSE.
 
 {% hint style="info" %}
-That base-scope, empty-base rootDSE read is precisely the query that surfaced the WS-Enumeration quirk mentioned earlier: ADWS returns the lone rootDSE object *without* a `wsen:EndOfSequence` marker, so the `Pull` loop has to treat a short page (`len(Items) < MaxElements`) as the end. Without that, simply resolving the base DN would spin forever.
+The cache is keyed by attribute name (`map[string]string`) rather than a single `defaultNamingContext`-only field, so any rootDSE attribute gets the same once-per-connection caching as the base DN, not just the default NC. No current call site actually fetches the same non-default attribute twice within one connection's lifetime to benefit from it today, but the uniformity means a future caller doesn't have to think about it either way.
+{% endhint %}
+
+{% hint style="info" %}
+That base-scope, empty-base rootDSE read is precisely the query that surfaced the WSDS quirk mentioned earlier: for unknown reasons, ADWS returns the lone rootDSE object *without* a `wsen:EndOfSequence` marker, so the `Pull` loop has to treat a short page (`len(Items) < MaxElements`) as the end. Without that, simply resolving the base DN would spin forever.
 {% endhint %}
 
 ## Connecting the dots
@@ -791,14 +812,21 @@ func connect(useADWS bool, scheme string, startTLS bool, baseDN string, noRootDS
         if err != nil {
             return nil, err
         }
-        conn.baseDN, conn.baseDNExplicit, conn.noRootDSE = baseDN, ldapBaseDNExplicit, noRootDSE
+        conn.baseDN = baseDN
+        conn.baseDNExplicit = ldapBaseDNExplicit
+        conn.noRootDSE = noRootDSE
         return conn, nil
     }
     conn, err := connectLDAP(ctx, targetHost, scheme, startTLS)
     if err != nil {
         return nil, err
     }
-    return &ldapConnClient{conn: conn, baseDN: baseDN, baseDNExplicit: ldapBaseDNExplicit, noRootDSE: noRootDSE}, nil
+    lc := &ldapConnClient{conn: conn}
+    lc.searcher = conn // the underlying *ldap.Conn does the actual wire lookups
+    lc.baseDN = baseDN
+    lc.baseDNExplicit = ldapBaseDNExplicit
+    lc.noRootDSE = noRootDSE
+    return lc, nil
 }
 ```
 
