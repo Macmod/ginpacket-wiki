@@ -32,14 +32,16 @@ The ADWS endpoint is actually split across several Microsoft Open Specifications
 | [MS-ADCAP](https://winprotocoldoc.z19.web.core.windows.net/MS-ADCAP/%5bMS-ADCAP%5d.pdf) | AD Custom Action Protocol | Defines custom actions for account and topology management |
 | [MC-NMF](https://winprotocoldoc.z19.web.core.windows.net/MC-NMF/%5bMC-NMF%5d.pdf) | .NET Message Framing Protocol | Defines the record-framing protocol used to delimit messages over the TCP stream |
 | [MS-NNS](https://winprotocoldoc.z19.web.core.windows.net/MS-NNS/[MS-NNS].pdf) | .NET NegotiateStream Protocol | Provides SPNEGO-based authentication wrapping Kerberos or NTLM over the transport stream |
+| [MC-NBFSE](https://winprotocoldoc.z19.web.core.windows.net/MC-NBFSE/[MC-NBFSE].pdf) | .NET Binary Format: SOAP Extension | Specifies the protocol to efficiently encode strings that are common to SOAP messages |
 | [MS-WSPELD](https://winprotocoldoc.z19.web.core.windows.net/MS-WSPELD/%5bMS-WSPELD%5d.pdf) | WS-Transfer and WS-Enumeration Protocol Extension for LDAP v3 Controls | Defines how LDAP v3 controls are carried inside ADWS SOAP messages |
 | [WS-MEX](https://www.w3.org/Submission/WS-MetadataExchange/) | WS-MetadataExchange | The one non-Microsoft spec in the stack - exposes service metadata over an unauthenticated endpoint |
 
 Together they describe how Active Directory domain controllers expose a SOAP endpoint on TCP/9389, with:
 
 * [NNS](https://winprotocoldoc.z19.web.core.windows.net/MS-NNS/[MS-NNS].pdf) and [NMF](https://winprotocoldoc.z19.web.core.windows.net/MC-NMF/%5bMC-NMF%5d.pdf) providing the "broad transport layer"
+* [MC-NBFSE](https://winprotocoldoc.z19.web.core.windows.net/MC-NBFSE/[MC-NBFSE].pdf) specifying the encoding format for SOAP messages
 * [ADDM](https://winprotocoldoc.z19.web.core.windows.net/MS-ADDM/[MS-ADDM].pdf), [WSDS](https://winprotocoldoc.z19.web.core.windows.net/MS-WSDS/[MS-WSDS].pdf), [WSTIM](https://winprotocoldoc.z19.web.core.windows.net/MS-WSTIM/%5bMS-WSTIM%5d.pdf) & [ADCAP](https://winprotocoldoc.z19.web.core.windows.net/MS-ADCAP/%5bMS-ADCAP%5d.pdf) defining the SOAP operations 
-* [WSPELD](https://github.com/Macmod/go-adws/blob/main/transport/nbfse_codec.go) specifying how LDAP controls are forwarded through the SOAP layer
+* [WSPELD](https://github.com/Macmod/go-adws/blob/main/transport/nbfse_codec.go) specifying how LDAP controls can be forwarded through the SOAP layer
 
 {% hint style="success" %}
 According to [Microsoft](https://learn.microsoft.com/en-us/services-hub/unified/health/remediation-steps-ad/configure-the-active-directory-web-services-adws-to-start-automatically-on-all-servers), ADWS is automatically installed since Windows Server 2008 R2 as soon as you install the **AD DS** or **AD LDS** roles to the server.
