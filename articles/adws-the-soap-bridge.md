@@ -39,7 +39,7 @@ The ADWS endpoint is actually split across several Microsoft Open Specifications
 Together they describe how Active Directory domain controllers expose a SOAP endpoint on TCP/9389, with:
 
 * [NNS](https://winprotocoldoc.z19.web.core.windows.net/MS-NNS/[MS-NNS].pdf) and [NMF](https://winprotocoldoc.z19.web.core.windows.net/MC-NMF/%5bMC-NMF%5d.pdf) providing the "broad transport layer"
-* [MC-NBFSE](https://winprotocoldoc.z19.web.core.windows.net/MC-NBFSE/[MC-NBFSE].pdf) specifying the encoding format for SOAP messages
+* [NBFSE](https://winprotocoldoc.z19.web.core.windows.net/MC-NBFSE/[MC-NBFSE].pdf) specifying the encoding format for SOAP messages
 * [ADDM](https://winprotocoldoc.z19.web.core.windows.net/MS-ADDM/[MS-ADDM].pdf), [WSDS](https://winprotocoldoc.z19.web.core.windows.net/MS-WSDS/[MS-WSDS].pdf), [WSTIM](https://winprotocoldoc.z19.web.core.windows.net/MS-WSTIM/%5bMS-WSTIM%5d.pdf) & [ADCAP](https://winprotocoldoc.z19.web.core.windows.net/MS-ADCAP/%5bMS-ADCAP%5d.pdf) defining the SOAP operations 
 * [WSPELD](https://github.com/Macmod/go-adws/blob/main/transport/nbfse_codec.go) specifying how LDAP controls can be forwarded through the SOAP layer
 
@@ -699,21 +699,17 @@ When building a bridge between protocols we have to check, of course, if the tar
 
 #### Replacing `*` in attribute lists for `ad:all`
 
-When a caller requests `"*"` as an attribute, it is [mapped by the library](https://github.com/Macmod/go-adws/blob/main/soap/build_enumeration.go#L48) to a `<ad:SelectionProperty>ad:all</ad:SelectionProperty>` selection property inside the `<ad:Selection>` tag (the ADWS equivalent of the "attributes" field of the Search). Operational attributes (`"+"`) are not supported - MS-WSDS doesn't define an equivalent. According to the MS-WSDS not including an `<ad:Selection>` at all should have the same result, but I used this approach to be semantically correct.
+When a caller requests `"*"` as an attribute, it is [mapped by the library](https://github.com/Macmod/go-adws/blob/main/soap/build_enumeration.go#L48) to a `<ad:SelectionProperty>ad:all</ad:SelectionProperty>` selection property inside the `<ad:Selection>` tag (the ADWS equivalent of the "attributes" field of the Search). Operational attributes (`"+"`) are not supported - MS-WSDS doesn't define an equivalent. According to MS-WSDS, not including an `<ad:Selection>` at all should have the same result, but this approach was used to preserve the semantics.
 
 #### Attributes belonging to specific syntaxes use Base64 encoding
 
 ADWS defines that attributes having the syntaxes of **OctetString**, **SidString**, **NTSecurityDescriptor**, or **ReplicaLink** (per MS-ADDM §2.3.4) are always formatted in Base64 and must have the `xsi:type="xsd:base64Binary"` attribute in the XML element to be sent (for writes) or in the returned XML (for reads). Everything else (`Boolean`, `Integer`, `LargeInteger`, DN types, timestamps, etc) is sent/received as `xsi:type="xsd:string"` and handled as usual.
 
-For that purpose, the [go-adws](https://github.com/Macmod/go-adws) library carries a [generated map of attribute names](https://github.com/Macmod/go-adws/blob/main/soap/attr_types.go) (like `objectSid`, `nTSecurityDescriptor`, `objectGUID` etc) to their `xsi:type` - produced from all major published AD schema LDF files by a generator script rather than hand-curated, so it doesn't drift. Unknown attributes default to `xsd:string`.
+For that purpose, the [Macmod/go-adws](https://github.com/Macmod/go-adws) library carries a [pre-generated map of attribute names](https://github.com/Macmod/go-adws/blob/main/soap/attr_types.go) (like `objectSid`, `nTSecurityDescriptor`, `objectGUID` etc) to their `xsi:type` - produced from all major published AD schema LDF files. Unknown attributes default to `xsd:string`.
 
 Whenever performing `Enumerate+Pull` or `Get` operations ("LDAP Search"), the library detects which attributes fall into these four syntaxes and automatically decodes their values from base64 back to raw bytes. 
 
-Whenever we are performing a `Create` ("LDAP Add") or `Put` ("LDAP Modify") operation and we include an LDAP attribute that belongs to these syntaxes, we must **base64-encode the value** and **set `xsi:type="xsd:base64Binary"`** on the `<ad:value>` element in the request - otherwise ADWS will reject it or misinterpret the binary data.
-
-This is performed by calling `soap.EncodeAttrValue()` for each attribute value or `soap.EncodeAttrValues()` for a list of values. If the attribute name maps to `xsd:base64Binary` in the generated map, the raw bytes are base64-encoded and the correct `xsi:type` is set in the generated XML (`<ad:value xsi:type="xsd:base64Binary">`). Everything else is passed through as `xsd:string`.
-
-From the caller's perspective, all of this is invisible: you pass the same strings you would for LDAP, and the bridge handles the encoding.
+Whenever we are performing a `Create` ("LDAP Add") or `Put` ("LDAP Modify") operation and we include an LDAP attribute that belongs to these syntaxes, we must **base64-encode the value** and **set `xsi:type="xsd:base64Binary"`** on the `<ad:value>` element in the request - otherwise ADWS will reject it or misinterpret the binary data. This is performed by calling [soap.EncodeAttrValue()](https://github.com/Macmod/go-adws/blob/main/soap/attr_types.go#L265) for each attribute value or [soap.EncodeAttrValues()](https://github.com/Macmod/go-adws/blob/main/soap/attr_types.go#L265) for a list of values.
 
 ## Connecting the dots
 
