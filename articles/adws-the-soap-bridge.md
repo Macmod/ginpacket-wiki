@@ -349,7 +349,7 @@ As much as these questions are interesting to think about (I won't tell you all 
 
 For me the rule of thumb as a tool developer seems to be to try to play nice: always prefer to use **SPNEGO** instead of plain GSSAPI or other specific methods (e.g. Sicily), and always encrypt and sign properly: either through a TLS channel or using SPNEGO, when over an unprotected channel. In ADWS, this means preferring the SPNEGO NNS mechanism; in LDAP this means preferring SASL/GSS-SPNEGO or TLS+SASL/EXTERNAL.
 
-Also, if we already have a secure connection through TLS (the "shared secret" here being the trusted certificate authority), it would make little sense to also wrap our payloads into an additional cryptographic layer (spoiling one of the answers, according to MS-ADTS this weird setup would simply **not work** - for **connection security** you must use either TLS or SASL, while for the authentication itself you can pick different methods).
+Also, if we already have a secure connection through TLS (the "shared secret" here being the trusted certificate authority), it would make little sense to also wrap our payloads into an additional cryptographic layer. Spoiling one of the answers, **in reality those hypothetical setups are simply rejected** - for **connection security** you must use either TLS or SASL, while for the authentication itself you can pick different methods; if you try it anyways you'll get either `unwillingToPerform` or `inappropriateAuthentication` errors.
 
 {% hint style="info" %}
 **Fun challenge for readers**: pick a **tool** or **library** that does LDAP authentication and study what it does under the wire when given **different sets of credentials** - either through packet capturing, source code inspection or both.
