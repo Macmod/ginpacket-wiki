@@ -931,7 +931,7 @@ ldap
 ```
 
 {% hint style="info" %}
-**ModifyDN** does not exist in ADWS and cannot be replicated precisely - instead one would have to do `Delete` + `Create`, which does not have the same atomicity semantics and may cause problems. The **WhoAmI** operation is also LDAP-specific. 
+**ModifyDN** does not exist in ADWS and cannot be replicated precisely - instead one would have to do `Delete` + `Create`, which does not have the same atomicity semantics and may cause problems. **ExtendedRequest** ops defined is MS-ADTS (**WhoAmI**, **StartTLS**, **TTLRefresh**, **FastBIND** and **BatchRequest**) are also LDAP-specific. 
 {% endhint %}
 
 {% hint style="info" %}
