@@ -330,6 +330,10 @@ This may look like a lot for just the "broad" transport layer, but keep in mind 
 **The naming trap**: the fact that the SASL "GSSAPI" mechanism should mean Kerberos isn't just a Microsoft deviation - it's in the SASL spec itself ([RFC 4752](https://datatracker.ietf.org/doc/html/rfc4752)). Back when that mechanism got named **in the context of SASL**, Kerberos was likely the only GSSAPI mechanism anyone would want to deploy, so "GSSAPI" kind of became shorthand for "Kerberos" and the name stuck. The one that actually supports both (and negotiates) is supposed to be the **GSS-SPNEGO** mechanism. But Microsoft doesn't follow its own specs, so NTLM can actually reach a DC in 3 different ways: directly via the Sicily path, via SASL/GSSAPI (without negotiation) or via SASL/GSS-SPNEGO (with negotiation). I know it looks ugly - don't blame me. Sometimes protocol architects make backwards-compat/interop calls that us regular humans can only dream of understanding some day.
 {% endhint %}
 
+{% hint style="info" %}
+Two good references on the internals of Kerberos (especially in the context of AD) are [Kerberos Explained](https://thattotallyrealmyth.gitbook.io/kerberos-explained) and [Kerberos Explained in a Little Too Much Detail](https://syfuhs.net/a-bit-about-kerberos).
+{% endhint %}
+
 On the ADWS side things are hairier in packet structure but simpler in flow: you either use NTLM directly, or SPNEGO to negotiate the mechanism for GSSAPI (NTLM or Kerberos).
 
 As you can see, these mechanisms sometimes mix up the concepts of **authentication** (providing valid credentials and having the server validate them) and **connection security** (integrity and confidentiality). That's by design, as signing and sealing depend on a shared secret, and if the underlying system already involves credential material, it's wise to use it for both when possible. After all, we may desire signing to prevent a "man in the middle" from messing with our messages, or additionally sealing to avoid them seeing our credential material.
@@ -341,7 +345,7 @@ Integrity and confidentiality are properties provided by the usage of **signing*
 From a tool developer perspective, all of this complexity / flexibility may seem useless and raise a bunch of questions, which are all valid:
 
 * Is it possible to do everything that we would do under LDAPS/LDAP+StartTLS (with SASL/EXTERNAL as the mechanism) using plain LDAP+SASL/GSS-SPNEGO or LDAP+SASL/GSSAPI instead? (i.e. changing passwords requires a secure connection)
-* Do we even need LDAP+SASL/GSS-SPNEGO at all if we can just use straight LDAP+SASL/GSSAPI for Kerberos and the Sicily path for NTLM?
+* Do we even need LDAP+SASL/GSS-SPNEGO at all if we can just use straight LDAP+SASL/GSSAPI for NTLM/Kerberos (or the Sicily path for NTLM)?
 * Is it possible to connect using LDAPS and then use GSSAPI (either straight or negotiated via SPNEGO) to also secure (encrypt/sign) the connection twice? (I know this setup **doesn't make sense at all**, but it's still a valid question!)
 * Will legitimate servers accept packets that are not signed nor encrypted (sealed) **after** negotiating the usage of GSSAPI?
 
